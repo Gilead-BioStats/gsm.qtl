@@ -47,9 +47,7 @@ all_reportingGroups <- reporting[[snap]]$Reporting_Groups
 all_reportingBounds <- do.call(dplyr::bind_rows, lapply(reporting, function(x) x$Reporting_Bounds))
 all_reportingMetrics <- reporting[[snap]]$Reporting_Metrics
 
-lCharts <- gsm.kri::MakeCharts(
+qtl_chart <- gsm.kri::Widget_TimeSeries(
   dfResults = all_reportingResults,
-  dfGroups = all_reportingGroups,
-  dfMetrics = all_reportingMetrics,
-  dfBounds =all_reportingBounds
+  dfGroups = all_reportingGroups
 )
