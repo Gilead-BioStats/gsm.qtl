@@ -49,5 +49,6 @@ all_reportingMetrics <- reporting[[snap]]$Reporting_Metrics
 
 qtl_chart <- gsm.kri::Widget_TimeSeries(
   dfResults = all_reportingResults,
-  dfGroups = all_reportingGroups
+  dfGroups = all_reportingGroups,
+  strOutcome = "Metric"
 )
