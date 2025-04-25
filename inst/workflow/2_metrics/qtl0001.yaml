@@ -1,7 +1,7 @@
 meta:
   Type: Analysis
   ID: qtl0001
-  GroupLevel: Site
+  GroupLevel: Trial
   Abbreviation: IE
   Metric: Inclusion/Exclusion Violation Rate
   Numerator: Number of subjects ineligible
@@ -41,7 +41,7 @@ steps:
       strNumeratorCol: subjid
       strDenominatorCol: subjid
       strSubjectCol: subjid
-      strGroupCol: invid
+      strGroupCol: studyid
       strGroupLevel: GroupLevel
       strNumeratorMethod: Count
       strDenominatorMethod: Count

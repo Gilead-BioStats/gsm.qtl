@@ -54,9 +54,6 @@ qtl_chart <- gsm.kri::Widget_TimeSeries(
   strOutcome = "Metric"
 )
 
-
-
-
 # Multiple Studies
 ie_data2 <- raw_data_generator(template_path = "~/gsm.datasim/inst/small_template.csv", mappings = "IE", package = "gsm.mapping")
 lRaw2 <- map_depth(ie_data2, 2, gsm.mapping::Ingest, mappings_spec)
@@ -67,7 +64,6 @@ reporting2 <- map2(
   ~ pmap(list(.x, .y),
          ~ gsm.core::RunWorkflows(reporting_wf, c(..1, list(lAnalyzed = ..2, lWorkflows = metrics_wf))))
 )
-library(purrr)
 
 reporting2 <- map(
   reporting2,
