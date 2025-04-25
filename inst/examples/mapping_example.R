@@ -2,6 +2,7 @@ library(gsm.datasim) # requires >= fix-50
 library(gsm.mapping) # requires >= fix-58
 library(gsm.reporting)
 library(gsm.core)
+library(purrr)
 devtools::load_all()
 set.seed(1234)
 
@@ -51,3 +52,40 @@ qtl_chart <- gsm.kri::Widget_TimeSeries(
   dfGroups = all_reportingGroups,
   strOutcome = "Metric"
 )
+
+
+
+
+# Multiple Studies
+ie_data2 <- raw_data_generator(template_path = "~/gsm.datasim/inst/small_template.csv", mappings = "IE", package = "gsm.mapping")
+lRaw2 <- map_depth(ie_data2, 2, gsm.mapping::Ingest, mappings_spec)
+mapped2 <- map_depth(lRaw2, 2, ~ gsm.core::RunWorkflows(mappings_wf, .x))
+analyzed2 <- map_depth(mapped2, 2, ~gsm.core::RunWorkflows(metrics_wf, .x))
+reporting2 <- map2(
+  mapped2, analyzed2,
+  ~ pmap(list(.x, .y),
+         ~ gsm.core::RunWorkflows(reporting_wf, c(..1, list(lAnalyzed = ..2, lWorkflows = metrics_wf))))
+)
+library(purrr)
+
+reporting2 <- map(
+  reporting2,
+  ~ imap(
+    .x,                            # each “date” sub-list
+    function(record, date_string) {
+      # parse the name into an actual Date
+      d <- as.Date(date_string)
+
+      # overwrite both snapshots
+      record$Reporting_Results$SnapshotDate <- d
+      record$Reporting_Bounds$SnapshotDate  <- d
+
+      record
+    }
+  )
+)
+
+all_reportingResults2 <- map_dfr(reporting2,~ map_dfr(.x, "Reporting_Results"))
+all_reportingGroups2 <- map_dfr(reporting2, ~ map_dfr(.x, "Reporting_Groups")) %>% unique
+all_reportingBounds2 <- map_dfr(reporting2,~ map_dfr(.x, "Reporting_Bounds"))
+all_reportingMetrics2 <- map_dfr(reporting2,~ map_dfr(.x, "Reporting_Metrics")) %>% unique
