@@ -18,25 +18,26 @@ ie_data <- generate_rawdata_for_single_study(
   package = "gsm.mapping",
   desired_specs = NULL
 )
+
+mappings_wf <- gsm.core::MakeWorkflowList(strNames =c("SUBJ", "ENROLL", "IE", "STUDY", "SITE", "COUNTRY"), strPath = "workflow/1_mappings", strPackage = "gsm.mapping")
+mappings_spec <- gsm.mapping::CombineSpecs(mappings_wf)
+metrics_wf <- gsm.core::MakeWorkflowList(strPath = "inst/workflow/2_metrics", strPackage = "gsm.qtl")
+reporting_wf <- gsm.core::MakeWorkflowList(strPath = "workflow/3_reporting", strPackage = "gsm.reporting")
+
 analyzed <- list()
 reporting <- list()
 dates <- names(ie_data) %>% as.Date
 for(snap in seq_along(ie_data)){
     lSource <- ie_data[[snap]]
-
-    mappings_wf <- gsm.core::MakeWorkflowList(strNames =c("SUBJ", "ENROLL", "IE", "STUDY", "SITE", "COUNTRY"), strPath = "workflow/1_mappings", strPackage = "gsm.mapping")
-    mappings_spec <- gsm.mapping::CombineSpecs(mappings_wf)
     lRaw <- gsm.mapping::Ingest(lSource, mappings_spec)
 
     # Step 1 - Create Mapped Data Layer - filter, aggregate and join raw data to create mapped data layer
     mapped <- gsm.core::RunWorkflows(mappings_wf, lRaw)
 
     # Step 2 - Create Metrics - calculate metrics using mapped data
-    metrics_wf <- gsm.core::MakeWorkflowList(strPath = "inst/workflow/2_metrics", strPackage = "gsm.qtl")
     analyzed[[snap]] <- gsm.core::RunWorkflows(metrics_wf, mapped)
 
     # # Step 3 - Create Reporting Layer - create reports using metrics data
-    reporting_wf <- gsm.core::MakeWorkflowList(strPath = "workflow/3_reporting", strPackage = "gsm.reporting")
     reporting[[snap]] <- gsm.core::RunWorkflows(reporting_wf, c(mapped, list(lAnalyzed = analyzed[[snap]],
                                                                              lWorkflows = metrics_wf)))
     reporting[[snap]]$Reporting_Results$SnapshotDate = dates[snap]
