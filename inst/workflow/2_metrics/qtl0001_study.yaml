@@ -12,6 +12,7 @@ meta:
   Threshold: -2,-1, 1, 2
   AccrualThreshold: 10
   AccrualMetric: Denominator
+  proprate: 0.21
 spec:
   Mapped_IE:
     subjid:
@@ -50,10 +51,10 @@ steps:
     params:
       dfInput: Analysis_Input
   - output: Analysis_Analyzed
-    name: Analyze_NormalApprox
+    name: Analyze_OneSideProp
     params:
       dfTransformed: Analysis_Transformed
-      strType: AnalysisType
+      proprate: proprate
   - output: Analysis_Flagged
     name: gsm.core::Flag
     params:

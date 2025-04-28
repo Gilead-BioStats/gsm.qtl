@@ -3,15 +3,16 @@ library(gsm.mapping) # requires >= fix-58
 library(gsm.reporting)
 library(gsm.core)
 library(purrr)
+library(dplyr)
 devtools::load_all()
 set.seed(1234)
 
 # Single Study
 ie_data <- generate_rawdata_for_single_study(
-  SnapshotCount = 6,
+  SnapshotCount = 3,
   SnapshotWidth = "months",
-  ParticipantCount = 1000,
-  SiteCount = 50,
+  ParticipantCount = 100,
+  SiteCount = 3,
   StudyID = "ABC",
   workflow_path = "workflow",
   mappings = "IE",
@@ -21,7 +22,7 @@ ie_data <- generate_rawdata_for_single_study(
 
 mappings_wf <- gsm.core::MakeWorkflowList(strNames =c("SUBJ", "ENROLL", "IE", "STUDY", "SITE", "COUNTRY"), strPath = "workflow/1_mappings", strPackage = "gsm.mapping")
 mappings_spec <- gsm.mapping::CombineSpecs(mappings_wf)
-metrics_wf <- gsm.core::MakeWorkflowList(strNames = "qtl0001_site", strPath = "inst/workflow/2_metrics", strPackage = "gsm.qtl")
+metrics_wf <- gsm.core::MakeWorkflowList(strNames = "qtl0001_study", strPath = "inst/workflow/2_metrics", strPackage = "gsm.qtl")
 reporting_wf <- gsm.core::MakeWorkflowList(strPath = "workflow/3_reporting", strPackage = "gsm.reporting")
 
 analyzed <- list()
@@ -38,10 +39,10 @@ for(snap in seq_along(ie_data)){
     analyzed[[snap]] <- gsm.core::RunWorkflows(metrics_wf, mapped)
 
     # # Step 3 - Create Reporting Layer - create reports using metrics data
-    reporting[[snap]] <- gsm.core::RunWorkflows(reporting_wf, c(mapped, list(lAnalyzed = analyzed[[snap]],
-                                                                             lWorkflows = metrics_wf)))
-    reporting[[snap]]$Reporting_Results$SnapshotDate = dates[snap]
-    reporting[[snap]]$Reporting_Bounds$SnapshotDate = dates[snap]
+    # reporting[[snap]] <- gsm.core::RunWorkflows(reporting_wf, c(mapped, list(lAnalyzed = analyzed[[snap]],
+    #                                                                          lWorkflows = metrics_wf)))
+    # reporting[[snap]]$Reporting_Results$SnapshotDate = dates[snap]
+    # reporting[[snap]]$Reporting_Bounds$SnapshotDate = dates[snap]
 }
 all_reportingResults <- do.call(dplyr::bind_rows, lapply(reporting, function(x) x$Reporting_Results))
 all_reportingGroups <- reporting[[snap]]$Reporting_Groups
