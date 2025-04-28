@@ -21,7 +21,7 @@ ie_data <- generate_rawdata_for_single_study(
 
 mappings_wf <- gsm.core::MakeWorkflowList(strNames =c("SUBJ", "ENROLL", "IE", "STUDY", "SITE", "COUNTRY"), strPath = "workflow/1_mappings", strPackage = "gsm.mapping")
 mappings_spec <- gsm.mapping::CombineSpecs(mappings_wf)
-metrics_wf <- gsm.core::MakeWorkflowList(strPath = "inst/workflow/2_metrics", strPackage = "gsm.qtl")
+metrics_wf <- gsm.core::MakeWorkflowList(strNames = "qtl0001_site", strPath = "inst/workflow/2_metrics", strPackage = "gsm.qtl")
 reporting_wf <- gsm.core::MakeWorkflowList(strPath = "workflow/3_reporting", strPackage = "gsm.reporting")
 
 analyzed <- list()
@@ -86,3 +86,9 @@ all_reportingResults2 <- map_dfr(reporting2,~ map_dfr(.x, "Reporting_Results"))
 all_reportingGroups2 <- map_dfr(reporting2, ~ map_dfr(.x, "Reporting_Groups")) %>% unique
 all_reportingBounds2 <- map_dfr(reporting2,~ map_dfr(.x, "Reporting_Bounds"))
 all_reportingMetrics2 <- map_dfr(reporting2,~ map_dfr(.x, "Reporting_Metrics")) %>% unique
+
+qtl_chart2 <- gsm.kri::Widget_TimeSeries(
+  dfResults = all_reportingResults2,
+  dfGroups = all_reportingGroups2,
+  strOutcome = "Metric"
+)
