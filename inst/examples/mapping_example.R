@@ -22,31 +22,41 @@ ie_data <- generate_rawdata_for_single_study(
 
 mappings_wf <- gsm.core::MakeWorkflowList(strNames =c("SUBJ", "ENROLL", "IE", "STUDY", "SITE", "COUNTRY"), strPath = "workflow/1_mappings", strPackage = "gsm.mapping")
 mappings_spec <- gsm.mapping::CombineSpecs(mappings_wf)
-metrics_wf <- gsm.core::MakeWorkflowList(strNames = "qtl0001_study", strPath = "inst/workflow/2_metrics", strPackage = "gsm.qtl")
+metrics_study_wf <- gsm.core::MakeWorkflowList(strNames = "qtl0001_study", strPath = "inst/workflow/2_metrics", strPackage = "gsm.qtl")
+metrics_site_wf <- gsm.core::MakeWorkflowList(strNames = "qtl0001_site", strPath = "inst/workflow/2_metrics", strPackage = "gsm.qtl")
 reporting_wf <- gsm.core::MakeWorkflowList(strPath = "workflow/3_reporting", strPackage = "gsm.reporting")
 
 
 lRaw <- map_depth(ie_data, 1, gsm.mapping::Ingest, mappings_spec)
 mapped <- map_depth(lRaw, 1, ~ gsm.core::RunWorkflows(mappings_wf, .x))
-analyzed <- map_depth(mapped, 1, ~gsm.core::RunWorkflows(metrics_wf, .x))
-reporting <- map2(
-  mapped, analyzed,
-  ~ gsm.core::RunWorkflows(reporting_wf, c(.x, list(lAnalyzed = .y, lWorkflows = metrics_wf)))
+analyzed_study <- map_depth(mapped, 1, ~gsm.core::RunWorkflows(metrics_study_wf, .x))
+analyzed_site <- map_depth(mapped, 1, ~gsm.core::RunWorkflows(metrics_site_wf, .x))
+reporting_study <- map2(
+  mapped, analyzed_study,
+  ~ gsm.core::RunWorkflows(reporting_wf, c(.x, list(lAnalyzed = .y, lWorkflows = metrics_study_wf)))
+)
+reporting_site <- map2(
+  mapped, analyzed_site,
+  ~ gsm.core::RunWorkflows(reporting_wf, c(.x, list(lAnalyzed = .y, lWorkflows = metrics_site_wf)))
 )
 dates <- names(ie_data) %>% as.Date
 for(snap in seq_along(ie_data)){
-    reporting[[snap]]$Reporting_Results$SnapshotDate = dates[snap]
-    reporting[[snap]]$Reporting_Bounds$SnapshotDate = dates[snap]
+  reporting_study[[snap]]$Reporting_Results$SnapshotDate = dates[snap]
+  reporting_study[[snap]]$Reporting_Bounds$SnapshotDate = dates[snap]
+  reporting_site[[snap]]$Reporting_Results$SnapshotDate = dates[snap]
+  reporting_site[[snap]]$Reporting_Bounds$SnapshotDate = dates[snap]
 }
 
-all_reportingResults <- do.call(dplyr::bind_rows, lapply(reporting, function(x) x$Reporting_Results)) %>%
-  mutate(Upper_funnel = 0.2 + 3*sqrt(0.2*(1-0.2)/.data$Denominator)) %>%
-  tidyr::pivot_longer(cols = c(Metric, Upper_funnel), names_to = "Group2", values_to = "Metric") %>%
-  mutate(GroupID = ifelse(Group2 == "Metric", StudyID, Group2))
+all_reportingResults_study <- do.call(dplyr::bind_rows, lapply(reporting_study, function(x) x$Reporting_Results))
+all_reportingResults_site <- do.call(dplyr::bind_rows, lapply(reporting_site, function(x) x$Reporting_Results))
+all_reportingResults_upper_funnel <- all_reportingResults_study %>%
+  select(-Metric) %>%
+  mutate(Metric = 0.2 + 3*sqrt(0.2*(1-0.2)/.data$Denominator)) %>%
+  mutate(GroupID = "Upper_funnel")
 
-all_reportingGroups <- reporting[[snap]]$Reporting_Groups
-all_reportingBounds <- do.call(dplyr::bind_rows, lapply(reporting, function(x) x$Reporting_Bounds))
-all_reportingMetrics <- reporting[[snap]]$Reporting_Metrics
+all_reportingResults <- bind_rows(all_reportingResults_study, all_reportingResults_site, all_reportingResults_upper_funnel)
+
+all_reportingGroups <- reporting_study[[1]]$Reporting_Groups
 
 qtl_chart <- gsm.qtl::Widget_TimeSeriesQTL(
   dfResults = all_reportingResults,
