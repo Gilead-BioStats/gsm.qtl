@@ -9,10 +9,10 @@ set.seed(1234)
 
 # Single Study
 ie_data <- generate_rawdata_for_single_study(
-  SnapshotCount = 3,
+  SnapshotCount = 6,
   SnapshotWidth = "months",
-  ParticipantCount = 100,
-  SiteCount = 3,
+  ParticipantCount = 1000,
+  SiteCount = 50,
   StudyID = "ABC",
   workflow_path = "workflow",
   mappings = "IE",
@@ -40,13 +40,15 @@ for(snap in seq_along(ie_data)){
 }
 
 all_reportingResults <- do.call(dplyr::bind_rows, lapply(reporting, function(x) x$Reporting_Results)) %>%
-  mutate(Upper_funnel = 0.2 + 3*sqrt(0.2*(1-0.2)/.data$Denominator))
+  mutate(Upper_funnel = 0.2 + 3*sqrt(0.2*(1-0.2)/.data$Denominator)) %>%
+  tidyr::pivot_longer(cols = c(Metric, Upper_funnel), names_to = "Group2", values_to = "Metric") %>%
+  mutate(GroupID = ifelse(Group2 == "Metric", StudyID, Group2))
 
 all_reportingGroups <- reporting[[snap]]$Reporting_Groups
 all_reportingBounds <- do.call(dplyr::bind_rows, lapply(reporting, function(x) x$Reporting_Bounds))
 all_reportingMetrics <- reporting[[snap]]$Reporting_Metrics
 
-qtl_chart <- gsm.kri::Widget_TimeSeries(
+qtl_chart <- gsm.qtl::Widget_TimeSeriesQTL(
   dfResults = all_reportingResults,
   dfGroups = all_reportingGroups,
   strOutcome = "Metric"
