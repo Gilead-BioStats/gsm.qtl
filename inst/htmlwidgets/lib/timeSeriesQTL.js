@@ -1,52 +1,82 @@
 function timeSeriesQTL(
-  _element_,
-  _results_,
-  _config_,
-  _thresholds_,
-  _intervals_,
-  _groupMetadata_
+  el,
+  results,
+  config,
+  thresholds,
+  intervals,
+  groupMetadata
 ) {
-  // 1) Build chart exactly as usual
+  const ALWAYS = "Upper_funnel";
+
+  // 1) Build the chart as usual
   const chart = gsmViz.default.timeSeries(
-    _element_,
-    _results_,
-    _config_,
-    _thresholds_,
-    _intervals_,
-    _groupMetadata_
+    el, results, config, thresholds, intervals, groupMetadata
   );
 
-  // 2) Helper to strip out distribution (boxplot/violin) datasets
+  // 2) Utility: strip out boxplots/violins
   function stripDistributions() {
     chart.data.datasets = chart.data.datasets.filter(
       ds => ds.purpose !== "distribution"
     );
   }
 
-  // 3) Strip them out immediately
+  // 3) Utility: restyle the ALWAYS line to be dotted & red
+  function styleAlways() {
+    chart.data.datasets.forEach(ds => {
+      // ds.type==="line" && ds.purpose==="highlight" is your selected-group line
+      if (
+        ds.type === "line" &&
+        ds.purpose === "highlight" &&
+        // either by label:
+        ds.label === `Site ${ALWAYS}` ||
+        // or by checking the raw data:
+        (ds.data[0] && ds.data[0].GroupID === ALWAYS)
+      ) {
+        ds.borderColor   = "red";
+        ds.backgroundColor = "red";
+        ds.borderDash    = [5,5];
+        ds.pointStyle    = "circle";
+        ds.pointRadius   = 4;
+      }
+    });
+  }
+
+  // 4) First pass: remove distributions, style ALWAYS, redraw
   stripDistributions();
+  styleAlways();
   chart.update();
 
-  // 4) Monkey‐patch the two helpers that re-run the pipeline
+  // 5) Monkey patch updateSelectedGroupIDs
   if (chart.helpers.updateSelectedGroupIDs) {
     const orig = chart.helpers.updateSelectedGroupIDs.bind(chart);
-    chart.helpers.updateSelectedGroupIDs = (ids) => {
-      orig(ids);
+    chart.helpers.updateSelectedGroupIDs = ids => {
+      const picked = Array.isArray(ids) ? ids : [ids];
+      const union  = [...new Set([ALWAYS, ...picked])];
+      orig(union);
       stripDistributions();
+      styleAlways();
       chart.update();
     };
   }
+
+  // 6) Also patch updateData (if you ever call it directly)
   if (chart.helpers.updateData) {
     const orig2 = chart.helpers.updateData.bind(chart);
     chart.helpers.updateData = (...args) => {
       orig2(...args);
       stripDistributions();
+      styleAlways();
       chart.update();
     };
   }
 
+  // 7) Kick off the very first “select” pass so ALWAYS is present
+  const initial = Array.isArray(config.selectedGroupIDs)
+    ? config.selectedGroupIDs
+    : config.selectedGroupIDs ? [config.selectedGroupIDs] : [];
+  chart.helpers.updateSelectedGroupIDs(initial);
+
   return chart;
 }
 
-// expose it
 main_default.timeSeriesQTL = timeSeriesQTL;
