@@ -28,7 +28,7 @@ function timeSeriesQTL(
         ds.type === "line" &&
         ds.purpose === "highlight" &&
         // either by label:
-        ds.label === `Site ${ALWAYS}` ||
+        ds.label === `Study ${ALWAYS}` ||
         // or by checking the raw data:
         (ds.data[0] && ds.data[0].GroupID === ALWAYS)
       ) {
@@ -75,8 +75,9 @@ function timeSeriesQTL(
     ? config.selectedGroupIDs
     : config.selectedGroupIDs ? [config.selectedGroupIDs] : [];
   chart.helpers.updateSelectedGroupIDs(initial);
-
   return chart;
 }
 
 main_default.timeSeriesQTL = timeSeriesQTL;
+
+
