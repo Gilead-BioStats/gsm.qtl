@@ -28,3 +28,7 @@ dependencies:
     version: 1.0.0
     src: 'htmlwidgets/lib'
     script: 'addOutcomeSelect2.js'
+  - name: timeSeriesQTL
+    version: 1.0.0
+    src: 'htmlwidgets/lib'
+    script: 'timeSeriesQTL.js'

@@ -19,7 +19,8 @@ HTMLWidgets.widget({
                 input.lMetric.clickCallback = clickCallback(el, input);
 
                 // Generate time series.
-                const instance = gsmViz.default.timeSeries(
+                //const instance = gsmViz.default.timeSeries(
+                const instance = timeSeriesQTL(
                     el,
                     input.dfResults,
                     {...input.lMetric, y: input.strOutcome}, // specify outcome to be plotted on the y-axis

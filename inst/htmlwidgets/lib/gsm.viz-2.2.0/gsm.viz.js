@@ -353,10 +353,6 @@ function timeSeries(_element_,_results_){var _config_=arguments.length>2&&argume
 labels:datasets.labels,// required by Chart.js
 config:config,// inputs
 _results_:_results_,_config_:_config_,_thresholds_:_thresholds_,_intervals_:_intervals_,_groupMetadata_:_groupMetadata_},options:options,plugins:[displayWhiteBackground()]});canvas.chart=chart;chart.helpers={updateData:updateData4.bind(chart),updateSelectedGroupIDs:updateSelectedGroupIDs.bind(chart)};return chart;}// src/main.js
-function timeSeriesQTL(_element_,_results_){var _config_=arguments.length>2&&arguments[2]!==undefined?arguments[2]:null;var _thresholds_=arguments.length>3&&arguments[3]!==undefined?arguments[3]:null;var _intervals_=arguments.length>4&&arguments[4]!==undefined?arguments[4]:null;var _groupMetadata_=arguments.length>5&&arguments[5]!==undefined?arguments[5]:null;checkInputs5(_results_,_config_,_thresholds_,_intervals_,_groupMetadata_);var config=configure7(_config_,_results_,_thresholds_,_intervals_);var canvas=addCanvas(_element_,config);var datasets=structureData5(_results_,config,_thresholds_,_intervals_,_groupMetadata_);var options={animation:false,maintainAspectRatio:config.maintainAspectRatio,onClick:onClick,onHover:onHover,plugins:getPlugins4(config),responsive:true,scales:getScales4(config,_results_)};var chart=new auto_default(canvas,{data:{datasets:datasets,// required by Chart.js
-labels:datasets.labels,// required by Chart.js
-config:config,// inputs
-_results_:_results_,_config_:_config_,_thresholds_:_thresholds_,_intervals_:_intervals_,_groupMetadata_:_groupMetadata_},options:options,plugins:[displayWhiteBackground()]});canvas.chart=chart;chart.helpers={updateData:updateData4.bind(chart),updateSelectedGroupIDs:updateSelectedGroupIDs.bind(chart)};return chart;}// src/main.js
 Chart.register(annotation,BoxAndWiskers,BoxPlotController,CategoryScale,LinearScale,Violin,ViolinController);var gsmViz={barChart:barChart,groupOverview:groupOverview,scatterPlot:scatterPlot,sparkline:sparkline,timeSeries:timeSeries};var main_default=gsmViz;return __toCommonJS(main_exports);}();/*! Bundled license information:
 
 chart.js/dist/chunks/helpers.segment.mjs:
