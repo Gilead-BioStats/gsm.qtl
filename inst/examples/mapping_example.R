@@ -26,7 +26,7 @@ metrics_wf <- gsm.core::MakeWorkflowList(strNames = "qtl0001_study", strPath = "
 reporting_wf <- gsm.core::MakeWorkflowList(strPath = "workflow/3_reporting", strPackage = "gsm.reporting")
 
 
-lRaw2 <- map_depth(ie_data, 1, gsm.mapping::Ingest, mappings_spec)
+lRaw <- map_depth(ie_data, 1, gsm.mapping::Ingest, mappings_spec)
 mapped <- map_depth(lRaw, 1, ~ gsm.core::RunWorkflows(mappings_wf, .x))
 analyzed <- map_depth(mapped, 1, ~gsm.core::RunWorkflows(metrics_wf, .x))
 reporting <- map2(

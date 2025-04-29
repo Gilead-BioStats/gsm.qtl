@@ -14,7 +14,7 @@ meta:
   FlagOrder: 2, 1, 0
   AccrualThreshold: 10
   AccrualMetric: Denominator
-  proprate: 0.10
+  proprate: 0.20
 spec:
   Mapped_IE:
     subjid:
