@@ -39,7 +39,9 @@ for(snap in seq_along(ie_data)){
     reporting[[snap]]$Reporting_Bounds$SnapshotDate = dates[snap]
 }
 
-all_reportingResults <- do.call(dplyr::bind_rows, lapply(reporting, function(x) x$Reporting_Results))
+all_reportingResults <- do.call(dplyr::bind_rows, lapply(reporting, function(x) x$Reporting_Results)) %>%
+  mutate(Upper_funnel = 0.2 + 3*sqrt(0.2*(1-0.2)/.data$Denominator))
+
 all_reportingGroups <- reporting[[snap]]$Reporting_Groups
 all_reportingBounds <- do.call(dplyr::bind_rows, lapply(reporting, function(x) x$Reporting_Bounds))
 all_reportingMetrics <- reporting[[snap]]$Reporting_Metrics

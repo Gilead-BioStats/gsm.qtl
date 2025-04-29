@@ -38,8 +38,8 @@
 #' @export
 
 Analyze_OneSideProp <- function(
-  dfTransformed,
-  proprate = 0.1
+    dfTransformed,
+    proprate = 0.1
 ) {
   stop_if(cnd = !is.data.frame(dfTransformed), message = "dfTransformed is not a data.frame")
   stop_if(
@@ -50,22 +50,22 @@ Analyze_OneSideProp <- function(
 
   # Caclulate Z-score with overdispersion --------------------------------------
   dfScore <- dfTransformed %>%
-      mutate(
-        vMu = proprate,
-        z_0 = ifelse(.data$vMu == 0 | .data$vMu == 1,
-          0,
-          (.data$Metric - .data$vMu) /
-            sqrt(.data$vMu * (1 - .data$vMu) / .data$Denominator)
-        ),
-        Upper_funnel = proprate + 3*sqrt(proprate*(1-proprate)/.data$Denominator)
-        # ,
-        # phi = mean(.data$z_0^2),
-        # z_i = ifelse(.data$vMu == 0 | .data$vMu == 1 | .data$phi == 0,
-        #   0,
-        #   (.data$Metric - .data$vMu) /
-        #     sqrt(.data$phi * .data$vMu * (1 - .data$vMu) / .data$Denominator)
-        # )
-      )
+    mutate(
+      vMu = proprate,
+      z_0 = ifelse(.data$vMu == 0 | .data$vMu == 1,
+                   0,
+                   (.data$Metric - .data$vMu) /
+                     sqrt(.data$vMu * (1 - .data$vMu) / .data$Denominator)
+      ),
+      Upper_funnel = proprate + 3*sqrt(proprate*(1-proprate)/.data$Denominator)
+      # ,
+      # phi = mean(.data$z_0^2),
+      # z_i = ifelse(.data$vMu == 0 | .data$vMu == 1 | .data$phi == 0,
+      #   0,
+      #   (.data$Metric - .data$vMu) /
+      #     sqrt(.data$phi * .data$vMu * (1 - .data$vMu) / .data$Denominator)
+      # )
+    )
 
   # dfAnalyzed -----------------------------------------------------------------
   dfAnalyzed <- dfScore %>%
