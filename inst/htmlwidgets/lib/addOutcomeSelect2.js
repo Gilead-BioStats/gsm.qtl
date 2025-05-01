@@ -9,7 +9,7 @@
  */
 
 const addOutcomeSelect2 = function(widgetControls, dfResults, lMetric, dfGroups, strOutcome) {
-    const outcomeSelect = addSelectControl(
+    const outcomeSelect = addSelectControl2(
         widgetControls,
         'Outcome (y-axis)',
         [
