@@ -8,19 +8,19 @@ function timeSeriesQTL(
 ) {
   const ALWAYS = "Upper_funnel";
 
-  // 1) Build the chart as usual
+  // Build the chart as usual - a time Series wrapper
   const chart = gsmViz.default.timeSeries(
     el, results, config, thresholds, intervals, groupMetadata
   );
 
-  // 2) Utility: strip out boxplots/violins
+  // Strip out boxplots/violins
   function stripDistributions() {
     chart.data.datasets = chart.data.datasets.filter(
       ds => ds.purpose !== "distribution"
     );
   }
 
-  // 3) Utility: restyle the ALWAYS line to be dotted & red
+  // ALWAYS plot the funnel
   function styleAlways() {
     chart.data.datasets.forEach(ds => {
       // ds.type==="line" && ds.purpose==="highlight" is your selected-group line
@@ -41,12 +41,12 @@ function timeSeriesQTL(
     });
   }
 
-  // 4) First pass: remove distributions, style ALWAYS, redraw
+  // First pass: remove distributions, style ALWAYS, redraw
   stripDistributions();
   styleAlways();
   chart.update();
 
-  // 5) Monkey patch updateSelectedGroupIDs
+  // Remove additional selection boxes on the plot
   if (chart.helpers.updateSelectedGroupIDs) {
     const orig = chart.helpers.updateSelectedGroupIDs.bind(chart);
     chart.helpers.updateSelectedGroupIDs = ids => {
@@ -59,7 +59,6 @@ function timeSeriesQTL(
     };
   }
 
-  // 6) Also patch updateData (if you ever call it directly)
   if (chart.helpers.updateData) {
     const orig2 = chart.helpers.updateData.bind(chart);
     chart.helpers.updateData = (...args) => {
@@ -70,7 +69,7 @@ function timeSeriesQTL(
     };
   }
 
-  // 7) Kick off the very first “select” pass so ALWAYS is present
+  // Ensure a first selection is made
   const initial = Array.isArray(config.selectedGroupIDs)
     ? config.selectedGroupIDs
     : config.selectedGroupIDs ? [config.selectedGroupIDs] : [];
