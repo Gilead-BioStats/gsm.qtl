@@ -4,7 +4,7 @@
 \alias{Analyze_OneSideProp}
 \title{Funnel Plot Analysis with Normal Approximation for Binary and Rate Outcomes.}
 \usage{
-Analyze_OneSideProp(dfTransformed, proprate = 0.1)
+Analyze_OneSideProp(dfTransformed, proprate = 0.1, num_deviations = 3)
 }
 \arguments{
 \item{dfTransformed}{\code{data.frame} Transformed data for analysis. Data should

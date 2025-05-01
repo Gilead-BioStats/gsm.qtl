@@ -75,7 +75,7 @@ Analyze_OneSideProp <- function(
       Upper_funnel
     ) %>%
     tidyr::pivot_longer(., cols = c("Metric", "Upper_funnel"), names_to = "tmp", values_to = "Metric") %>%
-    mutate(GroupID = ifelse(tmp == "Upper_funnel", "Upper_funnel", GroupID)) %>%
+    mutate(GroupID = ifelse(tmp == "Upper_funnel", "Upper_funnel", GroupID),) %>%
     select(-tmp) %>%
     group_by(GroupID) %>%
     unique() %>%
