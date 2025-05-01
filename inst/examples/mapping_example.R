@@ -1,5 +1,5 @@
-library(gsm.datasim) # requires >= fix-50
-library(gsm.mapping) # requires >= fix-58
+library(gsm.datasim) # requires >= fix-50 PR to get it to dev is up
+library(gsm.mapping) # dev is fine, as long as post fix-58
 library(gsm.reporting)
 library(gsm.core)
 library(purrr)
@@ -29,8 +29,12 @@ reporting_wf <- gsm.core::MakeWorkflowList(strNames = c("Results", "Groups"), st
 
 lRaw <- map_depth(ie_data, 1, gsm.mapping::Ingest, mappings_spec)
 mapped <- map_depth(lRaw, 1, ~ gsm.core::RunWorkflows(mappings_wf, .x))
+
+# Create respective analyzed_xyz data for study level, site level
 analyzed_study <- map_depth(mapped, 1, ~gsm.core::RunWorkflows(metrics_study_wf, .x))
 analyzed_site <- map_depth(mapped, 1, ~gsm.core::RunWorkflows(metrics_site_wf, .x))
+
+# Create respective reporting_xyz data for study level, site level
 reporting_study <- map2(
   mapped, analyzed_study,
   ~ gsm.core::RunWorkflows(reporting_wf, c(.x, list(lAnalyzed = .y, lWorkflows = metrics_study_wf)))
@@ -39,6 +43,8 @@ reporting_site <- map2(
   mapped, analyzed_site,
   ~ gsm.core::RunWorkflows(reporting_wf, c(.x, list(lAnalyzed = .y, lWorkflows = metrics_site_wf)))
 )
+
+# Fix `SnapshotDate` column in reporting results, can be addressed in https://github.com/Gilead-BioStats/gsm.reporting/issues/24
 dates <- names(ie_data) %>% as.Date
 for(snap in seq_along(ie_data)){
   reporting_study[[snap]]$Reporting_Results$SnapshotDate = dates[snap]
@@ -47,11 +53,14 @@ for(snap in seq_along(ie_data)){
   reporting_site[[snap]]$Reporting_Bounds$SnapshotDate = dates[snap]
 }
 
+# Bind multiple snapshots of data together
 all_reportingResults_study <- do.call(dplyr::bind_rows, lapply(reporting_study, function(x) x$Reporting_Results))
 all_reportingResults_site <- do.call(dplyr::bind_rows, lapply(reporting_site, function(x) x$Reporting_Results))
 
+# Only need 1 reporting group object
 all_reportingGroups <- reporting_study[[1]]$Reporting_Groups
 
+# Create modified time series widget plot
 qtl_chart_study <- gsm.qtl::Widget_TimeSeriesQTL(
   dfResults = all_reportingResults_study,
   dfGroups = all_reportingGroups,
