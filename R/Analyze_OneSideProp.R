@@ -49,8 +49,17 @@ Analyze_OneSideProp <- function(
   )
   stop_if(cnd = !all(!is.na(dfTransformed[["GroupID"]])), message = "NA value(s) found in GroupID")
 
-  # Caclulate Z-score with overdispersion --------------------------------------
-  dfScore <- dfTransformed %>%
+  # Calculate a grouped summarization to bind back together to create appropriate flags
+  # groups by study, site, country this df should always be the same, i.e. equivalent of study level
+  Upper_funnel <- dfTransformed %>%
+    group_by(GroupLevel) %>%
+    summarize(GroupID = "Upper_funnel",
+              Numerator = sum(Numerator),
+              Denominator = sum(Denominator)) %>%
+    ungroup() %>%
+    mutate(Metric = proprate + num_deviations*sqrt(proprate*(1-proprate)/sum(.data$Denominator)))
+
+  dfScore <- dplyr::bind_rows(dfTransformed, Upper_funnel) %>%
     mutate(
       vMu = proprate,
       z_0 = ifelse(.data$vMu == 0 | .data$vMu == 1,
@@ -58,9 +67,9 @@ Analyze_OneSideProp <- function(
                    (.data$Metric - .data$vMu) /
                      sqrt(.data$vMu * (1 - .data$vMu) / .data$Denominator)
       ),
-      Upper_funnel = proprate + num_deviations*sqrt(proprate*(1-proprate)/sum(.data$Denominator)),
-      Flag = ifelse(Metric > Upper_funnel, 2, 0)
-    )
+      upper_funnel = proprate + num_deviations*sqrt(proprate*(1-proprate)/sum(.data$Denominator)) # can add additional cutoffs with additional function arguments
+    ) %>%
+    mutate(Flag = ifelse(Metric >= upper_funnel | GroupID == "Upper_funnel", 2, 0)) # Custom flag based on upper-funnel
 
   # dfAnalyzed -----------------------------------------------------------------
   dfAnalyzed <- dfScore %>%
@@ -71,16 +80,8 @@ Analyze_OneSideProp <- function(
       "Denominator",
       "Metric",
       Score = "z_0",
-      Flag,
-      Upper_funnel
-    ) %>%
-    tidyr::pivot_longer(., cols = c("Metric", "Upper_funnel"), names_to = "tmp", values_to = "Metric") %>%
-    mutate(GroupID = ifelse(tmp == "Upper_funnel", "Upper_funnel", GroupID),) %>%
-    select(-tmp) %>%
-    group_by(GroupID) %>%
-    unique() %>%
-    ungroup() %>%
-    arrange(.data$Score)
+      Flag
+    )
 
 
   LogMessage(
