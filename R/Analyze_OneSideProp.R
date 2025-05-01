@@ -58,7 +58,7 @@ Analyze_OneSideProp <- function(
                    (.data$Metric - .data$vMu) /
                      sqrt(.data$vMu * (1 - .data$vMu) / .data$Denominator)
       ),
-      Upper_funnel = proprate + num_deviations*sqrt(proprate*(1-proprate)/.data$Denominator),
+      Upper_funnel = proprate + num_deviations*sqrt(proprate*(1-proprate)/sum(.data$Denominator)),
       Flag = ifelse(Metric > Upper_funnel, 2, 0)
     )
 
@@ -71,16 +71,23 @@ Analyze_OneSideProp <- function(
       "Denominator",
       "Metric",
       Score = "z_0",
-      Flag
+      Flag,
+      Upper_funnel
     ) %>%
+    tidyr::pivot_longer(., cols = c("Metric", "Upper_funnel"), names_to = "tmp", values_to = "Metric") %>%
+    mutate(GroupID = ifelse(tmp == "Upper_funnel", "Upper_funnel", GroupID)) %>%
+    select(-tmp) %>%
+    group_by(GroupID) %>%
+    unique() %>%
+    ungroup() %>%
     arrange(.data$Score)
+
 
   LogMessage(
     level = "info",
     message = "`OverallMetric`, `Factor`, and `Score` columns created from normal approximation.",
     cli_detail = "inform"
   )
-
 
   return(dfAnalyzed)
 }

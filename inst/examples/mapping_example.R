@@ -24,7 +24,7 @@ mappings_wf <- gsm.core::MakeWorkflowList(strNames =c("SUBJ", "ENROLL", "IE", "S
 mappings_spec <- gsm.mapping::CombineSpecs(mappings_wf)
 metrics_study_wf <- gsm.core::MakeWorkflowList(strNames = "qtl0001_study", strPath = "inst/workflow/2_metrics", strPackage = "gsm.qtl")
 metrics_site_wf <- gsm.core::MakeWorkflowList(strNames = "qtl0001_site", strPath = "inst/workflow/2_metrics", strPackage = "gsm.qtl")
-reporting_wf <- gsm.core::MakeWorkflowList(strPath = "workflow/3_reporting", strPackage = "gsm.reporting")
+reporting_wf <- gsm.core::MakeWorkflowList(strNames = c("Results", "Groups"), strPath = "workflow/3_reporting", strPackage = "gsm.reporting")
 
 
 lRaw <- map_depth(ie_data, 1, gsm.mapping::Ingest, mappings_spec)
@@ -49,17 +49,20 @@ for(snap in seq_along(ie_data)){
 
 all_reportingResults_study <- do.call(dplyr::bind_rows, lapply(reporting_study, function(x) x$Reporting_Results))
 all_reportingResults_site <- do.call(dplyr::bind_rows, lapply(reporting_site, function(x) x$Reporting_Results))
-all_reportingResults_upper_funnel <- all_reportingResults_study %>%
-  select(-Metric) %>%
-  mutate(Metric = 0.2 + 3*sqrt(0.2*(1-0.2)/.data$Denominator)) %>%
-  mutate(GroupID = "Upper_funnel")
+
 
 all_reportingResults <- bind_rows(all_reportingResults_study, all_reportingResults_site, all_reportingResults_upper_funnel)
 
 all_reportingGroups <- reporting_study[[1]]$Reporting_Groups
 
-qtl_chart <- gsm.qtl::Widget_TimeSeriesQTL(
-  dfResults = all_reportingResults,
+qtl_chart_study <- gsm.qtl::Widget_TimeSeriesQTL(
+  dfResults = all_reportingResults_study,
+  dfGroups = all_reportingGroups,
+  strOutcome = "Metric"
+)
+
+qtl_chart_site <- gsm.qtl::Widget_TimeSeriesQTL(
+  dfResults = all_reportingResults_site,
   dfGroups = all_reportingGroups,
   strOutcome = "Metric"
 )

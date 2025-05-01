@@ -27,18 +27,18 @@ steps:
       x: Mapped_ENROLL
       'y': Mapped_IE
       'by': subjid
-  - output: vThreshold
-    name: gsm.core::ParseThreshold
-    params:
-      strThreshold: Threshold
-  - output: vFlag
-    name: gsm.core::ParseThreshold
-    params:
-      strThreshold: Flag
-  - output: vFlagOrder
-    name: gsm.core::ParseThreshold
-    params:
-      strThreshold: FlagOrder
+  # - output: vThreshold
+  #   name: gsm.core::ParseThreshold
+  #   params:
+  #     strThreshold: Threshold
+  # - output: vFlag
+  #   name: gsm.core::ParseThreshold
+  #   params:
+  #     strThreshold: Flag
+  # - output: vFlagOrder
+  #   name: gsm.core::ParseThreshold
+  #   params:
+  #     strThreshold: FlagOrder
   - output: Analysis_Input
     name: gsm.core::Input_Rate
     params:
