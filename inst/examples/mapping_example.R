@@ -12,7 +12,7 @@ ie_data <- generate_rawdata_for_single_study(
   SnapshotCount = 6,
   SnapshotWidth = "months",
   ParticipantCount = 1000,
-  SiteCount = 50,
+  SiteCount = 10,
   StudyID = "ABC",
   workflow_path = "workflow",
   mappings = "IE",
@@ -50,12 +50,15 @@ for(snap in seq_along(ie_data)){
 all_reportingResults_study <- do.call(dplyr::bind_rows, lapply(reporting_study, function(x) x$Reporting_Results))
 all_reportingResults_site <- do.call(dplyr::bind_rows, lapply(reporting_site, function(x) x$Reporting_Results))
 
-all_reportingResults <- bind_rows(all_reportingResults_study, all_reportingResults_site)
-
 all_reportingGroups <- reporting_study[[1]]$Reporting_Groups
 
 qtl_chart_study <- gsm.qtl::Widget_TimeSeriesQTL(
   dfResults = all_reportingResults_study,
+  dfGroups = all_reportingGroups,
+  strOutcome = "Metric"
+)
+qtl_chart_site <- gsm.qtl::Widget_TimeSeriesQTL(
+  dfResults = all_reportingResults_site,
   dfGroups = all_reportingGroups,
   strOutcome = "Metric"
 )

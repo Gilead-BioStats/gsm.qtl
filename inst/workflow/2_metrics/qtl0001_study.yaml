@@ -9,7 +9,7 @@ meta:
   Model: Normal Approximation
   Score: Adjusted Z-Score
   AnalysisType: binary
-  proprate: 0.20 # historical data
+  proprate: 0.10 # historical data
   num_deviations: 3
 spec:
   Mapped_IE:

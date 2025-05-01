@@ -9,9 +9,8 @@ meta:
   Model: Normal Approximation
   Score: Adjusted Z-Score
   AnalysisType: binary
-  Threshold: -2,-1, 1, 2
-  AccrualThreshold: 10
-  AccrualMetric: Denominator
+  proprate: 0.10 # historical data
+  num_deviations: 3
 spec:
   Mapped_IE:
     subjid:
@@ -28,10 +27,18 @@ steps:
       x: Mapped_ENROLL
       'y': Mapped_IE
       'by': subjid
-  - output: vThreshold
-    name: gsm.core::ParseThreshold
-    params:
-      strThreshold: Threshold
+  # - output: vThreshold
+  #   name: gsm.core::ParseThreshold
+  #   params:
+  #     strThreshold: Threshold
+  # - output: vFlag
+  #   name: gsm.core::ParseThreshold
+  #   params:
+  #     strThreshold: Flag
+  # - output: vFlagOrder
+  #   name: gsm.core::ParseThreshold
+  #   params:
+  #     strThreshold: FlagOrder
   - output: Analysis_Input
     name: gsm.core::Input_Rate
     params:
@@ -49,28 +56,16 @@ steps:
     name: gsm.core::Transform_Rate
     params:
       dfInput: Analysis_Input
-  - output: Analysis_Analyzed
-    name: Analyze_NormalApprox
+  - output: Analysis_Summary
+    name: Analyze_OneSideProp
     params:
       dfTransformed: Analysis_Transformed
-      strType: AnalysisType
-  - output: Analysis_Flagged
-    name: gsm.core::Flag
-    params:
-      dfAnalyzed: Analysis_Analyzed
-      vThreshold: vThreshold
-      nAccrualThreshold: AccrualThreshold
-      strAccrualMetric: AccrualMetric
-  - output: Analysis_Summary
-    name: gsm.core::Summarize
-    params:
-      dfFlagged: Analysis_Flagged
+      proprate: proprate
+      num_deviations: num_deviations
   - output: lAnalysis
     name: list
     params:
       ID: ID
       Analysis_Input: Analysis_Input
       Analysis_Transformed: Analysis_Transformed
-      Analysis_Analyzed: Analysis_Analyzed
-      Analysis_Flagged: Analysis_Flagged
       Analysis_Summary: Analysis_Summary
