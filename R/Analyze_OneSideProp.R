@@ -21,7 +21,8 @@
 #'   Model vignette: `vignette("DataModel", package = "gsm.core")`. For this
 #'   function, `dfTransformed` should typically be created using
 #'   [Transform_Rate()].
-#' @param proprate a numeric with suggested discontinuation rate
+#' @param proprate a numeric with historic screen failure rate
+#' @param num_deviations a numeric to determine the appropriate threshold (number of SDs away) from violating QTL
 #'
 #' @return `data.frame` with one row per site with columns: GroupID, Numerator,
 #'   Denominator, Metric, OverallMetric, Factor, and Score.
@@ -48,26 +49,30 @@ Analyze_OneSideProp <- function(
     message = "One or more of these columns not found: GroupID, GroupLevel, Denominator, Numerator, Metric"
   )
   stop_if(cnd = !all(!is.na(dfTransformed[["GroupID"]])), message = "NA value(s) found in GroupID")
+  stop_if(cnd = (proprate > 1 | proprate < 0), message = "`proprate` must be a value between 0 and 1.")
 
-  # Calculate a grouped summarization to bind back together to create appropriate flags
-  # groups by study, site, country this df should always be the same, i.e. equivalent of study level
+  # Calculate a grouped summarization that accounts for groups by study, site, country
+  # This df should always be the same (i.e. equivalent) of study level
   Upper_funnel <- dfTransformed %>%
     group_by(GroupLevel) %>%
     summarize(GroupID = "Upper_funnel",
               Numerator = sum(Numerator),
               Denominator = sum(Denominator)) %>%
     ungroup() %>%
-    mutate(Metric = proprate + num_deviations*sqrt(proprate*(1-proprate)/sum(.data$Denominator)))
+    mutate(Metric = proprate + num_deviations*sqrt(proprate*(1-proprate)/sum(.data$Denominator))) # To plot the funnel need funnel data under metric
 
+  # Bind the upper funnel back together with original dataframe
   dfScore <- dplyr::bind_rows(dfTransformed, Upper_funnel) %>%
     mutate(
-      vMu = proprate,
+      vMu = proprate, # calculate one-sided proportion score against a historic rate
       z_0 = ifelse(.data$vMu == 0 | .data$vMu == 1,
                    0,
                    (.data$Metric - .data$vMu) /
                      sqrt(.data$vMu * (1 - .data$vMu) / .data$Denominator)
       ),
-      upper_funnel = proprate + num_deviations*sqrt(proprate*(1-proprate)/sum(.data$Denominator)) # can add additional cutoffs with additional function arguments
+      # Unsure if a dispersion correction is necessary especially at a study-level?
+      upper_funnel = proprate + num_deviations*sqrt(proprate*(1-proprate)/sum(.data$Denominator))
+      # Additional cutoffs can be made to compare against `Metric` for flagging
     ) %>%
     mutate(Flag = ifelse(Metric >= upper_funnel | GroupID == "Upper_funnel", 2, 0)) # Custom flag based on upper-funnel
 

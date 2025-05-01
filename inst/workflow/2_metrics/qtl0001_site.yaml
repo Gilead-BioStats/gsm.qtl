@@ -9,7 +9,7 @@ meta:
   Model: Normal Approximation
   Score: Adjusted Z-Score
   AnalysisType: binary
-  proprate: 0.10 # historical data
+  proprate: 0.10  # insert historical data
   num_deviations: 3
 spec:
   Mapped_IE:
@@ -27,18 +27,6 @@ steps:
       x: Mapped_ENROLL
       'y': Mapped_IE
       'by': subjid
-  # - output: vThreshold
-  #   name: gsm.core::ParseThreshold
-  #   params:
-  #     strThreshold: Threshold
-  # - output: vFlag
-  #   name: gsm.core::ParseThreshold
-  #   params:
-  #     strThreshold: Flag
-  # - output: vFlagOrder
-  #   name: gsm.core::ParseThreshold
-  #   params:
-  #     strThreshold: FlagOrder
   - output: Analysis_Input
     name: gsm.core::Input_Rate
     params:

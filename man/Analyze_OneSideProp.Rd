@@ -14,7 +14,9 @@ Model vignette: \code{vignette("DataModel", package = "gsm.core")}. For this
 function, \code{dfTransformed} should typically be created using
 \code{\link[=Transform_Rate]{Transform_Rate()}}.}
 
-\item{proprate}{a numeric with suggested discontinuation rate}
+\item{proprate}{a numeric with historic screen failure rate}
+
+\item{num_deviations}{a numeric to determine the appropriate threshold (number of SDs away) from violating QTL}
 }
 \value{
 \code{data.frame} with one row per site with columns: GroupID, Numerator,
