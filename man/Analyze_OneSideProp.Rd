@@ -4,7 +4,7 @@
 \alias{Analyze_OneSideProp}
 \title{Funnel Plot Analysis with Normal Approximation for Binary and Rate Outcomes.}
 \usage{
-Analyze_OneSideProp(dfTransformed, proprate = 0.1, num_deviations = 3)
+Analyze_OneSideProp(dfTransformed, nPropRate = 0.1, nNumDeviations = 3)
 }
 \arguments{
 \item{dfTransformed}{\code{data.frame} Transformed data for analysis. Data should
@@ -14,9 +14,9 @@ Model vignette: \code{vignette("DataModel", package = "gsm.core")}. For this
 function, \code{dfTransformed} should typically be created using
 \code{\link[=Transform_Rate]{Transform_Rate()}}.}
 
-\item{proprate}{a numeric with historic screen failure rate}
+\item{nPropRate}{a numeric with historic screen failure rate}
 
-\item{num_deviations}{a numeric to determine the appropriate threshold (number of SDs away) from violating QTL}
+\item{nNumDeviations}{a numeric to determine the appropriate threshold (number of SDs away) from violating QTL}
 }
 \value{
 \code{data.frame} with one row per site with columns: GroupID, Numerator,
@@ -27,16 +27,11 @@ Denominator, Metric, OverallMetric, Factor, and Score.
 
 Creates analysis results data for percentage/rate data using funnel plot
 method with normal approximation.
-
-More information can be found in \href{https://gilead-biostats.github.io/gsm.core/articles/KRI\%20Method.html#the-normal-approximation-method}{The Normal Approximation Method}
-of the KRI Method vignette.
 }
 \section{Statistical Methods}{
  This function applies funnel plots using
-asymptotic limits based on the normal approximation of a binomial
-distribution for the binary outcome, or normal approximation of a Poisson
-distribution for the rate outcome with volume (the sample sizes or total
-exposure of the sites) to assess data quality and safety.
+a fixed proportion/rate and number of standard deviations according to the
+one-sided Z proportion test.
 }
 
 \examples{

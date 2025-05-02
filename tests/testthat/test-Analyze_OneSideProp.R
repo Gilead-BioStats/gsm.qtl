@@ -20,6 +20,8 @@ test_that("Analyze One Side Prop works for Site",{
   res <- Analyze_OneSideProp(test_transformed, proprate = 0.01, 3)
   expect_equal(nrow(res), 4)
   expect_equal(res %>% pull(Flag), c(2,2,0,2))
+  expect_equal(res %>% filter(GroupID == "Upper_funnel") %>% pull(Numerator),
+               60)
   expect_equal(res %>% filter(GroupID == "Upper_funnel") %>% pull(Metric),
                0.01 + 3*sqrt(0.01*0.99/300))
 })

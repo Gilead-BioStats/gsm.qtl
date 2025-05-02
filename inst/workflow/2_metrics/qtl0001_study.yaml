@@ -9,8 +9,8 @@ meta:
   Model: Normal Approximation
   Score: Adjusted Z-Score
   AnalysisType: binary
-  proprate: 0.10 # insert historical data
-  num_deviations: 3
+  nPropRate: 0.10 # insert historical data
+  nNumDeviations: 3
 spec:
   Mapped_IE:
     subjid:
