@@ -4,7 +4,7 @@ test_that("Analyze One Side Prop works for Study",{
        "ABC",     "Study",         25,          100,    0.25
   )
 
-  res <- Analyze_OneSideProp(test_transformed, proprate = 0.01, 3)
+  res <- Analyze_OneSideProp(test_transformed, nPropRate = 0.01, nNumDeviations = 3)
   expect_equal(c(names(test_transformed), all(c("Score", "Flag")), names(res)))
   expect_equal(res %>% filter(GroupID == "ABC") %>% pull(Flag), 2)
 })
@@ -17,7 +17,7 @@ test_that("Analyze One Side Prop works for Site",{
      "SiteZ",      "Site",          2,          100,    0.02
   )
 
-  res <- Analyze_OneSideProp(test_transformed, proprate = 0.01, 3)
+  res <- Analyze_OneSideProp(test_transformed, nPropRate = 0.01, nNumDeviations = 3)
   expect_equal(nrow(res), 4)
   expect_equal(res %>% pull(Flag), c(2,2,0,2))
   expect_equal(res %>% filter(GroupID == "Upper_funnel") %>% pull(Numerator),

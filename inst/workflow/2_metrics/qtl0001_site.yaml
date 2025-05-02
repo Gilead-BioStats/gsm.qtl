@@ -48,8 +48,8 @@ steps:
     name: Analyze_OneSideProp
     params:
       dfTransformed: Analysis_Transformed
-      proprate: proprate
-      num_deviations: num_deviations
+      nPropRate: nPropRate
+      nNumDeviations: nNumDeviations
   - output: lAnalysis
     name: list
     params:

@@ -24,12 +24,12 @@
 #'
 #' @examples
 #' # Binary
-#' dfTransformed <- Transform_Rate(analyticsInput)
+#' dftransformed <- tibble::tribble(
+#'   ~GroupID, ~GroupLevel, ~Numerator, ~Denominator, ~Metric,
+#'   "ABC",     "Study",         25,          100,    0.25
+#' )
 #'
-#' dfAnalyzed <- Analyze_NormalApprox(dfTransformed, strType = "binary")
-#'
-#' # Rate
-#' dfAnalyzed <- Analyze_NormalApprox(dfTransformed, strType = "rate")
+#' dfAnalyzed <- Analyze_OneSideProp(dftransformedd, nPropRate = 0.01, nNumDeviations = 3)
 #'
 #' @export
 
