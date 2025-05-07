@@ -61,13 +61,14 @@ all_reportingResults_site <- do.call(dplyr::bind_rows, lapply(reporting_site, fu
 all_reportingGroups <- reporting_study[[1]]$Reporting_Groups
 
 # Create modified time series widget plot
-qtl_chart_study <- gsm.qtl::Widget_TimeSeriesQTL(
+qtl_timeseries_study <- gsm.qtl::Widget_TimeSeriesQTL(
   dfResults = all_reportingResults_study,
   dfGroups = all_reportingGroups,
   strOutcome = "Metric"
 )
-qtl_chart_site <- gsm.qtl::Widget_TimeSeriesQTL(
-  dfResults = all_reportingResults_site,
+
+qtl_barchart_site <- gsm.qtl::Widget_BarChartQTL(
+  dfResults = all_reportingResults_site %>% filter(SnapshotDate == "2012-06-30"),
   dfGroups = all_reportingGroups,
   strOutcome = "Metric"
 )

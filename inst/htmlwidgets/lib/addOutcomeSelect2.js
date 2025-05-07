@@ -15,7 +15,8 @@ const addOutcomeSelect2 = function(widgetControls, dfResults, lMetric, dfGroups,
         [
             //'Score',
             'Metric',
-            //'Numerator'
+            'Numerator',
+            'Denominator'
         ],
         false, // disable "None" option
         strOutcome // set initial selectection
