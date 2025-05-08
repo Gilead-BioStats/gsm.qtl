@@ -18,8 +18,9 @@
 #'
 
 Report_QTL <- function(
-    lCharts = NULL,
-    dfResults = NULL,
+    dfResultsStudy = NULL,
+    dfResultsSite = NULL,
+    dfListing = NULL,
     dfGroups = NULL,
     strOutputDir = getwd(),
     strOutputFile = NULL
@@ -32,8 +33,9 @@ Report_QTL <- function(
     strOutputFile = strOutputFile,
     strOutputDir = strOutputDir,
     lParams = list(
-      lCharts = lCharts,
-      dfResults = dfResults,
+      dfResultsStudy = dfResultsStudy,
+      dfResultsSite = dfResultsSite,
+      dfListing = dfListing,
       dfGroups = dfGroups
     )
   )

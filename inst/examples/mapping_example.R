@@ -2,6 +2,7 @@ library(gsm.datasim) # requires >= fix-50 PR to get it to dev is up
 library(gsm.mapping) # dev is fine, as long as post fix-58
 library(gsm.reporting)
 library(gsm.core)
+library(gsm.kri)
 library(purrr)
 library(dplyr)
 devtools::load_all()
@@ -59,29 +60,14 @@ all_reportingResults_site <- do.call(dplyr::bind_rows, lapply(reporting_site, fu
 # Only need 1 reporting group object
 all_reportingGroups <- reporting_study[[1]]$Reporting_Groups
 
-# Create modified time series widget plot
-qtl_timeseries_study <- gsm.qtl::Widget_TimeSeriesQTL(
-  dfResults = all_reportingResults_study,
-  dfGroups = all_reportingGroups,
-  strOutcome = "Metric"
-)
-
-qtl_barchart_site <- gsm.qtl::Widget_BarChartQTL(
-  dfResults = all_reportingResults_site %>% filter(SnapshotDate == "2012-06-30"),
-  dfGroups = all_reportingGroups,
-  strOutcome = "Metric"
-)
-lCharts <- list(
-  timeSeries = qtl_timeseries_study,
-  barChart = qtl_barchart_site
-)
-
-qtl_listing
-
 Report_QTL(
-  lCharts = lCharts,
+  dfResultsStudy = all_reportingResults_study,
+  dfResultsSite = all_reportingResults_site,
+  dfListing = analyzed_site[[length(analyzed_site)]]$Analysis_qtl0001_site$Analysis_Listing %>% filter(enrollyn == "N"),
+  dfGroups = all_reportingGroups,
   strOutputFile = "test.html"
 )
+
 # Multiple Studies
 # ie_data2 <- raw_data_generator(template_path = "~/gsm.datasim/inst/small_template.csv", mappings = "IE", package = "gsm.mapping")
 # lRaw2 <- map_depth(ie_data2, 2, gsm.mapping::Ingest, mappings_spec)

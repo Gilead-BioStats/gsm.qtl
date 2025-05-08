@@ -8,8 +8,9 @@ output:
       smooth_scroll: true
     css: styles.css
 params:
-  lCharts: NA
-  dfResults: NA
+  dfResultsStudy: NA
+  dfResultsSite: NA
+  dfListing: NA
   dfGroups: NA
 ---
 
@@ -36,9 +37,33 @@ date: "Snapshot Date: last known"
 ## Study Overview
 
 ## Results
-
 ```{r, echo=FALSE, results='asis'}
+
+#establish how many snapshots there were and find latest one for barchart
+length_snapshots = params$dfResultsSite$SnapshotDate %>% unique %>% length
+latest_snapshot = unique(params$dfResultsSite$SnapshotDate)[length_snapshots]
+
+qtl_timeseries_study <- gsm.qtl::Widget_TimeSeriesQTL(
+  dfResults = params$dfResultsStudy,
+  dfGroups = params$dfGroups,
+  strOutcome = "Metric"
+)
+
+qtl_barchart_site <- gsm.qtl::Widget_BarChartQTL(
+  dfResults = params$dfResultsSite %>% filter(SnapshotDate == latest_snapshot),
+  dfGroups = params$dfGroups,
+  strOutcome = "Metric"
+)
+lCharts <- list(
+  timeSeries = qtl_timeseries_study,
+  barChart = qtl_barchart_site
+)
 gsm.kri::Report_MetricCharts(lCharts)
+```
+
+## Inclusion/Exclusion Listing
+```{r, echo = FALSE, results='asis'}
+reactable::reactable(params$dfListing, searchable = TRUE)
 ```
 
 ```{r echo=FALSE}
