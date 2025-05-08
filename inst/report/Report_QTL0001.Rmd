@@ -1,0 +1,57 @@
+---
+output:
+  html_document:
+    mathjax: null
+    toc: true
+    toc_float:
+      collapsed: false
+      smooth_scroll: true
+    css: styles.css
+params:
+  lCharts: NA
+  dfResults: NA
+  dfGroups: NA
+---
+
+```{r setup, include=FALSE} 
+knitr::opts_chunk$set(warning = FALSE, message = FALSE) 
+```
+
+
+```{r, results='asis', echo=FALSE, message=FALSE, warning=FALSE}
+# library(gsm.kri)
+# library(gt)
+# setup <- Report_Setup(
+#   dfGroups =  params$dfGroups,
+#   dfResults = params$dfResults
+# )
+```
+
+
+---
+title: "QTL Overview"
+subtitle: "Study: ABC"
+date: "Snapshot Date: last known"
+--- 
+## Study Overview
+
+## Results
+
+```{r, echo=FALSE, results='asis'}
+gsm.kri::Report_MetricCharts(lCharts)
+```
+
+```{r echo=FALSE}
+group_dropdown <- system.file('report', 'lib', 'overallGroupDropdown.js', package = "gsm.kri")
+dropdown_drag <- system.file('report', 'lib', 'dragOverallGroupDropdown.js', package = "gsm.kri")
+toggle_toc <- system.file('report', 'lib', 'toggleTOC.js', package = "gsm.kri")
+```
+
+```{js, file={group_dropdown}, echo=FALSE }
+```
+
+```{js, file={dropdown_drag}, echo=FALSE}
+```
+
+```{js, file={toggle_toc}, echo=FALSE}
+```

@@ -9,7 +9,7 @@ meta:
   Model: Normal Approximation
   Score: Adjusted Z-Score
   AnalysisType: binary
-  nPropRate: 0.10  # insert historical data
+  nPropRate: 0.20  # insert historical data
   nNumDeviations: 3
 spec:
   Mapped_IE:
@@ -54,6 +54,7 @@ steps:
     name: list
     params:
       ID: ID
+      Analysis_Listing: total_screened
       Analysis_Input: Analysis_Input
       Analysis_Transformed: Analysis_Transformed
       Analysis_Summary: Analysis_Summary

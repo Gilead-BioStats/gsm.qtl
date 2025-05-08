@@ -26,7 +26,6 @@ metrics_study_wf <- gsm.core::MakeWorkflowList(strNames = "qtl0001_study", strPa
 metrics_site_wf <- gsm.core::MakeWorkflowList(strNames = "qtl0001_site", strPath = "inst/workflow/2_metrics", strPackage = "gsm.qtl")
 reporting_wf <- gsm.core::MakeWorkflowList(strNames = c("Results", "Groups"), strPath = "workflow/3_reporting", strPackage = "gsm.reporting")
 
-
 lRaw <- map_depth(ie_data, 1, gsm.mapping::Ingest, mappings_spec)
 mapped <- map_depth(lRaw, 1, ~ gsm.core::RunWorkflows(mappings_wf, .x))
 
@@ -72,7 +71,17 @@ qtl_barchart_site <- gsm.qtl::Widget_BarChartQTL(
   dfGroups = all_reportingGroups,
   strOutcome = "Metric"
 )
+lCharts <- list(
+  timeSeries = qtl_timeseries_study,
+  barChart = qtl_barchart_site
+)
 
+qtl_listing
+
+Report_QTL(
+  lCharts = lCharts,
+  strOutputFile = "test.html"
+)
 # Multiple Studies
 # ie_data2 <- raw_data_generator(template_path = "~/gsm.datasim/inst/small_template.csv", mappings = "IE", package = "gsm.mapping")
 # lRaw2 <- map_depth(ie_data2, 2, gsm.mapping::Ingest, mappings_spec)

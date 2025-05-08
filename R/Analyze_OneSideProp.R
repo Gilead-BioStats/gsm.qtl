@@ -80,7 +80,8 @@ Analyze_OneSideProp <- function(
       "Denominator",
       "Metric",
       Score = "z_0",
-      Flag
+      Flag,
+      upper_funnel
     )
 
 
