@@ -8,50 +8,53 @@ output:
       smooth_scroll: true
     css: styles.css
 params:
-  dfResultsStudy: NA
-  dfResultsSite: NA
-  dfListing: NA
+  dfResults: NA
   dfGroups: NA
+  dfListing: NA
 ---
 
 ```{r setup, include=FALSE} 
+library(dplyr)
+library(gsm.kri)
+library(gsm.qtl)
+library(reactable)
+
 knitr::opts_chunk$set(warning = FALSE, message = FALSE) 
+
+dfResultsStudy <- params$dfResults %>% filter(GroupLevel == "Study")
+dfResultsSite <- params$dfResults %>% filter(GroupLevel == "Site")
+dfGroups <- params$dfGroups
+dfListing <- params$dfListing
+
+length_snapshots = dfResultsSite$SnapshotDate %>% n_distinct()
+latest_snapshot = unique(dfResultsSite$SnapshotDate)[length_snapshots]
 ```
-
-
-```{r, results='asis', echo=FALSE, message=FALSE, warning=FALSE}
-# library(gsm.kri)
-# library(gt)
-# setup <- Report_Setup(
-#   dfGroups =  params$dfGroups,
-#   dfResults = params$dfResults
-# )
-```
-
 
 ---
 title: "QTL Overview"
-subtitle: "Study: ABC"
-date: "Snapshot Date: last known"
+subtitle: "Study: `r unique(dfListing$studyid)`"
+date: "Snapshot Date: `r latest_snapshot`"
 --- 
+
 ## Study Overview
+```{r, echo=FALSE, results='asis'}
+reactable(dfGroups)
+```
 
 ## Results
 ```{r, echo=FALSE, results='asis'}
 
 #establish how many snapshots there were and find latest one for barchart
-length_snapshots = params$dfResultsSite$SnapshotDate %>% unique %>% length
-latest_snapshot = unique(params$dfResultsSite$SnapshotDate)[length_snapshots]
 
 qtl_timeseries_study <- gsm.qtl::Widget_TimeSeriesQTL(
-  dfResults = params$dfResultsStudy,
-  dfGroups = params$dfGroups,
+  dfResults = dfResultsStudy,
+  dfGroups = dfGroups,
   strOutcome = "Metric"
 )
 
 qtl_barchart_site <- gsm.qtl::Widget_BarChartQTL(
-  dfResults = params$dfResultsSite %>% filter(SnapshotDate == latest_snapshot),
-  dfGroups = params$dfGroups,
+  dfResults = dfResultsSite %>% filter(SnapshotDate == latest_snapshot),
+  dfGroups = dfGroups,
   strOutcome = "Metric"
 )
 lCharts <- list(
@@ -63,7 +66,7 @@ gsm.kri::Report_MetricCharts(lCharts)
 
 ## Inclusion/Exclusion Listing
 ```{r, echo = FALSE, results='asis'}
-reactable::reactable(params$dfListing, searchable = TRUE)
+reactable::reactable(dfListing, searchable = TRUE)
 ```
 
 ```{r echo=FALSE}

@@ -5,15 +5,17 @@
 \title{Report_QTL function}
 \usage{
 Report_QTL(
-  lCharts = NULL,
   dfResults = NULL,
+  dfListing = NULL,
   dfGroups = NULL,
   strOutputDir = getwd(),
   strOutputFile = NULL
 )
 }
 \arguments{
-\item{lCharts}{A list of charts to include in the report.}
+\item{dfResults}{a}
+
+\item{dfGroups}{b}
 
 \item{strOutputDir}{The output directory path for the generated report. If not provided,
 the report will be saved in the current working directory.}
@@ -21,7 +23,7 @@ the report will be saved in the current working directory.}
 \item{strOutputFile}{The output file name for the generated report. If not provided,
 the report will be named based on the study ID, Group Level and Date.}
 
-\item{dfMetrics}{}
+\item{lCharts}{A list of charts to include in the report.}
 }
 \value{
 File path of the saved report html is returned invisibly. Save to object to view absolute output path.

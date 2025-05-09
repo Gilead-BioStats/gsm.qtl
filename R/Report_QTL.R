@@ -18,8 +18,7 @@
 #'
 
 Report_QTL <- function(
-    dfResultsStudy = NULL,
-    dfResultsSite = NULL,
+    dfResults = NULL,
     dfListing = NULL,
     dfGroups = NULL,
     strOutputDir = getwd(),
@@ -33,8 +32,7 @@ Report_QTL <- function(
     strOutputFile = strOutputFile,
     strOutputDir = strOutputDir,
     lParams = list(
-      dfResultsStudy = dfResultsStudy,
-      dfResultsSite = dfResultsSite,
+      dfResults = dfResults,
       dfListing = dfListing,
       dfGroups = dfGroups
     )
