@@ -42,7 +42,7 @@ reporting <- map2(reporting, dates, ~{
 all_reportingResults <- do.call(dplyr::bind_rows, lapply(reporting, function(x) x$Reporting_Results))
 
 # Only need 1 reporting group object
-all_reportingGroups <- reporting[[6]]$Reporting_Groups
+all_reportingGroups <- reporting[[length(reporting)]]$Reporting_Groups
 
 ie_listing <- analyzed[[length(analyzed)]]$Analysis_qtl0001_site$Analysis_Listing %>%
   filter(enrollyn == "N")

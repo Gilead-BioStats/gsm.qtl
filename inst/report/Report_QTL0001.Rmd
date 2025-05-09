@@ -38,7 +38,25 @@ date: "Snapshot Date: `r latest_snapshot`"
 
 ## Study Overview
 ```{r, echo=FALSE, results='asis'}
-reactable(dfGroups)
+dfResultsStudy %>%
+  filter(GroupLevel == "Study",
+         SnapshotDate == latest_snapshot,
+         GroupID != "Upper_funnel") %>%
+  mutate(Ineligible_Rate = paste0(as.character(Metric*100),"%"),
+         Deviation = ifelse(Metric > upper_funnel, "Yes", "No"),
+         upper_funnel = paste0(as.character(round(upper_funnel,3)*100), "%")) %>%
+  mutate_all(as.character) %>%
+  select(GroupID, Numerator, Denominator, Ineligible_Rate, upper_funnel, Deviation) %>%
+  tidyr::pivot_longer(., cols = c(GroupID, Numerator, Denominator, Ineligible_Rate, upper_funnel, Deviation), names_to = "Param", values_to = "Value") %>%
+  mutate(Param = case_when(
+    Param == "GroupID" ~ "StudyID",
+    Param == "Numerator" ~ "Eligibility Not Met",
+    Param == "Denominator" ~ "Total Enrolled",
+    Param == "Ineligible_Rate" ~ "Current Ineligible Enrolled Rate",
+    Param == "upper_funnel" ~ "Current Threshold",
+    Param == "Deviation" ~ "Deviation?"
+  )) %>% 
+  reactable()
 ```
 
 ## Results
