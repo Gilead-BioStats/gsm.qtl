@@ -71,7 +71,7 @@ qtl_timeseries_study <- gsm.qtl::Widget_TimeSeriesQTL(
 )
 
 qtl_barchart_site <- gsm.qtl::Widget_BarChartQTL(
-  dfResults = dfResultsSite %>% filter(SnapshotDate == latest_snapshot),
+  dfResults = dfResultsSite %>% filter(SnapshotDate == latest_snapshot, GroupID != "Upper_funnel"),
   dfGroups = dfGroups,
   strOutcome = "Metric"
 )
