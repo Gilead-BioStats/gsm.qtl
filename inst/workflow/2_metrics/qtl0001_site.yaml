@@ -15,24 +15,16 @@ spec:
   Mapped_IE:
     subjid:
       type: character
-  Mapped_SUBJ:
+  Analysis_Listing:
     subjid:
       type: character
-    invid:
-      type: character
 steps:
-  - output: total_screened
-    name: dplyr::left_join
-    params:
-      x: Mapped_ENROLL
-      'y': Mapped_IE
-      'by': subjid
   - output: Analysis_Input
     name: gsm.core::Input_Rate
     params:
-      dfSubjects: total_screened
+      dfSubjects: Analysis_Listing
       dfNumerator: Mapped_IE
-      dfDenominator: total_screened
+      dfDenominator: Analysis_Listing
       strNumeratorCol: subjid
       strDenominatorCol: subjid
       strSubjectCol: subjid
@@ -54,7 +46,7 @@ steps:
     name: list
     params:
       ID: ID
-      Analysis_Listing: total_screened
+      Analysis_Listing: Analysis_Listing
       Analysis_Input: Analysis_Input
       Analysis_Transformed: Analysis_Transformed
       Analysis_Summary: Analysis_Summary

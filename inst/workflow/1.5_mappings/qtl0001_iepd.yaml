@@ -1,0 +1,38 @@
+meta:
+  Type: Mapped
+  ID: qtl0001_iepd
+  Description: Combining IE and PD data to create participant level dataset
+  Priority: 1
+spec:
+  Mapped_IE:
+    subjid:
+      type: character
+  Mapped_ENROLL:
+    subjid:
+      type: character
+    invid:
+      type: character
+  Mapped_PD:
+    subjid:
+      type: character
+steps:
+  - output: add_ie
+    name: dplyr::left_join
+    params:
+      x: Mapped_ENROLL
+      'y': Mapped_IE
+      by:
+        - subjid
+  - output: Analysis_Listing
+    name: dplyr::left_join
+    params:
+      x: add_ie
+      'y': Mapped_PD
+      by:
+        - subjid
+  - output: lPreAnalysis
+    name: list
+    params:
+      ID: ID
+      Analysis_Listing: Analysis_Listing
+      Mapped_IE: Mapped_IE
