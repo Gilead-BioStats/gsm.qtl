@@ -15,13 +15,13 @@ ie_data <- generate_rawdata_for_single_study(
   ParticipantCount = 1000,
   SiteCount = 10,
   StudyID = "ABC",
-  workflow_path = "workflow",
+  workflow_path = "inst/workflow/1_mappings",
   mappings = c("IE", "PD"),
-  package = "gsm.mapping",
+  package = "gsm.qtl",
   desired_specs = NULL
 )
 
-mappings_wf <- gsm.core::MakeWorkflowList(strNames =c("SUBJ", "ENROLL", "IE", "PD", "STUDY", "SITE", "COUNTRY"), strPath = "workflow/1_mappings", strPackage = "gsm.mapping")
+mappings_wf <- gsm.core::MakeWorkflowList(strNames =c("SUBJ", "ENROLL", "IE", "PD", "STUDY", "SITE", "COUNTRY"), strPath = "inst/workflow/1_mappings", strPackage = "gsm.qtl")
 mappings_spec <- gsm.mapping::CombineSpecs(mappings_wf)
 premetrics_wf <- gsm.core::MakeWorkflowList(strNames = c("qtl0001_iepd"), strPath = "inst/workflow/1.5_mappings", strPackage = "gsm.qtl")
 metrics_wf <- gsm.core::MakeWorkflowList(strNames = c("qtl0001"), strPath = "inst/workflow/2_metrics", strPackage = "gsm.qtl")
@@ -30,8 +30,8 @@ reporting_wf <- gsm.core::MakeWorkflowList(strNames = c("Results", "Groups"), st
 lRaw <- map_depth(ie_data, 1, gsm.mapping::Ingest, mappings_spec)
 mapped <- map_depth(lRaw, 1, ~ gsm.core::RunWorkflows(mappings_wf, .x))
 pre_analyzed <- map_depth(mapped, 1, ~gsm.core::RunWorkflows(premetrics_wf, .x))
-analyzed <- map_depth(pre_analyzed, 1, ~gsm.core::RunWorkflows(metrics_wf, .x))
-reporting <- map2(mapped, analyzed, ~ gsm.core::RunWorkflows(reporting_wf, c(.x, list(lAnalyzed = .y, lWorkflows = metrics_wf))))
+analyzed <- map_depth(pre_analyzed, 2, ~gsm.core::RunWorkflows(metrics_wf, .x))
+reporting <- map2(mapped, analyzed, ~ gsm.core::RunWorkflows(reporting_wf, c(.x, list(lAnalyzed = .y[[1]], lWorkflows = metrics_wf))))
 
 # Fix `SnapshotDate` column in reporting results, can be addressed in https://github.com/Gilead-BioStats/gsm.reporting/issues/24
 dates <- names(ie_data) %>% as.Date

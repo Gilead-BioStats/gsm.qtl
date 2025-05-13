@@ -23,11 +23,19 @@ steps:
       'y': Mapped_IE
       by:
         - subjid
+  - output: pivot_pd
+    name: gsm.core::RunQuery
+    params:
+      df: Mapped_PD
+      strQuery: "SELECT subjid, deemedimportant, array_to_string(array_agg(dvterm), ';') AS eligibility_criteria
+                 FROM df
+                 WHERE dvdecod = 'Eligibility Criteria' and deemedimportant = 'Yes'
+                 GROUP BY subjid, deemedimportant"
   - output: Analysis_Listing
     name: dplyr::left_join
     params:
       x: add_ie
-      'y': Mapped_PD
+      'y': pivot_pd
       by:
         - subjid
   - output: lPreAnalysis
