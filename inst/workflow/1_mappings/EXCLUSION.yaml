@@ -1,0 +1,48 @@
+meta:
+  Type: Mapped
+  ID: EXCLUSION
+  Description: Combining IE and PD data to create QTL participant level dataset
+  Priority: 2
+spec:
+  Mapped_IE:
+    subjid:
+      type: character
+  Mapped_ENROLL:
+    subjid:
+      type: character
+    invid:
+      type: character
+    enrollyn:
+      type: character
+  Mapped_PD:
+    subjid:
+      type: character
+    dvterm:
+      type: character
+    dvdecod:
+      type: character
+    deemedimportant:
+      type: character
+steps:
+  - output: add_ie
+    name: dplyr::left_join
+    params:
+      x: Mapped_ENROLL
+      'y': Mapped_IE
+      by:
+        - subjid
+  - output: pivot_pd
+    name: gsm.core::RunQuery
+    params:
+      df: Mapped_PD
+      strQuery: "SELECT subjid, deemedimportant, array_to_string(array_agg(dvterm), ';') AS eligibility_criteria
+                 FROM df
+                 WHERE dvdecod = 'Eligibility Criteria' and deemedimportant = 'Yes'
+                 GROUP BY subjid, deemedimportant"
+  - output: Mapped_EXCLUSION
+    name: dplyr::left_join
+    params:
+      x: add_ie
+      'y': pivot_pd
+      by:
+        - subjid

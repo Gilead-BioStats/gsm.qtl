@@ -1,0 +1,26 @@
+meta:
+  Type: Mapped
+  ID: IE
+  Description: Inclusion/Exclusion Criteria Data Mapping
+  Priority: 1
+spec:
+  Raw_IE:
+    subjid:
+      type: character
+    tiver:
+      type: character
+    ietest:
+      type: character
+    ietestcd:
+      type: character
+    ieorres:
+      type: character
+    iecat:
+      type: character
+
+steps:
+  - output: Mapped_IE
+    name: =
+    params:
+      lhs: Mapped_IE
+      rhs: Raw_IE

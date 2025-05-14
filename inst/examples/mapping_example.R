@@ -1,8 +1,10 @@
-library(gsm.datasim) # requires >= fix-50
-library(gsm.mapping) # requires >= fix-58
+library(gsm.datasim) # requires >= fix-57 PR to get it to dev is up
+library(gsm.mapping) # dev is fine, as long as post fix-58
 library(gsm.reporting)
 library(gsm.core)
+library(gsm.kri)
 library(purrr)
+library(dplyr)
 devtools::load_all()
 set.seed(1234)
 
@@ -11,78 +13,44 @@ ie_data <- generate_rawdata_for_single_study(
   SnapshotCount = 6,
   SnapshotWidth = "months",
   ParticipantCount = 1000,
-  SiteCount = 50,
+  SiteCount = 10,
   StudyID = "ABC",
-  workflow_path = "workflow",
-  mappings = "IE",
-  package = "gsm.mapping",
+  workflow_path = "inst/workflow/1_mappings",
+  mappings = c("IE", "PD"),
+  package = "gsm.qtl",
   desired_specs = NULL
 )
 
-mappings_wf <- gsm.core::MakeWorkflowList(strNames =c("SUBJ", "ENROLL", "IE", "STUDY", "SITE", "COUNTRY"), strPath = "workflow/1_mappings", strPackage = "gsm.mapping")
+mappings_wf <- gsm.core::MakeWorkflowList(strNames =c("SUBJ", "ENROLL", "IE", "PD", "STUDY", "SITE", "COUNTRY", "EXCLUSION"), strPath = "inst/workflow/1_mappings", strPackage = "gsm.qtl")
 mappings_spec <- gsm.mapping::CombineSpecs(mappings_wf)
-metrics_wf <- gsm.core::MakeWorkflowList(strPath = "inst/workflow/2_metrics", strPackage = "gsm.qtl")
-reporting_wf <- gsm.core::MakeWorkflowList(strPath = "workflow/3_reporting", strPackage = "gsm.reporting")
+metrics_wf <- gsm.core::MakeWorkflowList(strNames = c("qtl0001"), strPath = "inst/workflow/2_metrics", strPackage = "gsm.qtl")
+reporting_wf <- gsm.core::MakeWorkflowList(strNames = c("Results", "Groups"), strPath = "workflow/3_reporting", strPackage = "gsm.reporting")
 
-analyzed <- list()
-reporting <- list()
+lRaw <- map_depth(ie_data, 1, gsm.mapping::Ingest, mappings_spec)
+mapped <- map_depth(lRaw, 1, ~ gsm.core::RunWorkflows(mappings_wf, .x))
+analyzed <- map_depth(mapped, 1, ~gsm.core::RunWorkflows(metrics_wf, .x))
+reporting <- map2(mapped, analyzed, ~ gsm.core::RunWorkflows(reporting_wf, c(.x, list(lAnalyzed = .y, lWorkflows = metrics_wf))))
+
+# Fix `SnapshotDate` column in reporting results, can be addressed in https://github.com/Gilead-BioStats/gsm.reporting/issues/24
 dates <- names(ie_data) %>% as.Date
-for(snap in seq_along(ie_data)){
-    lSource <- ie_data[[snap]]
-    lRaw <- gsm.mapping::Ingest(lSource, mappings_spec)
+reporting <- map2(reporting, dates, ~{
+  .x$Reporting_Results$SnapshotDate <- .y
+  .x
+})
 
-    # Step 1 - Create Mapped Data Layer - filter, aggregate and join raw data to create mapped data layer
-    mapped <- gsm.core::RunWorkflows(mappings_wf, lRaw)
-
-    # Step 2 - Create Metrics - calculate metrics using mapped data
-    analyzed[[snap]] <- gsm.core::RunWorkflows(metrics_wf, mapped)
-
-    # # Step 3 - Create Reporting Layer - create reports using metrics data
-    reporting[[snap]] <- gsm.core::RunWorkflows(reporting_wf, c(mapped, list(lAnalyzed = analyzed[[snap]],
-                                                                             lWorkflows = metrics_wf)))
-    reporting[[snap]]$Reporting_Results$SnapshotDate = dates[snap]
-    reporting[[snap]]$Reporting_Bounds$SnapshotDate = dates[snap]
-}
+# Bind multiple snapshots of data together
 all_reportingResults <- do.call(dplyr::bind_rows, lapply(reporting, function(x) x$Reporting_Results))
-all_reportingGroups <- reporting[[snap]]$Reporting_Groups
-all_reportingBounds <- do.call(dplyr::bind_rows, lapply(reporting, function(x) x$Reporting_Bounds))
-all_reportingMetrics <- reporting[[snap]]$Reporting_Metrics
 
-qtl_chart <- gsm.kri::Widget_TimeSeries(
+# Only need 1 reporting group object
+all_reportingGroups <- reporting[[length(reporting)]]$Reporting_Groups
+
+ie_listing <- analyzed[[length(analyzed)]]$Analysis_qtl0001_site$Analysis_Listing %>%
+  filter(enrollyn == "N")
+
+# Test if new Report_QTL rmd works
+Report_QTL(
   dfResults = all_reportingResults,
   dfGroups = all_reportingGroups,
-  strOutcome = "Metric"
+  dfListing = ie_listing,
+  strOutputFile = "test.html"
 )
-
-# Multiple Studies
-ie_data2 <- raw_data_generator(template_path = "~/gsm.datasim/inst/small_template.csv", mappings = "IE", package = "gsm.mapping")
-lRaw2 <- map_depth(ie_data2, 2, gsm.mapping::Ingest, mappings_spec)
-mapped2 <- map_depth(lRaw2, 2, ~ gsm.core::RunWorkflows(mappings_wf, .x))
-analyzed2 <- map_depth(mapped2, 2, ~gsm.core::RunWorkflows(metrics_wf, .x))
-reporting2 <- map2(
-  mapped2, analyzed2,
-  ~ pmap(list(.x, .y),
-         ~ gsm.core::RunWorkflows(reporting_wf, c(..1, list(lAnalyzed = ..2, lWorkflows = metrics_wf))))
-)
-
-reporting2 <- map(
-  reporting2,
-  ~ imap(
-    .x,                            # each “date” sub-list
-    function(record, date_string) {
-      # parse the name into an actual Date
-      d <- as.Date(date_string)
-
-      # overwrite both snapshots
-      record$Reporting_Results$SnapshotDate <- d
-      record$Reporting_Bounds$SnapshotDate  <- d
-
-      record
-    }
-  )
-)
-
-all_reportingResults2 <- map_dfr(reporting2,~ map_dfr(.x, "Reporting_Results"))
-all_reportingGroups2 <- map_dfr(reporting2, ~ map_dfr(.x, "Reporting_Groups")) %>% unique
-all_reportingBounds2 <- map_dfr(reporting2,~ map_dfr(.x, "Reporting_Bounds"))
-all_reportingMetrics2 <- map_dfr(reporting2,~ map_dfr(.x, "Reporting_Metrics")) %>% unique
