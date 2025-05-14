@@ -85,7 +85,6 @@ Analyze_OneSideProp <- function(
       "Metric",
       Score = "z_0",
       Flag,
-      vMu,
       upper_funnel
     )
 

@@ -39,10 +39,22 @@ steps:
                  FROM df
                  WHERE dvdecod = 'Eligibility Criteria' and deemedimportant = 'Yes'
                  GROUP BY subjid, deemedimportant"
-  - output: Mapped_EXCLUSION
+  - output: premapped
     name: dplyr::left_join
     params:
       x: add_ie
       'y': pivot_pd
       by:
         - subjid
+  - output: Mapped_EXCLUSION
+    name: gsm.core::RunQuery
+    params:
+      df: premapped
+      strQuery: "SELECT *,
+        CASE
+          WHEN ietest IS NOT NULL AND eligibility_criteria IS NULL THEN 'I/E Criteria Not Met'
+          WHEN ietest IS NOT NULL AND eligibility_criteria IS NOT NULL THEN 'Both Criteria'
+          WHEN ietest IS NULL AND eligibility_criteria IS NOT NULL THEN 'Eligibility IPD'
+          WHEN ietest IS NULL AND eligibility_criteria IS NULL THEN 'Neither'
+        ELSE ''
+      END AS Source FROM df"
