@@ -15,16 +15,16 @@ spec:
   Mapped_IE:
     subjid:
       type: character
-  Analysis_Listing:
+  Mapped_EXCLUSION:
     subjid:
       type: character
 steps:
   - output: Analysis_Input
     name: gsm.core::Input_Rate
     params:
-      dfSubjects: Analysis_Listing
+      dfSubjects: Mapped_EXCLUSION
       dfNumerator: Mapped_IE
-      dfDenominator: Analysis_Listing
+      dfDenominator: Mapped_EXCLUSION
       strNumeratorCol: subjid
       strDenominatorCol: subjid
       strSubjectCol: subjid
@@ -46,7 +46,7 @@ steps:
     name: list
     params:
       ID: ID
-      Analysis_Listing: Analysis_Listing
+      Analysis_Listing: Mapped_EXCLUSION
       Analysis_Input: Analysis_Input
       Analysis_Transformed: Analysis_Transformed
       Analysis_Summary: Analysis_Summary
