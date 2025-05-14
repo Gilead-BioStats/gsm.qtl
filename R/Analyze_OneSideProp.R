@@ -56,8 +56,12 @@ Analyze_OneSideProp <- function(
     ungroup() %>%
     mutate(Metric = nPropRate + nNumDeviations*sqrt(nPropRate*(1-nPropRate)/sum(.data$Denominator))) # To plot the funnel need funnel data under metric
 
+  flat_line <- Upper_funnel %>%
+    mutate(GroupID = "Flatline",
+           Metric = nPropRate)
+
   # Bind the upper funnel back together with original dataframe
-  dfScore <- dplyr::bind_rows(dfTransformed, Upper_funnel) %>%
+  dfScore <- dplyr::bind_rows(dfTransformed, Upper_funnel, flat_line) %>%
     mutate(
       vMu = nPropRate, # calculate one-sided proportion score against a historic rate
       z_0 = ifelse(.data$vMu == 0 | .data$vMu == 1,
@@ -81,6 +85,7 @@ Analyze_OneSideProp <- function(
       "Metric",
       Score = "z_0",
       Flag,
+      vMu,
       upper_funnel
     )
 

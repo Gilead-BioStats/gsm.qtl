@@ -77,7 +77,7 @@ gsm.qtl::Widget_TimeSeriesQTL(
 )
 ```
 
-## Summary Charts {.tabset .tabset-pills}
+## Bar Charts {.tabset .tabset-pills}
 
 ### JS - Site
 ```{r, echo = FALSE, results = 'asis', fig.height=4}
@@ -160,19 +160,4 @@ dfListing %>%
     `PD Term` = eligibility_criteria
   ) %>% 
   reactable::reactable(., searchable = TRUE)
-```
-
-```{r echo=FALSE}
-group_dropdown <- system.file('report', 'lib', 'overallGroupDropdown.js', package = "gsm.kri")
-dropdown_drag <- system.file('report', 'lib', 'dragOverallGroupDropdown.js', package = "gsm.kri")
-toggle_toc <- system.file('report', 'lib', 'toggleTOC.js', package = "gsm.kri")
-```
-
-```{js, file={group_dropdown}, echo=FALSE }
-```
-
-```{js, file={dropdown_drag}, echo=FALSE}
-```
-
-```{js, file={toggle_toc}, echo=FALSE}
 ```
