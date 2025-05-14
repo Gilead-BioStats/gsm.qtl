@@ -72,13 +72,13 @@ gsm.qtl::Widget_TimeSeriesQTL(
 
 ## Bar Charts {.tabset .tabset-pills}
 
+```{r, eval = FALSE , echo = FALSE, results = 'asis', fig.height=4}
 ### JS - Site
-```{r, echo = FALSE, results = 'asis', fig.height=4}
-gsm.qtl::Widget_BarChartQTL(
-  dfResults = dfResults %>% filter(GroupLevel == "Site", SnapshotDate == latest_snapshot, GroupID != "Upper_funnel"),
-  dfGroups = dfGroups,
-  strOutcome = "Metric"
-)
+# gsm.qtl::Widget_BarChartQTL(
+#   dfResults = dfResults %>% filter(GroupLevel == "Site", SnapshotDate == latest_snapshot, GroupID != "Upper_funnel"),
+#   dfGroups = dfGroups,
+#   strOutcome = "Metric"
+# )
 ```
 
 ### GG - Site
