@@ -1,8 +1,8 @@
 meta:
   Type: Mapped
-  ID: qtl0001_iepd
-  Description: Combining IE and PD data to create participant level dataset
-  Priority: 1
+  ID: EXCLUSION
+  Description: Combining IE and PD data to create QTL participant level dataset
+  Priority: 2
 spec:
   Mapped_IE:
     subjid:
@@ -12,8 +12,16 @@ spec:
       type: character
     invid:
       type: character
+    enrollyn:
+      type: character
   Mapped_PD:
     subjid:
+      type: character
+    dvterm:
+      type: character
+    dvdecod:
+      type: character
+    deemedimportant:
       type: character
 steps:
   - output: add_ie
@@ -31,16 +39,10 @@ steps:
                  FROM df
                  WHERE dvdecod = 'Eligibility Criteria' and deemedimportant = 'Yes'
                  GROUP BY subjid, deemedimportant"
-  - output: Analysis_Listing
+  - output: Mapped_EXCLUSION
     name: dplyr::left_join
     params:
       x: add_ie
       'y': pivot_pd
       by:
         - subjid
-  - output: lPreAnalysis
-    name: list
-    params:
-      ID: ID
-      Analysis_Listing: Analysis_Listing
-      Mapped_IE: Mapped_IE
