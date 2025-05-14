@@ -17,6 +17,7 @@ params:
 library(dplyr)
 library(gsm.kri)
 library(gsm.qtl)
+library(ggplot2)
 library(reactable)
 
 knitr::opts_chunk$set(warning = FALSE, message = FALSE) 
@@ -24,7 +25,13 @@ knitr::opts_chunk$set(warning = FALSE, message = FALSE)
 dfResultsStudy <- params$dfResults %>% filter(GroupLevel == "Study")
 dfResultsSite <- params$dfResults %>% filter(GroupLevel == "Site")
 dfGroups <- params$dfGroups
-dfListing <- params$dfListing
+dfListing <- params$dfListing %>% 
+  mutate(Source = case_when(
+    enrollyn == "N" & is.na(eligibility_criteria) ~ "I/E Criteria Not Met",
+    enrollyn == "N" & !is.na(eligibility_criteria) ~ "Both Criteria",
+    enrollyn == "Y" & !is.na(eligibility_criteria) ~ "Eligibility IPD",
+    enrollyn == "Y" & is.na(eligibility_criteria) ~ "Neither"
+  ))
 
 length_snapshots = dfResultsSite$SnapshotDate %>% n_distinct()
 latest_snapshot = unique(dfResultsSite$SnapshotDate)[length_snapshots]
@@ -59,32 +66,100 @@ dfResultsStudy %>%
   reactable()
 ```
 
-## Results
-```{r, echo=FALSE, results='asis'}
+# Results
 
-#establish how many snapshots there were and find latest one for barchart
-
-qtl_timeseries_study <- gsm.qtl::Widget_TimeSeriesQTL(
+## Time Series Chart
+```{r, echo=FALSE, results='asis', fig.height=4}
+gsm.qtl::Widget_TimeSeriesQTL(
   dfResults = dfResultsStudy,
   dfGroups = dfGroups,
   strOutcome = "Metric"
 )
+```
 
-qtl_barchart_site <- gsm.qtl::Widget_BarChartQTL(
+## Summary Charts {.tabset .tabset-pills}
+
+### JS - Site
+```{r, echo = FALSE, results = 'asis', fig.height=4}
+gsm.qtl::Widget_BarChartQTL(
   dfResults = dfResultsSite %>% filter(SnapshotDate == latest_snapshot, GroupID != "Upper_funnel"),
   dfGroups = dfGroups,
   strOutcome = "Metric"
 )
-lCharts <- list(
-  timeSeries = qtl_timeseries_study,
-  barChart = qtl_barchart_site
-)
-gsm.kri::Report_MetricCharts(lCharts)
+```
+
+### GG - Site
+```{r, echo = FALSE, results = 'asis', fig.height=4}
+dfListing %>% 
+  mutate(fillcol = ifelse(Source == "Neither", "Eligible", "Ineligible")) %>% 
+  ggplot(., aes(x = invid, fill = fillcol)) +
+  geom_bar() +
+  labs(x = "Site", y = "Count", fill = "Eligibility", title = "Count by site") +
+  theme_classic()
+```
+
+### GG - Country
+```{r, echo = FALSE, results = 'asis', fig.height=4}
+dfListing %>% 
+  mutate(fillcol = ifelse(Source == "Neither", "Eligible", "Ineligible")) %>% 
+  ggplot(., aes(x = country, fill = fillcol)) +
+  geom_bar() +
+  labs(x = "Site", y = "Count", fill = "Eligibility", title = "Count by site") +
+  theme_classic()
+```
+
+### GG - Source
+```{r, echo = FALSE, results = 'asis', fig.height=4}
+dfListing %>% 
+  ggplot(., aes(x = Source, fill = Source)) +
+  geom_bar()+
+  labs(x = "Source", y = "Count", title = "Count of observations by Category/Source") +
+  theme_classic()
+```
+
+### GG - Site/Criteria
+```{r, echo = FALSE, results = 'asis', fig.height=4}
+dfListing %>% 
+  filter(!is.na(ietest) | Source == "Eligibility IPD") %>% 
+  mutate(ietest = ifelse(is.na(ietest), "Eligibility IPD", ietest)) %>%  
+  ggplot(., aes(x = ietest, fill = invid)) +
+  geom_bar() +
+  labs(x = "Criteria", y = "Count", fill = "Site", title = "Eligibility by site") + 
+  theme_classic(base_size = 11) + 
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1),  # tilt to avoid overlap
+    panel.grid.major.x = element_blank()
+  )
+```
+
+### GG - Country/Criteria
+```{r, echo = FALSE, results = 'asis', fig.height=4}
+dfListing %>% 
+  filter(!is.na(ietest) | Source == "Eligibility IPD") %>% 
+  mutate(ietest = ifelse(is.na(ietest), "Eligibility IPD", ietest)) %>%  
+  ggplot(., aes(x = ietest, fill = country)) +
+  geom_bar() +
+  labs(x = "Criteria", y = "Count", fill = "Country", title = "Eligibility by Country") + 
+  theme_classic(base_size = 11) + 
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1),  # tilt to avoid overlap
+    panel.grid.major.x = element_blank()
+  )
 ```
 
 ## Inclusion/Exclusion Listing
 ```{r, echo = FALSE, results='asis'}
-reactable::reactable(dfListing, searchable = TRUE)
+dfListing %>% 
+  filter(!is.na(ietest) | !is.na(eligibility_criteria)) %>% 
+  select(invid, country, subjid, Source, ietest, eligibility_criteria) %>%
+  rename(
+    Site = invid,
+    Country = country,
+    `Subject ID` = subjid,
+    `Which I/E` = ietest,
+    `PD Term` = eligibility_criteria
+  ) %>% 
+  reactable::reactable(., searchable = TRUE)
 ```
 
 ```{r echo=FALSE}

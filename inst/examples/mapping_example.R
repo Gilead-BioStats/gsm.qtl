@@ -44,13 +44,12 @@ all_reportingResults <- do.call(dplyr::bind_rows, lapply(reporting, function(x) 
 # Only need 1 reporting group object
 all_reportingGroups <- reporting[[length(reporting)]]$Reporting_Groups
 
-ie_listing <- analyzed[[length(analyzed)]]$Analysis_qtl0001_site$Analysis_Listing %>%
-  filter(enrollyn == "N")
+ie_listing <- analyzed[[length(analyzed)]]$Analysis_qtl0001_site$Analysis_Listing
 
 # Test if new Report_QTL rmd works
 Report_QTL(
   dfResults = all_reportingResults,
   dfGroups = all_reportingGroups,
   dfListing = ie_listing,
-  strOutputFile = "test.html"
+  strOutputFile = "test_pills.html"
 )

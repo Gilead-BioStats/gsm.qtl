@@ -9,21 +9,23 @@ meta:
   Model: Normal Approximation
   Score: Adjusted Z-Score
   AnalysisType: binary
-  nPropRate: 0.20  # insert historical data
+  nPropRate: 0.45  # insert historical data
   nNumDeviations: 3
 spec:
-  Mapped_IE:
-    subjid:
-      type: character
   Mapped_EXCLUSION:
     subjid:
       type: character
 steps:
+  - output: numerator_df
+    name: gsm.core::RunQuery
+    params:
+      df: Mapped_EXCLUSION
+      strQuery: "SELECT * FROM df WHERE ietest != '' OR eligibility_criteria != ''"
   - output: Analysis_Input
     name: gsm.core::Input_Rate
     params:
       dfSubjects: Mapped_EXCLUSION
-      dfNumerator: Mapped_IE
+      dfNumerator: numerator_df
       dfDenominator: Mapped_EXCLUSION
       strNumeratorCol: subjid
       strDenominatorCol: subjid
