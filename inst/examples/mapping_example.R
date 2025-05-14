@@ -1,4 +1,4 @@
-library(gsm.datasim) # requires >= fix-50 PR to get it to dev is up
+library(gsm.datasim) # requires >= fix-57 PR to get it to dev is up
 library(gsm.mapping) # dev is fine, as long as post fix-58
 library(gsm.reporting)
 library(gsm.core)
@@ -46,7 +46,7 @@ all_reportingResults <- do.call(dplyr::bind_rows, lapply(reporting, function(x) 
 # Only need 1 reporting group object
 all_reportingGroups <- reporting[[length(reporting)]]$Reporting_Groups
 
-ie_listing <- analyzed[[length(analyzed)]]$Analysis_qtl0001_site$Analysis_Listing %>%
+ie_listing <- analyzed[[length(analyzed)]][[1]]$Analysis_qtl0001_site$Analysis_Listing %>%
   filter(enrollyn == "N")
 
 # Test if new Report_QTL rmd works
