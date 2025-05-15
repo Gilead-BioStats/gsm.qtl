@@ -20,7 +20,7 @@ steps:
     name: gsm.core::RunQuery
     params:
       df: Mapped_EXCLUSION
-      strQuery: "SELECT * FROM df WHERE ietest != '' OR eligibility_criteria != ''"
+      strQuery: "SELECT * FROM df WHERE Source != 'Neither'"
   - output: Analysis_Input
     name: gsm.core::Input_Rate
     params:
