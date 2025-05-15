@@ -52,5 +52,5 @@ Report_QTL(
   dfResults = all_reportingResults,
   dfGroups = all_reportingGroups,
   dfListing = ie_listing,
-  strOutputFile = "test_pills.html"
+  strOutputFile = "test.html"
 )
