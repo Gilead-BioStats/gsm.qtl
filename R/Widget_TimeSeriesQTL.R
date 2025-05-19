@@ -21,14 +21,14 @@ Widget_TimeSeriesQTL <- function(
   strShinyGroupSelectID = "GroupID",
   bDebug = FALSE
 ) {
-  gsm::stop_if(cnd = !is.data.frame(dfResults), "dfResults is not a data.frame")
-  gsm::stop_if(cnd = !(is.null(lMetric) || (is.list(lMetric) && !is.data.frame(lMetric))), "lMetric must be a list, but not a data.frame")
-  gsm::stop_if(cnd = !(is.null(dfGroups) || is.data.frame(dfGroups)), "dfGroups is not a data.frame")
-  gsm::stop_if(cnd = length(strOutcome) != 1, "strOutcome must be length 1")
-  gsm::stop_if(cnd = !is.character(strOutcome), "strOutcome is not a character")
-  gsm::stop_if(cnd = !is.logical(bAddGroupSelect), "bAddGroupSelect is not a logical")
-  gsm::stop_if(cnd = !is.character(strShinyGroupSelectID), "strShinyGroupSelectID is not a character")
-  gsm::stop_if(cnd = !is.logical(bDebug), "bDebug is not a logical")
+  gsm.core::stop_if(cnd = !is.data.frame(dfResults), "dfResults is not a data.frame")
+  gsm.core::stop_if(cnd = !(is.null(lMetric) || (is.list(lMetric) && !is.data.frame(lMetric))), "lMetric must be a list, but not a data.frame")
+  gsm.core::stop_if(cnd = !(is.null(dfGroups) || is.data.frame(dfGroups)), "dfGroups is not a data.frame")
+  gsm.core::stop_if(cnd = length(strOutcome) != 1, "strOutcome must be length 1")
+  gsm.core::stop_if(cnd = !is.character(strOutcome), "strOutcome is not a character")
+  gsm.core::stop_if(cnd = !is.logical(bAddGroupSelect), "bAddGroupSelect is not a logical")
+  gsm.core::stop_if(cnd = !is.character(strShinyGroupSelectID), "strShinyGroupSelectID is not a character")
+  gsm.core::stop_if(cnd = !is.logical(bDebug), "bDebug is not a logical")
 
   # Parse `vThreshold` from comma-delimited character string to numeric vector.
   if (!is.null(vThreshold)) {
