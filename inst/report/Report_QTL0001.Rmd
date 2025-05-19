@@ -42,6 +42,7 @@ dfResults %>%
   filter(GroupLevel == "Study",
          SnapshotDate == latest_snapshot,
          !(GroupID %in% c("Upper_funnel", "Flatline"))) %>%
+  mutate_at(c("Metric", "upper_funnel", "Numerator", "Denominator", "Score", "Flag"), as.numeric) %>%
   mutate(Ineligible_Rate = paste0(as.character(Metric*100),"%"),
          Deviation = ifelse(Metric > upper_funnel, "Yes", "No"),
          upper_funnel = paste0(as.character(round(upper_funnel,3)*100), "%")) %>%
