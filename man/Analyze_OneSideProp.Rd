@@ -14,13 +14,15 @@ Model vignette: \code{vignette("DataModel", package = "gsm.core")}. For this
 function, \code{dfTransformed} should typically be created using
 \code{\link[=Transform_Rate]{Transform_Rate()}}.}
 
-\item{nPropRate}{a numeric with historic screen failure rate}
+\item{nPropRate}{a numeric, between 0 and 1, that represents a proportion of
+comparison, e.g. a historic screen failure rate}
 
-\item{nNumDeviations}{a numeric to determine the appropriate threshold (number of SDs away) from violating QTL}
+\item{nNumDeviations}{a numeric, e.g. '3', standard deviations away from the value
+provided in \code{nPropRate} to calculate a threshold to which the \code{Metric} should be flagged}
 }
 \value{
-\code{data.frame} with one row per site with columns: GroupID, Numerator,
-Denominator, Metric, OverallMetric, Factor, and Score.
+\code{data.frame} with one row per site with columns: GroupID, GroupLevel, Numerator,
+Denominator, Metric, upper_funnel and flag
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}

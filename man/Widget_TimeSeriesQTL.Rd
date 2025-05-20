@@ -2,36 +2,49 @@
 % Please edit documentation in R/Widget_TimeSeriesQTL.R
 \name{Widget_TimeSeriesQTL}
 \alias{Widget_TimeSeriesQTL}
-\title{Time Series Widget}
+\title{Time Series Widget for QTL}
 \usage{
 Widget_TimeSeriesQTL(
   dfResults,
   lMetric = NULL,
   dfGroups = NULL,
   vThreshold = NULL,
-  strOutcome = "Score",
+  strOutcome = "Metric",
   bAddGroupSelect = TRUE,
   strShinyGroupSelectID = "GroupID",
   bDebug = FALSE
 )
 }
 \arguments{
-\item{dfResults}{a}
+\item{dfResults}{\code{data.frame} A stacked summary of analysis pipeline output.
+Created by passing a list of results returned by \code{\link[=Summarize]{Summarize()}} to
+\code{\link[=BindResults]{BindResults()}}. Expected columns: \code{GroupID}, \code{GroupLevel}, \code{Numerator},
+\code{Denominator}, \code{Metric}, \code{Score}, \code{Flag}, \code{MetricID}, \code{StudyID},
+\code{SnapshotDate}.}
 
-\item{lMetric}{b}
+\item{lMetric}{\code{list} Metric-specific metadata for use in charts and
+reporting. Created by passing an \code{lWorkflow} object to \code{\link[=MakeMetric]{MakeMetric()}} and
+turing it into a list. Expected columns: \code{File},\code{MetricID}, \code{Group},
+\code{Abbreviation}, \code{Metric}, \code{Numerator}, \code{Denominator}, \code{Model}, \code{Score}, and
+\code{strThreshold}. For more details see the Data Model vignette:
+\code{vignette("DataModel", package = "gsm.kri")}.}
 
-\item{dfGroups}{c}
+\item{dfGroups}{\code{data.frame} Group-level metadata dictionary. Created by
+passing CTMS site and study data to \code{\link[=MakeLongMeta]{MakeLongMeta()}}. Expected columns:
+\code{GroupID}, \code{GroupLevel}, \code{Param}, \code{Value}.}
 
-\item{vThreshold}{d}
+\item{vThreshold}{unused}
 
-\item{strOutcome}{e}
+\item{strOutcome}{unused}
 
-\item{bAddGroupSelect}{f}
+\item{bAddGroupSelect}{unused}
 
-\item{strShinyGroupSelectID}{g}
+\item{strShinyGroupSelectID}{unused}
 
-\item{bDebug}{h}
+\item{bDebug}{\code{logical} Print debug messages? Default: \code{FALSE}}
 }
 \description{
-Time Series Widget
+A widget that generates a time series of study-level results over time, plotting snapshot
+date on the x-axis and the outcome, metric, on the y-axis, also drawing an upper funnel and flat line based on
+an threshold, cited by \code{nPropRate} of \code{Analyze_OneSideProp()}.
 }

@@ -16,11 +16,13 @@
 #'   Model vignette: `vignette("DataModel", package = "gsm.core")`. For this
 #'   function, `dfTransformed` should typically be created using
 #'   [Transform_Rate()].
-#' @param nPropRate a numeric with historic screen failure rate
-#' @param nNumDeviations a numeric to determine the appropriate threshold (number of SDs away) from violating QTL
+#' @param nPropRate a numeric, between 0 and 1, that represents a proportion of
+#' comparison, e.g. a historic screen failure rate
+#' @param nNumDeviations a numeric, e.g. '3', standard deviations away from the value
+#' provided in `nPropRate` to calculate a threshold to which the `Metric` should be flagged
 #'
-#' @return `data.frame` with one row per site with columns: GroupID, Numerator,
-#'   Denominator, Metric, OverallMetric, Factor, and Score.
+#' @return `data.frame` with one row per site with columns: GroupID, GroupLevel, Numerator,
+#'   Denominator, Metric, upper_funnel and flag
 #'
 #' @examples
 #' # Binary
@@ -83,17 +85,8 @@ Analyze_OneSideProp <- function(
       "Numerator",
       "Denominator",
       "Metric",
-      Score = "z_0",
-      Flag,
-      upper_funnel
+      "Flag"
     )
-
-
-  LogMessage(
-    level = "info",
-    message = "`OverallMetric`, `Factor`, and `Score` columns created from normal approximation.",
-    cli_detail = "inform"
-  )
 
   return(dfAnalyzed)
 }
