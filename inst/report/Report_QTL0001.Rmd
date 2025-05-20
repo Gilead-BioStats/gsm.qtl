@@ -18,6 +18,7 @@ library(dplyr)
 library(gsm.kri)
 library(gsm.qtl)
 library(ggplot2)
+library(plotly)
 library(reactable)
 
 knitr::opts_chunk$set(warning = FALSE, message = FALSE) 
@@ -84,36 +85,39 @@ gsm.qtl::Widget_TimeSeriesQTL(
 
 ### GG - Site
 ```{r, echo = FALSE, results = 'asis', fig.height=4}
-dfListing %>% 
+site_bar <- dfListing %>% 
   mutate(fillcol = ifelse(Source == "Neither", "Eligible", "Ineligible")) %>% 
   ggplot(., aes(x = invid, fill = fillcol)) +
   geom_bar() +
   labs(x = "Site", y = "Count", fill = "Eligibility", title = "Count by site") +
-  theme_classic()
+  theme_classic() 
+plotly::ggplotly(site_bar)
 ```
 
 ### GG - Country
 ```{r, echo = FALSE, results = 'asis', fig.height=4}
-dfListing %>% 
+country_bar <- dfListing %>% 
   mutate(fillcol = ifelse(Source == "Neither", "Eligible", "Ineligible")) %>% 
   ggplot(., aes(x = country, fill = fillcol)) +
   geom_bar() +
   labs(x = "Site", y = "Count", fill = "Eligibility", title = "Count by site") +
   theme_classic()
+plotly::ggplotly(country_bar)
 ```
 
 ### GG - Source
 ```{r, echo = FALSE, results = 'asis', fig.height=4}
-dfListing %>% 
+source_bar <- dfListing %>% 
   ggplot(., aes(x = Source, fill = Source)) +
   geom_bar()+
   labs(x = "Source", y = "Count", title = "Count of observations by Category/Source") +
-  theme_classic()
+  theme_classic() 
+plotly::ggplotly(source_bar)
 ```
 
 ### GG - Site/Criteria
 ```{r, echo = FALSE, results = 'asis', fig.height=4}
-dfListing %>% 
+site_criteria_bar <- dfListing %>% 
   filter(!is.na(ietest) | Source == "Eligibility IPD") %>% 
   mutate(ietest = ifelse(is.na(ietest), "Eligibility IPD", ietest)) %>%  
   ggplot(., aes(x = ietest, fill = invid)) +
@@ -123,12 +127,13 @@ dfListing %>%
   theme(
     axis.text.x = element_text(angle = 45, hjust = 1),  # tilt to avoid overlap
     panel.grid.major.x = element_blank()
-  )
+  ) 
+plotly::ggplotly(site_criteria_bar)
 ```
 
 ### GG - Country/Criteria
 ```{r, echo = FALSE, results = 'asis', fig.height=4}
-dfListing %>% 
+country_criteria_bar <- dfListing %>% 
   filter(!is.na(ietest) | Source == "Eligibility IPD") %>% 
   mutate(ietest = ifelse(is.na(ietest), "Eligibility IPD", ietest)) %>%  
   ggplot(., aes(x = ietest, fill = country)) +
@@ -138,7 +143,8 @@ dfListing %>%
   theme(
     axis.text.x = element_text(angle = 45, hjust = 1),  # tilt to avoid overlap
     panel.grid.major.x = element_blank()
-  )
+  ) 
+plotly::ggplotly(country_criteria_bar)
 ```
 
 ## Inclusion/Exclusion Listing
