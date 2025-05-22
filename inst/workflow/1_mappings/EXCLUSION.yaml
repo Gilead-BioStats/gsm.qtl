@@ -7,12 +7,26 @@ spec:
   Mapped_IE:
     subjid:
       type: character
+    tiver:
+      type: character
+    ietest:
+      type: character
+    ietestcd:
+      type: character
+    ieorres:
+      type: character
+    iecat_custom:
+      type: character
+    ie_violation:
+      type: character
   Mapped_ENROLL:
     subjid:
       type: character
     invid:
       type: character
     enrollyn:
+      type: character
+    country:
       type: character
   Mapped_PD:
     subjid:
@@ -31,14 +45,16 @@ steps:
       'y': Mapped_IE
       by:
         - subjid
+        - studyid
+        - invid
   - output: pivot_pd
     name: gsm.core::RunQuery
     params:
       df: Mapped_PD
-      strQuery: "SELECT subjid, deemedimportant, array_to_string(array_agg(dvterm), ';') AS eligibility_criteria
+      strQuery: "SELECT subjid, array_to_string(array_agg(dvterm), ';') AS eligibility_criteria
                  FROM df
-                 WHERE dvdecod = 'Eligibility Criteria' and deemedimportant = 'Yes'
-                 GROUP BY subjid, deemedimportant"
+                 WHERE dvdecod IN ('Exclusion Criteria', 'Inclusion Criteria')
+                 GROUP BY subjid"
   - output: premapped
     name: dplyr::left_join
     params:
@@ -52,9 +68,8 @@ steps:
       df: premapped
       strQuery: "SELECT *,
         CASE
-          WHEN ietest IS NOT NULL AND eligibility_criteria IS NULL THEN 'I/E Criteria Not Met'
-          WHEN ietest IS NOT NULL AND eligibility_criteria IS NOT NULL THEN 'Both Criteria'
-          WHEN ietest IS NULL AND eligibility_criteria IS NOT NULL THEN 'Eligibility IPD'
-          WHEN ietest IS NULL AND eligibility_criteria IS NULL THEN 'Neither'
-        ELSE ''
-      END AS Source FROM df"
+          WHEN ie_violation = 'Y' AND eligibility_criteria IS NULL THEN 'Ineligible -- IE only, check PD'
+          WHEN ie_violation IS NULL AND eligibility_criteria IS NOT NULL THEN 'Ineligible -- PD only, check IE'
+          WHEN ie_violation = 'Y' AND eligibility_criteria IS NOT NULL THEN 'Ineligible, Both Criteria'
+        ELSE 'Neither'
+      END AS Source  FROM df WHERE enrollyn = 'Y'"

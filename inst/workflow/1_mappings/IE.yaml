@@ -5,6 +5,8 @@ meta:
   Priority: 1
 spec:
   Raw_IE:
+    studyid:
+      type: character
     subjid:
       type: character
     tiver:
@@ -19,8 +21,29 @@ spec:
       type: character
 
 steps:
-  - output: Mapped_IE
-    name: =
+  - output: iecat_custom
+    name: gsm.core::RunQuery
     params:
-      lhs: Mapped_IE
-      rhs: Raw_IE
+      df: Raw_IE
+      strQuery: "SELECT *,
+        CASE
+          WHEN ietestcd ILIKE '%exc%' THEN 'EX'
+          WHEN ietestcd ILIKE '%inc%' THEN 'IN'
+        END as iecat_custom
+      FROM df"
+  - output: ie_violation
+    name: gsm.core::RunQuery
+    params:
+      df: iecat_custom
+      strQuery: "SELECT * ,
+        CASE
+          WHEN iecat_custom = 'EX' AND ieorres = 'Yes' THEN 'Y'
+          WHEN iecat_custom = 'IN' AND ieorres = 'No' THEN 'Y'
+          ELSE 'N'
+        END as ie_violation
+       FROM df"
+  - output: Mapped_IE
+    name: gsm.core::RunQuery
+    params:
+      df: ie_violation
+      strQuery: "SELECT * FROM df WHERE subjid IS NOT NULL AND ie_violation = 'Y'"
