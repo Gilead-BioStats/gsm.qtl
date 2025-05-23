@@ -101,12 +101,12 @@ df_joined <- df_plot %>%
     ),
     tooltip_text = case_when(
       group_type != "Ineligibility Rate" ~ paste0(
-        "GroupID: ", GroupID, "<br>",
+        group_type, "<br>",
         "Date: ", SnapshotDate, "<br>",
         "Metric: ", round(Metric, 3)
       ),
       TRUE ~ paste0(
-        "GroupID: ", GroupID, "<br>",
+        "Study: ", GroupID, "<br>",
         "Date: ", SnapshotDate, "<br>",
         "Metric: ", round(Metric, 3), "<br>",
         "Numerator: ", Numerator, "<br>",
@@ -120,12 +120,13 @@ p <- ggplot(
   df_joined,
   aes(x = SnapshotDate, y = Metric, group = GroupID, text = tooltip_text)
 ) +
-  # Line: show legend
+  # Line with custom linetype
   geom_line(
-    data = df_joined %>% filter(group_type %in% c("Ineligibility Rate", "QTL Threshold", "Nominal Threshold")),
-    aes(color = group_type),
+    data = df_joined %>%
+      filter(group_type %in% c("Ineligibility Rate", "QTL Threshold", "Nominal Threshold")),
+    aes(color = group_type, linetype = group_type),
     size = 1,
-    show.legend = TRUE
+    show.legend = FALSE
   ) +
   
   # Colored points for Ineligibility Rate (keep color, hide legend)
@@ -156,6 +157,13 @@ p <- ggplot(
     ),
     breaks = c("Ineligibility Rate", "Nominal Threshold", "QTL Threshold"),
     name = NULL
+  ) +
+  scale_linetype_manual(
+    values = c(
+      "QTL Threshold" = "dashed",
+      "Nominal Threshold" = "dashed",
+      "Ineligibility Rate" = "solid"
+    )
   ) +
   
   scale_x_date(date_labels = "%Y-%m-%d", date_breaks = "1 month") +
@@ -201,7 +209,7 @@ country_bar <- dfListing %>%
   mutate(fillcol = ifelse(Source == "Neither", "Eligible", "Ineligible")) %>% 
   ggplot(., aes(x = country, fill = fillcol)) +
   geom_bar() +
-  labs(x = "Site", y = "Count", fill = "Eligibility", title = "Count by site") +
+  labs(x = "Site", y = "Count", fill = "Eligibility", title = "Count by country") +
   theme_classic()
 plotly::ggplotly(country_bar)
 ```
