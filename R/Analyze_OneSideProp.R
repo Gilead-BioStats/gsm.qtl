@@ -75,7 +75,11 @@ Analyze_OneSideProp <- function(
       upper_funnel = nPropRate + nNumDeviations*sqrt(nPropRate*(1-nPropRate)/sum(.data$Denominator))
       # Additional cutoffs can be made to compare against `Metric` for flagging
     ) %>%
-    mutate(Flag = ifelse(Metric >= upper_funnel | GroupID == "Upper_funnel", 2, 0)) # Custom flag based on upper-funnel
+    mutate(Flag = case_when(
+      Metric >= upper_funnel | GroupID == "Upper_funnel" ~ 2,
+      (Metric >= vMu & Metric < upper_funnel) | GroupID == "Flatline" ~ 1,
+      TRUE ~ 0)
+    ) # Custom flag based on upper-funnel
 
   # dfAnalyzed -----------------------------------------------------------------
   dfAnalyzed <- dfScore %>%
@@ -85,7 +89,10 @@ Analyze_OneSideProp <- function(
       "Numerator",
       "Denominator",
       "Metric",
-      "Flag"
+      "Flag",
+      "Score" = z_0,
+      "upper_funnel",
+      "flatline" = vMu
     )
 
   return(dfAnalyzed)

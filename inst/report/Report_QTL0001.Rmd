@@ -43,7 +43,7 @@ dfResults %>%
   filter(GroupLevel == "Study",
          SnapshotDate == latest_snapshot,
          !(GroupID %in% c("Upper_funnel", "Flatline"))) %>%
-  mutate_at(c("Metric", "upper_funnel", "Numerator", "Denominator", "Score", "Flag"), as.numeric) %>%
+  mutate_at(c("Metric", "upper_funnel", "Numerator", "Denominator", "Flag"), as.numeric) %>%
   mutate(Ineligible_Rate = paste0(as.character(Metric*100),"%"),
          Deviation = ifelse(Metric > upper_funnel, "Yes", "No"),
          upper_funnel = paste0(as.character(round(upper_funnel,3)*100), "%")) %>%
@@ -65,11 +65,112 @@ dfResults %>%
 
 ## Time Series Chart
 ```{r, echo=FALSE, results='asis', fig.height=4}
-gsm.qtl::Widget_TimeSeriesQTL(
-  dfResults = dfResults %>% filter(GroupLevel == "Study"),
-  dfGroups = dfGroups,
-  strOutcome = "Metric"
-)
+# gsm.qtl::Widget_TimeSeriesQTL(
+#   dfResults = dfResults %>% filter(GroupLevel == "Study"),
+#   dfGroups = dfGroups,
+#   strOutcome = "Metric"
+# )
+# Create reference table for funnel bounds per date
+df_plot <- dfResults %>%
+  filter(GroupLevel == "Study") %>%
+  select(GroupID, Numerator, Denominator, Metric, SnapshotDate) %>%
+  mutate(SnapshotDate = as.Date(SnapshotDate)) %>%
+  # Add group type
+  mutate(group_type = case_when(
+    GroupID == "Upper_funnel" ~ "QTL Threshold",
+    GroupID == "Flatline" ~ "Nominal Threshold",
+    TRUE ~ "Ineligibility Rate"
+  ))
+
+# Pivot thresholds to wide format
+thresholds <- df_plot %>%
+  filter(GroupID %in% c("Upper_funnel", "Flatline")) %>%
+  select(SnapshotDate, GroupID, Metric) %>%
+  tidyr::pivot_wider(names_from = GroupID, values_from = Metric)
+
+# Join thresholds to full data
+df_joined <- df_plot %>%
+  left_join(thresholds, by = "SnapshotDate") %>%
+  mutate(
+    # Point color logic for main group only
+    point_color = case_when(
+      group_type != "Ineligibility Rate" ~ NA_character_,
+      Metric > `Upper_funnel` ~ "red",
+      Metric > Flatline ~ "yellow",
+      TRUE ~ "green"
+    ),
+    tooltip_text = case_when(
+      group_type != "Ineligibility Rate" ~ paste0(
+        "GroupID: ", GroupID, "<br>",
+        "Date: ", SnapshotDate, "<br>",
+        "Metric: ", round(Metric, 3)
+      ),
+      TRUE ~ paste0(
+        "GroupID: ", GroupID, "<br>",
+        "Date: ", SnapshotDate, "<br>",
+        "Metric: ", round(Metric, 3), "<br>",
+        "Numerator: ", Numerator, "<br>",
+        "Denominator: ", Denominator
+      )
+    )
+  )
+
+# Build ggplot
+p <- ggplot(
+  df_joined,
+  aes(x = SnapshotDate, y = Metric, group = GroupID, text = tooltip_text)
+) +
+  # Line: show legend
+  geom_line(
+    data = df_joined %>% filter(group_type %in% c("Ineligibility Rate", "QTL Threshold", "Nominal Threshold")),
+    aes(color = group_type),
+    size = 1,
+    show.legend = TRUE
+  ) +
+  
+  # Colored points for Ineligibility Rate (keep color, hide legend)
+  geom_point(
+    data = df_joined %>% filter(group_type == "Ineligibility Rate"),
+    aes(color = point_color),
+    size = 2,
+    show.legend = FALSE
+  ) +
+  
+  # Points for thresholds (hide legend)
+  geom_point(
+    data = df_joined %>% filter(group_type != "Ineligibility Rate"),
+    aes(color = group_type),
+    size = 2,
+    show.legend = FALSE
+  ) +
+  
+  # Combine all colors in scale but only show legend for line groups
+  scale_color_manual(
+    values = c(
+      "QTL Threshold" = "red",
+      "Nominal Threshold" = "yellow",
+      "Ineligibility Rate" = "grey40",
+      "red" = "red",
+      "yellow" = "yellow",
+      "green" = "green"
+    ),
+    breaks = c("Ineligibility Rate", "Nominal Threshold", "QTL Threshold"),
+    name = NULL
+  ) +
+  
+  scale_x_date(date_labels = "%Y-%m-%d", date_breaks = "1 month") +
+  theme_minimal() +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    legend.position = "none"
+  ) +
+  labs(
+    y = "Ineligibility",
+    x = "Snapshot Date"
+  )
+
+
+ggplotly(p, tooltip = "text")
 ```
 
 ## Bar Charts {.tabset .tabset-pills}
