@@ -13,6 +13,8 @@ params:
   dfListing: NA
 ---
 
+
+
 ```{r setup, include=FALSE} 
 library(dplyr)
 library(gsm.kri)
@@ -22,21 +24,31 @@ library(plotly)
 library(reactable)
 library(htmltools)
 
-knitr::opts_chunk$set(warning = FALSE, message = FALSE) 
+
+
+knitr::opts_chunk$set(warning = FALSE, message = FALSE)
+
+
 
 dfResults <- params$dfResults
 dfGroups <- params$dfGroups
 dfListing <- params$dfListing
 
+
+
 length_snapshots = dfResults$SnapshotDate %>% n_distinct()
 latest_snapshot = unique(dfResults$SnapshotDate)[length_snapshots]
 ```
+
+
 
 ---
 title: "QTL Overview"
 subtitle: "Study: `r unique(dfListing$studyid)`"
 date: "Snapshot Date: `r latest_snapshot`"
---- 
+---
+
+
 
 ## Study Overview
 ```{r, echo=FALSE, results='asis'}
@@ -62,7 +74,11 @@ dfResults %>%
   reactable()
 ```
 
+
+
 # Results
+
+
 
 ## Time Series Chart
 ```{r, echo=FALSE, results='asis', fig.height=4}
@@ -83,11 +99,15 @@ df_plot <- dfResults %>%
     TRUE ~ "Ineligibility Rate"
   ))
 
+
+
 # Pivot thresholds to wide format
 thresholds <- df_plot %>%
   filter(GroupID %in% c("Upper_funnel", "Flatline")) %>%
   select(SnapshotDate, GroupID, Metric) %>%
   tidyr::pivot_wider(names_from = GroupID, values_from = Metric)
+
+
 
 # Join thresholds to full data
 df_joined <- df_plot %>%
@@ -122,6 +142,8 @@ df_joined <- df_plot %>%
     )
   )
 
+
+
 # Build ggplot
 p <- ggplot(
   df_joined,
@@ -135,7 +157,7 @@ p <- ggplot(
     size = 1,
     show.legend = FALSE
   ) +
-
+  
   # Colored points for Ineligibility Rate (keep color, hide legend)
   geom_point(
     data = df_joined %>% filter(group_type == "Ineligibility Rate"),
@@ -143,7 +165,7 @@ p <- ggplot(
     size = 2,
     show.legend = FALSE
   ) +
-
+  
   # Points for thresholds (hide legend)
   geom_point(
     data = df_joined %>% filter(group_type != "Ineligibility Rate"),
@@ -151,7 +173,7 @@ p <- ggplot(
     size = 2,
     show.legend = FALSE
   ) +
-
+  
   # Combine all colors in scale but only show legend for line groups
   scale_color_manual(
     values = c(
@@ -172,7 +194,7 @@ p <- ggplot(
       "Ineligibility Rate" = "solid"
     )
   ) +
-
+  
   # scale_x_date(date_labels = "%Y-%m-%d", date_breaks = "1 month") +
   theme_minimal() +
   theme(
@@ -185,10 +207,17 @@ p <- ggplot(
   )
 
 
+
+
+
 ggplotly(p, tooltip = "text")
 ```
 
+
+
 ## Bar Charts {.tabset .tabset-pills}
+
+
 
 ```{r, eval = FALSE , echo = FALSE, results = 'asis', fig.height=4}
 ### JS - Site
@@ -199,29 +228,50 @@ ggplotly(p, tooltip = "text")
 # )
 ```
 
-### GG - Site
+
+
+### Site
 ```{r, echo = FALSE, results = 'asis', fig.height=4}
-site_bar <- dfListing %>% 
+sites_with_ineligible <- ie_listing %>%  
   mutate(fillcol = ifelse(Source == "Neither", "Eligible", "Ineligible")) %>% 
-  ggplot(., aes(x = invid, fill = fillcol)) +
+  filter(fillcol == "Ineligible") %>% 
+  pull(invid) %>% 
+  unique()
+
+
+
+site_bar <- dfListing %>% 
+  mutate(fillcol = ifelse(Source == "Neither", "Eligible", "Ineligible")) %>%
+  filter(invid %in% sites_with_ineligible) %>% 
+  ggplot(., aes(y = forcats::fct_rev(forcats::fct_infreq(invid)), fill = fillcol)) +
   geom_bar() +
-  labs(x = "Site", y = "Count", fill = "Eligibility", title = "Count by site") +
+  labs(y = "Site", x = "Count", fill = "Eligibility", title = "Count by site") +
   theme_classic() 
 plotly::ggplotly(site_bar)
 ```
 
-### GG - Country
+
+
+### Country
 ```{r, echo = FALSE, results = 'asis', fig.height=4}
-country_bar <- dfListing %>% 
+countries_with_ineligible <- ie_listing %>%  
   mutate(fillcol = ifelse(Source == "Neither", "Eligible", "Ineligible")) %>% 
-  ggplot(., aes(x = country, fill = fillcol)) +
+  filter(fillcol == "Ineligible") %>% 
+  pull(country) %>% 
+  unique()
+country_bar <- dfListing %>% 
+  mutate(fillcol = ifelse(Source == "Neither", "Eligible", "Ineligible")) %>%
+  filter(invid %in% countries_with_ineligible) %>% 
+  ggplot(., aes(y = forcats::fct_rev(forcats::fct_infreq(country)), fill = fillcol)) +
   geom_bar() +
-  labs(x = "Site", y = "Count", fill = "Eligibility", title = "Count by country") +
-  theme_classic()
+  labs(y = "Country", x = "Count", fill = "Eligibility", title = "Count by country") +
+  theme_classic() 
 plotly::ggplotly(country_bar)
 ```
 
-### GG - Source
+
+
+### Source
 ```{r, echo = FALSE, results = 'asis', fig.height=4}
 source_bar <- dfListing %>% 
   filter(Source != "Neither") %>% 
@@ -236,7 +286,9 @@ source_bar <- dfListing %>%
 plotly::ggplotly(source_bar)
 ```
 
-### GG - Site/Criteria
+
+
+### Site/Criteria
 ```{r, echo = FALSE, results = 'asis', fig.height=4}
 site_criteria_bar <- dfListing %>% 
   filter(!is.na(ietestcd) | Source == "Ineligible -- PD only, check IE") %>% 
@@ -252,7 +304,9 @@ site_criteria_bar <- dfListing %>%
 plotly::ggplotly(site_criteria_bar)
 ```
 
-### GG - Country/Criteria
+
+
+### Country/Criteria
 ```{r, echo = FALSE, results = 'asis', fig.height=4}
 country_criteria_bar <- dfListing %>% 
   filter(!is.na(ietestcd) | Source == "Ineligible -- PD only, check IE") %>% 
@@ -267,6 +321,8 @@ country_criteria_bar <- dfListing %>%
   ) 
 plotly::ggplotly(country_criteria_bar)
 ```
+
+
 
 ## Inclusion/Exclusion Listing
 ```{r, echo = FALSE, results='asis'}
