@@ -261,7 +261,7 @@ countries_with_ineligible <- ie_listing %>%
   unique()
 country_bar <- dfListing %>% 
   mutate(fillcol = ifelse(Source == "Neither", "Eligible", "Ineligible")) %>%
-  filter(invid %in% countries_with_ineligible) %>% 
+  filter(country %in% countries_with_ineligible) %>% 
   ggplot(., aes(y = forcats::fct_rev(forcats::fct_infreq(country)), fill = fillcol)) +
   geom_bar() +
   labs(y = "Country", x = "Count", fill = "Eligibility", title = "Count by country") +
