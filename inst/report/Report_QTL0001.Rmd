@@ -1,12 +1,12 @@
 ---
 output:
   html_document:
+    self_continaed: true
     mathjax: null
     toc: true
     toc_float:
       collapsed: false
       smooth_scroll: true
-    css: styles.css
 params:
   dfResults: NA
   dfGroups: NA
@@ -20,6 +20,7 @@ library(gsm.qtl)
 library(ggplot2)
 library(plotly)
 library(reactable)
+library(htmltools)
 
 knitr::opts_chunk$set(warning = FALSE, message = FALSE) 
 
@@ -44,7 +45,7 @@ dfResults %>%
          SnapshotDate == latest_snapshot,
          !(GroupID %in% c("Upper_funnel", "Flatline"))) %>%
   mutate_at(c("Metric", "upper_funnel", "Numerator", "Denominator", "Flag"), as.numeric) %>%
-  mutate(Ineligible_Rate = paste0(as.character(Metric*100),"%"),
+  mutate(Ineligible_Rate = paste0(as.character(round(Metric,3)*100),"%"),
          Deviation = ifelse(Metric > upper_funnel, "Yes", "No"),
          upper_funnel = paste0(as.character(round(upper_funnel,3)*100), "%")) %>%
   mutate_all(as.character) %>%
@@ -52,7 +53,7 @@ dfResults %>%
   tidyr::pivot_longer(., cols = c(GroupID, Numerator, Denominator, Ineligible_Rate, upper_funnel, Deviation), names_to = "Param", values_to = "Value") %>%
   mutate(Param = case_when(
     Param == "GroupID" ~ "StudyID",
-    Param == "Numerator" ~ "Eligibility Not Met",
+    Param == "Numerator" ~ "Ineligible",
     Param == "Denominator" ~ "Total Enrolled",
     Param == "Ineligible_Rate" ~ "Current Ineligible Enrolled Rate",
     Param == "upper_funnel" ~ "Current Threshold",
@@ -101,15 +102,21 @@ df_joined <- df_plot %>%
     ),
     tooltip_text = case_when(
       group_type != "Ineligibility Rate" ~ paste0(
-        group_type, "<br>",
-        "Date: ", SnapshotDate, "<br>",
+        group_type, "
+",
+        "Date: ", SnapshotDate, "
+",
         "Metric: ", round(Metric, 3)
       ),
       TRUE ~ paste0(
-        "Study: ", GroupID, "<br>",
-        "Date: ", SnapshotDate, "<br>",
-        "Metric: ", round(Metric, 3), "<br>",
-        "Numerator: ", Numerator, "<br>",
+        "Study: ", GroupID, "
+",
+        "Date: ", SnapshotDate, "
+",
+        "Metric: ", round(Metric, 3), "
+",
+        "Numerator: ", Numerator, "
+",
         "Denominator: ", Denominator
       )
     )
@@ -128,7 +135,7 @@ p <- ggplot(
     size = 1,
     show.legend = FALSE
   ) +
-  
+
   # Colored points for Ineligibility Rate (keep color, hide legend)
   geom_point(
     data = df_joined %>% filter(group_type == "Ineligibility Rate"),
@@ -136,7 +143,7 @@ p <- ggplot(
     size = 2,
     show.legend = FALSE
   ) +
-  
+
   # Points for thresholds (hide legend)
   geom_point(
     data = df_joined %>% filter(group_type != "Ineligibility Rate"),
@@ -144,7 +151,7 @@ p <- ggplot(
     size = 2,
     show.legend = FALSE
   ) +
-  
+
   # Combine all colors in scale but only show legend for line groups
   scale_color_manual(
     values = c(
@@ -165,11 +172,11 @@ p <- ggplot(
       "Ineligibility Rate" = "solid"
     )
   ) +
-  
-  scale_x_date(date_labels = "%Y-%m-%d", date_breaks = "1 month") +
+
+  # scale_x_date(date_labels = "%Y-%m-%d", date_breaks = "1 month") +
   theme_minimal() +
   theme(
-    axis.text.x = element_text(angle = 45, hjust = 1),
+    axis.text.x = element_text(angle = 30),
     legend.position = "none"
   ) +
   labs(
@@ -217,19 +224,24 @@ plotly::ggplotly(country_bar)
 ### GG - Source
 ```{r, echo = FALSE, results = 'asis', fig.height=4}
 source_bar <- dfListing %>% 
+  filter(Source != "Neither") %>% 
   ggplot(., aes(x = Source, fill = Source)) +
   geom_bar()+
   labs(x = "Source", y = "Count", title = "Count of observations by Category/Source") +
-  theme_classic() 
+  theme_classic() +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1),  # tilt to avoid overlap
+    panel.grid.major.x = element_blank()
+  ) 
 plotly::ggplotly(source_bar)
 ```
 
 ### GG - Site/Criteria
 ```{r, echo = FALSE, results = 'asis', fig.height=4}
 site_criteria_bar <- dfListing %>% 
-  filter(!is.na(ietest) | Source == "Eligibility IPD") %>% 
-  mutate(ietest = ifelse(is.na(ietest), "Eligibility IPD", ietest)) %>%  
-  ggplot(., aes(x = ietest, fill = invid)) +
+  filter(!is.na(ietestcd) | Source == "Ineligible -- PD only, check IE") %>% 
+  mutate(ietestcd = ifelse(is.na(ietestcd), "Ineligible -- PD only, check IE", ietestcd)) %>%  
+  ggplot(., aes(x = ietestcd, fill = invid)) +
   geom_bar() +
   labs(x = "Criteria", y = "Count", fill = "Site", title = "Eligibility by site") + 
   theme_classic(base_size = 11) + 
@@ -243,9 +255,9 @@ plotly::ggplotly(site_criteria_bar)
 ### GG - Country/Criteria
 ```{r, echo = FALSE, results = 'asis', fig.height=4}
 country_criteria_bar <- dfListing %>% 
-  filter(!is.na(ietest) | Source == "Eligibility IPD") %>% 
-  mutate(ietest = ifelse(is.na(ietest), "Eligibility IPD", ietest)) %>%  
-  ggplot(., aes(x = ietest, fill = country)) +
+  filter(!is.na(ietestcd) | Source == "Ineligible -- PD only, check IE") %>% 
+  mutate(ietestcd = ifelse(is.na(ietestcd), "Ineligible -- PD only, check IE", ietestcd)) %>%  
+  ggplot(., aes(x = ietestcd, fill = country)) +
   geom_bar() +
   labs(x = "Criteria", y = "Count", fill = "Country", title = "Eligibility by Country") + 
   theme_classic(base_size = 11) + 
@@ -260,13 +272,34 @@ plotly::ggplotly(country_criteria_bar)
 ```{r, echo = FALSE, results='asis'}
 dfListing %>% 
   filter(Source != "Neither") %>% 
-  select(invid, country, subjid, Source, ietest, eligibility_criteria) %>%
+  select(invid, country, subjid, Source, ietestcd, dvdtm, eligibility_criteria) %>%
   rename(
     Site = invid,
     Country = country,
     `Subject ID` = subjid,
-    `Which I/E` = ietest,
+    `Which I/E` = ietestcd,
+    `PD Date` = dvdtm,
     `PD Term` = eligibility_criteria
   ) %>% 
-  reactable::reactable(., searchable = TRUE)
+  reactable::reactable(
+    .,
+    searchable = TRUE
+    # , 
+    # columns = list(
+    #   `PD Date` = colDef(
+    #     cell = function(value) {
+    #       tags$div(
+    #         title = value,
+    #         style = list(
+    #           whiteSpace = "nowrap",
+    #           overflow = "hidden",
+    #           textOverflow = "ellipsis",
+    #           maxWidth = "100px"
+    #         ),
+    #         value
+    #       )
+    #     }
+    #   )
+    # )
+  )
 ```

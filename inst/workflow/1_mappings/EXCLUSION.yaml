@@ -37,6 +37,8 @@ spec:
       type: character
     deemedimportant:
       type: character
+    dvdtm:
+      type: timestamp
 steps:
   - output: add_ie
     name: dplyr::left_join
@@ -45,16 +47,14 @@ steps:
       'y': Mapped_IE
       by:
         - subjid
-        - studyid
-        - invid
   - output: pivot_pd
     name: gsm.core::RunQuery
     params:
       df: Mapped_PD
-      strQuery: "SELECT subjid, array_to_string(array_agg(dvterm), ';') AS eligibility_criteria
+      strQuery: "SELECT subjid, dvdtm, array_to_string(array_agg(dvterm), ';') AS eligibility_criteria
                  FROM df
                  WHERE dvdecod IN ('Exclusion Criteria', 'Inclusion Criteria')
-                 GROUP BY subjid"
+                 GROUP BY subjid, dvdtm"
   - output: premapped
     name: dplyr::left_join
     params:

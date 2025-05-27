@@ -27,8 +27,8 @@ steps:
       df: Raw_IE
       strQuery: "SELECT *,
         CASE
-          WHEN ietestcd ILIKE '%exc%' THEN 'EX'
-          WHEN ietestcd ILIKE '%inc%' THEN 'IN'
+          WHEN ietestcd ILIKE '%EXC%' THEN 'EX'
+          WHEN ietestcd ILIKE '%INC%' THEN 'IN'
         END as iecat_custom
       FROM df"
   - output: ie_violation
@@ -37,9 +37,8 @@ steps:
       df: iecat_custom
       strQuery: "SELECT * ,
         CASE
-          WHEN iecat_custom = 'EX' AND ieorres = 'Yes' THEN 'Y'
-          WHEN iecat_custom = 'IN' AND ieorres = 'No' THEN 'Y'
-          ELSE 'N'
+          WHEN iecat_custom = 'EX' AND ieorres = 'Yes' then 'Y'
+          WHEN iecat_custom = 'IN' AND ieorres = 'No' then 'Y'
         END as ie_violation
        FROM df"
   - output: Mapped_IE
