@@ -5,6 +5,8 @@ meta:
   Priority: 2
 spec:
   Mapped_IE:
+    studyid:
+      type: character
     subjid:
       type: character
     tiver:
@@ -20,6 +22,8 @@ spec:
     ie_violation:
       type: character
   Mapped_ENROLL:
+    studyid:
+      type: character
     subjid:
       type: character
     invid:
@@ -29,6 +33,8 @@ spec:
     country:
       type: character
   Mapped_PD:
+    studyid:
+      type: character
     subjid:
       type: character
     dvterm:
@@ -47,6 +53,7 @@ steps:
       'y': Mapped_IE
       by:
         - subjid
+        - studyid
   - output: pivot_pd
     name: gsm.core::RunQuery
     params:
@@ -62,6 +69,7 @@ steps:
       'y': pivot_pd
       by:
         - subjid
+        - studyid
   - output: Mapped_EXCLUSION
     name: gsm.core::RunQuery
     params:
