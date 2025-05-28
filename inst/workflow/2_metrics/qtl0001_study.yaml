@@ -43,7 +43,7 @@ steps:
       dfDenominator: Mapped_EXCLUSION
       strNumeratorCol: subjectid
       strDenominatorCol: subjectid
-      strSubjectCol: subjectjid
+      strSubjectCol: subjectid
       strGroupCol: studyid
       strGroupLevel: GroupLevel
       strNumeratorMethod: Count
