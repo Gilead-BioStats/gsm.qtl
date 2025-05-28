@@ -232,7 +232,7 @@ ggplotly(p, tooltip = "text")
 
 ### Site
 ```{r, echo = FALSE, results = 'asis', fig.height=4}
-sites_with_ineligible <- ie_listing %>%  
+sites_with_ineligible <- dfListing %>%  
   mutate(fillcol = ifelse(Source == "Neither", "Eligible", "Ineligible")) %>% 
   filter(fillcol == "Ineligible") %>% 
   pull(invid) %>% 
@@ -254,7 +254,7 @@ plotly::ggplotly(site_bar)
 
 ### Country
 ```{r, echo = FALSE, results = 'asis', fig.height=4}
-countries_with_ineligible <- ie_listing %>%  
+countries_with_ineligible <- dfListing %>%  
   mutate(fillcol = ifelse(Source == "Neither", "Eligible", "Ineligible")) %>% 
   filter(fillcol == "Ineligible") %>% 
   pull(country) %>% 
