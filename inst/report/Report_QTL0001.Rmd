@@ -1,7 +1,6 @@
 ---
 output:
   html_document:
-    self_continaed: true
     mathjax: null
     toc: true
     toc_float:
