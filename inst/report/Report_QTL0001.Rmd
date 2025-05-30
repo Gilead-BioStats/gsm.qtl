@@ -116,7 +116,6 @@ df_joined <- df_plot %>%
     point_color = case_when(
       group_type != "Ineligibility Rate" ~ NA_character_,
       Metric > `Upper_funnel` ~ "red",
-      Metric > Flatline ~ "yellow",
       TRUE ~ "green"
     ),
     tooltip_text = case_when(
@@ -152,7 +151,7 @@ p <- ggplot(
   geom_line(
     data = df_joined %>%
       filter(group_type %in% c("Ineligibility Rate", "QTL Threshold", "Nominal Threshold")),
-    aes(color = group_type, linetype = group_type),
+    aes(color = group_type, linetype = group_type, linewidth = group_type),
     size = 1,
     show.legend = FALSE
   ) +
@@ -169,19 +168,18 @@ p <- ggplot(
   geom_point(
     data = df_joined %>% filter(group_type != "Ineligibility Rate"),
     aes(color = group_type),
-    size = 2,
+    size = 1,
     show.legend = FALSE
   ) +
   
   # Combine all colors in scale but only show legend for line groups
   scale_color_manual(
     values = c(
-      "QTL Threshold" = "red",
-      "Nominal Threshold" = "yellow",
-      "Ineligibility Rate" = "grey40",
-      "red" = "red",
-      "yellow" = "yellow",
-      "green" = "green"
+      "QTL Threshold" = "#FF5859",
+      "Nominal Threshold" = "grey80",
+      "Ineligibility Rate" = "grey50",
+      "red" = "#FF5859",
+      "green" = "#3DAF06"
     ),
     breaks = c("Ineligibility Rate", "Nominal Threshold", "QTL Threshold"),
     name = NULL
@@ -189,8 +187,15 @@ p <- ggplot(
   scale_linetype_manual(
     values = c(
       "QTL Threshold" = "dashed",
-      "Nominal Threshold" = "dashed",
+      "Nominal Threshold" = "dotted",
       "Ineligibility Rate" = "solid"
+    )
+  ) +
+  scale_linewidth_manual(
+    values = c(
+      "QTL Threshold" = 0.75,
+      "Nominal Threshold" = 0.5,
+      "Ineligibility Rate" = 0.75
     )
   ) +
   
@@ -210,7 +215,6 @@ p <- ggplot(
 
 
 ggplotly(p, tooltip = "text")
-```
 
 
 
@@ -245,6 +249,9 @@ site_bar <- dfListing %>%
   ggplot(., aes(y = forcats::fct_rev(forcats::fct_infreq(invid)), fill = fillcol)) +
   geom_bar() +
   labs(y = "Site", x = "Count", fill = "Eligibility", title = "Count by site") +
+  scale_fill_manual(values = c("Ineligible" = "#FF5859",
+                               "Eligible" = "#00BFC4",
+                               "Neither" = "#7CAE00")) +
   theme_classic() 
 plotly::ggplotly(site_bar)
 ```
@@ -264,6 +271,9 @@ country_bar <- dfListing %>%
   ggplot(., aes(y = forcats::fct_rev(forcats::fct_infreq(country)), fill = fillcol)) +
   geom_bar() +
   labs(y = "Country", x = "Count", fill = "Eligibility", title = "Count by country") +
+  scale_fill_manual(values = c("Ineligible" = "#FF5859",
+                               "Eligible" = "#00BFC4",
+                               "Neither" = "#7CAE00")) +
   theme_classic() 
 plotly::ggplotly(country_bar)
 ```
