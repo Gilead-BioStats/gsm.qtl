@@ -21,20 +21,13 @@ library(gsm.qtl)
 library(ggplot2)
 library(plotly)
 library(gt)
-library(reactable)
 library(htmltools)
 
-
-
 knitr::opts_chunk$set(warning = FALSE, message = FALSE)
-
-
 
 dfResults <- params$dfResults
 dfGroups <- params$dfGroups
 dfListing <- params$dfListing
-
-
 
 length_snapshots = dfResults$SnapshotDate %>% n_distinct()
 latest_snapshot = unique(dfResults$SnapshotDate)[length_snapshots]
@@ -71,7 +64,7 @@ dfResults %>%
     Param == "upper_funnel" ~ "Current Threshold",
     Param == "Deviation" ~ "Deviation?"
   )) %>% 
-  reactable()
+  gt::gt()
 ```
 
 
@@ -357,23 +350,9 @@ dfListing %>%
     `Subject ID` = subjid,
     `Which I/E` = ietestcd
   ) %>% 
-  # reactable::reactable(
-  #   .,
-  #   searchable = TRUE,
-  #   columns = list(
-  #     `PD Date1` = colDef(
-  #       style = list(
-  #         whiteSpace = "nowrap",
-  #         overflow = "hidden",
-  #         textOverflow = "ellipsis",
-  #         maxWidth = "100px"
-  #       )
-  #     )
-  #   )
-  # )
   gt::gt() %>%
   text_transform(
-    locations = cells_body(columns = c(`PD Term1`, `PD Term2`)),
+    locations = cells_body(columns = starts_with("PD Term")),
     fn = function(x) {
       vapply(x, function(txt) {
         if (is.na(txt) || !nzchar(txt)) return("")
