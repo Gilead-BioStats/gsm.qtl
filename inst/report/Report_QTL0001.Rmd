@@ -2,10 +2,6 @@
 output:
   html_document:
     mathjax: null
-    toc: true
-    toc_float:
-      collapsed: false
-      smooth_scroll: true
 params:
   dfResults: NA
   dfGroups: NA
@@ -329,6 +325,21 @@ plotly::ggplotly(country_criteria_bar)
 
 ## Inclusion/Exclusion Listing
 ```{r, echo = FALSE, results='asis'}
+scrollable_gt <- function(gt_tbl, height = "300px", min_table_width = "1200px") {
+  div(
+    style = sprintf("
+      max-height: %s;
+      overflow-y: auto;
+      overflow-x: auto;
+      border: 1px solid #ccc;
+    ", height),
+    div(
+      style = sprintf("min-width: %s;", min_table_width),
+      gt_tbl
+    )
+  )
+}
+
 dfListing %>% 
   filter(Source != "Neither") %>% 
   select(invid, country, subjid, Source, ietestcd, dvdtm, eligibility_criteria) %>%
@@ -382,5 +393,6 @@ dfListing %>%
   ) %>% 
   opt_interactive(use_search = TRUE,
                   use_filters = TRUE,
-                  page_size_default = 25)
+                  page_size_default = 25) %>% 
+  scrollable_gt(., height = "500px")
 ```
