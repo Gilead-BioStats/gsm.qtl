@@ -215,7 +215,7 @@ p <- ggplot(
 
 
 ggplotly(p, tooltip = "text")
-
+```
 
 
 ## Bar Charts {.tabset .tabset-pills}
