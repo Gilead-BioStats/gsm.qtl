@@ -20,6 +20,7 @@ library(gsm.kri)
 library(gsm.qtl)
 library(ggplot2)
 library(plotly)
+library(gt)
 library(reactable)
 library(htmltools)
 
@@ -338,33 +339,66 @@ plotly::ggplotly(country_criteria_bar)
 dfListing %>% 
   filter(Source != "Neither") %>% 
   select(invid, country, subjid, Source, ietestcd, dvdtm, eligibility_criteria) %>%
+  tidyr::separate(
+    dvdtm, 
+    into = paste0("PD Date", seq_len(max(sapply(strsplit(dfListing$dvdtm, ";;;"), length)))),
+    sep = ";;;",
+    fill = "right"
+  ) %>% 
+  tidyr::separate(
+    eligibility_criteria, 
+    into = paste0("PD Term", seq_len(max(sapply(strsplit(dfListing$eligibility_criteria, ";;;"), length)))),
+    sep = ";;;",
+    fill = "right"
+  ) %>% 
   rename(
     Site = invid,
     Country = country,
     `Subject ID` = subjid,
-    `Which I/E` = ietestcd,
-    `PD Date` = dvdtm,
-    `PD Term` = eligibility_criteria
+    `Which I/E` = ietestcd
   ) %>% 
-  reactable::reactable(
-    .,
-    searchable = TRUE
-    # , 
-    # columns = list(
-    #   `PD Date` = colDef(
-    #     cell = function(value) {
-    #       tags$div(
-    #         title = value,
-    #         style = list(
-    #           whiteSpace = "nowrap",
-    #           overflow = "hidden",
-    #           textOverflow = "ellipsis",
-    #           maxWidth = "100px"
-    #         ),
-    #         value
-    #       )
-    #     }
-    #   )
-    # )
+  # reactable::reactable(
+  #   .,
+  #   searchable = TRUE,
+  #   columns = list(
+  #     `PD Date1` = colDef(
+  #       style = list(
+  #         whiteSpace = "nowrap",
+  #         overflow = "hidden",
+  #         textOverflow = "ellipsis",
+  #         maxWidth = "100px"
+  #       )
+  #     )
+  #   )
+  # )
+  gt::gt() %>%
+  text_transform(
+    locations = cells_body(columns = c(`PD Term1`, `PD Term2`)),
+    fn = function(x) {
+      vapply(x, function(txt) {
+        if (is.na(txt) || !nzchar(txt)) return("")
+
+        # Tooltip: escape to be safe
+        tooltip <- htmlEscape(txt)
+
+        # Visual truncation logic based on plain text
+        plain <- gsub("<[^>]+>", "", txt)
+        should_truncate <- nchar(plain) > 10
+
+        display_html <- if (should_truncate) {
+          # You could optionally also truncate the HTML, but that's tricky.
+          txt  # just use full HTML; visual cutoff will be via CSS
+        } else {
+          txt
+        }
+
+        html(
+          sprintf(
+            '<div title="%s" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100px;">%s</div>',
+            tooltip, display_html
+          )
+        )
+      }, FUN.VALUE = html(""))
+    }
   )
 ```

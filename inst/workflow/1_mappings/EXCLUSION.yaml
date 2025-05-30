@@ -58,10 +58,14 @@ steps:
     name: gsm.core::RunQuery
     params:
       df: Mapped_PD
-      strQuery: "SELECT studyid, subjid, dvdtm, array_to_string(array_agg(dvterm), ';') AS eligibility_criteria
-                 FROM df
-                 WHERE dvdecod IN ('Exclusion Criteria', 'Inclusion Criteria')
-                 GROUP BY studyid, subjid, dvdtm"
+      strQuery: "SELECT
+      studyid,
+      subjid,
+      array_to_string(array_agg(dvdtm), ';;;')  AS dvdtm,
+      array_to_string(array_agg(dvterm), ';;;') AS eligibility_criteria
+      FROM df
+      WHERE dvdecod IN ('Exclusion Criteria', 'Inclusion Criteria')
+      GROUP BY studyid, subjid"
   - output: premapped
     name: dplyr::left_join
     params:
