@@ -1,7 +1,7 @@
 meta:
   Type: Analysis
-  ID: cou0006
-  GroupLevel: Country
+  ID: qtl0002_study
+  GroupLevel: Study
   Abbreviation: SDSC
   Metric: Study Discontinuation Rate
   Numerator: Subjects Discontinued - Study
@@ -9,8 +9,8 @@ meta:
   Model: Normal Approximation
   Score: Adjusted Z-Score
   AnalysisType: binary
-  Threshold: -3,-2,2,3
-  nMinDenominator: 3
+  nPropRate: 0.15 # insert historical data
+  nNumDeviations: 3
 spec:
   Mapped_SUBJ:
     subjid:
@@ -23,12 +23,8 @@ spec:
     compyn:
       type: character
 steps:
-  - output: vThreshold
-    name: gsm::ParseThreshold
-    params:
-      strThreshold: Threshold
   - output: Temp_DROPOUT
-    name: RunQuery
+    name: gsm.core::RunQuery
     params:
       df: Mapped_STUDCOMP
       strQuery: "SELECT * FROM df WHERE compyn = 'N'"
@@ -39,36 +35,24 @@ steps:
       dfNumerator: Temp_DROPOUT
       dfDenominator: Mapped_SUBJ
       strSubjectCol: subjid
-      strGroupCol: country
+      strGroupCol: studyid
       strGroupLevel: GroupLevel
       strNumeratorMethod: Count
       strDenominatorMethod: Count
   - output: Analysis_Transformed
-    name: gsm::Transform_Rate
+    name: gsm.core::Transform_Rate
     params:
       dfInput: Analysis_Input
-  - output: Analysis_Analyzed
-    name: Analyze_NormalApprox
+  - output: Analysis_Summary
+    name: Analyze_OneSideProp
     params:
       dfTransformed: Analysis_Transformed
-      strType: AnalysisType
-  - output: Analysis_Flagged
-    name: gsm::Flag_NormalApprox
-    params:
-      dfAnalyzed: Analysis_Analyzed
-      vThreshold: vThreshold
-  - output: Analysis_Summary
-    name: gsm::Summarize
-    params:
-      dfFlagged: Analysis_Flagged
-      nMinDenominator: nMinDenominator
+      nPropRate: nPropRate
+      nNumDeviations: nNumDeviations
   - output: lAnalysis
     name: list
     params:
       ID: ID
       Analysis_Input: Analysis_Input
       Analysis_Transformed: Analysis_Transformed
-      Analysis_Analyzed: Analysis_Analyzed
-      Analysis_Flagged: Analysis_Flagged
       Analysis_Summary: Analysis_Summary
-
