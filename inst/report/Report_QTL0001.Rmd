@@ -391,8 +391,8 @@ dfListing %>%
       }, FUN.VALUE = html(""))
     }
   ) %>% 
-  opt_interactive(use_search = TRUE,
-                  use_filters = TRUE,
-                  page_size_default = 25) %>% 
+  # opt_interactive(use_search = TRUE,
+  #                 use_filters = TRUE,
+  #                 page_size_default = 25) %>% 
   scrollable_gt(., height = "500px")
 ```
