@@ -22,7 +22,7 @@ Imports:
   dplyr,
   ggplot2,
   glue,
-  gsm.core (>= 1.1.0),,
+  gsm.core (>= 1.1.0),
   gsm.mapping (>= 1.0.1),
   gt,
   htmltools,
