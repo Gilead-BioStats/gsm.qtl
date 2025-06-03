@@ -31,7 +31,7 @@
 #'   "ABC",     "Study",         25,          100,    0.25
 #' )
 #'
-#' dfAnalyzed <- Analyze_OneSideProp(dftransformedd, nPropRate = 0.01, nNumDeviations = 3)
+#' dfAnalyzed <- Analyze_OneSideProp(dftransformed, nPropRate = 0.01, nNumDeviations = 3)
 #'
 #' @export
 

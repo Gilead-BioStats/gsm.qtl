@@ -15,8 +15,7 @@
 #' @param bAddGroupSelect f
 #' @param strShinyGroupSelectID g
 #' @param bDebug h
-#'
-#' @export
+#' @noRd
 
 Widget_BarChartQTL <- function(
     dfResults,

@@ -21,22 +21,27 @@ LazyData: true
 Imports: 
   dplyr,
   ggplot2,
-  glue,
   gsm.core,
+  gsm.kri,
   gt,
-  htmltools,
+  htmlwidgets,
+  jsonlite,
   plotly,
   purrr,
   rlang,
+  tidyr,
+  tibble,
+  utils
+Suggests: 
+  glue,
+  gsm.mapping,
+  gsm.reporting,
+  htmltools,
+  knitr,
+  lubridate,
   rmarkdown,
   stringr,
-  tidyr
-Suggests: 
-    gsm.mapping,
-    gsm.reporting,
-    knitr,
-    lubridate,
-    testthat (>= 3.0.0)
+  testthat (>= 3.0.0)
 Remotes:
     gsm.core=Gilead-BioStats/gsm.core@main,
     gsm.mapping=Gilead-BioStats/gsm.mapping@main,
