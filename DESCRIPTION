@@ -44,6 +44,7 @@ Suggests:
   testthat (>= 3.0.0)
 Remotes:
     gsm.core=Gilead-BioStats/gsm.core@main,
+    gsm.kri=Gilead-BioStats/gsm.kri@main,
     gsm.mapping=Gilead-BioStats/gsm.mapping@main,
     gsm.reporting=Gilead-BioStats/gsm.reporting@main
 URL: https://gilead-biostats.github.io/gsm.qtl
