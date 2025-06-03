@@ -22,8 +22,7 @@ Imports:
   dplyr,
   ggplot2,
   glue,
-  gsm.core (>= 1.1.0),
-  gsm.mapping (>= 1.0.1),
+  gsm.core,
   gt,
   htmltools,
   plotly,
@@ -33,8 +32,14 @@ Imports:
   stringr,
   tidyr
 Suggests: 
+    gsm.mapping,
+    gsm.reporting,
     knitr,
     lubridate,
     testthat (>= 3.0.0)
+Remotes:
+    gsm.core=Gilead-BioStats/gsm.core@main,
+    gsm.mapping=Gilead-BioStats/gsm.mapping@main,
+    gsm.reporting=Gilead-BioStats/gsm.reporting@main
 URL: https://gilead-biostats.github.io/gsm.qtl
 Config/testthat/edition: 3
