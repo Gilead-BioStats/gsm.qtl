@@ -290,9 +290,9 @@ plotly::ggplotly(source_bar)
 ### Site/Criteria
 ```{r, echo = FALSE, results = 'asis', fig.height=4}
 site_criteria_bar <- dfListing %>% 
-  filter(!is.na(ietestcd) | Source == "Ineligible -- PD only, check IE") %>% 
-  mutate(ietestcd = ifelse(is.na(ietestcd), "Ineligible -- PD only, check IE", ietestcd)) %>%  
-  ggplot(., aes(x = ietestcd, fill = invid)) +
+  filter(!is.na(ietestcd_concat) | Source == "Ineligible -- PD only, check IE") %>% 
+  mutate(ietestcd_concat = ifelse(is.na(ietestcd_concat), "Ineligible -- PD only, check IE", ietestcd_concat)) %>%  
+  ggplot(., aes(x = ietestcd_concat, fill = invid)) +
   geom_bar() +
   labs(x = "Criteria", y = "Count", fill = "Site", title = "Eligibility by site") + 
   theme_classic(base_size = 11) + 
@@ -308,9 +308,9 @@ plotly::ggplotly(site_criteria_bar)
 ### Country/Criteria
 ```{r, echo = FALSE, results = 'asis', fig.height=4}
 country_criteria_bar <- dfListing %>% 
-  filter(!is.na(ietestcd) | Source == "Ineligible -- PD only, check IE") %>% 
-  mutate(ietestcd = ifelse(is.na(ietestcd), "Ineligible -- PD only, check IE", ietestcd)) %>%  
-  ggplot(., aes(x = ietestcd, fill = country)) +
+  filter(!is.na(ietestcd_concat) | Source == "Ineligible -- PD only, check IE") %>% 
+  mutate(ietestcd_concat = ifelse(is.na(ietestcd_concat), "Ineligible -- PD only, check IE", ietestcd_concat)) %>%  
+  ggplot(., aes(x = ietestcd_concat, fill = country)) +
   geom_bar() +
   labs(x = "Criteria", y = "Count", fill = "Country", title = "Eligibility by Country") + 
   theme_classic(base_size = 11) + 
@@ -365,7 +365,7 @@ dfListing %>%
     Site = invid,
     Country = country,
     `Subject ID` = subjid,
-    `Which I/E` = ietestcd
+    `Which I/E` = ietestcd_concat
   ) %>% 
   gt::gt() %>%
   text_transform(
