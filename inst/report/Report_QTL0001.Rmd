@@ -343,12 +343,12 @@ scrollable_gt <- function(gt_tbl, height = "300px", min_table_width = "1200px") 
 dfListing %>% 
   filter(Source != "Neither") %>% 
   select(invid, country, subjid, Source, ietestcd_concat, dvdtm, eligibility_criteria) %>% 
-  tidyr::separate(
-    ietestcd_concat, 
-    into = paste0("", seq_len(max(sapply(strsplit(dfListing$ietestcd_concat, ";;;"), length)))),
-    sep = ";;;",
-    fill = "right"
-  ) %>%
+  # tidyr::separate(
+  #   ietestcd_concat, 
+  #   into = paste0("", seq_len(max(sapply(strsplit(dfListing$ietestcd_concat, ";;;"), length)))),
+  #   sep = ";;;",
+  #   fill = "right"
+  # ) %>%
   tidyr::separate(
     dvdtm, 
     into = paste0("PD Date", seq_len(max(sapply(strsplit(dfListing$dvdtm, ";;;"), length)))),
