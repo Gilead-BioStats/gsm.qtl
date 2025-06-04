@@ -3,4 +3,7 @@
 [![R-CMD-check](https://github.com/Gilead-BioStats/gsm.qtl/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/Gilead-BioStats/gsm.qtl/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
-A gsm extension package to create QTL metrics and produce an html report and shiny application.
+The Good Statistical Monitoring or 'gsm' suite of R packages
+    provides a framework for statistical data monitoring. 'gsm.qtl'
+    is an extension that contains the additional functions, workflows,
+    and document template to generate reports for QTL.

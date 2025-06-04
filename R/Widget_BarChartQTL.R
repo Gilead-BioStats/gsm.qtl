@@ -104,13 +104,13 @@ Widget_BarChartQTL <- function(
 #'
 #' @name Widget_BarChart-shiny
 #'
-#' @export
+#' @noRd
 Widget_BarChartOutputQTL  <- function(outputId, width = "100%", height = "400px") {
   htmlwidgets::shinyWidgetOutput(outputId, "Widget_BarChartQTL", width, height, package = "gsm.qtl")
 }
 
 #' @rdname Widget_BarChart-shiny
-#' @export
+#' @noRd
 renderWidget_BarChartQTL  <- function(expr, env = parent.frame(), quoted = FALSE) {
   if (!quoted) {
     expr <- substitute(expr)

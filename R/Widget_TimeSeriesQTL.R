@@ -112,13 +112,13 @@ Widget_TimeSeriesQTL <- function(
 #'
 #' @name Widget_TimeSeries-shiny
 #'
-#' @export
+#' @noRd
 Widget_TimeSeriesQTLOutput <- function(outputId, width = "100%", height = "400px") {
   htmlwidgets::shinyWidgetOutput(outputId, "Widget_TimeSeriesQTL", width, height, package = "gsm.qtl")
 }
 
 #' @rdname Widget_TimeSeries-shiny
-#' @export
+#' @noRd
 renderWidget_TimeSeriesQTL <- function(expr, env = parent.frame(), quoted = FALSE) {
   if (!quoted) {
     expr <- substitute(expr)
