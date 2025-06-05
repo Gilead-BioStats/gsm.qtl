@@ -3,15 +3,18 @@
 #' @description
 #' `r lifecycle::badge("stable")`
 #'
-#' This function generates a KRI report based on the provided inputs.
+#' This function generates a QTL report based on the provided inputs.
 #'
-#' @param lCharts A list of charts to include in the report.
 #' @param strOutputDir The output directory path for the generated report. If not provided,
 #'  the report will be saved in the current working directory.
 #' @param strOutputFile The output file name for the generated report. If not provided,
 #'  the report will be named based on the study ID, Group Level and Date.
-#' @param dfResults a
-#' @param dfGroups b
+#' @param dfResults A results `data.frame` from the output of `gsm.reporting::BindResults()` used
+#' to create a variety of visualizations like the line plot, bar plot.
+#' @param dfGroups A groups `data.frame` from the output of the `Groups.yaml` of `gsm.reporting`used
+#' to create a variety of visualizations like the line plot, bar plot.
+#' @param dfListing A `data.frame` that is used as a listing to represent participants that are the numerators
+#' of the visualizations from `dfResults`.
 #'
 #' @return File path of the saved report html is returned invisibly. Save to object to view absolute output path.
 #' @export

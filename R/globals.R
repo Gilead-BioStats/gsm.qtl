@@ -1,0 +1,9 @@
+globalVariables(
+  c(
+    "GroupLevel",
+    "Numerator",
+    "Denominator",
+    "z_0",
+    "vMu"
+  )
+)

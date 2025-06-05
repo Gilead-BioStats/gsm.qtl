@@ -2,10 +2,6 @@
 output:
   html_document:
     mathjax: null
-    toc: true
-    toc_float:
-      collapsed: false
-      smooth_scroll: true
 params:
   dfResults: NA
   dfGroups: NA
@@ -20,20 +16,14 @@ library(gsm.kri)
 library(gsm.qtl)
 library(ggplot2)
 library(plotly)
-library(reactable)
+library(gt)
 library(htmltools)
 
-
-
 knitr::opts_chunk$set(warning = FALSE, message = FALSE)
-
-
 
 dfResults <- params$dfResults
 dfGroups <- params$dfGroups
 dfListing <- params$dfListing
-
-
 
 length_snapshots = dfResults$SnapshotDate %>% n_distinct()
 latest_snapshot = unique(dfResults$SnapshotDate)[length_snapshots]
@@ -70,7 +60,7 @@ dfResults %>%
     Param == "upper_funnel" ~ "Current Threshold",
     Param == "Deviation" ~ "Deviation?"
   )) %>% 
-  reactable()
+  gt::gt()
 ```
 
 
@@ -215,7 +205,7 @@ p <- ggplot(
 
 
 ggplotly(p, tooltip = "text")
-
+```
 
 
 ## Bar Charts {.tabset .tabset-pills}
@@ -300,9 +290,15 @@ plotly::ggplotly(source_bar)
 ### Site/Criteria
 ```{r, echo = FALSE, results = 'asis', fig.height=4}
 site_criteria_bar <- dfListing %>% 
-  filter(!is.na(ietestcd) | Source == "Ineligible -- PD only, check IE") %>% 
-  mutate(ietestcd = ifelse(is.na(ietestcd), "Ineligible -- PD only, check IE", ietestcd)) %>%  
-  ggplot(., aes(x = ietestcd, fill = invid)) +
+  filter(!is.na(ietestcd_concat) | Source == "Ineligible -- PD only, check IE") %>% 
+  mutate(
+    ietestcd_concat = case_when(
+      is.na(ietestcd_concat) ~ "Ineligible -- PD only, check IE",
+      stringr::str_detect(ietestcd_concat, ";;;") ~ "Multiple",
+      TRUE ~ ietestcd_concat
+    )
+  ) %>%  
+  ggplot(., aes(x = ietestcd_concat, fill = invid)) +
   geom_bar() +
   labs(x = "Criteria", y = "Count", fill = "Site", title = "Eligibility by site") + 
   theme_classic(base_size = 11) + 
@@ -318,9 +314,16 @@ plotly::ggplotly(site_criteria_bar)
 ### Country/Criteria
 ```{r, echo = FALSE, results = 'asis', fig.height=4}
 country_criteria_bar <- dfListing %>% 
-  filter(!is.na(ietestcd) | Source == "Ineligible -- PD only, check IE") %>% 
-  mutate(ietestcd = ifelse(is.na(ietestcd), "Ineligible -- PD only, check IE", ietestcd)) %>%  
-  ggplot(., aes(x = ietestcd, fill = country)) +
+  filter(!is.na(ietestcd_concat) | Source == "Ineligible -- PD only, check IE") %>% 
+  mutate(
+    ietestcd_concat = case_when(
+      is.na(ietestcd_concat) ~ "Ineligible -- PD only, check IE",
+      stringr::str_detect(ietestcd_concat, ";;;") ~ "Multiple",
+      TRUE ~ ietestcd_concat
+    )
+  ) %>% 
+  mutate(ietestcd_concat = ifelse(is.na(ietestcd_concat), "Ineligible -- PD only, check IE", ietestcd_concat)) %>%  
+  ggplot(., aes(x = ietestcd_concat, fill = country)) +
   geom_bar() +
   labs(x = "Criteria", y = "Count", fill = "Country", title = "Eligibility by Country") + 
   theme_classic(base_size = 11) + 
@@ -335,36 +338,80 @@ plotly::ggplotly(country_criteria_bar)
 
 ## Inclusion/Exclusion Listing
 ```{r, echo = FALSE, results='asis'}
+scrollable_gt <- function(gt_tbl, height = "300px", min_table_width = "1200px") {
+  div(
+    style = sprintf("
+      max-height: %s;
+      overflow-y: auto;
+      overflow-x: auto;
+      border: 1px solid #ccc;
+    ", height),
+    div(
+      style = sprintf("min-width: %s;", min_table_width),
+      gt_tbl
+    )
+  )
+}
+
 dfListing %>% 
   filter(Source != "Neither") %>% 
-  select(invid, country, subjid, Source, ietestcd, dvdtm, eligibility_criteria) %>%
+  select(invid, country, subjid, Source, ietestcd_concat, dvdtm, eligibility_criteria) %>% 
+  # tidyr::separate(
+  #   ietestcd_concat, 
+  #   into = paste0("", seq_len(max(sapply(strsplit(dfListing$ietestcd_concat, ";;;"), length)))),
+  #   sep = ";;;",
+  #   fill = "right"
+  # ) %>%
+  tidyr::separate(
+    dvdtm, 
+    into = paste0("PD Date", seq_len(max(sapply(strsplit(dfListing$dvdtm, ";;;"), length)))),
+    sep = ";;;",
+    fill = "right"
+  ) %>% 
+  tidyr::separate(
+    eligibility_criteria, 
+    into = paste0("PD Term", seq_len(max(sapply(strsplit(dfListing$eligibility_criteria, ";;;"), length)))),
+    sep = ";;;",
+    fill = "right"
+  ) %>% 
   rename(
     Site = invid,
     Country = country,
     `Subject ID` = subjid,
-    `Which I/E` = ietestcd,
-    `PD Date` = dvdtm,
-    `PD Term` = eligibility_criteria
+    `Which I/E` = ietestcd_concat
   ) %>% 
-  reactable::reactable(
-    .,
-    searchable = TRUE
-    # , 
-    # columns = list(
-    #   `PD Date` = colDef(
-    #     cell = function(value) {
-    #       tags$div(
-    #         title = value,
-    #         style = list(
-    #           whiteSpace = "nowrap",
-    #           overflow = "hidden",
-    #           textOverflow = "ellipsis",
-    #           maxWidth = "100px"
-    #         ),
-    #         value
-    #       )
-    #     }
-    #   )
-    # )
-  )
+  gt::gt() %>%
+  text_transform(
+    locations = cells_body(columns = starts_with("PD Term")),
+    fn = function(x) {
+      vapply(x, function(txt) {
+        if (is.na(txt) || !nzchar(txt)) return("")
+
+        # Tooltip: escape to be safe
+        tooltip <- htmlEscape(txt)
+
+        # Visual truncation logic based on plain text
+        plain <- gsub("<[^>]+>", "", txt)
+        should_truncate <- nchar(plain) > 10
+
+        display_html <- if (should_truncate) {
+          # You could optionally also truncate the HTML, but that's tricky.
+          txt  # just use full HTML; visual cutoff will be via CSS
+        } else {
+          txt
+        }
+
+        html(
+          sprintf(
+            '<div title="%s" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100px;">%s</div>',
+            tooltip, display_html
+          )
+        )
+      }, FUN.VALUE = html(""))
+    }
+  ) %>% 
+  # opt_interactive(use_search = TRUE,
+  #                 use_filters = TRUE,
+  #                 page_size_default = 25) %>% 
+  scrollable_gt(., height = "500px")
 ```
