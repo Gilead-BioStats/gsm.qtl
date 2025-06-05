@@ -54,7 +54,7 @@ dfResults %>%
   tidyr::pivot_longer(., cols = c(GroupID, Numerator, Denominator, Ineligible_Rate, upper_funnel, Deviation), names_to = "Param", values_to = "Value") %>%
   mutate(Param = case_when(
     Param == "GroupID" ~ "StudyID",
-    Param == "Numerator" ~ "Ineligible",
+    Param == "Numerator" ~ "Ineligible Participants",
     Param == "Denominator" ~ "Total Enrolled",
     Param == "Ineligible_Rate" ~ "Current Ineligible Enrolled Rate",
     Param == "upper_funnel" ~ "Current Threshold",
@@ -226,19 +226,18 @@ ggplotly(p, tooltip = "text")
 ### Site
 ```{r, echo = FALSE, results = 'asis', fig.height=4}
 sites_with_ineligible <- dfListing %>%  
-  mutate(fillcol = ifelse(Source == "Neither", "Eligible", "Ineligible")) %>% 
-  filter(fillcol == "Ineligible") %>% 
+  filter(Source != "Neither") %>% 
   pull(invid) %>% 
   unique()
 
 
 
 site_bar <- dfListing %>% 
-  mutate(fillcol = ifelse(Source == "Neither", "Eligible", "Ineligible")) %>%
+  mutate(fillcol = ifelse(Source == "Neither", "No Eligiblity Risk", "Ineligible")) %>%
   filter(invid %in% sites_with_ineligible) %>% 
   ggplot(., aes(y = forcats::fct_rev(forcats::fct_infreq(invid)), fill = fillcol)) +
   geom_bar() +
-  labs(y = "Site", x = "Count", fill = "Eligibility", title = "Count by site") +
+  labs(y = "Site", x = "Participant Count", fill = "Eligibility", title = "Count by site", caption = "Footnote: Excludes sites with no ineligible partipants.") +
   scale_fill_manual(values = c("Ineligible" = "#FF5859",
                                "Eligible" = "#00BFC4",
                                "Neither" = "#7CAE00")) +
@@ -251,16 +250,15 @@ plotly::ggplotly(site_bar)
 ### Country
 ```{r, echo = FALSE, results = 'asis', fig.height=4}
 countries_with_ineligible <- dfListing %>%  
-  mutate(fillcol = ifelse(Source == "Neither", "Eligible", "Ineligible")) %>% 
-  filter(fillcol == "Ineligible") %>% 
+  filter(Source != "Neither") %>% 
   pull(country) %>% 
   unique()
 country_bar <- dfListing %>% 
-  mutate(fillcol = ifelse(Source == "Neither", "Eligible", "Ineligible")) %>%
+  mutate(fillcol = ifelse(Source == "Neither", "No Eligiblity Risk", "Ineligible")) %>%
   filter(country %in% countries_with_ineligible) %>% 
   ggplot(., aes(y = forcats::fct_rev(forcats::fct_infreq(country)), fill = fillcol)) +
   geom_bar() +
-  labs(y = "Country", x = "Count", fill = "Eligibility", title = "Count by country") +
+  labs(y = "Country", x = "Participant Count", fill = "Eligibility", title = "Count by country", caption = "Footnote: Excludes countries with no ineligible partipants.") +
   scale_fill_manual(values = c("Ineligible" = "#FF5859",
                                "Eligible" = "#00BFC4",
                                "Neither" = "#7CAE00")) +
@@ -276,7 +274,7 @@ source_bar <- dfListing %>%
   filter(Source != "Neither") %>% 
   ggplot(., aes(x = Source, fill = Source)) +
   geom_bar()+
-  labs(x = "Source", y = "Count", title = "Count of observations by Category/Source") +
+  labs(x = "Source", y = "Participant Count", title = "Count of Particpants by Category/Source") +
   theme_classic() +
   theme(
     axis.text.x = element_text(angle = 45, hjust = 1),  # tilt to avoid overlap
@@ -287,7 +285,7 @@ plotly::ggplotly(source_bar)
 
 
 
-### Site/Criteria
+### Criteria/Site
 ```{r, echo = FALSE, results = 'asis', fig.height=4}
 site_criteria_bar <- dfListing %>% 
   filter(!is.na(ietestcd_concat) | Source == "Ineligible -- PD only, check IE") %>% 
@@ -300,7 +298,7 @@ site_criteria_bar <- dfListing %>%
   ) %>%  
   ggplot(., aes(x = ietestcd_concat, fill = invid)) +
   geom_bar() +
-  labs(x = "Criteria", y = "Count", fill = "Site", title = "Eligibility by site") + 
+  labs(x = "Criteria", y = "Criteria Count", fill = "Site", title = "Eligibility by site", caption = "Footnote: Partipants can be ineligible for multiple criteria.") + 
   theme_classic(base_size = 11) + 
   theme(
     axis.text.x = element_text(angle = 45, hjust = 1),  # tilt to avoid overlap
@@ -311,7 +309,7 @@ plotly::ggplotly(site_criteria_bar)
 
 
 
-### Country/Criteria
+### Criteria/Country
 ```{r, echo = FALSE, results = 'asis', fig.height=4}
 country_criteria_bar <- dfListing %>% 
   filter(!is.na(ietestcd_concat) | Source == "Ineligible -- PD only, check IE") %>% 
@@ -325,7 +323,7 @@ country_criteria_bar <- dfListing %>%
   mutate(ietestcd_concat = ifelse(is.na(ietestcd_concat), "Ineligible -- PD only, check IE", ietestcd_concat)) %>%  
   ggplot(., aes(x = ietestcd_concat, fill = country)) +
   geom_bar() +
-  labs(x = "Criteria", y = "Count", fill = "Country", title = "Eligibility by Country") + 
+  labs(x = "Criteria", y = "Criteria Count", fill = "Country", title = "Eligibility by Country", caption = "Footnote: Partipants can be ineligible for multiple criteria.") + 
   theme_classic(base_size = 11) + 
   theme(
     axis.text.x = element_text(angle = 45, hjust = 1),  # tilt to avoid overlap
@@ -368,6 +366,7 @@ dfListing %>%
     sep = ";;;",
     fill = "right"
   ) %>% 
+  mutate_at(vars(starts_with("PD Date")) , ~substr(.x, 1, 10)) %>% 
   tidyr::separate(
     eligibility_criteria, 
     into = paste0("PD Term", seq_len(max(sapply(strsplit(dfListing$eligibility_criteria, ";;;"), length)))),
@@ -382,7 +381,7 @@ dfListing %>%
   ) %>% 
   gt::gt() %>%
   text_transform(
-    locations = cells_body(columns = starts_with("PD Term")),
+    locations = cells_body(columns = c(`Which I/E`, starts_with("PD Term"))),
     fn = function(x) {
       vapply(x, function(txt) {
         if (is.na(txt) || !nzchar(txt)) return("")
