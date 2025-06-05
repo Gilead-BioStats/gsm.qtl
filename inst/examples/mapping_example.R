@@ -1,5 +1,5 @@
-library(gsm.datasim) # requires >= fix-57 PR to get it to dev is up
-library(gsm.mapping) # dev is fine, as long as post fix-58
+library(gsm.datasim)
+library(gsm.mapping)
 library(gsm.reporting)
 library(gsm.core)
 library(gsm.kri)
@@ -21,7 +21,7 @@ ie_data <- generate_rawdata_for_single_study(
   desired_specs = NULL
 )
 
-mappings_wf <- gsm.core::MakeWorkflowList(strNames =c("SUBJ", "ENROLL", "IE", "PD", "STUDY", "SITE", "COUNTRY", "EXCLUSION"), strPath = "inst/workflow/1_mappings", strPackage = "gsm.qtl")
+mappings_wf <- gsm.core::MakeWorkflowList(strNames =c("SUBJ", "ENROLL", "IE", "PD", "STUDY", "SITE", "COUNTRY", "EXCLUSION"), strPath = "workflow/1_mappings", strPackage = "gsm.mapping")
 mappings_spec <- gsm.mapping::CombineSpecs(mappings_wf)
 metrics_wf <- gsm.core::MakeWorkflowList(strNames = c("qtl0001"), strPath = "inst/workflow/2_metrics", strPackage = "gsm.qtl")
 reporting_wf <- gsm.core::MakeWorkflowList(strNames = c("Results", "Groups"), strPath = "workflow/3_reporting", strPackage = "gsm.reporting")

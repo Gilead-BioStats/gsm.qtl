@@ -288,10 +288,10 @@ plotly::ggplotly(source_bar)
 ### Criteria/Site
 ```{r, echo = FALSE, results = 'asis', fig.height=4}
 site_criteria_bar <- dfListing %>% 
-  filter(!is.na(ietestcd_concat) | Source == "Ineligible -- PD only, check IE") %>% 
+  filter(!is.na(ietestcd_concat) | Source == "Eligibility IPD") %>% 
   mutate(
     ietestcd_concat = case_when(
-      is.na(ietestcd_concat) ~ "Ineligible -- PD only, check IE",
+      is.na(ietestcd_concat) ~ "Eligibility IPD",
       stringr::str_detect(ietestcd_concat, ";;;") ~ "Multiple",
       TRUE ~ ietestcd_concat
     )
@@ -312,15 +312,14 @@ plotly::ggplotly(site_criteria_bar)
 ### Criteria/Country
 ```{r, echo = FALSE, results = 'asis', fig.height=4}
 country_criteria_bar <- dfListing %>% 
-  filter(!is.na(ietestcd_concat) | Source == "Ineligible -- PD only, check IE") %>% 
+  filter(!is.na(ietestcd_concat) | Source == "Eligibility IPD") %>% 
   mutate(
     ietestcd_concat = case_when(
-      is.na(ietestcd_concat) ~ "Ineligible -- PD only, check IE",
+      is.na(ietestcd_concat) ~ "Eligibility IPD",
       stringr::str_detect(ietestcd_concat, ";;;") ~ "Multiple",
       TRUE ~ ietestcd_concat
     )
   ) %>% 
-  mutate(ietestcd_concat = ifelse(is.na(ietestcd_concat), "Ineligible -- PD only, check IE", ietestcd_concat)) %>%  
   ggplot(., aes(x = ietestcd_concat, fill = country)) +
   geom_bar() +
   labs(x = "Criteria", y = "Criteria Count", fill = "Country", title = "Eligibility by Country", caption = "Footnote: Partipants can be ineligible for multiple criteria.") + 
