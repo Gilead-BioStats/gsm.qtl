@@ -240,12 +240,17 @@ site_bar <- dfListing %>%
                              "\nEligibility Status: ", fillcol))
          ) +
   geom_bar() +
-  labs(y = "Site", x = "Participant Count", fill = "Eligibility", title = "Participant Count by site", caption = "Footnote: Excludes sites with no ineligible partipants.") +
+  labs(y = "Site", x = "Participant Count", fill = "Eligibility", title = "Participant Count by site") +
   scale_fill_manual(values = c("Ineligible" = "#FF5859",
                                "No Eligiblity Risk" = "#00BFC4",
                                "Neither" = "#7CAE00")) +
   theme_classic() 
-plotly::ggplotly(site_bar, tooltip = c("x", "text"))
+plotly::ggplotly(site_bar, tooltip = c("x", "text")) %>%
+  layout(margin = list(l = 50, r = 50, b = 150, t = 50),
+         annotations = list(x = 1, y = -0.5, text = "Note: Excludes sites with no ineligible participants.",
+                            xref='paper', yref='paper', showarrow = F, 
+                            xanchor='right', yanchor='auto', xshift=0, yshift=0,
+                            font = list(size = 10)))
 ```
 
 
@@ -259,16 +264,21 @@ countries_with_ineligible <- dfListing %>%
 country_bar <- dfListing %>% 
   mutate(fillcol = ifelse(Source == "Neither", "No Eligiblity Risk", "Ineligible")) %>%
   filter(country %in% countries_with_ineligible) %>% 
-  ggplot(., aes(y = forcats::fct_rev(forcats::fct_infreq(country)), fill = fillcol),
+  ggplot(., aes(y = forcats::fct_rev(forcats::fct_infreq(country)), fill = fillcol,
                 text = paste0("Country: ",forcats::fct_rev(forcats::fct_infreq(country)), 
-                             "\nEligibility Status: ", fillcol)) +
+                             "\nEligibility Status: ", fillcol))) +
   geom_bar() +
-  labs(y = "Country", x = "Participant Count", fill = "Eligibility", title = "Count by country", caption = "Footnote: Excludes countries with no ineligible partipants.") +
+  labs(y = "Country", x = "Participant Count", fill = "Eligibility", title = "Count by country") +
   scale_fill_manual(values = c("Ineligible" = "#FF5859",
                                "No Eligiblity Risk" = "#00BFC4",
                                "Neither" = "#7CAE00")) +
   theme_classic() 
-plotly::ggplotly(country_bar, tooltip = c("x", "text"))
+plotly::ggplotly(country_bar, tooltip = c("x", "text")) %>%
+  layout(margin = list(l = 50, r = 50, b = 150, t = 50),
+         annotations = list(x = 1, y = -0.5, text = "Note: Excludes countries with no ineligible participants.",
+                            xref='paper', yref='paper', showarrow = F, 
+                            xanchor='right', yanchor='auto', xshift=0, yshift=0,
+                            font = list(size = 10)))
 ```
 
 
@@ -305,13 +315,18 @@ site_criteria_bar <- dfListing %>%
                 text = paste0("Site: ",invid, 
                              "\nEligibility Status: ", ietestcd_concat))) +
   geom_bar() +
-  labs(x = "Criteria", y = "Criteria Count", fill = "Site", title = "Eligibility by site", caption = "Footnote: Partipants can be ineligible for multiple criteria.") + 
+  labs(x = "Criteria", y = "Criteria Count", fill = "Site", title = "Eligibility by site") + 
   theme_classic(base_size = 11) + 
   theme(
     axis.text.x = element_text(angle = 45, hjust = 1),  # tilt to avoid overlap
     panel.grid.major.x = element_blank()
   ) 
-plotly::ggplotly(site_criteria_bar, tooltip = c("y", "text"))
+plotly::ggplotly(site_criteria_bar, tooltip = c("y", "text")) %>%
+  layout(margin = list(l = 50, r = 50, b = 150, t = 50),
+         annotations = list(x = 1, y = -0.5, text = "Note: Participants can be ineligible for multiple criteria.",
+                            xref='paper', yref='paper', showarrow = F, 
+                            xanchor='right', yanchor='auto', xshift=0, yshift=0,
+                            font = list(size = 10)))
 ```
 
 
@@ -331,13 +346,18 @@ country_criteria_bar <- dfListing %>%
                 text = paste0("Country: ",country, 
                              "\nEligibility Status: ", ietestcd_concat))) +
   geom_bar() +
-  labs(x = "Criteria", y = "Criteria Count", fill = "Country", title = "Eligibility by Country", caption = "Footnote: Partipants can be ineligible for multiple criteria.") + 
+  labs(x = "Criteria", y = "Criteria Count", fill = "Country", title = "Eligibility by Country") + 
   theme_classic(base_size = 11) + 
   theme(
     axis.text.x = element_text(angle = 45, hjust = 1),  # tilt to avoid overlap
     panel.grid.major.x = element_blank()
   ) 
-plotly::ggplotly(country_criteria_bar, tooltip = c("y", "text"))
+plotly::ggplotly(country_criteria_bar, tooltip = c("y", "text")) %>%
+  layout(margin = list(l = 50, r = 50, b = 150, t = 50),
+         annotations = list(x = 1, y = -0.5, text = "Note: Participants can be ineligible for multiple criteria.",
+                            xref='paper', yref='paper', showarrow = F, 
+                            xanchor='right', yanchor='auto', xshift=0, yshift=0,
+                            font = list(size = 10)))
 ```
 
 
