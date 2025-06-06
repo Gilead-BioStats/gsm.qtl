@@ -12,6 +12,9 @@ to create a variety of visualizations like the line plot, bar plot.}
 
 \item{strQTL}{A \code{string} to label the QTL being measured}
 }
+\value{
+A \code{plotly} object
+}
 \description{
 Title
 }

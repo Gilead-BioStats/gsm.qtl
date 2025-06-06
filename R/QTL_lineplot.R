@@ -6,8 +6,6 @@
 #'
 #' @returns A `plotly` object
 #' @export
-#'
-#' @examples
 QTL_lineplot <- function(dfResults,
                          strQTLid,
                          strQTL) {
