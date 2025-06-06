@@ -2,10 +2,7 @@
 
 export(Analyze_OneSideProp)
 export(QTL_Overview)
-<<<<<<< HEAD
-=======
 export(QTL_lineplot)
->>>>>>> fix-22
 export(Report_QTL)
 export(criteria_groupBar)
 export(eligibility_groupBar)
