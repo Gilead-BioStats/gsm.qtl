@@ -4,13 +4,22 @@
 \alias{QTL_Overview}
 \title{Title}
 \usage{
-QTL_Overview(dfResults, strQTLid, dSnapshot)
+QTL_Overview(dfResults, strQTLid, dSnapshot, strNum, strDenom, strQTL)
 }
 \arguments{
 \item{dfResults}{A results \code{data.frame} from the output of \code{gsm.reporting::BindResults()} used
 to create a variety of visualizations like the line plot, bar plot.}
 
 \item{strQTLid}{A \code{string} to denominate with QTL metric to be displayed}
+
+\item{strNum}{A \code{string} to denominate what the numerator population is.}
+
+\item{strDenom}{A \code{string} to denominate what the denominator population is.}
+
+\item{strQTL}{A \code{string} to define the QTL being measured}
+}
+\value{
+\code{gt} object
 }
 \description{
 Title

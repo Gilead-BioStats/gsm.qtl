@@ -1,10 +1,11 @@
 #' Title
 #'
-#' @param df A `data.frame` containing the participant lebel dataset with eligibility
+#' @param df A `data.frame` containing the participant level dataset with eligibility
 #' @param varGroupID A variable to make the stacked bar chart with, i.e. invid
 #' @param strGroupLabel A `string` to label the `varGroupID` in reference to axes, legend, footnotes.
 #'
-#' @returns a `plotly` object
+#' @returns A `plotly` object
+#'
 #' @export
 eligibility_groupBar <- function(df, varGroupID, strGroupLabel) {
   # Parse out groups with 0 ineligible

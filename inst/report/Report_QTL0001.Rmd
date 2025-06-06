@@ -81,21 +81,9 @@ eligibility_groupBar(df = dfListing, varGroupID = invid, strGroupLabel = "Site")
 eligibility_groupBar(df = dfListing, varGroupID = country, strGroupLabel = "Country")
 ```
 
-
-
 ### Source
 ```{r, echo = FALSE, results = 'asis', fig.height=4}
-source_bar <- dfListing %>% 
-  filter(Source != "Neither") %>% 
-  ggplot(., aes(x = Source, fill = Source)) +
-  geom_bar()+
-  labs(x = "Source", y = "Participant Count", title = "Count of Particpants by Category/Source") +
-  theme_classic() +
-  theme(
-    axis.text.x = element_text(angle = 45, hjust = 1),  # tilt to avoid overlap
-    panel.grid.major.x = element_blank()
-  ) 
-plotly::ggplotly(source_bar)
+eligibility_sourceBar(df = dfListing)
 ```
 
 

@@ -4,7 +4,7 @@
 #' to create a variety of visualizations like the line plot, bar plot.
 #' @param strQTL A `string` to label the QTL being measured
 #'
-#' @returns
+#' @returns A `plotly` object
 #' @export
 #'
 #' @examples
