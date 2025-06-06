@@ -233,11 +233,11 @@ sites_with_ineligible <- dfListing %>%
 
 
 site_bar <- dfListing %>% 
-  mutate(fillcol = ifelse(Source == "Neither", "No Eligiblity Risk", "Ineligible")) %>%
+  mutate(fillcol = ifelse(Source == "Neither", "No Eligibility Risk", "Ineligible")) %>%
   filter(invid %in% sites_with_ineligible) %>% 
   mutate(invid = forcats::fct_rev(forcats::fct_infreq(invid))) %>%
   dplyr::group_by(invid, fillcol) %>%
-  dplyr::summarize(totals = length(subjid)) %>%
+  dplyr::summarize(totals = n()) %>%
   ungroup() %>%
   ggplot(., aes(y = invid,  fill = fillcol, x = totals,
                 text = paste0("Count: ", totals,
@@ -247,7 +247,7 @@ site_bar <- dfListing %>%
   geom_bar(stat = "identity") +
   labs(y = "Site", x = "Participant Count", fill = "Eligibility", title = "Participant Count by site") +
   scale_fill_manual(values = c("Ineligible" = "#FF5859",
-                               "No Eligiblity Risk" = "#00BFC4",
+                               "No Eligibility Risk" = "#00BFC4",
                                "Neither" = "#7CAE00")) +
   theme_classic() 
 plotly::ggplotly(site_bar, tooltip = c("text")) %>%
@@ -267,20 +267,20 @@ countries_with_ineligible <- dfListing %>%
   pull(country) %>% 
   unique()
 country_bar <- dfListing %>% 
-  mutate(fillcol = ifelse(Source == "Neither", "No Eligiblity Risk", "Ineligible")) %>%
+  mutate(fillcol = ifelse(Source == "Neither", "No Eligibility Risk", "Ineligible")) %>%
   filter(country %in% countries_with_ineligible) %>% 
   mutate(country = forcats::fct_rev(forcats::fct_infreq(country))) %>%
   dplyr::group_by(country, fillcol) %>%
-  dplyr::summarize(totals = length(subjid)) %>%
+  dplyr::summarize(totals = n()) %>%
   ungroup() %>%
   ggplot(., aes(y = country, fill = fillcol, x = totals,
                 text = paste0("Count: ", totals, 
                               "\nCountry: ",country, 
                              "\nEligibility Status: ", fillcol))) +
   geom_bar(stat = "identity") +
-  labs(y = "Country", x = "Participant Count", fill = "Eligibility", title = "Count by country") +
+  labs(y = "Country", x = "Participant Count", fill = "Eligibility", title = "Participant Count by country") +
   scale_fill_manual(values = c("Ineligible" = "#FF5859",
-                               "No Eligiblity Risk" = "#00BFC4",
+                               "No Eligibility Risk" = "#00BFC4",
                                "Neither" = "#7CAE00")) +
   theme_classic() 
 plotly::ggplotly(country_bar, tooltip = c("text")) %>%
@@ -299,7 +299,7 @@ source_bar <- dfListing %>%
   filter(Source != "Neither") %>% 
   ggplot(., aes(x = Source, fill = Source)) +
   geom_bar()+
-  labs(x = "Source", y = "Participant Count", title = "Count of Particpants by Category/Source") +
+  labs(x = "Source", y = "Participant Count", title = "Participant Count by Category/Source") +
   theme_classic() +
   theme(
     axis.text.x = element_text(angle = 45, hjust = 1),  # tilt to avoid overlap
