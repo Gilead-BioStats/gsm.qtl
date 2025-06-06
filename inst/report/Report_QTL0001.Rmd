@@ -37,8 +37,6 @@ subtitle: "Study: `r unique(dfListing$studyid)`"
 date: "Snapshot Date: `r latest_snapshot`"
 ---
 
-
-
 ## Study Overview
 ```{r, echo=FALSE, results='asis'}
 QTL_Overview(dfResults = dfResults,
@@ -49,11 +47,7 @@ QTL_Overview(dfResults = dfResults,
              strQTL = "Current Ineligible Enrolled Rate")
 ```
 
-
-
 # Results
-
-
 
 ## Time Series Chart
 ```{r, echo=FALSE, results='asis', fig.height=4}
@@ -66,10 +60,7 @@ QTL_Overview(dfResults = dfResults,
 QTL_lineplot(dfResults = dfResults, strQTLid = "Analysis_qtl0001_study",strQTL = "Ineligibility Rate")
 ```
 
-
 ## Bar Charts {.tabset .tabset-pills}
-
-
 
 ```{r, eval = FALSE , echo = FALSE, results = 'asis', fig.height=4}
 ### JS - Site
@@ -80,49 +71,14 @@ QTL_lineplot(dfResults = dfResults, strQTLid = "Analysis_qtl0001_study",strQTL =
 # )
 ```
 
-
-
 ### Site
 ```{r, echo = FALSE, results = 'asis', fig.height=4}
-sites_with_ineligible <- dfListing %>%  
-  filter(Source != "Neither") %>% 
-  pull(invid) %>% 
-  unique()
-
-
-
-site_bar <- dfListing %>% 
-  mutate(fillcol = ifelse(Source == "Neither", "No Eligiblity Risk", "Ineligible")) %>%
-  filter(invid %in% sites_with_ineligible) %>% 
-  ggplot(., aes(y = forcats::fct_rev(forcats::fct_infreq(invid)), fill = fillcol)) +
-  geom_bar() +
-  labs(y = "Site", x = "Participant Count", fill = "Eligibility", title = "Count by site", caption = "Footnote: Excludes sites with no ineligible partipants.") +
-  scale_fill_manual(values = c("Ineligible" = "#FF5859",
-                               "Eligible" = "#00BFC4",
-                               "Neither" = "#7CAE00")) +
-  theme_classic() 
-plotly::ggplotly(site_bar)
+eligibility_groupBar(df = dfListing, varGroupID = invid, strGroupLabel = "Site")
 ```
-
-
 
 ### Country
 ```{r, echo = FALSE, results = 'asis', fig.height=4}
-countries_with_ineligible <- dfListing %>%  
-  filter(Source != "Neither") %>% 
-  pull(country) %>% 
-  unique()
-country_bar <- dfListing %>% 
-  mutate(fillcol = ifelse(Source == "Neither", "No Eligiblity Risk", "Ineligible")) %>%
-  filter(country %in% countries_with_ineligible) %>% 
-  ggplot(., aes(y = forcats::fct_rev(forcats::fct_infreq(country)), fill = fillcol)) +
-  geom_bar() +
-  labs(y = "Country", x = "Participant Count", fill = "Eligibility", title = "Count by country", caption = "Footnote: Excludes countries with no ineligible partipants.") +
-  scale_fill_manual(values = c("Ineligible" = "#FF5859",
-                               "Eligible" = "#00BFC4",
-                               "Neither" = "#7CAE00")) +
-  theme_classic() 
-plotly::ggplotly(country_bar)
+eligibility_groupBar(df = dfListing, varGroupID = country, strGroupLabel = "Country")
 ```
 
 
