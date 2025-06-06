@@ -21,17 +21,13 @@ ie_data <- generate_rawdata_for_single_study(
   desired_specs = NULL
 )
 
-<<<<<<< HEAD
 mappings_wf <- gsm.core::MakeWorkflowList(
   strNames =c("SUBJ", "ENROLL", "IE", "PD", "STUDY", "SITE", "COUNTRY", "EXCLUSION","STUDCOMP"),
   strPath = "inst/workflow/1_mappings",
   strPackage = "gsm.qtl"
 )
-=======
-mappings_wf <- gsm.core::MakeWorkflowList(strNames =c("SUBJ", "ENROLL", "IE", "PD", "STUDY", "SITE", "COUNTRY", "EXCLUSION"), strPath = "workflow/1_mappings", strPackage = "gsm.mapping")
->>>>>>> fix-14
 mappings_spec <- gsm.mapping::CombineSpecs(mappings_wf)
-metrics_wf <- gsm.core::MakeWorkflowList(strNames = c("qtl0002"), strPath = "inst/workflow/2_metrics", strPackage = "gsm.qtl")
+metrics_wf <- gsm.core::MakeWorkflowList(strNames = c("qtl0001_study", "qtl0002_study"), strPath = "inst/workflow/2_metrics", strPackage = "gsm.qtl")
 reporting_wf <- gsm.core::MakeWorkflowList(strNames = c("Results", "Groups"), strPath = "workflow/3_reporting", strPackage = "gsm.reporting")
 
 lRaw <- map_depth(ie_data, 1, gsm.mapping::Ingest, mappings_spec)
