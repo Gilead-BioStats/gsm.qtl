@@ -31,7 +31,7 @@ Report_QTL <- function(
   rlang::check_installed("knitr", reason = "to run `Report_QTL()`")
 
   RenderRmd(
-    strInputPath = system.file("report", "Report_QTL0001.Rmd", package = "gsm.qtl"),
+    strInputPath = system.file("report", "Report_QTL.Rmd", package = "gsm.qtl"),
     strOutputFile = strOutputFile,
     strOutputDir = strOutputDir,
     lParams = list(

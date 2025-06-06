@@ -1,0 +1,51 @@
+---
+output:
+  html_document:
+    mathjax: null
+params:
+  dfResults: NA
+  dfGroups: NA
+  dfListing: NA
+---
+
+```{r setup, include=FALSE} 
+library(dplyr)
+library(gsm.kri)
+library(gsm.qtl)
+library(ggplot2)
+library(plotly)
+library(gt)
+library(htmltools)
+library(knitr)
+
+knitr::opts_chunk$set(warning = FALSE, message = FALSE)
+
+dfResults <- params$dfResults
+dfGroups <- params$dfGroups
+dfListing <- params$dfListing
+latest_snapshot = max(dfResults$SnapshotDate)
+```
+
+---
+title: "QTL Overview"
+subtitle: "Study: `r unique(dfListing$studyid)`"
+date: "Snapshot Date: `r latest_snapshot`"
+---
+
+# QTL0001 - Ineligibility
+
+```{r QTL0001, echo = FALSE, results = 'asis'}
+# Feed and knit just QTL0001 using child rmd support
+qtl0001 <- knitr::knit_child(
+  system.file("report", "QTL0001.Rmd", package = "gsm.qtl"),
+  envir = list(
+    qtl0001_params = list(
+      dfResults = dfResults,
+      dfListing = dfListing,
+      latest_snapshot = latest_snapshot
+    )
+  ),
+  quiet = TRUE
+) %>% suppressMessages %>% suppressWarnings
+cat(qtl0001, sep = "\n")
+```
