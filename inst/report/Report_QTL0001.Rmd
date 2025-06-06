@@ -245,7 +245,7 @@ site_bar <- dfListing %>%
                               "\nEligibility Status: ", fillcol))
          ) +
   geom_bar(stat = "identity") +
-  labs(y = "Site", x = "Participant Count", fill = "Eligibility", title = "Participant Count by site") +
+  labs(y = "Site", x = "Participant Count", fill = "Eligibility", title = "Participant Count by Site") +
   scale_fill_manual(values = c("Ineligible" = "#FF5859",
                                "No Eligibility Risk" = "#00BFC4",
                                "Neither" = "#7CAE00")) +
@@ -278,7 +278,7 @@ country_bar <- dfListing %>%
                               "\nCountry: ",country, 
                              "\nEligibility Status: ", fillcol))) +
   geom_bar(stat = "identity") +
-  labs(y = "Country", x = "Participant Count", fill = "Eligibility", title = "Participant Count by country") +
+  labs(y = "Country", x = "Participant Count", fill = "Eligibility", title = "Participant Count by Country") +
   scale_fill_manual(values = c("Ineligible" = "#FF5859",
                                "No Eligibility Risk" = "#00BFC4",
                                "Neither" = "#7CAE00")) +
