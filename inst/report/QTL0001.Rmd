@@ -11,7 +11,6 @@ QTL_Overview(dfResults = qtl0001_params$dfResults,
              strQTL = "Current Ineligible Enrolled Rate")
 ```
 
-
 ## Time Series Chart
 ```{r, echo=FALSE, results='asis', fig.height=4}
 # gsm.qtl::Widget_TimeSeriesQTL(

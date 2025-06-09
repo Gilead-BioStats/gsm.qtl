@@ -5,7 +5,7 @@ output:
 params:
   dfResults: NA
   dfGroups: NA
-  dfListing: NA
+  lListings: NA
 ---
 
 ```{r setup, include=FALSE} 
@@ -22,13 +22,13 @@ knitr::opts_chunk$set(warning = FALSE, message = FALSE)
 
 dfResults <- params$dfResults
 dfGroups <- params$dfGroups
-dfListing <- params$dfListing
+lListings <- params$lListings
 latest_snapshot = max(dfResults$SnapshotDate)
 ```
 
 ---
 title: "QTL Overview"
-subtitle: "Study: `r unique(dfListing$studyid)`"
+subtitle: "Study: `r unique(lListings[[1]]$studyid)`"
 date: "Snapshot Date: `r latest_snapshot`"
 ---
 
@@ -41,7 +41,7 @@ qtl0001 <- knitr::knit_child(
   envir = list(
     qtl0001_params = list(
       dfResults = dfResults %>% filter(MetricID == "Analysis_qtl0001_study"),
-      dfListing = dfListing,
+      dfListing = lListings$qtl0001,
       latest_snapshot = latest_snapshot
     )
   ),
@@ -60,6 +60,7 @@ qtl0002 <- knitr::knit_child(
   envir = list(
     qtl0002_params = list(
       dfResults = dfResults %>% filter(MetricID == "Analysis_qtl0002_study"),
+      dfListing = lListings$qtl0002,
       latest_snapshot = latest_snapshot
     )
   ),

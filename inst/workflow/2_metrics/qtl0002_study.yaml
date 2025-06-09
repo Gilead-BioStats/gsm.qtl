@@ -35,6 +35,8 @@ steps:
         - 'PROTOCOL VIOLATION'
         - 'PHYSICIAN DECISION'
         - 'Withdrew Consent'
+        - 'Death'
+        - 'Lost to Follow-Up'
   - output: Analysis_Input
     name: gsm.core::Input_Rate
     params:
