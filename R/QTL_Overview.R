@@ -2,7 +2,6 @@
 #'
 #' @param dfResults A results `data.frame` from the output of `gsm.reporting::BindResults()` used
 #' to create a variety of visualizations like the line plot, bar plot.
-#' @param strQTLid A `string` to denominate with QTL metric to be displayed
 #' @param dSnapshot A `date` to determine the snapshot grab the data from `dfResults`
 #' @param strNum A `string` to denominate what the numerator population is.
 #' @param strDenom A `string` to denominate what the denominator population is.
@@ -12,7 +11,6 @@
 #' @export
 
 QTL_Overview <- function(dfResults,
-                         strQTLid,
                          dSnapshot,
                          strNum,
                          strDenom,

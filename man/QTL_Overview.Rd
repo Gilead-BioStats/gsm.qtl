@@ -4,13 +4,11 @@
 \alias{QTL_Overview}
 \title{QTL Overview Table}
 \usage{
-QTL_Overview(dfResults, strQTLid, dSnapshot, strNum, strDenom, strQTL)
+QTL_Overview(dfResults, dSnapshot, strNum, strDenom, strQTL)
 }
 \arguments{
 \item{dfResults}{A results \code{data.frame} from the output of \code{gsm.reporting::BindResults()} used
 to create a variety of visualizations like the line plot, bar plot.}
-
-\item{strQTLid}{A \code{string} to denominate with QTL metric to be displayed}
 
 \item{dSnapshot}{A \code{date} to determine the snapshot grab the data from \code{dfResults}}
 
