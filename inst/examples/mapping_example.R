@@ -49,7 +49,9 @@ all_reportingResults <- do.call(dplyr::bind_rows, lapply(reporting, function(x) 
 all_reportingGroups <- reporting[[length(reporting)]]$Reporting_Groups
 
 report_listings <- list(qtl0001 = mapped$`2012-06-30`$Mapped_EXCLUSION,
-                        qtl0002 = left_join(mapped$`2012-06-30`$Mapped_STUDCOMP, select(mapped$`2012-06-30`$Mapped_SUBJ, subjid, country), by = "subjid")
+                        qtl0002 = left_join(mapped$`2012-06-30`$Mapped_STUDCOMP,
+                                            select(mapped$`2012-06-30`$Mapped_SUBJ, subjid, invid, country),
+                                            by = "subjid"))
 
 # Test if new Report_QTL rmd works
 Report_QTL(
