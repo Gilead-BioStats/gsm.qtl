@@ -1,4 +1,4 @@
-#' Title
+#' Eligibility Bar Chart by Source
 #'
 #' @param df A `data.frame` containing the participant level dataset with eligibility
 #'
