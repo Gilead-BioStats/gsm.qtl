@@ -1,0 +1,18 @@
+---
+title: "QTL0002 - Premature Discontinuation"
+---
+## Study Overview
+```{r, echo=FALSE}
+QTL_Overview(dfResults = qtl0002_params$dfResults,
+             strQTLid = "Analysis_qtl0002_study",
+             dSnapshot = qtl0002_params$latest_snapshot,
+             strNum = "Subjects Discontinued - Study",
+             strDenom = "Total Enrolled", 
+             strQTL = "Current Premature Discontinuation Rate")
+```
+
+
+## Time Series Chart
+```{r, echo=FALSE, results='asis', fig.height=4}
+QTL_lineplot(dfResults = qtl0002_params$dfResults, strQTLid = "Analysis_qtl0002_study", strQTL = "Premature Discontinuation Rate")
+```

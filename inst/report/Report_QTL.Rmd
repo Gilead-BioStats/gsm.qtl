@@ -40,7 +40,7 @@ qtl0001 <- knitr::knit_child(
   system.file("report", "QTL0001.Rmd", package = "gsm.qtl"),
   envir = list(
     qtl0001_params = list(
-      dfResults = dfResults,
+      dfResults = dfResults %>% filter(MetricID == "Analysis_qtl0001_study"),
       dfListing = dfListing,
       latest_snapshot = latest_snapshot
     )
@@ -48,4 +48,22 @@ qtl0001 <- knitr::knit_child(
   quiet = TRUE
 ) %>% suppressMessages %>% suppressWarnings
 cat(qtl0001, sep = "\n")
+```
+
+
+# QTL0002 - Study Discontinuation
+
+```{r QTL0002, echo = FALSE, results = 'asis'}
+# Feed and knit just QTL0002 using child rmd support
+qtl0002 <- knitr::knit_child(
+  system.file("report", "QTL0002.Rmd", package = "gsm.qtl"),
+  envir = list(
+    qtl0002_params = list(
+      dfResults = dfResults %>% filter(MetricID == "Analysis_qtl0002_study"),
+      latest_snapshot = latest_snapshot
+    )
+  ),
+  quiet = TRUE
+) %>% suppressMessages %>% suppressWarnings
+cat(qtl0002, sep = "\n")
 ```
