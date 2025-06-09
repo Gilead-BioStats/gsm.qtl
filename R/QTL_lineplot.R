@@ -1,4 +1,4 @@
-#' Title
+#' QTL Time Series Lineplot
 #'
 #' @param dfResults A results `data.frame` from the output of `gsm.reporting::BindResults()` used
 #' to create a variety of visualizations like the line plot, bar plot.
