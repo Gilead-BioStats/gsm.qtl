@@ -25,7 +25,7 @@ discontinuation_groupBar(df = qtl0002_params$dfListing, varGroupID = invid, strG
 
 ### Country
 ```{r, echo = FALSE, results = 'asis', fig.height=4}
-# discontinuation_groupBar(df = qtl0002_params$dfListing, varGroupID = country, strGroupLabel = "Country")
+discontinuation_groupBar(df = qtl0002_params$dfListing, varGroupID = country, strGroupLabel = "Country")
 ```
 
 ### Reasons
@@ -40,7 +40,7 @@ reasons_groupBar(df = qtl0002_params$dfListing, varGroupID = invid, strGroupLabe
 
 ### Reasons/Country
 ```{r, echo = FALSE, results = 'asis', fig.height=4}
-# reasons_groupBar(df = qtl0002_params$dfListing, varGroupID = country, strGroupLabel = "Country")
+reasons_groupBar(df = qtl0002_params$dfListing, varGroupID = country, strGroupLabel = "Country")
 ```
 
 ## Discontinuation Listing
