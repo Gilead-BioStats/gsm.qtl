@@ -7,39 +7,32 @@
 #' @returns A `plotly` object
 #'
 #' @export
-eligibility_groupBar <- function(df, varGroupID, strGroupLabel) {
-  # Parse out groups with 0 ineligible
-  groups_with_ineligible <- df %>%
-    filter(Source != "Neither") %>%
-    pull(!!enexpr(varGroupID)) %>%
-    unique()
-
-  # Create the gg object
-  group_bar <- df %>%
-    mutate(fillcol = ifelse(Source == "Neither", "No Eligibility Risk", "Ineligible")) %>%
-    filter(!!enexpr(varGroupID) %in% groups_with_ineligible) %>%
-    mutate(!!enexpr(varGroupID) := forcats::fct_rev(forcats::fct_infreq(!!enexpr(varGroupID)))) %>%
-    dplyr::group_by(!!enexpr(varGroupID), fillcol) %>%
-    dplyr::summarize(totals = n()) %>%
-    ungroup() %>%
-    ggplot(., aes(y = !!enexpr(varGroupID),  fill = fillcol, x = totals,
-                  text = paste0("Count: ", totals,
-                                "\n", strGroupLabel ,": ", !!enexpr(varGroupID),
-                                "\nEligibility Status: ", fillcol))
-    ) +
-    geom_bar(stat = "identity") +
-    labs(y = strGroupLabel, x = "Participant Count", fill = "Eligibility", title = paste0("Participant Count by ", strGroupLabel)) +
-    scale_fill_manual(values = c("Ineligible" = "#FF5859",
-                                 "No Eligibility Risk" = "#00BFC4",
-                                 "Neither" = "#7CAE00")) +
-    theme_classic()
-
-  # Create the plotly object
-  x <- plotly::ggplotly(group_bar, tooltip = c("text")) %>%
+criteria_groupBar <- function(df, varGroupID, strGroupLabel) {
+  # Create GG object
+  group_criteria_bar <- df %>%
+    filter(!is.na(ietestcd_concat) | Source == "Eligibility IPD") %>%
+    mutate(
+      ietestcd_concat = case_when(
+        is.na(ietestcd_concat) ~ "Eligibility IPD",
+        stringr::str_detect(ietestcd_concat, ";") ~ "Multiple",
+        TRUE ~ ietestcd_concat
+      )
+    ) %>%
+    ggplot(., aes(x = ietestcd_concat, fill = !!enexpr(varGroupID),
+                  text = paste0(strGroupLabel,": ", !!enexpr(varGroupID),
+                                "\nEligibility Status: ", ietestcd_concat))) +
+    geom_bar() +
+    labs(x = "Criteria", y = "Criteria Count", fill = strGroupLabel, title = paste0("Eligibility by ", strGroupLabel)) +
+    theme_classic(base_size = 11) +
+    theme(
+      axis.text.x = element_text(angle = 45, hjust = 1),  # tilt to avoid overlap
+      panel.grid.major.x = element_blank()
+    )
+  # Create plotly
+  plotly::ggplotly(group_criteria_bar, tooltip = c("y", "text")) %>%
     layout(margin = list(l = 50, r = 50, b = 150, t = 50),
-           annotations = list(x = 1, y = -0.5, text = paste0("Note: Excludes ", tolower(strGroupLabel), "(s)", " with no ineligible participants."),
+           annotations = list(x = 1, y = -0.5, text = "Note: Participants can be ineligible for multiple criteria.",
                               xref='paper', yref='paper', showarrow = F,
                               xanchor='right', yanchor='auto', xshift=0, yshift=0,
                               font = list(size = 10)))
-  return(x)
 }
