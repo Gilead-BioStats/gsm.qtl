@@ -15,9 +15,15 @@ spec:
   Mapped_SUBJ:
     subjid:
       type: character
-    country:
+    studyid:
+      type: character
+    siteid:
       type: character
   Mapped_STUDCOMP:
+    studyid:
+      type: character
+    invid:
+      type: character
     subjid:
       type: character
     compyn:
