@@ -5,6 +5,10 @@ meta:
   Priority: 1
 spec:
   Raw_STUDCOMP:
+    studyid:
+      type: character
+    invid:
+      type: character
     subjid:
       type: character
     compyn:
