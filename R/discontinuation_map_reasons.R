@@ -1,4 +1,4 @@
-#' Title
+#' Filter Discontinuation Reasons in data.frame
 #'
 #' @param df A `data.frame` derived from mapping STUDCOMP
 #' @param strReasons A `string` of reasons for discontinuation
