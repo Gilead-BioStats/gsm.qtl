@@ -6,8 +6,8 @@
 \usage{
 Report_QTL(
   dfResults = NULL,
-  dfListing = NULL,
   dfGroups = NULL,
+  lListings = NULL,
   strOutputDir = getwd(),
   strOutputFile = NULL
 )
@@ -15,9 +15,6 @@ Report_QTL(
 \arguments{
 \item{dfResults}{A results \code{data.frame} from the output of \code{gsm.reporting::BindResults()} used
 to create a variety of visualizations like the line plot, bar plot.}
-
-\item{dfListing}{A \code{data.frame} that is used as a listing to represent participants that are the numerators
-of the visualizations from \code{dfResults}.}
 
 \item{dfGroups}{A groups \code{data.frame} from the output of the \code{Groups.yaml} of \code{gsm.reporting}used
 to create a variety of visualizations like the line plot, bar plot.}
@@ -27,6 +24,9 @@ the report will be saved in the current working directory.}
 
 \item{strOutputFile}{The output file name for the generated report. If not provided,
 the report will be named based on the study ID, Group Level and Date.}
+
+\item{dfListing}{A \code{data.frame} that is used as a listing to represent participants that are the numerators
+of the visualizations from \code{dfResults}.}
 }
 \value{
 File path of the saved report html is returned invisibly. Save to object to view absolute output path.
