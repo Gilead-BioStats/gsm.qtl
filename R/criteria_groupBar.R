@@ -1,4 +1,4 @@
-#' Title
+#' Bar Chart by Group and Criteria
 #'
 #' @param df A `data.frame` containing the participant level dataset with eligibility
 #' @param varGroupID A variable to make the stacked bar chart with, i.e. invid
