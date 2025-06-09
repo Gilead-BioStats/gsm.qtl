@@ -1,4 +1,4 @@
-#' Title
+#' Generate Eligibility Listing
 #'
 #' @param df A `data.frame` containing the participant level dataset with eligibility
 #'
