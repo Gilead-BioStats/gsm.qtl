@@ -13,7 +13,7 @@
 #' to create a variety of visualizations like the line plot, bar plot.
 #' @param dfGroups A groups `data.frame` from the output of the `Groups.yaml` of `gsm.reporting`used
 #' to create a variety of visualizations like the line plot, bar plot.
-#' @param dfListing A `data.frame` that is used as a listing to represent participants that are the numerators
+#' @param lListings A `list` of `data.frame`s that are used as listings to represent participants that are the numerators
 #' of the visualizations from `dfResults`.
 #'
 #' @return File path of the saved report html is returned invisibly. Save to object to view absolute output path.

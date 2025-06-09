@@ -4,7 +4,7 @@
 \alias{QTL_lineplot}
 \title{QTL Time Series Lineplot}
 \usage{
-QTL_lineplot(dfResults, strQTLid, strQTL)
+QTL_lineplot(dfResults, strQTL)
 }
 \arguments{
 \item{dfResults}{A results \code{data.frame} from the output of \code{gsm.reporting::BindResults()} used

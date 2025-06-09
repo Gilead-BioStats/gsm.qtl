@@ -12,6 +12,8 @@ to create a variety of visualizations like the line plot, bar plot.}
 
 \item{strQTLid}{A \code{string} to denominate with QTL metric to be displayed}
 
+\item{dSnapshot}{A \code{date} to determine the snapshot grab the data from \code{dfResults}}
+
 \item{strNum}{A \code{string} to denominate what the numerator population is.}
 
 \item{strDenom}{A \code{string} to denominate what the denominator population is.}

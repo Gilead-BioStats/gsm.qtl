@@ -4,7 +4,6 @@ title: "QTL0001 - Ineligibilty"
 ## Study Overview
 ```{r, echo=FALSE}
 QTL_Overview(dfResults = qtl0001_params$dfResults,
-             strQTLid = "Analysis_qtl0001_study",
              dSnapshot = qtl0001_params$latest_snapshot,
              strNum = "Ineligible Participants",
              strDenom = "Total Enrolled", 
@@ -19,7 +18,7 @@ QTL_Overview(dfResults = qtl0001_params$dfResults,
 #   strOutcome = "Metric"
 # )
 # Create reference table for funnel bounds per date
-QTL_lineplot(dfResults = qtl0001_params$dfResults, strQTLid = "Analysis_qtl0001_study",strQTL = "Ineligibility Rate")
+QTL_lineplot(dfResults = qtl0001_params$dfResults, strQTL = "Ineligibility Rate")
 ```
 
 ## Bar Charts {.tabset .tabset-pills}

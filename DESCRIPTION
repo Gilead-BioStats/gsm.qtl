@@ -20,6 +20,7 @@ Depends:
 LazyData: true
 Imports: 
   dplyr,
+  forcats,
   ggplot2,
   gsm.core,
   gsm.kri,

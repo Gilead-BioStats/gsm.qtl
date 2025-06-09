@@ -7,7 +7,6 @@
 #' @returns A `plotly` object
 #' @export
 QTL_lineplot <- function(dfResults,
-                         strQTLid,
                          strQTL) {
   df_plot <- dfResults %>%
     filter(GroupLevel == "Study") %>%
