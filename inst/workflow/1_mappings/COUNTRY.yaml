@@ -5,6 +5,8 @@ meta:
   Priority: 3
 spec:
   Mapped_SUBJ:
+    studyid:
+      type: character
     country:
       type: character
     invid:

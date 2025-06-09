@@ -31,6 +31,8 @@ spec:
       type: character
     race:
       type: character
+    mincreated_dts:
+      type: timestamp
 steps:
   - output: Mapped_SUBJ
     name: gsm.core::RunQuery
