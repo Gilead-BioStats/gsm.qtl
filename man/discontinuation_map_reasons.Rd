@@ -2,7 +2,7 @@
 % Please edit documentation in R/discontinuation_map_reasons.R
 \name{discontinuation_map_reasons}
 \alias{discontinuation_map_reasons}
-\title{Title}
+\title{Filter Discontinuation Reasons in data.frame}
 \usage{
 discontinuation_map_reasons(df, strReasons)
 }
@@ -15,5 +15,5 @@ discontinuation_map_reasons(df, strReasons)
 A \code{data.frame}
 }
 \description{
-Title
+Filter Discontinuation Reasons in data.frame
 }

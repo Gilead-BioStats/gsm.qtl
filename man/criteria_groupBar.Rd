@@ -2,7 +2,7 @@
 % Please edit documentation in R/criteria_groupBar.R
 \name{criteria_groupBar}
 \alias{criteria_groupBar}
-\title{Title}
+\title{Bar Chart by Group and Criteria}
 \usage{
 criteria_groupBar(df, varGroupID, strGroupLabel)
 }
@@ -17,5 +17,5 @@ criteria_groupBar(df, varGroupID, strGroupLabel)
 A \code{plotly} object
 }
 \description{
-Title
+Bar Chart by Group and Criteria
 }

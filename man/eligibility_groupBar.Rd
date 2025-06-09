@@ -2,7 +2,7 @@
 % Please edit documentation in R/eligibility_groupBar.R
 \name{eligibility_groupBar}
 \alias{eligibility_groupBar}
-\title{Title}
+\title{Stacked Eligibility Bar Chart}
 \usage{
 eligibility_groupBar(df, varGroupID, strGroupLabel)
 }
@@ -17,5 +17,5 @@ eligibility_groupBar(df, varGroupID, strGroupLabel)
 A \code{plotly} object
 }
 \description{
-Title
+Stacked Eligibility Bar Chart
 }

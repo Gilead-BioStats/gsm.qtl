@@ -1,4 +1,4 @@
-#' Title
+#' Stacked Discontinuation Bar Chart
 #'
 #' @param df A `data.frame` containing the participant level dataset with discontinuation
 #' @param varGroupID A variable to make the stacked bar chart with, i.e. invid

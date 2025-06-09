@@ -2,7 +2,7 @@
 % Please edit documentation in R/reasons_groupBar.R
 \name{reasons_groupBar}
 \alias{reasons_groupBar}
-\title{Title}
+\title{Bar Chart by Group and Reasons}
 \usage{
 reasons_groupBar(df, varGroupID, strGroupLabel)
 }
@@ -17,5 +17,5 @@ reasons_groupBar(df, varGroupID, strGroupLabel)
 A \code{plotly} object
 }
 \description{
-Title
+Bar Chart by Group and Reasons
 }

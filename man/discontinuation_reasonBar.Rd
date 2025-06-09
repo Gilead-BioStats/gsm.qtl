@@ -2,7 +2,7 @@
 % Please edit documentation in R/discontinuation_reasonBar.R
 \name{discontinuation_reasonBar}
 \alias{discontinuation_reasonBar}
-\title{Title}
+\title{Discontinuation Reasons Bar Chart}
 \usage{
 discontinuation_reasonBar(df)
 }
@@ -13,5 +13,5 @@ discontinuation_reasonBar(df)
 A \code{plotly} object
 }
 \description{
-Title
+Discontinuation Reasons Bar Chart
 }

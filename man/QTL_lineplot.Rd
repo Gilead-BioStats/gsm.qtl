@@ -2,7 +2,7 @@
 % Please edit documentation in R/QTL_lineplot.R
 \name{QTL_lineplot}
 \alias{QTL_lineplot}
-\title{Title}
+\title{QTL Time Series Lineplot}
 \usage{
 QTL_lineplot(dfResults, strQTLid, strQTL)
 }
@@ -16,5 +16,5 @@ to create a variety of visualizations like the line plot, bar plot.}
 A \code{plotly} object
 }
 \description{
-Title
+QTL Time Series Lineplot
 }

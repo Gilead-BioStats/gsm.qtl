@@ -1,4 +1,4 @@
-#' Title
+#' Discontinuation Reasons Bar Chart
 #'
 #' @param df A `data.frame` containing the participant level dataset with eligibility
 #'

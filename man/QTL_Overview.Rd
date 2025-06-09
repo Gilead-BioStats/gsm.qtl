@@ -2,7 +2,7 @@
 % Please edit documentation in R/QTL_Overview.R
 \name{QTL_Overview}
 \alias{QTL_Overview}
-\title{Title}
+\title{QTL Overview Table}
 \usage{
 QTL_Overview(dfResults, strQTLid, dSnapshot, strNum, strDenom, strQTL)
 }
@@ -22,5 +22,5 @@ to create a variety of visualizations like the line plot, bar plot.}
 \code{gt} object
 }
 \description{
-Title
+QTL Overview Table
 }

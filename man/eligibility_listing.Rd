@@ -2,7 +2,7 @@
 % Please edit documentation in R/eligibility_listing.R
 \name{eligibility_listing}
 \alias{eligibility_listing}
-\title{Title}
+\title{Generate Eligibility Listing}
 \usage{
 eligibility_listing(df)
 }
@@ -13,5 +13,5 @@ eligibility_listing(df)
 A \code{gt} object
 }
 \description{
-Title
+Generate Eligibility Listing
 }

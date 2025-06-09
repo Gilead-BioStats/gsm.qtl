@@ -23,8 +23,8 @@ ie_data <- generate_rawdata_for_single_study(
 
 mappings_wf <- gsm.core::MakeWorkflowList(
   strNames =c("SUBJ", "ENROLL", "IE", "PD", "STUDY", "SITE", "COUNTRY", "EXCLUSION", "STUDCOMP"),
-  strPath = "workflow/1_mappings",
-  strPackage = "gsm.mapping"
+  strPath = "inst/workflow/1_mappings",
+  strPackage = "gsm.qtl"
 )
 mappings_spec <- gsm.mapping::CombineSpecs(mappings_wf)
 metrics_wf <- gsm.core::MakeWorkflowList(strNames = c("qtl0001_study", "qtl0002_study"), strPath = "inst/workflow/2_metrics", strPackage = "gsm.qtl")
@@ -49,7 +49,7 @@ all_reportingResults <- do.call(dplyr::bind_rows, lapply(reporting, function(x) 
 all_reportingGroups <- reporting[[length(reporting)]]$Reporting_Groups
 
 report_listings <- list(qtl0001 = mapped$`2012-06-30`$Mapped_EXCLUSION,
-                        qtl0002 = mapped$`2012-06-30`$Mapped_STUDCOMP)
+                        qtl0002 = left_join(mapped$`2012-06-30`$Mapped_STUDCOMP, select(mapped$`2012-06-30`$Mapped_SUBJ, subjid, country), by = "subjid")
 
 # Test if new Report_QTL rmd works
 Report_QTL(

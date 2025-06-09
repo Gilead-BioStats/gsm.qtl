@@ -2,7 +2,7 @@
 % Please edit documentation in R/discontinuation_groupBar.R
 \name{discontinuation_groupBar}
 \alias{discontinuation_groupBar}
-\title{Title}
+\title{Stacked Discontinuation Bar Chart}
 \usage{
 discontinuation_groupBar(df, varGroupID, strGroupLabel)
 }
@@ -17,5 +17,5 @@ discontinuation_groupBar(df, varGroupID, strGroupLabel)
 A \code{plotly} object
 }
 \description{
-Title
+Stacked Discontinuation Bar Chart
 }
