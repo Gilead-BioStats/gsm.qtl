@@ -10,13 +10,13 @@
 discontinuation_groupBar <- function(df, varGroupID, strGroupLabel) {
   # Parse out groups with 0 ineligible
   groups_with_discontinuation <- df %>%
-    filter(compyn == "N") %>%
+    filter(compyn %in% c("N", "")) %>%
     pull(!!enexpr(varGroupID)) %>%
     unique()
 
   # Create the gg object
   group_bar <- df %>%
-    mutate(fillcol = ifelse(compyn == "N", "Premature Discontinuation", "Completed/Ongoing")) %>%
+    mutate(fillcol = ifelse(compyn %in% c("N", ""), "Premature Discontinuation", "Completed/Ongoing")) %>%
     filter(!!enexpr(varGroupID) %in% groups_with_discontinuation) %>%
     mutate(!!enexpr(varGroupID) := forcats::fct_rev(forcats::fct_infreq(!!enexpr(varGroupID)))) %>%
     dplyr::group_by(!!enexpr(varGroupID), fillcol) %>%
