@@ -16,7 +16,7 @@ discontinuation_groupBar <- function(df, varGroupID, strGroupLabel) {
 
   # Create the gg object
   group_bar <- df %>%
-    mutate(fillcol = ifelse(compyn == "N", "Completed/Ongoing", "Premature Discontinuation")) %>%
+    mutate(fillcol = ifelse(compyn == "N", "Premature Discontinuation", "Completed/Ongoing")) %>%
     filter(!!enexpr(varGroupID) %in% groups_with_discontinuation) %>%
     mutate(!!enexpr(varGroupID) := forcats::fct_rev(forcats::fct_infreq(!!enexpr(varGroupID)))) %>%
     dplyr::group_by(!!enexpr(varGroupID), fillcol) %>%
