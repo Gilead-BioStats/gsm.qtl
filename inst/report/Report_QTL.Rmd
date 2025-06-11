@@ -2,6 +2,11 @@
 output:
   html_document:
     mathjax: null
+    toc: true
+    toc_float:
+      collapsed: false
+      smooth_scroll: true
+    css: styles.css
 params:
   dfResults: NA
   dfGroups: NA
