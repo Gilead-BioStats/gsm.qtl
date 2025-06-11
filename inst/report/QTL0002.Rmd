@@ -1,0 +1,58 @@
+---
+title: "QTL0002 - Premature Discontinuation"
+---
+## Study Overview
+```{r, echo=FALSE}
+QTL_Overview(dfResults = qtl0002_params$dfResults,
+             dSnapshot = qtl0002_params$latest_snapshot,
+             strNum = "Subjects Discontinued - Study",
+             strDenom = "Total Enrolled", 
+             strQTL = "Current Premature Discontinuation Rate")
+```
+
+## Time Series Chart
+```{r, echo=FALSE, results='asis', fig.height=4}
+QTL_lineplot(dfResults = qtl0002_params$dfResults, strQTL = "Premature Discontinuation Rate")
+```
+
+## Bar Charts {.tabset .tabset-pills}
+
+### Site
+```{r, echo = FALSE, results = 'asis', fig.height=4}
+discontinuation_groupBar(df = qtl0002_params$dfListing, varGroupID = invid, strGroupLabel = "Site")
+```
+
+### Country
+```{r, echo = FALSE, results = 'asis', fig.height=4}
+discontinuation_groupBar(df = qtl0002_params$dfListing, varGroupID = country, strGroupLabel = "Country")
+```
+
+### Reasons
+```{r, echo = FALSE, results = 'asis', fig.height=4}
+discontinuation_reasonBar(df = qtl0002_params$dfListing)
+```
+
+### Reasons/Site
+```{r, echo = FALSE, results = 'asis', fig.height=4}
+reasons_groupBar(df = qtl0002_params$dfListing, varGroupID = invid, strGroupLabel = "Site")
+```
+
+### Reasons/Country
+```{r, echo = FALSE, results = 'asis', fig.height=4}
+reasons_groupBar(df = qtl0002_params$dfListing, varGroupID = country, strGroupLabel = "Country")
+```
+
+## Discontinuation Listing
+```{r, echo = FALSE}
+gsm.qtl::discontinuation_map_reasons(
+  df = qtl0002_params$dfListing,
+  strReasons = c('WITHDRAWAL BY SUBJECT', 'NON-COMPLIANCE WITH STUDY DRUG', 'PROTOCOL VIOLATION', 'PHYSICIAN DECISION',
+                 'Withdrew Consent', 'Death', 'Lost to Follow-Up')
+) %>% 
+  select(subjid, compreas) %>% 
+  rename(
+    `Subject ID` = subjid,
+    `Discontinuation Reason` = compreas
+  ) %>% 
+  gt()
+```

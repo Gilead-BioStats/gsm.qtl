@@ -1,34 +1,48 @@
-#' Time Series Widget
+#' Time Series Widget for QTL
 #'
-#' @param dfResults a
-#' @param lMetric b
-#' @param dfGroups c
-#' @param vThreshold d
-#' @param strOutcome e
-#' @param bAddGroupSelect f
-#' @param strShinyGroupSelectID g
-#' @param bDebug h
+#' A widget that generates a time series of study-level results over time, plotting snapshot
+#' date on the x-axis and the outcome, metric, on the y-axis, also drawing an upper funnel and flat line based on
+#' an threshold, cited by `nPropRate` of `Analyze_OneSideProp()`.
 #'
-#' @export
+#' @param dfResults `data.frame` A stacked summary of analysis pipeline output.
+#'   Created by passing a list of results returned by [Summarize()] to
+#'   [BindResults()]. Expected columns: `GroupID`, `GroupLevel`, `Numerator`,
+#'   `Denominator`, `Metric`, `Score`, `Flag`, `MetricID`, `StudyID`,
+#'   `SnapshotDate`.
+#' @param lMetric `list` Metric-specific metadata for use in charts and
+#'   reporting. Created by passing an `lWorkflow` object to [MakeMetric()] and
+#'   turing it into a list. Expected columns: `File`,`MetricID`, `Group`,
+#'   `Abbreviation`, `Metric`, `Numerator`, `Denominator`, `Model`, `Score`, and
+#'   `strThreshold`. For more details see the Data Model vignette:
+#'   `vignette("DataModel", package = "gsm.kri")`.
+#' @param dfGroups `data.frame` Group-level metadata dictionary. Created by
+#'   passing CTMS site and study data to [MakeLongMeta()]. Expected columns:
+#'   `GroupID`, `GroupLevel`, `Param`, `Value`.
+#' @param vThreshold unused
+#' @param strOutcome unused
+#' @param bAddGroupSelect unused
+#' @param strShinyGroupSelectID unused
+#' @param bDebug  `logical` Print debug messages? Default: `FALSE`
+#' @noRd
 
 Widget_TimeSeriesQTL <- function(
   dfResults,
   lMetric = NULL,
   dfGroups = NULL,
   vThreshold = NULL,
-  strOutcome = "Score",
+  strOutcome = "Metric",
   bAddGroupSelect = TRUE,
   strShinyGroupSelectID = "GroupID",
   bDebug = FALSE
 ) {
-  gsm::stop_if(cnd = !is.data.frame(dfResults), "dfResults is not a data.frame")
-  gsm::stop_if(cnd = !(is.null(lMetric) || (is.list(lMetric) && !is.data.frame(lMetric))), "lMetric must be a list, but not a data.frame")
-  gsm::stop_if(cnd = !(is.null(dfGroups) || is.data.frame(dfGroups)), "dfGroups is not a data.frame")
-  gsm::stop_if(cnd = length(strOutcome) != 1, "strOutcome must be length 1")
-  gsm::stop_if(cnd = !is.character(strOutcome), "strOutcome is not a character")
-  gsm::stop_if(cnd = !is.logical(bAddGroupSelect), "bAddGroupSelect is not a logical")
-  gsm::stop_if(cnd = !is.character(strShinyGroupSelectID), "strShinyGroupSelectID is not a character")
-  gsm::stop_if(cnd = !is.logical(bDebug), "bDebug is not a logical")
+  gsm.core::stop_if(cnd = !is.data.frame(dfResults), "dfResults is not a data.frame")
+  gsm.core::stop_if(cnd = !(is.null(lMetric) || (is.list(lMetric) && !is.data.frame(lMetric))), "lMetric must be a list, but not a data.frame")
+  gsm.core::stop_if(cnd = !(is.null(dfGroups) || is.data.frame(dfGroups)), "dfGroups is not a data.frame")
+  gsm.core::stop_if(cnd = length(strOutcome) != 1, "strOutcome must be length 1")
+  gsm.core::stop_if(cnd = !is.character(strOutcome), "strOutcome is not a character")
+  gsm.core::stop_if(cnd = !is.logical(bAddGroupSelect), "bAddGroupSelect is not a logical")
+  gsm.core::stop_if(cnd = !is.character(strShinyGroupSelectID), "strShinyGroupSelectID is not a character")
+  gsm.core::stop_if(cnd = !is.logical(bDebug), "bDebug is not a logical")
 
   # Parse `vThreshold` from comma-delimited character string to numeric vector.
   if (!is.null(vThreshold)) {
@@ -98,13 +112,13 @@ Widget_TimeSeriesQTL <- function(
 #'
 #' @name Widget_TimeSeries-shiny
 #'
-#' @export
+#' @noRd
 Widget_TimeSeriesQTLOutput <- function(outputId, width = "100%", height = "400px") {
   htmlwidgets::shinyWidgetOutput(outputId, "Widget_TimeSeriesQTL", width, height, package = "gsm.qtl")
 }
 
 #' @rdname Widget_TimeSeries-shiny
-#' @export
+#' @noRd
 renderWidget_TimeSeriesQTL <- function(expr, env = parent.frame(), quoted = FALSE) {
   if (!quoted) {
     expr <- substitute(expr)

@@ -6,24 +6,27 @@
 \usage{
 Report_QTL(
   dfResults = NULL,
-  dfListing = NULL,
   dfGroups = NULL,
+  lListings = NULL,
   strOutputDir = getwd(),
   strOutputFile = NULL
 )
 }
 \arguments{
-\item{dfResults}{a}
+\item{dfResults}{A results \code{data.frame} from the output of \code{gsm.reporting::BindResults()} used
+to create a variety of visualizations like the line plot, bar plot.}
 
-\item{dfGroups}{b}
+\item{dfGroups}{A groups \code{data.frame} from the output of the \code{Groups.yaml} of \code{gsm.reporting}used
+to create a variety of visualizations like the line plot, bar plot.}
+
+\item{lListings}{A \code{list} of \code{data.frame}s that are used as listings to represent participants that are the numerators
+of the visualizations from \code{dfResults}.}
 
 \item{strOutputDir}{The output directory path for the generated report. If not provided,
 the report will be saved in the current working directory.}
 
 \item{strOutputFile}{The output file name for the generated report. If not provided,
 the report will be named based on the study ID, Group Level and Date.}
-
-\item{lCharts}{A list of charts to include in the report.}
 }
 \value{
 File path of the saved report html is returned invisibly. Save to object to view absolute output path.
@@ -31,5 +34,5 @@ File path of the saved report html is returned invisibly. Save to object to view
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}
 
-This function generates a KRI report based on the provided inputs.
+This function generates a QTL report based on the provided inputs.
 }

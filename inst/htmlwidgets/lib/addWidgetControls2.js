@@ -32,7 +32,7 @@ const addWidgetControls2 = function(el, dfResults, lMetric, dfGroups, bAddGroupS
         false,
         groups[0]    // <-- pick the very first group as default
     );
-    groupSelect.classList.add('gsm-widget-control--group');
+    groupSelect.classList.add('gsm-widget-control--groupQTL');
 
     // add event listener to group select
     groupSelect.addEventListener('change', event => {

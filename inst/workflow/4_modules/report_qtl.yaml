@@ -1,0 +1,49 @@
+meta:
+  Type: Report
+  ID: report_qtl
+  Output: html
+  Name: QTL Report
+  Description: A report summarizing QTL
+spec:
+  Mapped_EXCLUSION:
+    _all:
+      required: true
+  Reporting_Results:
+    _all:
+      required: true
+  Reporting_Groups:
+    _all:
+      required: true
+steps:
+  - output: ie_listing
+    name: gsm.core::RunQuery
+    params:
+      df: Mapped_EXCLUSION
+      strQuery: "SELECT * FROM df"
+  - output: all_reportingResults
+    name: =
+    params:
+      lhs: all_reportingResults
+      rhs: Reporting_Results
+  - output: all_reportingGroups
+    name: =
+    params:
+      lhs: all_reportingGroups
+      rhs: Reporting_Groups
+  - output: strOutputDir
+    name: file.path
+    params:
+      outputs: outputs
+      test: test
+  - output: strOutputDir
+    name: normalizePath
+    params:
+      path: strOutputDir
+  - output: Report
+    name: gsm.qtl::Report_QTL
+    params:
+      dfResults: all_reportingResults
+      dfGroups: all_reportingGroups
+      dfListing: ie_listing
+      strOutputDir: strOutputDir
+      strOutputFile: "test.html"

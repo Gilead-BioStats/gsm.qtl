@@ -2,7 +2,7 @@
 .html-widget.Widget_BarChart,
 .html-widget.Widget_BarChartQTL,
 .html-widget.Widget_TimeSeries,
-.html-widget.Widget_TimeSeriesQTL {
+.html-widget.Widget_TimeSeriesQTL  {
 
 }
 
@@ -21,4 +21,8 @@
 
 .gsm-widget-control--select {
 
+}
+
+.gsm-widget-control--groupQTL {
+  display: none;
 }

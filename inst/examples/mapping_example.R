@@ -1,5 +1,5 @@
-library(gsm.datasim) # requires >= fix-57 PR to get it to dev is up
-library(gsm.mapping) # dev is fine, as long as post fix-58
+library(gsm.datasim)
+library(gsm.mapping)
 library(gsm.reporting)
 library(gsm.core)
 library(gsm.kri)
@@ -16,14 +16,18 @@ ie_data <- generate_rawdata_for_single_study(
   SiteCount = 10,
   StudyID = "ABC",
   workflow_path = "inst/workflow/1_mappings",
-  mappings = c("IE", "PD"),
+  mappings = c("IE", "PD", "STUDCOMP"),
   package = "gsm.qtl",
   desired_specs = NULL
 )
 
-mappings_wf <- gsm.core::MakeWorkflowList(strNames =c("SUBJ", "ENROLL", "IE", "PD", "STUDY", "SITE", "COUNTRY", "EXCLUSION"), strPath = "inst/workflow/1_mappings", strPackage = "gsm.qtl")
+mappings_wf <- gsm.core::MakeWorkflowList(
+  strNames =c("SUBJ", "ENROLL", "IE", "PD", "STUDY", "SITE", "COUNTRY", "EXCLUSION", "STUDCOMP"),
+  strPath = "inst/workflow/1_mappings",
+  strPackage = "gsm.qtl"
+)
 mappings_spec <- gsm.mapping::CombineSpecs(mappings_wf)
-metrics_wf <- gsm.core::MakeWorkflowList(strNames = c("qtl0001"), strPath = "inst/workflow/2_metrics", strPackage = "gsm.qtl")
+metrics_wf <- gsm.core::MakeWorkflowList(strNames = c("qtl0001_study", "qtl0002_study"), strPath = "inst/workflow/2_metrics", strPackage = "gsm.qtl")
 reporting_wf <- gsm.core::MakeWorkflowList(strNames = c("Results", "Groups"), strPath = "workflow/3_reporting", strPackage = "gsm.reporting")
 
 lRaw <- map_depth(ie_data, 1, gsm.mapping::Ingest, mappings_spec)
@@ -44,13 +48,15 @@ all_reportingResults <- do.call(dplyr::bind_rows, lapply(reporting, function(x) 
 # Only need 1 reporting group object
 all_reportingGroups <- reporting[[length(reporting)]]$Reporting_Groups
 
-ie_listing <- analyzed[[length(analyzed)]]$Analysis_qtl0001_site$Analysis_Listing %>%
-  filter(enrollyn == "N")
+report_listings <- list(qtl0001 = mapped$`2012-06-30`$Mapped_EXCLUSION,
+                        qtl0002 = left_join(mapped$`2012-06-30`$Mapped_STUDCOMP,
+                                            select(mapped$`2012-06-30`$Mapped_SUBJ, subjid, invid, country),
+                                            by = "subjid"))
 
 # Test if new Report_QTL rmd works
 Report_QTL(
   dfResults = all_reportingResults,
   dfGroups = all_reportingGroups,
-  dfListing = ie_listing,
+  lListings = report_listings,
   strOutputFile = "test.html"
 )

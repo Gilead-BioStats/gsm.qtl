@@ -39,13 +39,13 @@ HTMLWidgets.widget({
                 );
 
                 // Add a dropdown that changes the outcome variable.
-                const outcomeSelect = addOutcomeSelect2(
-                    widgetControls,
-                    input.dfResults,
-                    input.lMetric,
-                    input.dfGroups,
-                    input.strOutcome
-                );
+                //const outcomeSelect = addOutcomeSelect2(
+                //    widgetControls,
+                //    input.dfResults,
+                //    input.lMetric,
+                //    input.dfGroups,
+                //    input.strOutcome
+                //);
             },
             resize: function(width, height) {
             }

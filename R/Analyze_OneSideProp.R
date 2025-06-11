@@ -16,11 +16,13 @@
 #'   Model vignette: `vignette("DataModel", package = "gsm.core")`. For this
 #'   function, `dfTransformed` should typically be created using
 #'   [Transform_Rate()].
-#' @param nPropRate a numeric with historic screen failure rate
-#' @param nNumDeviations a numeric to determine the appropriate threshold (number of SDs away) from violating QTL
+#' @param nPropRate a numeric, between 0 and 1, that represents a proportion of
+#' comparison, e.g. a historic screen failure rate
+#' @param nNumDeviations a numeric, e.g. '3', standard deviations away from the value
+#' provided in `nPropRate` to calculate a threshold to which the `Metric` should be flagged
 #'
-#' @return `data.frame` with one row per site with columns: GroupID, Numerator,
-#'   Denominator, Metric, OverallMetric, Factor, and Score.
+#' @return `data.frame` with one row per site with columns: GroupID, GroupLevel, Numerator,
+#'   Denominator, Metric, upper_funnel and flag
 #'
 #' @examples
 #' # Binary
@@ -29,7 +31,7 @@
 #'   "ABC",     "Study",         25,          100,    0.25
 #' )
 #'
-#' dfAnalyzed <- Analyze_OneSideProp(dftransformedd, nPropRate = 0.01, nNumDeviations = 3)
+#' dfAnalyzed <- Analyze_OneSideProp(dftransformed, nPropRate = 0.01, nNumDeviations = 3)
 #'
 #' @export
 
@@ -56,8 +58,12 @@ Analyze_OneSideProp <- function(
     ungroup() %>%
     mutate(Metric = nPropRate + nNumDeviations*sqrt(nPropRate*(1-nPropRate)/sum(.data$Denominator))) # To plot the funnel need funnel data under metric
 
+  flat_line <- Upper_funnel %>%
+    mutate(GroupID = "Flatline",
+           Metric = nPropRate)
+
   # Bind the upper funnel back together with original dataframe
-  dfScore <- dplyr::bind_rows(dfTransformed, Upper_funnel) %>%
+  dfScore <- dplyr::bind_rows(dfTransformed, Upper_funnel, flat_line) %>%
     mutate(
       vMu = nPropRate, # calculate one-sided proportion score against a historic rate
       z_0 = ifelse(.data$vMu == 0 | .data$vMu == 1,
@@ -69,7 +75,11 @@ Analyze_OneSideProp <- function(
       upper_funnel = nPropRate + nNumDeviations*sqrt(nPropRate*(1-nPropRate)/sum(.data$Denominator))
       # Additional cutoffs can be made to compare against `Metric` for flagging
     ) %>%
-    mutate(Flag = ifelse(Metric >= upper_funnel | GroupID == "Upper_funnel", 2, 0)) # Custom flag based on upper-funnel
+    mutate(Flag = case_when(
+      Metric >= upper_funnel | GroupID == "Upper_funnel" ~ 2,
+      (Metric >= vMu & Metric < upper_funnel) | GroupID == "Flatline" ~ 1,
+      TRUE ~ 0)
+    ) # Custom flag based on upper-funnel
 
   # dfAnalyzed -----------------------------------------------------------------
   dfAnalyzed <- dfScore %>%
@@ -79,17 +89,11 @@ Analyze_OneSideProp <- function(
       "Numerator",
       "Denominator",
       "Metric",
-      Score = "z_0",
-      Flag,
-      upper_funnel
+      "Flag",
+      "Score" = z_0,
+      "upper_funnel",
+      "flatline" = vMu
     )
-
-
-  LogMessage(
-    level = "info",
-    message = "`OverallMetric`, `Factor`, and `Score` columns created from normal approximation.",
-    cli_detail = "inform"
-  )
 
   return(dfAnalyzed)
 }

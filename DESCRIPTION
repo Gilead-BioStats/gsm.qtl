@@ -1,18 +1,52 @@
 Package: gsm.qtl
 Title: Good Statistical Monitoring QTLs
-Version: 0.0.0.9000
+Version: 0.0.1
 Authors@R: c(
     person("Zhongkai", "Wang", , "Zhongkai.Wang6@gilead.com", role = c("aut", "cre"),
             comment = c(ORCID = "0000-0002-1883-2265")),
-    person("Laura", "Maxwell", , "laura.maxwell@atorusresearch.com", role = c("aut"))
+    person("Laura", "Maxwell", , "laura.maxwell@atorusresearch.com", role = c("aut")),
+    person("Zelos", "Zhu", , "zelos.zhu@atorusresearch.com", role = c("aut"))
     )
-Description: A gsm extension package to create QTL metrics and produce an html report and shiny application.
-License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
-    license
+Description: The Good Statistical Monitoring or 'gsm' suite of R packages
+    provides a framework for statistical data monitoring. 'gsm.qtl'
+    is an extension that contains the additional functions, workflows,
+    and document template to generate reports for QTL.
+License: Apache License (>= 2)
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
-URL: https://gilead-biostats.github.io/gsm.qtl
+Depends:
+  R (>= 4.0)
+LazyData: true
+Imports: 
+  dplyr,
+  forcats,
+  ggplot2,
+  gsm.core,
+  gsm.kri,
+  gt,
+  htmlwidgets,
+  jsonlite,
+  plotly,
+  purrr,
+  rlang,
+  tidyr,
+  tibble,
+  utils
 Suggests: 
-    testthat (>= 3.0.0)
+  glue,
+  gsm.mapping,
+  gsm.reporting,
+  htmltools,
+  knitr,
+  lubridate,
+  rmarkdown,
+  stringr,
+  testthat (>= 3.0.0)
+Remotes:
+    gsm.core=Gilead-BioStats/gsm.core@main,
+    gsm.kri=Gilead-BioStats/gsm.kri@main,
+    gsm.mapping=Gilead-BioStats/gsm.mapping@main,
+    gsm.reporting=Gilead-BioStats/gsm.reporting@main
+URL: https://gilead-biostats.github.io/gsm.qtl
 Config/testthat/edition: 3
