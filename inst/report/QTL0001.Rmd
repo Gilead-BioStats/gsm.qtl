@@ -1,0 +1,63 @@
+---
+title: "QTL0001 - Ineligibilty"
+---
+## Study Overview
+```{r, echo=FALSE}
+QTL_Overview(dfResults = qtl0001_params$dfResults,
+             dSnapshot = qtl0001_params$latest_snapshot,
+             strNum = "Ineligible Participants",
+             strDenom = "Total Enrolled", 
+             strQTL = "Current Ineligible Enrolled Rate")
+```
+
+## Time Series Chart
+```{r, echo=FALSE, results='asis', fig.height=4}
+# gsm.qtl::Widget_TimeSeriesQTL(
+#   dfResults = dfResults %>% filter(GroupLevel == "Study"),
+#   dfGroups = dfGroups,
+#   strOutcome = "Metric"
+# )
+# Create reference table for funnel bounds per date
+QTL_lineplot(dfResults = qtl0001_params$dfResults, strQTL = "Ineligibility Rate")
+```
+
+## Bar Charts {.tabset .tabset-pills}
+
+```{r, eval = FALSE , echo = FALSE, results = 'asis', fig.height=4}
+### JS - Site
+# gsm.qtl::Widget_BarChartQTL(
+#   dfResults = dfResults %>% filter(GroupLevel == "Site", SnapshotDate == latest_snapshot, GroupID != "Upper_funnel"),
+#   dfGroups = dfGroups,
+#   strOutcome = "Metric"
+# )
+```
+
+### Site
+```{r, echo = FALSE, results = 'asis', fig.height=4}
+eligibility_groupBar(df = qtl0001_params$dfListing, varGroupID = invid, strGroupLabel = "Site")
+```
+
+### Country
+```{r, echo = FALSE, results = 'asis', fig.height=4}
+eligibility_groupBar(df = qtl0001_params$dfListing, varGroupID = country, strGroupLabel = "Country")
+```
+
+### Source
+```{r, echo = FALSE, results = 'asis', fig.height=4}
+eligibility_sourceBar(df = qtl0001_params$dfListing)
+```
+
+### Criteria/Site
+```{r, echo = FALSE, results = 'asis', fig.height=4}
+criteria_groupBar(df = qtl0001_params$dfListing, varGroupID = invid, strGroupLabel = "Site")
+```
+
+### Criteria/Country
+```{r, echo = FALSE, results = 'asis', fig.height=4}
+criteria_groupBar(df = qtl0001_params$dfListing, varGroupID = country, strGroupLabel = "Country")
+```
+
+## Inclusion/Exclusion Listing
+```{r, echo = FALSE}
+eligibility_listing(df = qtl0001_params$dfListing)
+```

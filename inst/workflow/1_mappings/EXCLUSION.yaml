@@ -46,11 +46,22 @@ spec:
     dvdtm:
       type: timestamp
 steps:
+  - output: pivot_ie
+    name: gsm.core::RunQuery
+    params:
+      df: Mapped_IE
+      strQuery: "SELECT
+        subjid,
+        studyid,
+        array_to_string(array_agg(ietestcd), ',') AS ietestcd_concat,
+        ie_violation
+      FROM df
+      GROUP BY studyid, subjid, ie_violation"
   - output: add_ie
     name: dplyr::left_join
     params:
       x: Mapped_ENROLL
-      'y': Mapped_IE
+      'y': pivot_ie
       by:
         - subjid
         - studyid
@@ -59,10 +70,10 @@ steps:
     params:
       df: Mapped_PD
       strQuery: "SELECT
-      studyid,
-      subjid,
-      array_to_string(array_agg(dvdtm), ';;;')  AS dvdtm,
-      array_to_string(array_agg(dvterm), ';;;') AS eligibility_criteria
+        studyid,
+        subjid,
+        array_to_string(array_agg(dvdtm), ';;;') AS dvdtm,
+        array_to_string(array_agg(dvterm), ';;;') AS eligibility_criteria
       FROM df
       WHERE dvdecod IN ('Exclusion Criteria', 'Inclusion Criteria')
       GROUP BY studyid, subjid"
@@ -80,8 +91,8 @@ steps:
       df: premapped
       strQuery: "SELECT *,
         CASE
-          WHEN ie_violation = 'Y' AND eligibility_criteria IS NULL THEN 'Ineligible -- IE only, check PD'
-          WHEN ie_violation IS NULL AND eligibility_criteria IS NOT NULL THEN 'Ineligible -- PD only, check IE'
+          WHEN ie_violation = 'Y' AND eligibility_criteria IS NULL THEN 'EDC I/E'
+          WHEN ie_violation IS NULL AND eligibility_criteria IS NOT NULL THEN 'Eligibility IPD'
           WHEN ie_violation = 'Y' AND eligibility_criteria IS NOT NULL THEN 'Ineligible, Both Criteria'
         ELSE 'Neither'
       END AS Source  FROM df WHERE enrollyn = 'Y'"

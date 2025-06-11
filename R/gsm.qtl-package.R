@@ -9,10 +9,11 @@
 #' @import gt
 #' @import htmlwidgets
 #' @import tibble
+#' @importFrom forcats fct_rev fct_infreq
 #' @importFrom jsonlite toJSON
-#' @importFrom plotly ggplotly
+#' @importFrom plotly ggplotly layout
 #' @importFrom purrr map
-#' @importFrom rlang check_installed
+#' @importFrom rlang check_installed enexpr
 #' @importFrom tidyr pivot_longer pivot_wider separate unite
 #' @importFrom utils globalVariables
 ## usethis namespace: end

@@ -28,6 +28,8 @@ spec:
     Country:
       type: character
       source_col: country
+    site_active_dt:
+      type: Date
   Mapped_SUBJ:
     studyid:
       type: character
