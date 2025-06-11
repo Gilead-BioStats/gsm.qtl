@@ -43,7 +43,7 @@ reporting <- map2(reporting, dates, ~{
 })
 
 # Bind multiple snapshots of data together
-all_reportingResults <- do.call(dplyr::bind_rows, lapply(reporting, function(x) x$Reporting_Results))
+all_reportingResults <- do.call(dplyr::bind_rows, lapply(reporting, function(x) x$Reporting_Results)) %>% filter(MetricID == "Analysis_qtl0001_study")
 
 # Only need 1 reporting group object
 all_reportingGroups <- reporting[[length(reporting)]]$Reporting_Groups
