@@ -73,3 +73,10 @@ qtl0002 <- knitr::knit_child(
 ) %>% suppressMessages %>% suppressWarnings
 cat(qtl0002, sep = "\n")
 ```
+
+```{r echo=FALSE}
+toggle_toc <- system.file('report', 'lib', 'toggleTOC.js', package = "gsm.kri")
+```
+
+```{js, file={toggle_toc}, echo=FALSE}
+```
