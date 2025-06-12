@@ -40,18 +40,8 @@ QTL_lineplot <- function(dfResults,
         TRUE ~ "green"
       ),
       tooltip_text = case_when(
-        group_type != strQTL ~ paste0(
-          group_type,
-          "\nDate: ", SnapshotDate,
-          "\nMetric: ", round(Metric, 3)
-        ),
-        TRUE ~ paste0(
-          "Study: ", GroupID,
-          "\nDate: ", SnapshotDate,
-          "\nMetric: ", round(Metric, 3),
-          "\nNumerator: ", Numerator,
-          "\nDenominator: ", Denominator
-        )
+        group_type != strQTL ~ paste0(group_type, "\nDate: ", SnapshotDate, "\nMetric: ", round(Metric, 3)),
+        TRUE ~ paste0("Study: ", GroupID, "\nDate: ", SnapshotDate, "\nMetric: ", round(Metric, 3), "\nNumerator: ", Numerator, "\nDenominator: ", Denominator)
       )
     )
 
