@@ -15,16 +15,16 @@ ie_data <- generate_rawdata_for_single_study(
   ParticipantCount = 1000,
   SiteCount = 10,
   StudyID = "ABC",
-  workflow_path = "inst/workflow/1_mappings",
+  workflow_path = "workflow/1_mappings",
   mappings = c("IE", "PD", "STUDCOMP"),
-  package = "gsm.qtl",
+  package = "gsm.mapping",
   desired_specs = NULL
 )
 
 mappings_wf <- gsm.core::MakeWorkflowList(
   strNames =c("SUBJ", "ENROLL", "IE", "PD", "STUDY", "SITE", "COUNTRY", "EXCLUSION", "STUDCOMP"),
-  strPath = "inst/workflow/1_mappings",
-  strPackage = "gsm.qtl"
+  strPath = "workflow/1_mappings",
+  strPackage = "gsm.mapping"
 )
 mappings_spec <- gsm.mapping::CombineSpecs(mappings_wf)
 metrics_wf <- gsm.core::MakeWorkflowList(strNames = c("qtl0001_study", "qtl0002_study"), strPath = "inst/workflow/2_metrics", strPackage = "gsm.qtl")
