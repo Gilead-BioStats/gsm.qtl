@@ -14,7 +14,7 @@ QTL_Overview(dfResults = qtl0001_params$dfResults,
 ```
 
 ## Time Series Chart
-```{r, echo=FALSE, results='asis', fig.height=4, eval = FALSE}
+```{r, echo=FALSE, results='asis', fig.height=4}
 # gsm.qtl::Widget_TimeSeriesQTL(
 #   dfResults = dfResults %>% filter(GroupLevel == "Study"),
 #   dfGroups = dfGroups,
