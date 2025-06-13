@@ -27,17 +27,8 @@ library(knitr)
 
 knitr::opts_chunk$set(warning = FALSE, message = FALSE)
 
-read_in_results <- params$dfResults 
 
-read_in_results2 <- read_in_results %>%
-    filter(str_detect(MetricID, "qtl"),
-           GroupID %in% c("Upper_funnel", "Flatline")) %>% 
-    select(SnapshotDate, GroupID, Metric) %>% 
-    mutate(GroupID = tolower(GroupID)) %>% 
-    tidyr::pivot_wider(., names_from = "GroupID", values_from = "Metric")
-
-dfResults <- full_join(read_in_results, read_in_results2, "SnapshotDate")
-
+dfResults <- gsm.qtl::ResultsProcessor(params$dfResults)
 dfGroups <- params$dfGroups
 lListings <- params$lListings
 latest_snapshot = max(dfResults$SnapshotDate)
