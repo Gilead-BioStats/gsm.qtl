@@ -6,7 +6,7 @@
 ResultsProcessor <- function(df){
   df1 <- df
 
-  df2 <- df %>%
+  df2 <- df1 %>%
     filter(str_detect(MetricID, "qtl"),
            GroupID %in% c("Upper_funnel", "Flatline")) %>%
     select(SnapshotDate, GroupID, Metric) %>%
