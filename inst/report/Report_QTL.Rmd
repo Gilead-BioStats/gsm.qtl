@@ -28,10 +28,13 @@ library(knitr)
 knitr::opts_chunk$set(warning = FALSE, message = FALSE)
 
 
-dfResults <- gsm.qtl::ResultsProcessor(params$dfResults)
+dfResults <- params$dfResults
 dfGroups <- params$dfGroups
 lListings <- params$lListings
-latest_snapshot = max(dfResults$SnapshotDate)
+str(dfResults)
+str(dfGroups)
+str(lListings)
+# latest_snapshot = max(dfResults$SnapshotDate)
 ```
 
 ---
@@ -40,7 +43,7 @@ subtitle: "Study: `r unique(lListings[[1]]$studyid)`"
 date: "Snapshot Date: `r latest_snapshot`"
 ---
 
-```{r QTL0001 Eligibility, echo = FALSE, results = 'asis'}
+```{r QTL0001 Eligibility, echo = FALSE, results = 'asis', eval = FALSE}
 # Feed and knit just QTL0001 using child rmd support
 if("Analysis_qtl0001_study" %in% dfResults$MetricID) {
   qtl0001 <- knitr::knit_child(
@@ -59,7 +62,7 @@ if("Analysis_qtl0001_study" %in% dfResults$MetricID) {
 }
 ```
 
-```{r QTL0002 Premature Study Discontinuation, echo = FALSE, results = 'asis'}
+```{r QTL0002 Premature Study Discontinuation, echo = FALSE, results = 'asis', eval = FALSE}
 # Feed and knit just QTL0002 using child rmd support
 if("Analysis_qtl0002_study" %in% dfResults$MetricID) {
   qtl0002 <- knitr::knit_child(
