@@ -38,6 +38,8 @@ Report_QTL <- function(
       dfResults = dfResults,
       dfGroups = dfGroups,
       lListings = lListings
-    )
+    ),
+    intermediates_dir = tempdir(),
+    envir = new.env(parent = globalenv())
   )
 }
