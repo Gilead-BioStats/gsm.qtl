@@ -11,6 +11,7 @@ QTL_lineplot <- function(dfResults,
   df_plot <- dfResults %>%
     filter(GroupLevel == "Study") %>%
     select(GroupID, Numerator, Denominator, Metric, SnapshotDate) %>%
+    mutate(across(Numerator:Metric, as.numeric)) %>%
     mutate(SnapshotDate = as.Date(SnapshotDate)) %>%
     # Add group type
     mutate(group_type = case_when(
