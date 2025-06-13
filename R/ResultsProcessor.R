@@ -4,7 +4,7 @@
 #'
 #' @export
 ResultsProcessor <- function(df){
-  df <- params$dfResults
+  df1 <- df
 
   df2 <- df %>%
     filter(str_detect(MetricID, "qtl"),
@@ -13,6 +13,6 @@ ResultsProcessor <- function(df){
     mutate(GroupID = tolower(GroupID)) %>%
     tidyr::pivot_wider(., names_from = "GroupID", values_from = "Metric")
 
-  dfResults <- full_join(df, df2, "SnapshotDate")
+  dfResults <- full_join(df1, df2, "SnapshotDate")
   return(dfResults)
 }
