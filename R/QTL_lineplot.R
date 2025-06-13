@@ -47,7 +47,7 @@ QTL_lineplot <- function(dfResults,
   # Build ggplot
   p <- ggplot(
     df_joined,
-    aes(x = SnapshotDate, y = Metric, group = GroupID) #, text = tooltip_text)
+    aes(x = SnapshotDate, y = Metric, group = GroupID, text = tooltip_text)
   ) +
     # Line with custom linetype
     geom_line(
