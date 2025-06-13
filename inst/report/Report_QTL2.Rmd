@@ -26,7 +26,9 @@ library(htmltools)
 library(knitr)
 
 knitr::opts_chunk$set(warning = FALSE, message = FALSE)
+```
 
+```{r}
 dfResults <- params$dfResults
-str(dfResults)
+print(head(dfResults))
 ```
