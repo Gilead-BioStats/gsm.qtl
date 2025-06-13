@@ -27,16 +27,16 @@ library(knitr)
 
 knitr::opts_chunk$set(warning = FALSE, message = FALSE)
 
-dfResults_1 <- params$dfResults 
+read_in_results <- params$dfResults 
 
-dfResults_2 <- params$dfResults %>%
+read_in_results2 <- read_in_results %>%
     filter(str_detect(MetricID, "qtl"),
            GroupID %in% c("Upper_funnel", "Flatline")) %>% 
     select(SnapshotDate, GroupID, Metric) %>% 
     mutate(GroupID = tolower(GroupID)) %>% 
     tidyr::pivot_wider(., names_from = "GroupID", values_from = "Metric")
 
-dfResults <- full_join(dfResults_1, dfResults_2, "SnapshotDate")
+dfResults <- full_join(read_in_results, read_in_results2, "SnapshotDate")
 
 dfGroups <- params$dfGroups
 lListings <- params$lListings
