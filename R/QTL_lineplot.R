@@ -78,32 +78,32 @@ QTL_lineplot <- function(dfResults,
       size = 1,
       show.legend = FALSE
     ) +
-    # Combine all colors in scale but only show legend for line groups
-    scale_color_manual(
-      values = c(
-        "QTL Threshold" = "#FF5859",
-        "Nominal Threshold" = "grey80",
-        strQTL = "grey50",
-        "red" = "#FF5859",
-        "green" = "#3DAF06"
-      ),
-      breaks = c(strQTL, "Nominal Threshold", "QTL Threshold"),
-      name = NULL
-    ) +
-    scale_linetype_manual(
-      values = c(
-        "QTL Threshold" = "dashed",
-        "Nominal Threshold" = "dotted",
-        strQTL = "solid"
-      )
-    ) +
-    scale_linewidth_manual(
-      values = c(
-        "QTL Threshold" = 0.75,
-        "Nominal Threshold" = 0.5,
-        strQTL = 0.75
-      )
-    ) +
+    # # Combine all colors in scale but only show legend for line groups
+    # scale_color_manual(
+    #   values = c(
+    #     "QTL Threshold" = "#FF5859",
+    #     "Nominal Threshold" = "grey80",
+    #     strQTL = "grey50",
+    #     "red" = "#FF5859",
+    #     "green" = "#3DAF06"
+    #   ),
+    #   breaks = c(strQTL, "Nominal Threshold", "QTL Threshold"),
+    #   name = NULL
+    # ) +
+    # scale_linetype_manual(
+    #   values = c(
+    #     "QTL Threshold" = "dashed",
+    #     "Nominal Threshold" = "dotted",
+    #     strQTL = "solid"
+    #   )
+    # ) +
+    # scale_linewidth_manual(
+    #   values = c(
+    #     "QTL Threshold" = 0.75,
+    #     "Nominal Threshold" = 0.5,
+    #     strQTL = 0.75
+    #   )
+    # ) +
 
     # scale_x_date(date_labels = "%Y-%m-%d", date_breaks = "1 month") +
     theme_minimal() +
