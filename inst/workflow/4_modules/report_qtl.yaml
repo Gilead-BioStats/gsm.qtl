@@ -61,14 +61,11 @@ steps:
     name: normalizePath
     params:
       path: strOutputDir
-  # - outpuut: Report
-  #   naame: gsm.qtl::Report_QTL
-  #   params:
-  #     strOutputDir: strOutputDir
-  #     strOutputFile: ID
-  #     dfResults: all_reportingResults
-  #     dfGroups: all_reportingGroups
-  #     lListings: reporting_listings
+  - output: strInputPath
+    names: system.file
+    params:
+      ...: "report/Report_QTL.Rmd"
+      package: "gsm.qtl"
   - output: lParams
     name: list
     params:
@@ -81,6 +78,6 @@ steps:
       lParams: lParams
       strOutputDir: strOutputDir
       strOutputFile: ID
-      strInputPath: "./reports/Report_QTL.Rmd"
+      strInputPath: strInputPath
 
 
