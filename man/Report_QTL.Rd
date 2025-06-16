@@ -9,7 +9,8 @@ Report_QTL(
   dfGroups = NULL,
   lListings = NULL,
   strOutputDir = getwd(),
-  strOutputFile = NULL
+  strOutputFile = NULL,
+  strInputPath = system.file("report", "Report_QTL.Rmd", package = "gsm.qtl")
 )
 }
 \arguments{

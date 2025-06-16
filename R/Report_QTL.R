@@ -25,19 +25,21 @@ Report_QTL <- function(
     dfGroups = NULL,
     lListings = NULL,
     strOutputDir = getwd(),
-    strOutputFile = NULL
+    strOutputFile = NULL,
+    strInputPath =  system.file("report", "Report_QTL2.Rmd", package = "gsm.qtl")
 ) {
   rlang::check_installed("rmarkdown", reason = "to run `Report_QTL()`")
   rlang::check_installed("knitr", reason = "to run `Report_QTL()`")
 
-  RenderRmd(
-    strInputPath = system.file("report", "Report_QTL.Rmd", package = "gsm.qtl"),
-    strOutputFile = strOutputFile,
-    strOutputDir = strOutputDir,
-    lParams = list(
+  rmarkdown::render(
+    input =  strInputPath,
+    output_file = file.path(strOutputDir, strOutputFile),
+    params =  list(
       dfResults = dfResults,
       dfGroups = dfGroups,
       lListings = lListings
-    )
+    ),
+    intermediates_dir = tempdir(),
+    envir = new.env(parent = globalenv())
   )
 }
