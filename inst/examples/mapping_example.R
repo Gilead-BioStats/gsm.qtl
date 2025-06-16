@@ -44,21 +44,26 @@ reporting <- map2(reporting, dates, ~{
 
 # Bind multiple snapshots of data together
 all_reportingResults <- do.call(dplyr::bind_rows, lapply(reporting, function(x) x$Reporting_Results)) %>%
-  filter(MetricID == "Analysis_qtl0001_study") %>%
+  # filter(MetricID == "Analysis_qtl0001_study") %>%
   select(-c(upper_funnel, flatline))
+
 
 # Only need 1 reporting group object
 all_reportingGroups <- reporting[[length(reporting)]]$Reporting_Groups
 
 report_listings <- list(qtl0001 = mapped$`2012-06-30`$Mapped_EXCLUSION,
                         qtl0002 = left_join(mapped$`2012-06-30`$Mapped_STUDCOMP,
-                                            select(mapped$`2012-06-30`$Mapped_SUBJ, subjid, invid, country),
+                                            select(mapped$`2012-06-30`$Mapped_SUBJ, subjid, country),
                                             by = "subjid"))
 
 # Test if new Report_QTL rmd works
-Report_QTL(
-  dfResults = all_reportingResults,
-  dfGroups = all_reportingGroups,
-  lListings = report_listings,
-  strOutputFile = "test.html"
+gsm.kri::RenderRmd(
+  lParams = list(
+    dfResults = all_reportingResults,
+    dfGroups = all_reportingGroups,
+    lListings = report_listings
+  ),
+  strOutputDir = getwd(),
+  strOutputFile = "test.html",
+  strInputPath = system.file("report/Report_QTL.Rmd", package = "gsm.qtl")
 )
