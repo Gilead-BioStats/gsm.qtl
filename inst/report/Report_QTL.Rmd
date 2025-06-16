@@ -28,7 +28,7 @@ library(knitr)
 knitr::opts_chunk$set(warning = FALSE, message = FALSE)
 
 
-dfResults <- params$dfResults
+dfResults <- ResultsProcessor(dfResults)
 dfGroups <- params$dfGroups
 lListings <- params$lListings
 latest_snapshot = max(dfResults$SnapshotDate)
