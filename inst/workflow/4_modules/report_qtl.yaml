@@ -8,42 +8,76 @@ spec:
   Mapped_EXCLUSION:
     _all:
       required: true
-  Reporting_Results:
+  Reporting_Results_Longitudinal:
     _all:
       required: true
   Reporting_Groups:
     _all:
       required: true
 steps:
-  - output: ie_listing
+  # add listings
+  - output: qtl0001
     name: gsm.core::RunQuery
     params:
       df: Mapped_EXCLUSION
       strQuery: "SELECT * FROM df"
+  - output: reporting_listings
+    names: list
+    params:
+      'qtl0001': qtl0001
   - output: all_reportingResults
-    name: =
+    name: gsm.core::RunQuery
     params:
-      lhs: all_reportingResults
-      rhs: Reporting_Results
+      df: Reporting_Results_Longitudinal
+      strQuery: |
+        SELECT *
+        FROM df
+        WHERE GroupLevel = 'Study'
+        ORDER BY MetricID
   - output: all_reportingGroups
-    name: =
+    name: gsm.core::RunQuery
     params:
-      lhs: all_reportingGroups
-      rhs: Reporting_Groups
+      df: Reporting_Groups
+      strQuery: |
+        SELECT *
+        FROM df
+        WHERE GroupLevel IN ('Site', 'Study')
+  # Define the output directory for the report.
+  - output: strSnapshotDate
+    name: pull
+    params:
+      .data: Reporting_Results_Longitudinal
+      var: SnapshotDate
+  - output: strSnapshotDate
+    name: max
+    params:
+      ...: strSnapshotDate
   - output: strOutputDir
     name: file.path
     params:
       outputs: outputs
-      test: test
+      SnapshotDate: strSnapshotDate
   - output: strOutputDir
     name: normalizePath
     params:
       path: strOutputDir
-  - output: Report
-    name: gsm.qtl::Report_QTL
+  - output: strInputPath
+    names: system.file
     params:
-      dfResults: all_reportingResults
-      dfGroups: all_reportingGroups
-      dfListing: ie_listing
+      ...: "report/Report_QTL.Rmd"
+      package: "gsm.qtl"
+  - output: lParams
+    name: list
+    params:
+      'dfResults': all_reportingResults
+      'dfGroups': all_reportingGroups
+      'lListings': reporting_listings
+  - output: Report
+    name: gsm.kri::RenderRmd
+    params:
+      lParams: lParams
       strOutputDir: strOutputDir
-      strOutputFile: "test.html"
+      strOutputFile: ID
+      strInputPath: strInputPath
+
+

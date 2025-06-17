@@ -1,6 +1,9 @@
 ---
 title: "QTL0001 - Ineligibilty"
 ---
+
+# QTL0001 - Ineligibility
+
 ## Study Overview
 ```{r, echo=FALSE}
 QTL_Overview(dfResults = qtl0001_params$dfResults,
