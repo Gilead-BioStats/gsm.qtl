@@ -5,6 +5,16 @@ meta:
   Name: QTL Report
   Description: A report summarizing QTL
 spec:
+  Mapped_STUDCOMP:
+    _all:
+      required: true
+  Mapped_SUBJ:
+    studyid:
+      type: character
+    subjid:
+      type: character
+    country:
+      type: character
   Mapped_EXCLUSION:
     _all:
       required: true
@@ -21,10 +31,19 @@ steps:
     params:
       df: Mapped_EXCLUSION
       strQuery: "SELECT * FROM df"
+  - output: qtl0002
+    name: dplyr::left_join
+    params:
+      'x': Mapped_STUDCOMP
+      'y': Mapped_SUBJ
+      'by':
+        - 'studyid'
+        - 'subjid'
   - output: reporting_listings
     names: list
     params:
       'qtl0001': qtl0001
+      'qtl0002': qtl0002
   - output: all_reportingResults
     name: gsm.core::RunQuery
     params:
@@ -79,5 +98,3 @@ steps:
       strOutputDir: strOutputDir
       strOutputFile: ID
       strInputPath: strInputPath
-
-
