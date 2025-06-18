@@ -11,13 +11,7 @@ criteria_groupBar <- function(df, varGroupID, strGroupLabel) {
   # Create GG object
   group_criteria_bar <- df %>%
     filter(!is.na(ietestcd_concat) | Source == "Eligibility IPD") %>%
-    mutate(
-      ietestcd_concat = case_when(
-        is.na(ietestcd_concat) ~ "Eligibility IPD",
-        stringr::str_detect(ietestcd_concat, ";") ~ "Multiple",
-        TRUE ~ ietestcd_concat
-      )
-    ) %>%
+    tidyr::separate_longer_delim(ietestcd_concat, ";;;") %>%
     ggplot(., aes(x = ietestcd_concat, fill = !!enexpr(varGroupID),
                   text = paste0(strGroupLabel,": ", !!enexpr(varGroupID),
                                 "\nEligibility Status: ", ietestcd_concat))) +
