@@ -22,24 +22,33 @@ eligibility_groupBar <- function(df, varGroupID, strGroupLabel) {
     dplyr::group_by(!!enexpr(varGroupID), fillcol) %>%
     dplyr::summarize(totals = n()) %>%
     ungroup() %>%
-    ggplot(., aes(y = !!enexpr(varGroupID),  fill = fillcol, x = totals,
-                  text = paste0("Count: ", totals,
-                                "\n", strGroupLabel ,": ", !!enexpr(varGroupID),
-                                "\nEligibility Status: ", fillcol))
-    ) +
+    ggplot(., aes(
+      y = !!enexpr(varGroupID), fill = fillcol, x = totals,
+      text = paste0(
+        "Count: ", totals,
+        "\n", strGroupLabel, ": ", !!enexpr(varGroupID),
+        "\nEligibility Status: ", fillcol
+      )
+    )) +
     geom_bar(stat = "identity") +
     labs(y = strGroupLabel, x = "Participant Count", fill = "Eligibility", title = paste0("Participant Count by ", strGroupLabel)) +
-    scale_fill_manual(values = c("Ineligible" = "#FF5859",
-                                 "No Eligibility Risk" = "#00BFC4",
-                                 "Neither" = "#7CAE00")) +
+    scale_fill_manual(values = c(
+      "Ineligible" = "#FF5859",
+      "No Eligibility Risk" = "#00BFC4",
+      "Neither" = "#7CAE00"
+    )) +
     theme_classic()
 
   # Create the plotly object
   x <- plotly::ggplotly(group_bar, tooltip = c("text")) %>%
-    layout(margin = list(l = 50, r = 50, b = 150, t = 50),
-           annotations = list(x = 1, y = -0.5, text = paste0("Note: Excludes ", tolower(strGroupLabel), "(s)", " with no ineligible participants."),
-                              xref='paper', yref='paper', showarrow = F,
-                              xanchor='right', yanchor='auto', xshift=0, yshift=0,
-                              font = list(size = 10)))
+    layout(
+      margin = list(l = 50, r = 50, b = 150, t = 50),
+      annotations = list(
+        x = 1, y = -0.5, text = paste0("Note: Excludes ", tolower(strGroupLabel), "(s)", " with no ineligible participants."),
+        xref = "paper", yref = "paper", showarrow = F,
+        xanchor = "right", yanchor = "auto", xshift = 0, yshift = 0,
+        font = list(size = 10)
+      )
+    )
   return(x)
 }

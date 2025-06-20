@@ -31,5 +31,6 @@ globalVariables(
     "subjid",
     "tooltip_text",
     "totals",
-    "upper_funnel")
+    "upper_funnel"
+  )
 )

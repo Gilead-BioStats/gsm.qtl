@@ -21,20 +21,20 @@
 #'
 
 Report_QTL <- function(
-    dfResults = NULL,
-    dfGroups = NULL,
-    lListings = NULL,
-    strOutputDir = getwd(),
-    strOutputFile = NULL,
-    strInputPath =  system.file("report", "Report_QTL.Rmd", package = "gsm.qtl")
+  dfResults = NULL,
+  dfGroups = NULL,
+  lListings = NULL,
+  strOutputDir = getwd(),
+  strOutputFile = NULL,
+  strInputPath = system.file("report", "Report_QTL.Rmd", package = "gsm.qtl")
 ) {
   rlang::check_installed("rmarkdown", reason = "to run `Report_QTL()`")
   rlang::check_installed("knitr", reason = "to run `Report_QTL()`")
 
   rmarkdown::render(
-    input =  strInputPath,
+    input = strInputPath,
     output_file = file.path(strOutputDir, strOutputFile),
-    params =  list(
+    params = list(
       dfResults = dfResults,
       dfGroups = dfGroups,
       lListings = lListings

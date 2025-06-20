@@ -18,14 +18,14 @@
 #' @noRd
 
 Widget_BarChartQTL <- function(
-    dfResults,
-    lMetric = NULL,
-    dfGroups = NULL,
-    vThreshold = NULL,
-    strOutcome = "Score",
-    bAddGroupSelect = TRUE,
-    strShinyGroupSelectID = "GroupID",
-    bDebug = FALSE
+  dfResults,
+  lMetric = NULL,
+  dfGroups = NULL,
+  vThreshold = NULL,
+  strOutcome = "Score",
+  bAddGroupSelect = TRUE,
+  strShinyGroupSelectID = "GroupID",
+  bDebug = FALSE
 ) {
   gsm.core::stop_if(cnd = !is.data.frame(dfResults), message = "dfResults is not a data.frame")
   gsm.core::stop_if(cnd = !(is.null(lMetric) || (is.list(lMetric) && !is.data.frame(lMetric))), message = "lMetric must be a list, but not a data.frame")
@@ -105,13 +105,13 @@ Widget_BarChartQTL <- function(
 #' @name Widget_BarChart-shiny
 #'
 #' @noRd
-Widget_BarChartOutputQTL  <- function(outputId, width = "100%", height = "400px") {
+Widget_BarChartOutputQTL <- function(outputId, width = "100%", height = "400px") {
   htmlwidgets::shinyWidgetOutput(outputId, "Widget_BarChartQTL", width, height, package = "gsm.qtl")
 }
 
 #' @rdname Widget_BarChart-shiny
 #' @noRd
-renderWidget_BarChartQTL  <- function(expr, env = parent.frame(), quoted = FALSE) {
+renderWidget_BarChartQTL <- function(expr, env = parent.frame(), quoted = FALSE) {
   if (!quoted) {
     expr <- substitute(expr)
   } # force quoted
