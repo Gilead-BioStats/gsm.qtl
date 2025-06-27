@@ -1,0 +1,73 @@
+meta:
+  Type: Analysis
+  ID: qtl0002_study
+  GroupLevel: Study
+  Abbreviation: SDSC
+  Metric: Study Discontinuation Rate
+  Numerator: Subjects Discontinued - Study
+  Denominator: Enrolled Subjects
+  Model: Normal Approximation
+  Score: Adjusted Z-Score
+  AnalysisType: binary
+  nPropRate: 0.05 # insert historical data
+  nNumDeviations: 3
+spec:
+  Mapped_SUBJ:
+    subjid:
+      type: character
+    studyid:
+      type: character
+    invid:
+      type: character
+  Mapped_STUDCOMP:
+    studyid:
+      type: character
+    invid:
+      type: character
+    subjid:
+      type: character
+    compyn:
+      type: character
+    compreas:
+      type: character
+steps:
+  - output: Temp_DROPOUT
+    name: gsm.qtl::discontinuation_map_reasons
+    params:
+      df: Mapped_STUDCOMP
+      strReasons:
+        - 'WITHDRAWAL BY SUBJECT'
+        - 'NON-COMPLIANCE WITH STUDY DRUG'
+        - 'PROTOCOL VIOLATION'
+        - 'PHYSICIAN DECISION'
+        - 'Withdrew Consent'
+        - 'Death'
+        - 'Lost to Follow-Up'
+  - output: Analysis_Input
+    name: gsm.core::Input_Rate
+    params:
+      dfSubjects: Mapped_SUBJ
+      dfNumerator: Temp_DROPOUT
+      dfDenominator: Mapped_SUBJ
+      strSubjectCol: subjid
+      strGroupCol: studyid
+      strGroupLevel: GroupLevel
+      strNumeratorMethod: Count
+      strDenominatorMethod: Count
+  - output: Analysis_Transformed
+    name: gsm.core::Transform_Rate
+    params:
+      dfInput: Analysis_Input
+  - output: Analysis_Summary
+    name: Analyze_OneSideProp
+    params:
+      dfTransformed: Analysis_Transformed
+      nPropRate: nPropRate
+      nNumDeviations: nNumDeviations
+  - output: lAnalysis
+    name: list
+    params:
+      ID: ID
+      Analysis_Input: Analysis_Input
+      Analysis_Transformed: Analysis_Transformed
+      Analysis_Summary: Analysis_Summary
