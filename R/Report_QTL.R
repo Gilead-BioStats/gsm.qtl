@@ -4,7 +4,7 @@
 #' `r lifecycle::badge("stable")`
 #'
 #' This function generates a QTL report based on the provided inputs.
-#'
+#' @param strInputPath Path to template of the report
 #' @param strOutputDir The output directory path for the generated report. If not provided,
 #'  the report will be saved in the current working directory.
 #' @param strOutputFile The output file name for the generated report. If not provided,
@@ -21,23 +21,25 @@
 #'
 
 Report_QTL <- function(
-    dfResults = NULL,
-    dfGroups = NULL,
-    lListings = NULL,
-    strOutputDir = getwd(),
-    strOutputFile = NULL
+  dfResults = NULL,
+  dfGroups = NULL,
+  lListings = NULL,
+  strOutputDir = getwd(),
+  strOutputFile = NULL,
+  strInputPath = system.file("report", "Report_QTL.Rmd", package = "gsm.qtl")
 ) {
   rlang::check_installed("rmarkdown", reason = "to run `Report_QTL()`")
   rlang::check_installed("knitr", reason = "to run `Report_QTL()`")
 
-  RenderRmd(
-    strInputPath = system.file("report", "Report_QTL.Rmd", package = "gsm.qtl"),
-    strOutputFile = strOutputFile,
-    strOutputDir = strOutputDir,
-    lParams = list(
+  rmarkdown::render(
+    input = strInputPath,
+    output_file = file.path(strOutputDir, strOutputFile),
+    params = list(
       dfResults = dfResults,
       dfGroups = dfGroups,
       lListings = lListings
-    )
+    ),
+    intermediates_dir = tempdir(),
+    envir = new.env(parent = globalenv())
   )
 }

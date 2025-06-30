@@ -1,11 +1,11 @@
-test_that("Analyze One Side Prop works for Study",{
+test_that("Analyze One Side Prop works for Study", {
   test_transformed <- tibble::tribble(
     ~GroupID, ~GroupLevel, ~Numerator, ~Denominator, ~Metric,
-       "ABC",     "Study",         25,          100,    0.25
+    "ABC", "Study", 25, 100, 0.25
   )
 
   res <- Analyze_OneSideProp(test_transformed, nPropRate = 0.01, nNumDeviations = 3)
-  expect_equal(c(names(test_transformed), "Flag", "Score","upper_funnel", "flatline"), names(res))
+  expect_equal(c(names(test_transformed), "Flag", "Score", "upper_funnel", "flatline"), names(res))
   expect_equal(res %>% filter(GroupID == "ABC") %>% pull(Flag), 2)
 })
 
@@ -26,5 +26,3 @@ test_that("Analyze One Side Prop works for Study",{
 #   expect_equal(res %>% filter(GroupID == "Upper_funnel") %>% pull(Metric),
 #                0.01 + 3*sqrt(0.01*0.99/300))
 # })
-
-

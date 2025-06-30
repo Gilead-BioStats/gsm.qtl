@@ -1,6 +1,9 @@
 ---
-title: "QTL0002 - Premature Discontinuation"
+title: "QTL0002 - Premature Study Discontinuation"
 ---
+
+# QTL0002 - Premature Study Discontinuation
+
 ## Study Overview
 ```{r, echo=FALSE}
 QTL_Overview(dfResults = qtl0002_params$dfResults,

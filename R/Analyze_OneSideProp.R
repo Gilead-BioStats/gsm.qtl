@@ -28,7 +28,7 @@
 #' # Binary
 #' dftransformed <- tibble::tribble(
 #'   ~GroupID, ~GroupLevel, ~Numerator, ~Denominator, ~Metric,
-#'   "ABC",     "Study",         25,          100,    0.25
+#'   "ABC", "Study", 25, 100, 0.25
 #' )
 #'
 #' dfAnalyzed <- Analyze_OneSideProp(dftransformed, nPropRate = 0.01, nNumDeviations = 3)
@@ -36,9 +36,9 @@
 #' @export
 
 Analyze_OneSideProp <- function(
-    dfTransformed,
-    nPropRate = 0.1,
-    nNumDeviations = 3
+  dfTransformed,
+  nPropRate = 0.1,
+  nNumDeviations = 3
 ) {
   stop_if(cnd = !is.data.frame(dfTransformed), message = "dfTransformed is not a data.frame")
   stop_if(
@@ -52,34 +52,38 @@ Analyze_OneSideProp <- function(
   # This df should always be the same (i.e. equivalent) of study level
   Upper_funnel <- dfTransformed %>%
     group_by(GroupLevel) %>%
-    summarize(GroupID = "Upper_funnel",
-              Numerator = sum(Numerator),
-              Denominator = sum(Denominator)) %>%
+    summarize(
+      GroupID = "Upper_funnel",
+      Numerator = sum(Numerator),
+      Denominator = sum(Denominator)
+    ) %>%
     ungroup() %>%
-    mutate(Metric = nPropRate + nNumDeviations*sqrt(nPropRate*(1-nPropRate)/sum(.data$Denominator))) # To plot the funnel need funnel data under metric
+    mutate(Metric = nPropRate + nNumDeviations * sqrt(nPropRate * (1 - nPropRate) / sum(.data$Denominator))) # To plot the funnel need funnel data under metric
 
   flat_line <- Upper_funnel %>%
-    mutate(GroupID = "Flatline",
-           Metric = nPropRate)
+    mutate(
+      GroupID = "Flatline",
+      Metric = nPropRate
+    )
 
   # Bind the upper funnel back together with original dataframe
   dfScore <- dplyr::bind_rows(dfTransformed, Upper_funnel, flat_line) %>%
     mutate(
       vMu = nPropRate, # calculate one-sided proportion score against a historic rate
       z_0 = ifelse(.data$vMu == 0 | .data$vMu == 1,
-                   0,
-                   (.data$Metric - .data$vMu) /
-                     sqrt(.data$vMu * (1 - .data$vMu) / .data$Denominator)
+        0,
+        (.data$Metric - .data$vMu) /
+          sqrt(.data$vMu * (1 - .data$vMu) / .data$Denominator)
       ),
       # Unsure if a dispersion correction is necessary especially at a study-level?
-      upper_funnel = nPropRate + nNumDeviations*sqrt(nPropRate*(1-nPropRate)/sum(.data$Denominator))
+      upper_funnel = nPropRate + nNumDeviations * sqrt(nPropRate * (1 - nPropRate) / sum(.data$Denominator))
       # Additional cutoffs can be made to compare against `Metric` for flagging
     ) %>%
     mutate(Flag = case_when(
       Metric >= upper_funnel | GroupID == "Upper_funnel" ~ 2,
       (Metric >= vMu & Metric < upper_funnel) | GroupID == "Flatline" ~ 1,
-      TRUE ~ 0)
-    ) # Custom flag based on upper-funnel
+      TRUE ~ 0
+    )) # Custom flag based on upper-funnel
 
   # dfAnalyzed -----------------------------------------------------------------
   dfAnalyzed <- dfScore %>%

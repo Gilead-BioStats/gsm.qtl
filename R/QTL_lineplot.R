@@ -6,11 +6,11 @@
 #'
 #' @returns A `plotly` object
 #' @export
-QTL_lineplot <- function(dfResults,
-                         strQTL) {
+QTL_lineplot <- function(dfResults, strQTL) {
   df_plot <- dfResults %>%
     filter(GroupLevel == "Study") %>%
     select(GroupID, Numerator, Denominator, Metric, SnapshotDate) %>%
+    mutate(across(Numerator:Metric, as.numeric)) %>%
     mutate(SnapshotDate = as.Date(SnapshotDate)) %>%
     # Add group type
     mutate(group_type = case_when(
@@ -18,8 +18,6 @@ QTL_lineplot <- function(dfResults,
       GroupID == "Flatline" ~ "Nominal Threshold",
       TRUE ~ strQTL
     ))
-
-
 
   # Pivot thresholds to wide format
   thresholds <- df_plot %>%
@@ -40,22 +38,10 @@ QTL_lineplot <- function(dfResults,
         TRUE ~ "green"
       ),
       tooltip_text = case_when(
-        group_type != strQTL ~ paste0(
-          group_type,
-          "\nDate: ", SnapshotDate,
-          "\nMetric: ", round(Metric, 3)
-        ),
-        TRUE ~ paste0(
-          "Study: ", GroupID,
-          "\nDate: ", SnapshotDate,
-          "\nMetric: ", round(Metric, 3),
-          "\nNumerator: ", Numerator,
-          "\nDenominator: ", Denominator
-        )
+        group_type != strQTL ~ paste0(group_type, "\nDate: ", SnapshotDate, "\nMetric: ", round(Metric, 2)),
+        TRUE ~ paste0("Study: ", GroupID, "\nDate: ", SnapshotDate, "\nMetric: ", round(Metric, 2), "\nNumerator: ", Numerator, "\nDenominator: ", Denominator)
       )
     )
-
-
 
   # Build ggplot
   p <- ggplot(
@@ -86,7 +72,6 @@ QTL_lineplot <- function(dfResults,
       size = 1,
       show.legend = FALSE
     ) +
-
     # Combine all colors in scale but only show legend for line groups
     scale_color_manual(
       values = c(
@@ -113,7 +98,6 @@ QTL_lineplot <- function(dfResults,
         strQTL = 0.75
       )
     ) +
-
     # scale_x_date(date_labels = "%Y-%m-%d", date_breaks = "1 month") +
     theme_minimal() +
     theme(
@@ -124,10 +108,5 @@ QTL_lineplot <- function(dfResults,
       y = strQTL,
       x = "Snapshot Date"
     )
-
-
-
-
-
   ggplotly(p, tooltip = "text")
 }

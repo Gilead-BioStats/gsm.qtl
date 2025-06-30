@@ -4,7 +4,7 @@
 #'
 #' @returns A `gt` object
 #' @export
-eligibility_listing <- function(df){
+eligibility_listing <- function(df) {
   df %>%
     filter(Source != "Neither") %>%
     select(invid, country, subjid, Source, ietestcd_concat, dvdtm, eligibility_criteria) %>%
@@ -14,7 +14,7 @@ eligibility_listing <- function(df){
       sep = ";;;",
       fill = "right"
     ) %>%
-    mutate_at(vars(starts_with("PD Date")) , ~substr(.x, 1, 10)) %>%
+    mutate_at(vars(starts_with("PD Date")), ~ substr(.x, 1, 10)) %>%
     tidyr::separate(
       eligibility_criteria,
       into = paste0("PD Term", seq_len(max(sapply(strsplit(df$eligibility_criteria, ";;;"), length)))),
@@ -32,7 +32,9 @@ eligibility_listing <- function(df){
       locations = cells_body(columns = c(`Which I/E`, starts_with("PD Term"))),
       fn = function(x) {
         vapply(x, function(txt) {
-          if (is.na(txt) || !nzchar(txt)) return("")
+          if (is.na(txt) || !nzchar(txt)) {
+            return("")
+          }
 
           # Tooltip: escape to be safe
           tooltip <- htmlEscape(txt)
@@ -43,7 +45,7 @@ eligibility_listing <- function(df){
 
           display_html <- if (should_truncate) {
             # You could optionally also truncate the HTML, but that's tricky.
-            txt  # just use full HTML; visual cutoff will be via CSS
+            txt # just use full HTML; visual cutoff will be via CSS
           } else {
             txt
           }

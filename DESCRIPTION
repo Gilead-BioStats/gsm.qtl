@@ -1,6 +1,6 @@
 Package: gsm.qtl
 Title: Good Statistical Monitoring QTLs
-Version: 0.0.1
+Version: 0.1.0
 Authors@R: c(
     person("Zhongkai", "Wang", , "Zhongkai.Wang6@gilead.com", role = c("aut", "cre"),
             comment = c(ORCID = "0000-0002-1883-2265")),
@@ -22,8 +22,8 @@ Imports:
   dplyr,
   forcats,
   ggplot2,
-  gsm.core,
-  gsm.kri,
+  gsm.core (>= 1.1.2),
+  gsm.kri (>= 1.2.0),
   gt,
   htmlwidgets,
   jsonlite,
@@ -35,8 +35,8 @@ Imports:
   utils
 Suggests: 
   glue,
-  gsm.mapping,
-  gsm.reporting,
+  gsm.mapping (>= 1.1.0),
+  gsm.reporting (>= 1.1.1),
   htmltools,
   knitr,
   lubridate,
