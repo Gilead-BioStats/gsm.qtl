@@ -8,8 +8,7 @@
 discontinuation_map_reasons <- function(df, strReasons) {
   filtered_df <- df %>%
     dplyr::filter(
-      compreas %in% strReasons,
-      compyn %in% c("N", "")
+      compreas %in% strReasons
     )
   return(filtered_df)
 }
