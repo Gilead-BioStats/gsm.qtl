@@ -37,7 +37,7 @@ jobs:
           extra-packages: any::pkgdown, local::.
           needs: website
 
-            - name: Generate sample reports
+      - name: Generate sample reports
         shell: Rscript {0}
         run: |
           devtools::load_all()
