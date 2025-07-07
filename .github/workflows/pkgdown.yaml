@@ -40,9 +40,9 @@ jobs:
       - name: Generate sample reports
         shell: Rscript {0}
         run: |
-          devtools::load_all()
           dir.create(here::here("pkgdown", "assets"), recursive = TRUE)
           library(gsm.kri)
+          library(gsm.qtl)
 
           gsm.kri::RenderRmd(
             lParams = gsm.qtl:::example_lparams,
