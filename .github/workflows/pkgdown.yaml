@@ -37,6 +37,20 @@ jobs:
           extra-packages: any::pkgdown, local::.
           needs: website
 
+            - name: Generate sample reports
+        shell: Rscript {0}
+        run: |
+          devtools::load_all()
+          dir.create(here::here("pkgdown", "assets"), recursive = TRUE)
+          library(gsm.kri)
+
+          gsm.kri::RenderRmd(
+            lParams = gsm.qtl:::example_lparams,
+            strOutputDir = here::here("pkgdown", "assets"),
+            strOutputFile = "report_qtl.html",
+            strInputPath = system.file("report/Report_QTL.Rmd", package = "gsm.qtl")
+          )
+
       - name: Deploy pkgdown
         run: |
           git config --local user.email "actions@github.com"

@@ -67,3 +67,9 @@ gsm.kri::RenderRmd(
   strOutputFile = "test.html",
   strInputPath = system.file("report/Report_QTL.Rmd", package = "gsm.qtl")
 )
+# example_lparams <- list(
+# dfResults = all_reportingResults,
+# dfGroups = all_reportingGroups,
+# lListings = report_listings
+# )
+# usethis::use_data(example_lparams, internal = TRUE)

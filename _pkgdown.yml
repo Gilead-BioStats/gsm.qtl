@@ -1,4 +1,15 @@
 url: https://gilead-biostats.github.io/gsm.qtl
 template:
   bootstrap: 5
+  bootswatch: yeti
 
+navbar:
+  structure:
+    left: [Reports, reference, news]
+    right: [search, github]
+  components:
+    Reports:
+      text: Sample Reports
+      menu:
+        - text: QTL Report
+          href: report_qtl.html
