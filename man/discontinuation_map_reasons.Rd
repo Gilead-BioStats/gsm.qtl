@@ -4,12 +4,16 @@
 \alias{discontinuation_map_reasons}
 \title{Filter Discontinuation Reasons in data.frame}
 \usage{
-discontinuation_map_reasons(df, strReasons)
+discontinuation_map_reasons(
+  df,
+  yaml_path = system.file("workflow", "0_other", "disc_reasons.yaml", package =
+    "gsm.qtl")
+)
 }
 \arguments{
-\item{df}{A \code{data.frame} derived from mapping STUDCOMP}
+\item{df}{A \code{data.frame} that contains discontiuation reasons}
 
-\item{strReasons}{A \code{string} of reasons for discontinuation}
+\item{yaml_path}{A \code{string} that denotes path to yaml file that contains discontinuation reasons}
 }
 \value{
 A \code{data.frame}

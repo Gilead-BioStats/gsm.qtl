@@ -1,5 +1,5 @@
 #' Filter Discontinuation Reasons in data.frame
-#'
+#' @param df A `data.frame` that contains discontiuation reasons
 #' @param yaml_path A `string` that denotes path to yaml file that contains discontinuation reasons
 #'
 #' @returns A `data.frame`

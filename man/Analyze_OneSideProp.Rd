@@ -40,7 +40,7 @@ one-sided Z proportion test.
 # Binary
 dftransformed <- tibble::tribble(
   ~GroupID, ~GroupLevel, ~Numerator, ~Denominator, ~Metric,
-  "ABC",     "Study",         25,          100,    0.25
+  "ABC", "Study", 25, 100, 0.25
 )
 
 dfAnalyzed <- Analyze_OneSideProp(dftransformed, nPropRate = 0.01, nNumDeviations = 3)
