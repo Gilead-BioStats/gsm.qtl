@@ -1,6 +1,6 @@
 meta:
   Type: Analysis
-  ID: qtl0002_study
+  ID: qtl0002
   GroupLevel: Study
   Abbreviation: SDSC
   Metric: Study Discontinuation Rate

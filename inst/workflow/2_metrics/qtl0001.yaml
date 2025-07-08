@@ -1,6 +1,6 @@
 meta:
   Type: Analysis
-  ID: qtl0001_study
+  ID: qtl0001
   GroupLevel: Study
   Abbreviation: IE
   Metric: Inclusion/Exclusion Violation Rate
