@@ -29,13 +29,16 @@ spec:
     compreas:
       type: character
 steps:
-  - output: disc_reasons
-    name: gsm.qtl::discontinuation_map_reasons
+  - output: disc_reasons_path
+    name: system.file
+    params:
+      ...: "workflow/0_other/disc_reasons.yaml"
+      package: "gsm.qtl"
   - output: Temp_DROPOUT
-    name: gsm.core::RunQuery
+    name: gsm.qtl::discontinuation_map_reasons
     params:
       df: Mapped_STUDCOMP
-      strReasons: disc_reasons
+      yaml_path: disc_reasons_path
   - output: Analysis_Input
     name: gsm.core::Input_Rate
     params:

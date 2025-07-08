@@ -4,11 +4,8 @@
 #'
 #' @returns A `data.frame`
 #' @export
-discontinuation_map_reasons <- function(yaml_path = system.file("workflow", "0_other", "disc_reasons.yaml", package = "gsm.qtl")) {
+discontinuation_map_reasons <- function(df, yaml_path = system.file("workflow", "0_other", "disc_reasons.yaml", package = "gsm.qtl")) {
   yaml_data <- yaml::read_yaml(yaml_path)
   reasons <- yaml_data$steps[[1]]$params$reasons
-
-  # Format as indexed list
-  indexed <- sprintf(reasons)
-  return(indexed)
+  df %>% filter(compreas %in% reasons)
 }

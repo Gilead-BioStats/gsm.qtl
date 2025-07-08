@@ -5,7 +5,7 @@ library(gsm.core)
 library(gsm.kri)
 library(purrr)
 library(dplyr)
-devtools::load_all()
+library(gsm.qtl)
 set.seed(1234)
 
 # Single Study
@@ -27,7 +27,7 @@ mappings_wf <- gsm.core::MakeWorkflowList(
   strPackage = "gsm.mapping"
 )
 mappings_spec <- gsm.mapping::CombineSpecs(mappings_wf)
-metrics_wf <- gsm.core::MakeWorkflowList(strNames = c("qtl0001_study", "qtl0002_study"), strPath = "inst/workflow/2_metrics", strPackage = "gsm.qtl")
+metrics_wf <- gsm.core::MakeWorkflowList(strNames = c("qtl0001", "qtl0002"), strPath = "workflow/2_metrics", "gsm.qtl")
 reporting_wf <- gsm.core::MakeWorkflowList(strNames = c("Results", "Groups"), strPath = "workflow/3_reporting", strPackage = "gsm.reporting")
 
 lRaw <- map_depth(ie_data, 1, gsm.mapping::Ingest, mappings_spec)

@@ -31,7 +31,7 @@ steps:
     params:
       df: Mapped_EXCLUSION
       strQuery: "SELECT * FROM df"
-  - output: qtl0002
+  - output: qtl0002_preprocess
     name: dplyr::left_join
     params:
       'x': Mapped_STUDCOMP
@@ -39,6 +39,16 @@ steps:
       'by':
         - 'studyid'
         - 'subjid'
+  - output: disc_reasons_path
+    name: system.file
+    params:
+      ...: "workflow/0_other/disc_reasons.yaml"
+      package: "gsm.qtl"
+  - output: qtl0002
+    name: gsm.qtl::discontinuation_map_reasons
+    params:
+      df: qtl0002_preprocess
+      yaml_path: disc_reasons_path
   - output: reporting_listings
     names: list
     params:
