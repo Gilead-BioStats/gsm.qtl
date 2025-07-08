@@ -29,18 +29,13 @@ spec:
     compreas:
       type: character
 steps:
-  - output: Temp_DROPOUT
+  - output: disc_reasons
     name: gsm.qtl::discontinuation_map_reasons
+  - output: Temp_DROPOUT
+    name: gsm.core::RunQuery
     params:
       df: Mapped_STUDCOMP
-      strReasons:
-        - 'WITHDRAWAL BY SUBJECT'
-        - 'NON-COMPLIANCE WITH STUDY DRUG'
-        - 'PROTOCOL VIOLATION'
-        - 'PHYSICIAN DECISION'
-        - 'Withdrew Consent'
-        - 'Death'
-        - 'Lost to Follow-Up'
+      strReasons: disc_reasons
   - output: Analysis_Input
     name: gsm.core::Input_Rate
     params:
