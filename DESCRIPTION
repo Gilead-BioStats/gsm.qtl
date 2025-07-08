@@ -29,9 +29,11 @@ Imports:
   plotly,
   purrr,
   rlang,
+  stringr,
   tidyr,
   tibble,
-  utils
+  utils,
+  yaml
 Suggests: 
   glue,
   gsm.mapping (>= 1.1.0),
@@ -40,7 +42,6 @@ Suggests:
   knitr,
   lubridate,
   rmarkdown,
-  stringr,
   testthat (>= 3.0.0)
 Remotes:
     gsm.core=Gilead-BioStats/gsm.core@main,

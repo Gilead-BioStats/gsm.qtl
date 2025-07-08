@@ -14,7 +14,9 @@
 #' @importFrom plotly ggplotly layout
 #' @importFrom purrr map
 #' @importFrom rlang check_installed enexpr
+#' @importFrom stringr str_detect
 #' @importFrom tidyr pivot_longer pivot_wider separate unite separate_longer_delim
 #' @importFrom utils globalVariables
+#' @importFrom yaml read_yaml
 ## usethis namespace: end
 NULL
