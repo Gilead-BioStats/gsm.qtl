@@ -92,7 +92,7 @@ one-sided Z proportion test.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Binary</span></span></span>
 <span class="r-in"><span><span class="va">dftransformed</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html" class="external-link">tribble</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>  <span class="op">~</span><span class="va">GroupID</span>, <span class="op">~</span><span class="va">GroupLevel</span>, <span class="op">~</span><span class="va">Numerator</span>, <span class="op">~</span><span class="va">Denominator</span>, <span class="op">~</span><span class="va">Metric</span>,</span></span>
-<span class="r-in"><span>  <span class="st">"ABC"</span>,     <span class="st">"Study"</span>,         <span class="fl">25</span>,          <span class="fl">100</span>,    <span class="fl">0.25</span></span></span>
+<span class="r-in"><span>  <span class="st">"ABC"</span>, <span class="st">"Study"</span>, <span class="fl">25</span>, <span class="fl">100</span>, <span class="fl">0.25</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">dfAnalyzed</span> <span class="op">&lt;-</span> <span class="fu">Analyze_OneSideProp</span><span class="op">(</span><span class="va">dftransformed</span>, nPropRate <span class="op">=</span> <span class="fl">0.01</span>, nNumDeviations <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></span>

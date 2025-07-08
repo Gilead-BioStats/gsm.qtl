@@ -43,7 +43,11 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">discontinuation_map_reasons</span><span class="op">(</span><span class="va">df</span>, <span class="va">strReasons</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">discontinuation_map_reasons</span><span class="op">(</span></span>
+<span>  <span class="va">df</span>,</span>
+<span>  yaml_path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"workflow"</span>, <span class="st">"0_other"</span>, <span class="st">"disc_reasons.yaml"</span>, package <span class="op">=</span></span>
+<span>    <span class="st">"gsm.qtl"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -51,11 +55,11 @@
 
 
 <dl><dt id="arg-df">df<a class="anchor" aria-label="anchor" href="#arg-df"></a></dt>
-<dd><p>A <code>data.frame</code> derived from mapping STUDCOMP</p></dd>
+<dd><p>A <code>data.frame</code> that contains discontiuation reasons</p></dd>
 
 
-<dt id="arg-strreasons">strReasons<a class="anchor" aria-label="anchor" href="#arg-strreasons"></a></dt>
-<dd><p>A <code>string</code> of reasons for discontinuation</p></dd>
+<dt id="arg-yaml-path">yaml_path<a class="anchor" aria-label="anchor" href="#arg-yaml-path"></a></dt>
+<dd><p>A <code>string</code> that denotes path to yaml file that contains discontinuation reasons</p></dd>
 
 </dl></div>
     <div class="section level2">
