@@ -15,7 +15,7 @@
 #'   `Numerator`, `Denominator`, and `Metric`. For more details see the Data
 #'   Model vignette: `vignette("DataModel", package = "gsm.core")`. For this
 #'   function, `dfTransformed` should typically be created using
-#'   [Transform_Rate()].
+#'   [`gsm.core::Transform_Rate()`].
 #' @param nPropRate a numeric, between 0 and 1, that represents a proportion of
 #' comparison, e.g. a historic screen failure rate
 #' @param nNumDeviations a numeric, e.g. '3', standard deviations away from the value
