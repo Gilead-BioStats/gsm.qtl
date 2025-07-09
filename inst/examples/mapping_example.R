@@ -44,7 +44,6 @@ reporting <- map2(reporting, dates, ~{
 
 # Bind multiple snapshots of data together
 all_reportingResults <- do.call(dplyr::bind_rows, lapply(reporting, function(x) x$Reporting_Results)) %>%
-  # filter(MetricID == "Analysis_qtl0001_study") %>%
   select(-c(upper_funnel, flatline))
 
 
@@ -72,4 +71,4 @@ gsm.kri::RenderRmd(
 # dfGroups = all_reportingGroups,
 # lListings = report_listings
 # )
-# usethis::use_data(example_lparams, internal = TRUE)
+# usethis::use_data(example_lparams, internal = TRUE, overwrite = TRUE)
