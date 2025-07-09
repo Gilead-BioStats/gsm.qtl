@@ -47,7 +47,7 @@ if("Analysis_qtl0001_study" %in% dfResults$MetricID) {
     system.file("report", "QTL0001.Rmd", package = "gsm.qtl"),
     envir = list(
       qtl0001_params = list(
-        dfResults = dfResults %>% filter(MetricID == "Analysis_qtl0001_study"),
+        dfResults = dfResults %>% filter(MetricID == "Analysis_qtl0001"),
         dfListing = lListings$qtl0001,
         latest_snapshot = latest_snapshot
       )
@@ -66,7 +66,7 @@ if("Analysis_qtl0002_study" %in% dfResults$MetricID) {
     system.file("report", "QTL0002.Rmd", package = "gsm.qtl"),
     envir = list(
       qtl0002_params = list(
-        dfResults = dfResults %>% filter(MetricID == "Analysis_qtl0002_study"),
+        dfResults = dfResults %>% filter(MetricID == "Analysis_qtl0002"),
         dfListing = lListings$qtl0002,
         latest_snapshot = latest_snapshot
       )
