@@ -42,7 +42,7 @@ date: "Snapshot Date: `r latest_snapshot`"
 
 ```{r QTL0001 Eligibility, echo = FALSE, results = 'asis'}
 # Feed and knit just QTL0001 using child rmd support
-if("Analysis_qtl0001_study" %in% dfResults$MetricID) {
+if("Analysis_qtl0001" %in% dfResults$MetricID) {
   qtl0001 <- knitr::knit_child(
     system.file("report", "QTL0001.Rmd", package = "gsm.qtl"),
     envir = list(
@@ -61,7 +61,7 @@ if("Analysis_qtl0001_study" %in% dfResults$MetricID) {
 
 ```{r QTL0002 Premature Study Discontinuation, echo = FALSE, results = 'asis',}
 # Feed and knit just QTL0002 using child rmd support
-if("Analysis_qtl0002_study" %in% dfResults$MetricID) {
+if("Analysis_qtl0002" %in% dfResults$MetricID) {
   qtl0002 <- knitr::knit_child(
     system.file("report", "QTL0002.Rmd", package = "gsm.qtl"),
     envir = list(
