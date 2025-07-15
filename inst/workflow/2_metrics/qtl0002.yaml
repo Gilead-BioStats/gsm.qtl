@@ -30,11 +30,10 @@ spec:
       type: character
 steps:
   - output: disc_reasons_path
-    name: system.file
+    name: c
     params:
-      ...: "workflow/0_other/disc_reasons.yaml"
-      package: "gsm.qtl"
-  - output: Temp_DROPOUT
+      ...: "workflows/0_other/disc_reasons.yaml" # study specific, can grab the default in gsm.qtl too
+  - output: Mapped_DROPOUT
     name: gsm.qtl::discontinuation_map_reasons
     params:
       df: Mapped_STUDCOMP
