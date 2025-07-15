@@ -10,7 +10,7 @@
 reasons_groupBar <- function(df, varGroupID, strGroupLabel) {
   # Create GG object
   group_reasons_bar <- df %>%
-    filter(compyn == "N") %>%
+    # filter(compyn == "N") %>%
     ggplot(., aes(
       x = compreas, fill = !!enexpr(varGroupID),
       text = paste0(
