@@ -1,0 +1,68 @@
+meta:
+  Type: Analysis
+  ID: qtl0002
+  GroupLevel: Study
+  Abbreviation: SDSC
+  Metric: Study Discontinuation Rate
+  Numerator: Subjects Discontinued - Study
+  Denominator: Enrolled Subjects
+  Model: Normal Approximation
+  Score: Adjusted Z-Score
+  AnalysisType: binary
+  nPropRate: 0.07 # insert historical data
+  nNumDeviations: 3
+spec:
+  Mapped_SUBJ:
+    subjid:
+      type: character
+    studyid:
+      type: character
+    invid:
+      type: character
+  Mapped_STUDCOMP:
+    studyid:
+      type: character
+    subjid:
+      type: character
+    compyn:
+      type: character
+    compreas:
+      type: character
+steps:
+  - output: disc_reasons_path
+    name: c
+    params:
+      ...:  "tests/testqualification/qualification/qual_workflows/0_other/disc_reasons.yaml"
+  - output: Temp_DROPOUT
+    name: gsm.qtl::discontinuation_map_reasons
+    params:
+      df: Mapped_STUDCOMP
+      yaml_path: disc_reasons_path
+  - output: Analysis_Input
+    name: gsm.core::Input_Rate
+    params:
+      dfSubjects: Mapped_SUBJ
+      dfNumerator: Temp_DROPOUT
+      dfDenominator: Mapped_SUBJ
+      strSubjectCol: subjid
+      strGroupCol: studyid
+      strGroupLevel: GroupLevel
+      strNumeratorMethod: Count
+      strDenominatorMethod: Count
+  - output: Analysis_Transformed
+    name: gsm.core::Transform_Rate
+    params:
+      dfInput: Analysis_Input
+  - output: Analysis_Summary
+    name: Analyze_OneSideProp
+    params:
+      dfTransformed: Analysis_Transformed
+      nPropRate: nPropRate
+      nNumDeviations: nNumDeviations
+  - output: lAnalysis
+    name: list
+    params:
+      ID: ID
+      Analysis_Input: Analysis_Input
+      Analysis_Transformed: Analysis_Transformed
+      Analysis_Summary: Analysis_Summary

@@ -1,0 +1,3 @@
+Spec,Test.ID,Tests,N.Tests,Function.Name,Description,Risk,Impact,Spec.Status,Spec.Comments,Test.Status
+1,1,T1_1,5,Ineligibility Assessment,"Given appropriate raw participant-level data, an Ineligibility Assessment can be done using methods cited in gsm.qtl",High,High,complete,,
+2,1,T2_1,5,Early Discontinuation Assessment,"Given appropriate raw participant-level data, an Early Discontinuation Assessment can be done using methods cited in gsm.qtl",High,High,complete,,

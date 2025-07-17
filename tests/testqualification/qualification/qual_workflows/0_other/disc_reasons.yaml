@@ -1,0 +1,17 @@
+meta:
+  Type: additional mapping
+  ID: disc_reasons
+  file: disc_reasons.yaml
+  output: string
+steps:
+  - output: disc_reasons
+    name: c
+    params:
+      reasons:
+        - 'WITHDRAWAL BY SUBJECT'
+        - 'NON-COMPLIANCE WITH STUDY DRUG'
+        - 'PROTOCOL VIOLATION'
+        - 'PHYSICIAN DECISION'
+        - 'Withdrew Consent'
+        - 'Death'
+        - 'Lost to Follow-Up'
