@@ -23,7 +23,8 @@ yaml_path_custom_metrics <- "tests/testqualification/qualification/qual_workflow
 
 mappings_wf <- gsm.core::MakeWorkflowList(
   strNames =c("SUBJ", "ENROLL", "IE", "PD", "STUDY", "SITE", "COUNTRY", "EXCLUSION", "STUDCOMP"),
-  strPath = yaml_path_custom_mappings
+  strPath = yaml_path_custom_mappings,
+  strPackage = "gsm.qtl"
 )
 
 mappings_spec <- gsm.mapping::CombineSpecs(mappings_wf)
@@ -33,7 +34,8 @@ mapped <- purrr::map_depth(lRaw, 1, ~ gsm.core::RunWorkflows(mappings_wf, .x))
 # mappings_spec <- gsm.mapping::CombineSpecs(mappings_wf)
 metrics_wf <- gsm.core::MakeWorkflowList(
   strNames = c("qtl0001", "qtl0002"),
-  strPath = yaml_path_custom_metrics
+  strPath = yaml_path_custom_metrics,
+  strPackage = "gsm.qtl"
 )
 
 analyzed <- purrr::map_depth(mapped, 1, ~gsm.core::RunWorkflows(metrics_wf, .x))
