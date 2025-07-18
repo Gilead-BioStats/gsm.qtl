@@ -40,13 +40,64 @@ source(here::here("inst", "qualification", "test_cases.R"))
 spec_df <- import_specs()
 ```
 
-# Qualification Test Results
+```{r}
+qual_specs_orig <- read.csv(system.file("qualification", "qualification_specs.csv", package = "gsm.qc"))
+qual_specs <- qual_specs_orig %>%
+  mutate(SpecID = paste0("S", Spec, "_", Test.ID)) %>%
+  select(Specs = SpecID, Tests, N.Tests)
 
-```{r, results='asis', echo=FALSE}
+### One row per spec
+Specifications <- spec_df %>%
+  select(ID, Description, Risk, Impact, Tests) %>%
+  mutate(sort1 = as.numeric(str_extract(ID, "(?<=S)\\d+")),
+         sort2 = as.numeric(str_extract(ID, "\\d+$"))) %>%
+  arrange(as.numeric(sort1), as.numeric(sort2)) %>%
+  select(-c(sort1, sort2))
+colnames(Specifications) <- c("Spec ID", "Spec Description", "Risk", "Impact", "Associated Test IDs")
 
-if (!is.null(tests)) {
-  cat(to_md(tests), sep = "\n")
-} else {
-  cat("No qualification test results to display.")
-}
+Specifications %>%
+  gt() %>%
+  tab_options(
+    latex.use_longtable = T,
+    table.font.size = px(9)
+  )%>%
+  cols_width(
+    `Spec Description` ~ px(180),
+    `Associated Test IDs` ~ px(150)
+  ) %>%
+  opt_row_striping()
 ```
+
+\newpage
+
+## One Row Per Test
+
+```{r}
+### One row per test
+ test <- scrape_new %>%
+  mutate(result_new = ifelse(failed == 0, "Pass", "Fail")) %>%
+  select(Tests, test, result_new, Function)
+
+Results <- left_join(test, qual_specs, by = "Tests") %>%
+  select(Function, Specs, Tests, test, result_new) %>%
+  mutate(sort1 = as.numeric(str_extract(Tests, "(?<=T)\\d+")),
+         sort2 = as.numeric(str_extract(Tests, "\\d+$"))) %>%
+  arrange(as.numeric(sort1), as.numeric(sort2)) %>%
+  select(-c(sort1, sort2))
+colnames(Results) <- c("Function", "Spec ID", "Test ID", "Test Description", "Test Result")
+
+Results %>%
+  gt() %>%
+  tab_options(
+    latex.use_longtable = T,
+    table.font.size = px(9)
+  ) %>%
+  cols_width(
+    `Function` ~ px(120),
+    `Spec ID` ~ px(90),
+    `Test Description` ~ px(180)
+  ) %>%
+  opt_row_striping()
+```
+
+\newpage
