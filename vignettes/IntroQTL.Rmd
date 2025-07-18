@@ -1,6 +1,10 @@
 ---
 title: "IntroQTL"
 output: html_document
+vignette: >
+  %\VignetteIndexEntry{Introduction to QTL}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
 ---
 
 The Good Statistical Monitoring or `gsm` suite of R packages provides a framework for statistical data monitoring. 
@@ -38,7 +42,7 @@ You can install the development version of `gsm.qtl` like so:
 
 This is a basic example showing how to create interactive widget visualizations based on reporting outputs from the `{gsm.reporting}` package:
 
-```{r}
+```{r, eval = FALSE}
 library(gsm.datasim)
 library(gsm.mapping)
 library(gsm.reporting)

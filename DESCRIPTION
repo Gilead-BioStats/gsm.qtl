@@ -48,8 +48,7 @@ Remotes:
     gsm.kri=Gilead-BioStats/gsm.kri@main,
     gsm.mapping=Gilead-BioStats/gsm.mapping@main,
     gsm.reporting=Gilead-BioStats/gsm.reporting@main
-VignetteBuilder: 
-    knitr
+VignetteBuilder: knitr
 Config/testthat/edition: 3
 Config/testthat/parallel: true
 Config/Needs/website: DT, here, pkgdown, devtools

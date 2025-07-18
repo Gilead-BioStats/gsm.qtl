@@ -42,19 +42,19 @@ to_md <- function(data) {
 ```{r setup, echo=FALSE, warning=FALSE, message=FALSE}
 library(testthat)
 
-if (rlang::is_installed("gsm.endpoints")) {
+if (rlang::is_installed("gsm.qtl")) {
   library(gsm.endpoints)
 }
 
 devtools::load_all()
 
-qualification_test_paths <- list.files(system.file("tests", "testqualification", "qualification", package = "gsm.endpoints"), pattern = ".R", full.names = TRUE)
+qualification_test_paths <- list.files(system.file("tests", "testqualification", "qualification", package = "gsm.qtl"), pattern = ".R", full.names = TRUE)
 
 
 if (length(qualification_test_paths) > 0) {
   
   qualification_test_results <- lapply(qualification_test_paths, function(x) {
-    test_results_raw <- testthat::test_file(x, reporter = testthat::ListReporter, package = "gsm.endpoints")
+    test_results_raw <- testthat::test_file(x, reporter = testthat::ListReporter, package = "gsm.qtl")
     
     test_results_parsed <- data.frame(test_results_raw)
     
