@@ -11,69 +11,33 @@ vignette: >
   %\VignetteEngine{knitr::rmarkdown_notangle}
 ---
 
-```{r, include = FALSE}
-knitr::opts_chunk$set(
+```{r setup, echo=FALSE, warning=FALSE}
+suppressPackageStartupMessages({
+  library(gsm.core)
+  library(gt)
+  library(knitr)
+  library(dplyr)
+  library(purrr)
+  library(pander)
+  library(gh)
+  library(stringr)
+  library(riskmetric)
+  suppressMessages(devtools::load_all())
+})
+
+opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  eval = TRUE,
+  echo = FALSE,
+  results = "asis",
+  message = FALSE,
+  tidy = FALSE
 )
 
-to_md <- function(data) {
-  # ChatGPT Generated this function :O
-  # Get column names
-  col_names <- colnames(data)
-  # Get number of columns
-  num_cols <- length(col_names)
-  # Create header row
-  header <- paste("|", paste(col_names, collapse = " | "), " |", sep = "")
-  # Create separator row
-  separator <- paste("|", paste(rep("---", num_cols), collapse = " | "), " |", sep = "")
-  # Create data rows
-  data_rows <- apply(data, 1, function(row) {
-    paste("|", paste(row, collapse = " | "), " |", sep = "")
-  })
-  # Combine all parts
-  markdown_table <- c(header, separator, data_rows)
-  # Return markdown formatted table
-  return(markdown_table)
-}
-
-```
-
-```{r setup, echo=FALSE, warning=FALSE, message=FALSE}
-library(testthat)
-
-if (rlang::is_installed("gsm.qtl")) {
-  library(gsm.qtl)
-}
-
-devtools::load_all()
-
-qualification_test_paths <- list.files(system.file("tests", "testqualification", "qualification", package = "gsm.qtl"), pattern = ".R", full.names = TRUE)
-
-
-if (length(qualification_test_paths) > 0) {
-  
-  qualification_test_results <- lapply(qualification_test_paths, function(x) {
-    test_results_raw <- testthat::test_file(x, reporter = testthat::ListReporter, package = "gsm.qtl")
-    
-    test_results_parsed <- data.frame(test_results_raw)
-    
-    output <- data.frame(
-      File = test_results_parsed$file,
-      Passed = !(test_results_parsed$failed | test_results_parsed$error),
-      Skipped = test_results_parsed$skipped,
-      Description = test_results_parsed$test
-    )
-    
-    return(output)
-  })
-
-tests <- do.call(rbind, qualification_test_results)
-  
-} else {
-  tests <- NULL
-}
-
+source(here::here("inst", "qualification", "specs.R"))
+source(here::here("inst", "qualification", "test_cases.R"))
+spec_df <- import_specs()
 ```
 
 # Qualification Test Results

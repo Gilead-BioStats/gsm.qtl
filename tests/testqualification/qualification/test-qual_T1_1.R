@@ -1,5 +1,5 @@
 # Test Setup -------------------------------------------------------
-ineligibility_workflow <- flatten(
+ineligibility_workflow <- purrr::flatten(
   gsm.core::MakeWorkflowList(
     strNames = c("qtl0001"),
     strPath = yaml_path_custom_metrics,
