@@ -4,7 +4,7 @@ pkgdown_sha: ~
 articles:
   IntroQTL: IntroQTL.html
   articles/Qualification: Qualification.html
-last_built: 2025-07-18T18:02Z
+last_built: 2025-07-18T19:55Z
 urls:
   reference: https://gilead-biostats.github.io/gsm.qtl/reference
   article: https://gilead-biostats.github.io/gsm.qtl/articles
