@@ -2,7 +2,7 @@ on:
   release:
     types: [published]
   pull_request:
-    branches: main
+    branches: main, dev
   workflow_dispatch:
     inputs:
       environment:
