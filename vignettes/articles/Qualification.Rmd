@@ -43,7 +43,7 @@ to_md <- function(data) {
 library(testthat)
 
 if (rlang::is_installed("gsm.qtl")) {
-  library(gsm.endpoints)
+  library(gsm.qtl)
 }
 
 devtools::load_all()

@@ -2,7 +2,8 @@
 earlydisc_workflow <- flatten(
   gsm.core::MakeWorkflowList(
     strNames = c("qtl0002"),
-    strPath = yaml_path_custom_metrics
+    strPath = yaml_path_custom_metrics,
+    strPackage = "gsm.qtl"
   )
 )
 
