@@ -43,7 +43,7 @@ spec_df <- import_specs()
 spec_list <- list.files(here::here('tests', 'testqualification', 'qualification'), pattern = "test-qual_", full.names = TRUE)
 
 scrape <- map_df(spec_list, function(x) {
-    testResultsRaw <- testthat::test_file(x, reporter = testthat::ListReporter, package = "gsm.qc") %>%
+    testResultsRaw <- testthat::test_file(x, reporter = testthat::ListReporter, package = "gsm.qtl") %>%
       as_tibble()
 
     return(testResultsRaw)
