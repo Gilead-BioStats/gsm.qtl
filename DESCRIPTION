@@ -38,10 +38,13 @@ Suggests:
   glue,
   gsm.mapping (>= 1.1.0),
   gsm.reporting (>= 1.1.1),
+  gh,
   htmltools,
   knitr,
   lubridate,
+  pander,
   rmarkdown,
+  riskmetric,
   testthat (>= 3.0.0)
 Remotes:
     gsm.core=Gilead-BioStats/gsm.core@main,
