@@ -39,8 +39,37 @@ source(here::here("inst", "qualification", "specs.R"))
 source(here::here("inst", "qualification", "test_cases.R"))
 spec_df <- import_specs()
 ```
-
 ```{r}
+spec_list <- list.files(here::here('tests', 'testqualification', 'qualification'), pattern = "test-qual_", full.names = TRUE)
+
+scrape <- map_df(spec_list, function(x) {
+    testResultsRaw <- testthat::test_file(x, reporter = testthat::ListReporter, package = "gsm.qc") %>%
+      as_tibble()
+
+    return(testResultsRaw)
+}) %>%
+  mutate(Tests = gsub("test-qual_", "", file),
+         Tests = gsub(".R", "", Tests))
+
+funcs <- spec_df %>%
+  select(Tests, Assessment) %>%
+  tidyr::separate_rows("Tests", sep = ",") %>%
+  mutate(Tests = trimws(Tests)) %>%
+  rename(Function = Assessment) %>%
+  distinct()
+
+testResultsIndividual <- left_join(scrape, funcs, by = "Tests") %>%
+  group_by(Function) %>%
+  reframe(`Function Name` = unique(Function),
+          `Number of Tests` = sum(nb),
+          `Number Passed` = sum(passed),
+          `Number Failed` = sum(failed),
+          `Number Skipped` = sum(skipped)) %>%
+  arrange(`Function Name`) %>%
+  select(-Function)
+
+scrape_new <- left_join(scrape, funcs, by = "Tests")
+
 qual_specs_orig <- read.csv(system.file("qualification", "qualification_specs.csv", package = "gsm.qtl"))
 qual_specs <- qual_specs_orig %>%
   mutate(SpecID = paste0("S", Spec, "_", Test.ID)) %>%
