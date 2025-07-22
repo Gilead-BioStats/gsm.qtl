@@ -123,8 +123,7 @@ Results %>%
   ) %>%
   cols_width(
     `Function` ~ px(120),
-    `Spec ID` ~ px(90),
-    `Test Description` ~ px(180)
+    `Spec ID` ~ px(90)
   ) %>%
   opt_row_striping()
 ```
