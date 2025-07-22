@@ -25,6 +25,15 @@ testthat::test_that("Given appropriate mapped participant-level data, calculates
   # Summary adds a row for Upper funnel and Flatline
   expect_equal(nrow(analyzed_earlydisc[[1]]$Analysis_Summary), 3)
 
+  nPropRate <- earlydisc_workflow$meta$nPropRate
+  nNumDeviations <- earlydisc_workflow$meta$nNumDeviations
+
   # flatline value matches `nPropRate` in yaml
-  expect_equal(pull(filter(analyzed_earlydisc[[1]]$Analysis_Summary, GroupID == "Flatline"), Metric), earlydisc_workflow$meta$nPropRate)
+  expect_equal(pull(filter(analyzed_earlydisc[[1]]$Analysis_Summary, GroupID == "Flatline"), Metric), nPropRate)
+
+  # upper funnel value matches `nPropRate` in yaml
+  expect_equal(
+    pull(filter(analyzed_earlydisc[[1]]$Analysis_Summary, GroupID == "Upper_funnel"), Metric),
+    (nPropRate  + nNumDeviations * sqrt(nPropRate * (1 - nPropRate) / sum(analyzed_earlydisc[[1]]$Analysis_Transformed$Denominator)))
+  )
 })

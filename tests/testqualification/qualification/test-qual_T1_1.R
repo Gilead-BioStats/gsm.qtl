@@ -25,6 +25,15 @@ testthat::test_that("Given appropriate mapped participant-level data, calculates
   # Summary adds a row for Upper funnel and Flatline
   expect_equal(nrow(analyzed_ineligibility[[1]]$Analysis_Summary), 3)
 
+  nPropRate <- ineligibility_workflow$meta$nPropRate
+  nNumDeviations <- ineligibility_workflow$meta$nNumDeviations
+
   # flatline value matches `nPropRate` in yaml
-  expect_equal(pull(filter(analyzed_ineligibility[[1]]$Analysis_Summary, GroupID == "Flatline"), Metric), ineligibility_workflow$meta$nPropRate)
+  expect_equal(pull(filter(analyzed_ineligibility[[1]]$Analysis_Summary, GroupID == "Flatline"), Metric), nPropRate)
+
+  # upper funnel value matches `nPropRate` in yaml
+  expect_equal(
+    pull(filter(analyzed_ineligibility[[1]]$Analysis_Summary, GroupID == "Upper_funnel"), Metric),
+    (nPropRate  + nNumDeviations * sqrt(nPropRate * (1 - nPropRate) / sum(analyzed_ineligibility[[1]]$Analysis_Transformed$Denominator)))
+  )
 })
