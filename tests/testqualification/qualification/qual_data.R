@@ -18,13 +18,13 @@ ie_data <- generate_rawdata_for_single_study(
 )
 
 ## custom kris path instead of inst/workflow
-yaml_path_custom_mappings <- "tests/testqualification/qualification/qual_workflows/1_mappings"
+yaml_path_custom_mappings <- "workflow/1_mappings"
 yaml_path_custom_metrics <- "tests/testqualification/qualification/qual_workflows/2_metrics"
 
 mappings_wf <- gsm.core::MakeWorkflowList(
   strNames =c("SUBJ", "ENROLL", "IE", "PD", "STUDY", "SITE", "COUNTRY", "EXCLUSION", "STUDCOMP"),
   strPath = yaml_path_custom_mappings,
-  strPackage = "gsm.qtl"
+  strPackage = "gsm.mapping"
 )
 
 mappings_spec <- gsm.mapping::CombineSpecs(mappings_wf)
