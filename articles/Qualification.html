@@ -66,7 +66,7 @@
       <h1>Qualification Report</h1>
             
             <h4 data-toc-skip class="date">Report Run Date:
-2025-07-23</h4>
+2025-07-24</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/Gilead-BioStats/gsm.qtl/blob/fix-39/vignettes/articles/Qualification.Rmd" class="external-link"><code>vignettes/articles/Qualification.Rmd</code></a></small>
       <div class="d-none name"><code>Qualification.Rmd</code></div>
@@ -541,17 +541,24 @@
 <tbody class="gt_table_body">
 <tr>
 <td headers="Spec ID" class="gt_row gt_left">S1_1</td>
-<td headers="Spec Description" class="gt_row gt_left">Given appropriate raw participant-level data, an Ineligibility Assessment can be done using methods cited in gsm.qtl</td>
-<td headers="Risk" class="gt_row gt_left">High</td>
-<td headers="Impact" class="gt_row gt_left">High</td>
+<td headers="Spec Description" class="gt_row gt_left"> Given a thresold and multiplier, function can appropriately calculate an upper funnel metric for comparison</td>
+<td headers="Risk" class="gt_row gt_left"> High</td>
+<td headers="Impact" class="gt_row gt_left"> High</td>
 <td headers="Associated Test IDs" class="gt_row gt_left">T1_1</td>
 </tr>
 <tr>
 <td headers="Spec ID" class="gt_row gt_left gt_striped">S2_1</td>
-<td headers="Spec Description" class="gt_row gt_left gt_striped">Given appropriate raw participant-level data, an Early Discontinuation Assessment can be done using methods cited in gsm.qtl</td>
+<td headers="Spec Description" class="gt_row gt_left gt_striped">Given appropriate raw participant-level data, an Ineligibility Assessment can be done using methods cited in gsm.qtl</td>
 <td headers="Risk" class="gt_row gt_left gt_striped">High</td>
 <td headers="Impact" class="gt_row gt_left gt_striped">High</td>
 <td headers="Associated Test IDs" class="gt_row gt_left gt_striped">T2_1</td>
+</tr>
+<tr>
+<td headers="Spec ID" class="gt_row gt_left">S3_1</td>
+<td headers="Spec Description" class="gt_row gt_left">Given appropriate raw participant-level data, an Early Discontinuation Assessment can be done using methods cited in gsm.qtl</td>
+<td headers="Risk" class="gt_row gt_left">High</td>
+<td headers="Impact" class="gt_row gt_left">High</td>
+<td headers="Associated Test IDs" class="gt_row gt_left">T3_1</td>
 </tr>
 </tbody>
 </table>
@@ -1014,26 +1021,37 @@
 <col style="width:120px;">
 <col style="width:90px;">
 <col>
+<col style="width:180px;">
 <col>
 </colgroup>
 <thead><tr class="gt_col_headings">
 <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="Function">Function</th>
       <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="Spec-ID">Spec ID</th>
       <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="Test-ID">Test ID</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="Test-Description">Test Description</th>
       <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="Test-Result">Test Result</th>
     </tr></thead>
 <tbody class="gt_table_body">
 <tr>
-<td headers="Function" class="gt_row gt_left">Ineligibility Assessment</td>
+<td headers="Function" class="gt_row gt_left">One Side Prop unit test</td>
 <td headers="Spec ID" class="gt_row gt_left">S1_1</td>
 <td headers="Test ID" class="gt_row gt_left">T1_1</td>
+<td headers="Test Description" class="gt_row gt_left">Analyze One Side Prop works for Study</td>
 <td headers="Test Result" class="gt_row gt_left">Pass</td>
 </tr>
 <tr>
-<td headers="Function" class="gt_row gt_left gt_striped">Early Discontinuation Assessment</td>
+<td headers="Function" class="gt_row gt_left gt_striped">Ineligibility Assessment</td>
 <td headers="Spec ID" class="gt_row gt_left gt_striped">S2_1</td>
 <td headers="Test ID" class="gt_row gt_left gt_striped">T2_1</td>
+<td headers="Test Description" class="gt_row gt_left gt_striped">NA</td>
 <td headers="Test Result" class="gt_row gt_left gt_striped">Pass</td>
+</tr>
+<tr>
+<td headers="Function" class="gt_row gt_left">Early Discontinuation Assessment</td>
+<td headers="Spec ID" class="gt_row gt_left">S3_1</td>
+<td headers="Test ID" class="gt_row gt_left">T3_1</td>
+<td headers="Test Description" class="gt_row gt_left">NA</td>
+<td headers="Test Result" class="gt_row gt_left">Pass</td>
 </tr>
 </tbody>
 </table>

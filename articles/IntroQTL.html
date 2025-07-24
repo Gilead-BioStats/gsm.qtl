@@ -72,125 +72,103 @@
 
     
     
-<p>The Good Statistical Monitoring or <code>gsm</code> suite of R
-packages provides a framework for statistical data monitoring.
-<code>gsm.qtl</code> is an extension package that contains the
-additional functions, workflows, and document template to generate
-reports for quality tolerance limits (QTL). See <a href="https://github.com/Gilead-BioStats/gsm.core" class="external-link"><code>gsm.core</code></a>
-for an overview of the ecosystem.</p>
 <div class="section level2">
-<h2 id="background">Background<a class="anchor" aria-label="anchor" href="#background"></a>
+<h2 id="gsm-qtl-introduction-to-quantitative-threshold-limit-analysis">
+<code>gsm.qtl</code> – Introduction to Quantitative Threshold Limit
+Analysis<a class="anchor" aria-label="anchor" href="#gsm-qtl-introduction-to-quantitative-threshold-limit-analysis"></a>
 </h2>
-<p>The <code>gsm.qtl</code> package calculates study level metrics that
-can be represented by some sort <code>M</code>/<code>N</code> value that
-is used to evaluate a particular QTL of a particular study, such as
-inclusion/exclusion criteria violations, early study discontinuation,
-etc.</p>
-</div>
-<div class="section level2">
-<h2 id="mapping">Mapping<a class="anchor" aria-label="anchor" href="#mapping"></a>
-</h2>
-<p>Datasets necessary to calculate a particular QTL can be requested or
-customized based off of previously existing mappings, see <a href="https://github.com/Gilead-BioStats/gsm.mapping" class="external-link"><code>gsm.mapping</code></a>.
-Additional mappings that have been added to support <code>gsm.qtl</code>
-include the <code>IE</code> and <code>EXCLUSION</code> mappings.</p>
-</div>
-<div class="section level2">
-<h2 id="metrics">Metrics<a class="anchor" aria-label="anchor" href="#metrics"></a>
-</h2>
-<p><code>qtlxxxx</code> metric yaml files have been added to calculate
-study level QTLs, these files follow similar structure to those found in
-<a href="https://github.com/Gilead-BioStats/gsm.kri" class="external-link"><code>gsm.kri</code></a>.</p>
-</div>
-<div class="section level2">
-<h2 id="reporting">Reporting<a class="anchor" aria-label="anchor" href="#reporting"></a>
-</h2>
-<p><code>gsm.qtl</code> has a report template to produce the data
-visualizations, widgets and tables that ultimately go into an html QTL
-report.</p>
+<p>The <strong><code>gsm.qtl</code></strong> package is a specialized
+module within the Gilead Statistical Monitoring (GSM) framework,
+focusing on <strong>Quantitative Threshold Limit (QTL)</strong>
+analysis. It is designed to detect atypical trends, study-level
+anomalies, or data integrity concerns using pre-specified or data-driven
+thresholds.</p>
+<hr>
 <div class="section level3">
-<h3 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+<h3 id="workflows-overview">Workflows Overview<a class="anchor" aria-label="anchor" href="#workflows-overview"></a>
 </h3>
-<p>You can install the development version of <code>gsm.qtl</code> like
-so:</p>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># install.packages("pak")</span></span>
-<span><span class="co"># pak::pak("Gilead-BioStats/gsm.qtl@dev")</span></span></code></pre></div>
+<p><code>gsm.qtl</code> mirrors the modular design of the GSM ecosystem.
+A typical workflow includes:</p>
+<ol style="list-style-type: decimal">
+<li><p><strong>Data Ingestion</strong><br>
+Load participant-level trial data (e.g., deviations).</p></li>
+<li><p><strong>Summarization</strong><br>
+Aggregate data into study‑level metrics such as rates of deviations,
+etc.</p></li>
+<li>
+<p><strong>Threshold Detection</strong><br>
+Compare each study’s metrics to <strong>QTL thresholds</strong>
+using:</p>
+<ul>
+<li>Z‑score calculations with optional overdispersion adjustments</li>
+</ul>
+</li>
+<li><p><strong>Flagging</strong><br>
+Assign <strong>risk levels</strong> (Red / Green) based on breaches of
+the thresholds.</p></li>
+<li><p><strong>Visualization &amp; Reporting</strong><br>
+Produce interactive HTML reports with charts, summary tables, and
+filters for exploration.</p></li>
+</ol>
+<hr>
 </div>
 <div class="section level3">
-<h3 id="sample-code">Sample Code<a class="anchor" aria-label="anchor" href="#sample-code"></a>
+<h3 id="why-use-gsm-qtl">Why Use <code>gsm.qtl</code>?<a class="anchor" aria-label="anchor" href="#why-use-gsm-qtl"></a>
 </h3>
-<p>This is a basic example showing how to create interactive widget
-visualizations based on reporting outputs from the
-<a href="https://gilead-biostats.github.io/gsm.reporting/" class="external-link">gsm.reporting</a> package:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">gsm.datasim</span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/Gilead-BioStats/gsm.mapping" class="external-link">gsm.mapping</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://gilead-biostats.github.io/gsm.reporting/" class="external-link">gsm.reporting</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://gilead-biostats.github.io/gsm.core" class="external-link">gsm.core</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/Gilead-BioStats/gsm.kri" class="external-link">gsm.kri</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://purrr.tidyverse.org/" class="external-link">purrr</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://gilead-biostats.github.io/gsm.qtl">gsm.qtl</a></span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">1234</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Single Study</span></span>
-<span><span class="va">ie_data</span> <span class="op">&lt;-</span> <span class="fu">generate_rawdata_for_single_study</span><span class="op">(</span></span>
-<span>  SnapshotCount <span class="op">=</span> <span class="fl">6</span>,</span>
-<span>  SnapshotWidth <span class="op">=</span> <span class="st">"months"</span>,</span>
-<span>  ParticipantCount <span class="op">=</span> <span class="fl">1000</span>,</span>
-<span>  SiteCount <span class="op">=</span> <span class="fl">10</span>,</span>
-<span>  StudyID <span class="op">=</span> <span class="st">"ABC"</span>,</span>
-<span>  workflow_path <span class="op">=</span> <span class="st">"workflow/1_mappings"</span>,</span>
-<span>  mappings <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"IE"</span>, <span class="st">"PD"</span>, <span class="st">"STUDCOMP"</span><span class="op">)</span>,</span>
-<span>  package <span class="op">=</span> <span class="st">"gsm.mapping"</span>,</span>
-<span>  desired_specs <span class="op">=</span> <span class="cn">NULL</span></span>
-<span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">mappings_wf</span> <span class="op">&lt;-</span> <span class="fu">gsm.core</span><span class="fu">::</span><span class="fu"><a href="https://gilead-biostats.github.io/gsm.core/reference/MakeWorkflowList.html" class="external-link">MakeWorkflowList</a></span><span class="op">(</span></span>
-<span>  strNames <span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"SUBJ"</span>, <span class="st">"ENROLL"</span>, <span class="st">"IE"</span>, <span class="st">"PD"</span>, <span class="st">"STUDY"</span>, <span class="st">"SITE"</span>, <span class="st">"COUNTRY"</span>, <span class="st">"EXCLUSION"</span>, <span class="st">"STUDCOMP"</span><span class="op">)</span>,</span>
-<span>  strPath <span class="op">=</span> <span class="st">"workflow/1_mappings"</span>,</span>
-<span>  strPackage <span class="op">=</span> <span class="st">"gsm.mapping"</span></span>
-<span><span class="op">)</span></span>
-<span><span class="va">mappings_spec</span> <span class="op">&lt;-</span> <span class="fu">gsm.mapping</span><span class="fu">::</span><span class="fu"><a href="https://gilead-biostats.github.io/gsm.mapping/reference/CombineSpecs.html" class="external-link">CombineSpecs</a></span><span class="op">(</span><span class="va">mappings_wf</span><span class="op">)</span></span>
-<span><span class="va">metrics_wf</span> <span class="op">&lt;-</span> <span class="fu">gsm.core</span><span class="fu">::</span><span class="fu"><a href="https://gilead-biostats.github.io/gsm.core/reference/MakeWorkflowList.html" class="external-link">MakeWorkflowList</a></span><span class="op">(</span>strNames <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"qtl0001"</span>, <span class="st">"qtl0002"</span><span class="op">)</span>, strPath <span class="op">=</span> <span class="st">"inst/workflow/2_metrics"</span>, strPackage <span class="op">=</span> <span class="st">"gsm.qtl"</span><span class="op">)</span></span>
-<span><span class="va">reporting_wf</span> <span class="op">&lt;-</span> <span class="fu">gsm.core</span><span class="fu">::</span><span class="fu"><a href="https://gilead-biostats.github.io/gsm.core/reference/MakeWorkflowList.html" class="external-link">MakeWorkflowList</a></span><span class="op">(</span>strNames <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Results"</span>, <span class="st">"Groups"</span><span class="op">)</span>, strPath <span class="op">=</span> <span class="st">"workflow/3_reporting"</span>, strPackage <span class="op">=</span> <span class="st">"gsm.reporting"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">lRaw</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map_depth.html" class="external-link">map_depth</a></span><span class="op">(</span><span class="va">ie_data</span>, <span class="fl">1</span>, <span class="fu">gsm.mapping</span><span class="fu">::</span><span class="va"><a href="https://gilead-biostats.github.io/gsm.mapping/reference/Ingest.html" class="external-link">Ingest</a></span>, <span class="va">mappings_spec</span><span class="op">)</span></span>
-<span><span class="va">mapped</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map_depth.html" class="external-link">map_depth</a></span><span class="op">(</span><span class="va">lRaw</span>, <span class="fl">1</span>, <span class="op">~</span> <span class="fu">gsm.core</span><span class="fu">::</span><span class="fu"><a href="https://gilead-biostats.github.io/gsm.core/reference/RunWorkflows.html" class="external-link">RunWorkflows</a></span><span class="op">(</span><span class="va">mappings_wf</span>, <span class="va">.x</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">analyzed</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map_depth.html" class="external-link">map_depth</a></span><span class="op">(</span><span class="va">mapped</span>, <span class="fl">1</span>, <span class="op">~</span><span class="fu">gsm.core</span><span class="fu">::</span><span class="fu"><a href="https://gilead-biostats.github.io/gsm.core/reference/RunWorkflows.html" class="external-link">RunWorkflows</a></span><span class="op">(</span><span class="va">metrics_wf</span>, <span class="va">.x</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">reporting</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map2.html" class="external-link">map2</a></span><span class="op">(</span><span class="va">mapped</span>, <span class="va">analyzed</span>, <span class="op">~</span> <span class="fu">gsm.core</span><span class="fu">::</span><span class="fu"><a href="https://gilead-biostats.github.io/gsm.core/reference/RunWorkflows.html" class="external-link">RunWorkflows</a></span><span class="op">(</span><span class="va">reporting_wf</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">.x</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>lAnalyzed <span class="op">=</span> <span class="va">.y</span>, lWorkflows <span class="op">=</span> <span class="va">metrics_wf</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">dates</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">ie_data</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="va">as.Date</span></span>
-<span><span class="va">reporting</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map2.html" class="external-link">map2</a></span><span class="op">(</span><span class="va">reporting</span>, <span class="va">dates</span>, <span class="op">~</span><span class="op">{</span></span>
-<span>  <span class="va">.x</span><span class="op">$</span><span class="va">Reporting_Results</span><span class="op">$</span><span class="va">SnapshotDate</span> <span class="op">&lt;-</span> <span class="va">.y</span></span>
-<span>  <span class="va">.x</span></span>
-<span><span class="op">}</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Bind multiple snapshots of data together</span></span>
-<span><span class="va">all_reportingResults</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/do.call.html" class="external-link">do.call</a></span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="va"><a href="https://dplyr.tidyverse.org/reference/bind_rows.html" class="external-link">bind_rows</a></span>, <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">reporting</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="va">x</span><span class="op">$</span><span class="va">Reporting_Results</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">upper_funnel</span>, <span class="va">flatline</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span></span>
-<span><span class="co"># Only need 1 reporting group object</span></span>
-<span><span class="va">all_reportingGroups</span> <span class="op">&lt;-</span> <span class="va">reporting</span><span class="op">[[</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">reporting</span><span class="op">)</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">Reporting_Groups</span></span>
-<span></span>
-<span><span class="va">report_listings</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>qtl0001 <span class="op">=</span> <span class="va">mapped</span><span class="op">$</span><span class="va">`2012-06-30`</span><span class="op">$</span><span class="va">Mapped_EXCLUSION</span>,</span>
-<span>                        qtl0002 <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">mapped</span><span class="op">$</span><span class="va">`2012-06-30`</span><span class="op">$</span><span class="va">Mapped_STUDCOMP</span>,</span>
-<span>                                            <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">mapped</span><span class="op">$</span><span class="va">`2012-06-30`</span><span class="op">$</span><span class="va">Mapped_SUBJ</span>, <span class="va">subjid</span>, <span class="va">country</span><span class="op">)</span>,</span>
-<span>                                            by <span class="op">=</span> <span class="st">"subjid"</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Test if new Report_QTL rmd works</span></span>
-<span><span class="fu">gsm.kri</span><span class="fu">::</span><span class="fu"><a href="https://gilead-biostats.github.io/gsm.kri/reference/RenderRmd.html" class="external-link">RenderRmd</a></span><span class="op">(</span></span>
-<span>  lParams <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
-<span>    dfResults <span class="op">=</span> <span class="va">all_reportingResults</span>,</span>
-<span>    dfGroups <span class="op">=</span> <span class="va">all_reportingGroups</span>,</span>
-<span>    lListings <span class="op">=</span> <span class="va">report_listings</span></span>
-<span>  <span class="op">)</span>,</span>
-<span>  strOutputDir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/getwd.html" class="external-link">getwd</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>  strOutputFile <span class="op">=</span> <span class="st">"test.html"</span>,</span>
-<span>  strInputPath <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"report/Report_QTL.Rmd"</span>, package <span class="op">=</span> <span class="st">"gsm.qtl"</span><span class="op">)</span></span>
-<span><span class="op">)</span></span></code></pre></div>
+<ul>
+<li><p><strong>Modular &amp; Compliant</strong><br>
+Leverages the qualified GSM statistical engine with unit testing and
+familiar reports/outputs.</p></li>
+<li><p><strong>Flexible Thresholds</strong><br>
+Supports both <em>static QTLs</em> (predefined in YAML) and
+<em>data-driven cutoffs</em> (z-scores, quantiles).</p></li>
+<li><p><strong>End-to-End Reporting</strong><br>
+Generates clean, reproducible outputs that can be embedded into trial
+oversight reports.</p></li>
+</ul>
+<hr>
+</div>
+<div class="section level3">
+<h3 id="statistical-methods-for-threshold-flagging">Statistical Methods for Threshold Flagging<a class="anchor" aria-label="anchor" href="#statistical-methods-for-threshold-flagging"></a>
+</h3>
+<p>For each study, a <strong>proportion metric</strong> is calculated
+as</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover><mi>p</mi><mo accent="true">̂</mo></mover><mo>=</mo><mfrac><mtext mathvariant="normal">num</mtext><mtext mathvariant="normal">denom</mtext></mfrac><mo>,</mo></mrow><annotation encoding="application/x-tex">
+\hat{p} = \frac{\text{num}}{\text{denom}},
+</annotation></semantics></math></p>
+<p>where <strong>num</strong> is the number of observed events of
+interest (e.g., protocol deviations, early study discontinuation) and
+<strong>denom</strong> is the relevant denominator (e.g., total
+participants).</p>
+<p>This observed proportion is compared against a <strong>predefined QTL
+threshold,</strong>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>p</mi><mn>0</mn></msub><annotation encoding="application/x-tex">p_0</annotation></semantics></math>,
+typically derived from historical trial data (e.g., 0.05). This
+predefined threshold,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>p</mi><mn>0</mn></msub><annotation encoding="application/x-tex">p_0</annotation></semantics></math>,
+will be configurable in the workflows from study to study, denoted as
+<code>nPropRate</code> in each analysis <code>yaml</code>’s
+<code>meta</code> field.</p>
+<p>To account for natural variability, a <strong>tolerance
+margin</strong> is added to the threshold based on a normal
+approximation to the binomial distribution:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="normal">Tolerance Margin</mtext><mo>=</mo><mtext mathvariant="normal">z</mtext><mo>×</mo><msqrt><mfrac><mrow><msub><mi>p</mi><mn>0</mn></msub><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo>−</mo><msub><mi>p</mi><mn>0</mn></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow><mtext mathvariant="normal">denom</mtext></mfrac></msqrt><mi>.</mi></mrow><annotation encoding="application/x-tex">
+\text{Tolerance Margin} = \text{z} \times \sqrt{\frac{p_0(1 - p_0)}{\text{denom}}}.
+</annotation></semantics></math></p>
+<p>Here,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>z</mi><annotation encoding="application/x-tex">z</annotation></semantics></math>,
+which will also be configurable denoted as <code>nNumDeviations</code>
+in the <code>yaml</code>’s <code>meta</code> field, controls the
+leniency of the threshold.</p>
+<p>A <strong>threshold violation</strong> is flagged when</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover><mi>p</mi><mo accent="true">̂</mo></mover><mo>&gt;</mo><msub><mi>p</mi><mn>0</mn></msub><mo>+</mo><mtext mathvariant="normal">z</mtext><mo>×</mo><msqrt><mfrac><mrow><msub><mi>p</mi><mn>0</mn></msub><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo>−</mo><msub><mi>p</mi><mn>0</mn></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow><mtext mathvariant="normal">denom</mtext></mfrac></msqrt><mi>.</mi></mrow><annotation encoding="application/x-tex">
+\hat{p} &gt; p_0 + \text{z} \times \sqrt{\frac{p_0(1 - p_0)}{\text{denom}}}.
+</annotation></semantics></math></p>
+<p>This approach is conceptually similar to a one-sided control limit
+around the expected rate
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>p</mi><mn>0</mn></msub><annotation encoding="application/x-tex">p_0</annotation></semantics></math>.
+Studies exceeding this adjusted limit are <strong>flagged for further
+review</strong> as potential outliers in the monitored metric.</p>
 </div>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
