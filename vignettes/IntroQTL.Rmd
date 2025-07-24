@@ -7,107 +7,72 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-The Good Statistical Monitoring or `gsm` suite of R packages provides a framework for statistical data monitoring. 
-`gsm.qtl` is an extension package that contains the additional functions, workflows, and document template to generate reports for quality tolerance limits (QTL).
-See [`gsm.core`](https://github.com/Gilead-BioStats/gsm.core) for an overview of the ecosystem.
+# `gsm.qtl` – Introduction to Quantitative Threshold Limit Analysis
 
-# Background 
+The **`gsm.qtl`** package is a specialized module within the Gilead Statistical Monitoring (GSM) framework, focusing on **Quantitative Threshold Limit (QTL)** analysis. It is designed to detect atypical trends, study-level anomalies, or data integrity concerns using pre-specified or data-driven thresholds.
 
-The `gsm.qtl` package calculates study level metrics that can be represented by some sort `M`/`N` value that is used to evaluate a particular QTL of a particular study,
-such as inclusion/exclusion criteria violations, early study discontinuation, etc.
+------------------------------------------------------------------------
 
-# Mapping
+## Workflows Overview
 
-Datasets necessary to calculate a particular QTL can be requested or customized based off of previously existing mappings, see [`gsm.mapping`](https://github.com/Gilead-BioStats/gsm.mapping).
-Additional mappings that have been added to support `gsm.qtl` include the `IE` and `EXCLUSION` mappings.
+`gsm.qtl` mirrors the modular design of the GSM ecosystem. A typical workflow includes:
 
-# Metrics
+1.  **Data Ingestion**\
+    Load participant-level trial data (e.g., deviations).
 
-`qtlxxxx` metric yaml files have been added to calculate study level QTLs, these files follow similar structure to those found in [`gsm.kri`](https://github.com/Gilead-BioStats/gsm.kri).
+2.  **Summarization**\
+    Aggregate data into study‑level metrics such as rates of deviations, etc.
 
-# Reporting
+3.  **Threshold Detection**\
+    Compare each study’s metrics to **QTL thresholds** using:
 
-`gsm.qtl` has a report template to produce the data visualizations, widgets and tables that ultimately go into an html QTL report.
+    -   Z‑score calculations with optional overdispersion adjustments
 
-## Installation
+4.  **Flagging**\
+    Assign **risk levels** (Red / Green) based on breaches of the thresholds.
 
-You can install the development version of `gsm.qtl` like so:
+5.  **Visualization & Reporting**\
+    Produce interactive HTML reports with charts, summary tables, and filters for exploration.
 
-```{r}
-# install.packages("pak")
-# pak::pak("Gilead-BioStats/gsm.qtl@dev")
-```
+------------------------------------------------------------------------
 
-## Sample Code
+## Why Use `gsm.qtl`?
 
-This is a basic example showing how to create interactive widget visualizations based on reporting outputs from the `{gsm.reporting}` package:
+-   **Modular & Compliant**\
+    Leverages the qualified GSM statistical engine with unit testing and familiar reports/outputs.
 
-```{r, eval = FALSE}
-library(gsm.datasim)
-library(gsm.mapping)
-library(gsm.reporting)
-library(gsm.core)
-library(gsm.kri)
-library(purrr)
-library(dplyr)
-library(gsm.qtl)
-set.seed(1234)
+-   **Flexible Thresholds**\
+    Supports both *static QTLs* (predefined in YAML) and *data-driven cutoffs* (z-scores, quantiles).
 
-# Single Study
-ie_data <- generate_rawdata_for_single_study(
-  SnapshotCount = 6,
-  SnapshotWidth = "months",
-  ParticipantCount = 1000,
-  SiteCount = 10,
-  StudyID = "ABC",
-  workflow_path = "workflow/1_mappings",
-  mappings = c("IE", "PD", "STUDCOMP"),
-  package = "gsm.mapping",
-  desired_specs = NULL
-)
+-   **End-to-End Reporting**\
+    Generates clean, reproducible outputs that can be embedded into trial oversight reports.
 
-mappings_wf <- gsm.core::MakeWorkflowList(
-  strNames =c("SUBJ", "ENROLL", "IE", "PD", "STUDY", "SITE", "COUNTRY", "EXCLUSION", "STUDCOMP"),
-  strPath = "workflow/1_mappings",
-  strPackage = "gsm.mapping"
-)
-mappings_spec <- gsm.mapping::CombineSpecs(mappings_wf)
-metrics_wf <- gsm.core::MakeWorkflowList(strNames = c("qtl0001", "qtl0002"), strPath = "inst/workflow/2_metrics", strPackage = "gsm.qtl")
-reporting_wf <- gsm.core::MakeWorkflowList(strNames = c("Results", "Groups"), strPath = "workflow/3_reporting", strPackage = "gsm.reporting")
+------------------------------------------------------------------------
 
-lRaw <- map_depth(ie_data, 1, gsm.mapping::Ingest, mappings_spec)
-mapped <- map_depth(lRaw, 1, ~ gsm.core::RunWorkflows(mappings_wf, .x))
-analyzed <- map_depth(mapped, 1, ~gsm.core::RunWorkflows(metrics_wf, .x))
-reporting <- map2(mapped, analyzed, ~ gsm.core::RunWorkflows(reporting_wf, c(.x, list(lAnalyzed = .y, lWorkflows = metrics_wf))))
+## Statistical Methods for Threshold Flagging
 
-dates <- names(ie_data) %>% as.Date
-reporting <- map2(reporting, dates, ~{
-  .x$Reporting_Results$SnapshotDate <- .y
-  .x
-})
+For each study, a **proportion metric** is calculated as
 
-# Bind multiple snapshots of data together
-all_reportingResults <- do.call(dplyr::bind_rows, lapply(reporting, function(x) x$Reporting_Results)) %>%
-  select(-c(upper_funnel, flatline))
+$$
+\hat{p} = \frac{\text{num}}{\text{denom}},
+$$
 
+where **num** is the number of observed events of interest (e.g., protocol deviations, early study discontinuation) and **denom** is the relevant denominator (e.g., total participants).
 
-# Only need 1 reporting group object
-all_reportingGroups <- reporting[[length(reporting)]]$Reporting_Groups
+This observed proportion is compared against a **predefined QTL threshold,** $p_0$, typically derived from historical trial data (e.g., 0.05). This predefined threshold, $p_0$, will be configurable in the workflows from study to study, denoted as `nPropRate` in each analysis `yaml`'s `meta` field.
 
-report_listings <- list(qtl0001 = mapped$`2012-06-30`$Mapped_EXCLUSION,
-                        qtl0002 = left_join(mapped$`2012-06-30`$Mapped_STUDCOMP,
-                                            select(mapped$`2012-06-30`$Mapped_SUBJ, subjid, country),
-                                            by = "subjid"))
+To account for natural variability, a **tolerance margin** is added to the threshold based on a normal approximation to the binomial distribution:
 
-# Test if new Report_QTL rmd works
-gsm.kri::RenderRmd(
-  lParams = list(
-    dfResults = all_reportingResults,
-    dfGroups = all_reportingGroups,
-    lListings = report_listings
-  ),
-  strOutputDir = getwd(),
-  strOutputFile = "test.html",
-  strInputPath = system.file("report/Report_QTL.Rmd", package = "gsm.qtl")
-)
-```
+$$
+\text{Tolerance Margin} = \text{z} \times \sqrt{\frac{p_0(1 - p_0)}{\text{denom}}}.
+$$
+
+Here, $z$, which will also be configurable denoted as `nNumDeviations` in the `yaml`'s `meta` field, controls the leniency of the threshold.
+
+A **threshold violation** is flagged when
+
+$$
+\hat{p} > p_0 + \text{z} \times \sqrt{\frac{p_0(1 - p_0)}{\text{denom}}}.
+$$
+
+This approach is conceptually similar to a one-sided control limit around the expected rate $p_0$. Studies exceeding this adjusted limit are **flagged for further review** as potential outliers in the monitored metric.

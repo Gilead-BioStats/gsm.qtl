@@ -112,8 +112,8 @@ Results <- left_join(test, qual_specs, by = "Tests") %>%
   mutate(sort1 = as.numeric(str_extract(Tests, "(?<=T)\\d+")),
          sort2 = as.numeric(str_extract(Tests, "\\d+$"))) %>%
   arrange(as.numeric(sort1), as.numeric(sort2)) %>%
-  select(-c(sort1, sort2, test))
-colnames(Results) <- c("Function", "Spec ID", "Test ID", "Test Result")
+  select(-c(sort1, sort2))
+colnames(Results) <- c("Function", "Spec ID", "Test ID", "Test Description", "Test Result")
 
 Results %>%
   gt() %>%
@@ -123,7 +123,8 @@ Results %>%
   ) %>%
   cols_width(
     `Function` ~ px(120),
-    `Spec ID` ~ px(90)
+    `Spec ID` ~ px(90),
+    `Test Description` ~ px(180)
   ) %>%
   opt_row_striping()
 ```

@@ -70,13 +70,13 @@ Analyze_OneSideProp <- function(
   dfScore <- dplyr::bind_rows(dfTransformed, Upper_funnel, flat_line) %>%
     mutate(
       vMu = nPropRate, # calculate one-sided proportion score against a historic rate
+      # Unsure if a dispersion correction is necessary especially at a study-level
       z_0 = ifelse(.data$vMu == 0 | .data$vMu == 1,
         0,
         (.data$Metric - .data$vMu) /
           sqrt(.data$vMu * (1 - .data$vMu) / .data$Denominator)
       ),
-      # Unsure if a dispersion correction is necessary especially at a study-level?
-      upper_funnel = nPropRate + nNumDeviations * sqrt(nPropRate * (1 - nPropRate) / sum(.data$Denominator))
+      upper_funnel = nPropRate + nNumDeviations * sqrt(nPropRate * (1 - nPropRate) / sum(.data$Denominator)/3 )
       # Additional cutoffs can be made to compare against `Metric` for flagging
     ) %>%
     mutate(Flag = case_when(
@@ -94,9 +94,7 @@ Analyze_OneSideProp <- function(
       "Denominator",
       "Metric",
       "Flag",
-      "Score" = z_0,
-      "upper_funnel",
-      "flatline" = vMu
+      "Score" = z_0
     )
 
   return(dfAnalyzed)
