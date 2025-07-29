@@ -32,7 +32,7 @@ steps:
   - output: disc_reasons_path
     name: c
     params:
-      ...: "workflows/0_other/disc_reasons.yaml" # study specific, can grab the default in gsm.qtl too
+      ...: "workflow/0_other/disc_reasons.yaml" # study specific, can grab the default in gsm.qtl too
   - output: Mapped_DROPOUT
     name: gsm.qtl::discontinuation_map_reasons
     params:
