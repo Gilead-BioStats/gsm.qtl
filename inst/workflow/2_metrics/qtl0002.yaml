@@ -29,20 +29,21 @@ spec:
     compreas:
       type: character
 steps:
+# study specific, can grab the default in gsm.qtl too
   - output: disc_reasons_path
     name: c
     params:
-      ...: "workflow/0_other/disc_reasons.yaml" # study specific, can grab the default in gsm.qtl too
+      ...: "workflow/0_other/disc_reasons.yaml"
   - output: Mapped_DROPOUT
     name: gsm.qtl::discontinuation_map_reasons
     params:
       df: Mapped_STUDCOMP
-      yaml_path: disc_reasons_path
+      # yaml_path: disc_reasons_path
   - output: Analysis_Input
     name: gsm.core::Input_Rate
     params:
       dfSubjects: Mapped_SUBJ
-      dfNumerator: Temp_DROPOUT
+      dfNumerator: Mapped_DROPOUT
       dfDenominator: Mapped_SUBJ
       strSubjectCol: subjid
       strGroupCol: studyid
