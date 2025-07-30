@@ -73,16 +73,16 @@
     
     
 <div class="section level2">
-<h2 id="gsm-qtl-introduction-to-quantitative-threshold-limit-analysis">
-<code>gsm.qtl</code> – Introduction to Quantitative Threshold Limit
-Analysis<a class="anchor" aria-label="anchor" href="#gsm-qtl-introduction-to-quantitative-threshold-limit-analysis"></a>
+<h2 id="gsm-qtl-introduction-to-quality-tolerance-limit-qtl-analysis">
+<code>gsm.qtl</code> – Introduction to Quality Tolerance Limit (QTL)
+Analysis<a class="anchor" aria-label="anchor" href="#gsm-qtl-introduction-to-quality-tolerance-limit-qtl-analysis"></a>
 </h2>
 <p>The <strong><code>gsm.qtl</code></strong> package is a specialized
 module within the Gilead Statistical Monitoring (GSM) framework,
-focusing on <strong>Quantitative Threshold Limit (QTL)</strong>
-analysis. It is designed to detect atypical trends, study-level
-anomalies, or data integrity concerns using pre-specified or data-driven
-thresholds.</p>
+focusing on the <strong>Quality Tolerance Limit (QTL)</strong> analysis.
+It is designed to detect atypical trends of metric at study-level as an
+indication of potential data integrity or patient safety concerns using
+pre-specified or data-driven thresholds.</p>
 <hr>
 <div class="section level3">
 <h3 id="workflows-overview">Workflows Overview<a class="anchor" aria-label="anchor" href="#workflows-overview"></a>
@@ -131,20 +131,27 @@ oversight reports.</p></li>
 <div class="section level3">
 <h3 id="statistical-methods-for-threshold-flagging">Statistical Methods for Threshold Flagging<a class="anchor" aria-label="anchor" href="#statistical-methods-for-threshold-flagging"></a>
 </h3>
+<p>The default statistical method applies normal approximation of
+binomial distribution to the binary outcome as dynamic thresholds. This
+method is particularly useful for monitoring binary outcomes, such as
+proportion of participants with eligibility-related deviations or early
+study discontinuation, where the goal is to identify studies that
+deviate significantly from expected rates.</p>
 <p>For each study, a <strong>proportion metric</strong> is calculated
 as</p>
 <p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover><mi>p</mi><mo accent="true">̂</mo></mover><mo>=</mo><mfrac><mtext mathvariant="normal">num</mtext><mtext mathvariant="normal">denom</mtext></mfrac><mo>,</mo></mrow><annotation encoding="application/x-tex">
 \hat{p} = \frac{\text{num}}{\text{denom}},
 </annotation></semantics></math></p>
 <p>where <strong>num</strong> is the number of observed events of
-interest (e.g., protocol deviations, early study discontinuation) and
-<strong>denom</strong> is the relevant denominator (e.g., total
-participants).</p>
+interest (e.g., participants with protocol deviations related to
+eligibility, early study discontinuation) and <strong>denom</strong> is
+the relevant denominator (e.g., total participants).</p>
 <p>This observed proportion is compared against a <strong>predefined QTL
-threshold,</strong>
+threshold</strong> that is calculated as the following.</p>
+<p>The expected mean of QTL,
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>p</mi><mn>0</mn></msub><annotation encoding="application/x-tex">p_0</annotation></semantics></math>,
-typically derived from historical trial data (e.g., 0.05). This
-predefined threshold,
+typically derived from historical trial data (e.g., 0.05). This expected
+mean,
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>p</mi><mn>0</mn></msub><annotation encoding="application/x-tex">p_0</annotation></semantics></math>,
 will be configurable in the workflows from study to study, denoted as
 <code>nPropRate</code> in each analysis <code>yaml</code>’s
@@ -160,7 +167,7 @@ approximation to the binomial distribution:</p>
 which will also be configurable denoted as <code>nNumDeviations</code>
 in the <code>yaml</code>’s <code>meta</code> field, controls the
 leniency of the threshold.</p>
-<p>A <strong>threshold violation</strong> is flagged when</p>
+<p>An excursion from the <strong>QTL</strong> limit is flagged when</p>
 <p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover><mi>p</mi><mo accent="true">̂</mo></mover><mo>&gt;</mo><msub><mi>p</mi><mn>0</mn></msub><mo>+</mo><mtext mathvariant="normal">z</mtext><mo>×</mo><msqrt><mfrac><mrow><msub><mi>p</mi><mn>0</mn></msub><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo>−</mo><msub><mi>p</mi><mn>0</mn></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow><mtext mathvariant="normal">denom</mtext></mfrac></msqrt><mi>.</mi></mrow><annotation encoding="application/x-tex">
 \hat{p} &gt; p_0 + \text{z} \times \sqrt{\frac{p_0(1 - p_0)}{\text{denom}}}.
 </annotation></semantics></math></p>
