@@ -7,9 +7,9 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-# `gsm.qtl` – Introduction to Quantitative Threshold Limit Analysis
+# `gsm.qtl` – Introduction to Quality Tolerance Limit (QTL) Analysis
 
-The **`gsm.qtl`** package is a specialized module within the Gilead Statistical Monitoring (GSM) framework, focusing on **Quantitative Threshold Limit (QTL)** analysis. It is designed to detect atypical trends, study-level anomalies, or data integrity concerns using pre-specified or data-driven thresholds.
+The **`gsm.qtl`** package is a specialized module within the Gilead Statistical Monitoring (GSM) framework, focusing on the **Quality Tolerance Limit (QTL)** analysis. It is designed to detect atypical trends of metric at study-level as an indication of potential data integrity or patient safety concerns using pre-specified or data-driven thresholds.
 
 ------------------------------------------------------------------------
 
@@ -51,15 +51,19 @@ The **`gsm.qtl`** package is a specialized module within the Gilead Statistical 
 
 ## Statistical Methods for Threshold Flagging
 
+The default statistical method applies normal approximation of binomial distribution to the binary outcome as dynamic thresholds. This method is particularly useful for monitoring binary outcomes, such as proportion of participants with eligibility-related deviations or early study discontinuation, where the goal is to identify studies that deviate significantly from expected rates.
+
 For each study, a **proportion metric** is calculated as
 
 $$
 \hat{p} = \frac{\text{num}}{\text{denom}},
 $$
 
-where **num** is the number of observed events of interest (e.g., protocol deviations, early study discontinuation) and **denom** is the relevant denominator (e.g., total participants).
+where **num** is the number of observed events of interest (e.g., participants with protocol deviations related to eligibility, early study discontinuation) and **denom** is the relevant denominator (e.g., total participants).
 
-This observed proportion is compared against a **predefined QTL threshold,** $p_0$, typically derived from historical trial data (e.g., 0.05). This predefined threshold, $p_0$, will be configurable in the workflows from study to study, denoted as `nPropRate` in each analysis `yaml`'s `meta` field.
+This observed proportion is compared against a **predefined QTL threshold** that is calculated as the following. 
+
+The expected mean of QTL, $p_0$, typically derived from historical trial data (e.g., 0.05). This expected mean, $p_0$, will be configurable in the workflows from study to study, denoted as `nPropRate` in each analysis `yaml`'s `meta` field.
 
 To account for natural variability, a **tolerance margin** is added to the threshold based on a normal approximation to the binomial distribution:
 
@@ -69,7 +73,7 @@ $$
 
 Here, $z$, which will also be configurable denoted as `nNumDeviations` in the `yaml`'s `meta` field, controls the leniency of the threshold.
 
-A **threshold violation** is flagged when
+An excursion from the **QTL** limit is flagged when
 
 $$
 \hat{p} > p_0 + \text{z} \times \sqrt{\frac{p_0(1 - p_0)}{\text{denom}}}.
