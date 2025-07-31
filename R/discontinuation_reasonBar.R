@@ -6,7 +6,7 @@
 #' @export
 discontinuation_reasonBar <- function(df) {
   reasonbar <- df %>%
-    filter(compyn == "N") %>%
+    # filter(compyn == "N") %>%
     ggplot(., aes(x = compreas, fill = compreas)) +
     geom_bar() +
     labs(x = "Discontinuation Reasons", y = "Participant Count", title = "Participant Count by Reasons") +

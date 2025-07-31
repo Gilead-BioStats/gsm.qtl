@@ -1,0 +1,4 @@
+Spec,Test.ID,Tests,N.Tests,Function.Name,Description,Risk,Impact,Spec.Status,Test.Status
+1,1,T1_1,3,One Side Prop unit test, "Given a thresold and multiplier, function can appropriately calculate an upper funnel metric for comparison", High, High,,
+2,1,T2_1,6,Ineligibility Assessment,"Given appropriate raw participant-level data, an Ineligibility Assessment can be done using methods cited in gsm.qtl",High,High,complete,
+3,1,T3_1,6,Early Discontinuation Assessment,"Given appropriate raw participant-level data, an Early Discontinuation Assessment can be done using methods cited in gsm.qtl",High,High,complete,

@@ -10,7 +10,7 @@
 discontinuation_groupBar <- function(df, varGroupID, strGroupLabel) {
   # Parse out groups with 0 ineligible
   groups_with_discontinuation <- df %>%
-    filter(compyn %in% c("N", "")) %>%
+    # filter(compyn %in% c("N", "")) %>%
     pull(!!enexpr(varGroupID)) %>%
     unique()
 

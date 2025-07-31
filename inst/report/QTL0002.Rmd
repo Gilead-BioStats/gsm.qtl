@@ -47,14 +47,12 @@ reasons_groupBar(df = qtl0002_params$dfListing, varGroupID = country, strGroupLa
 
 ## Discontinuation Listing
 ```{r, echo = FALSE}
-gsm.qtl::discontinuation_map_reasons(
-  df = qtl0002_params$dfListing,
-  strReasons = c('WITHDRAWAL BY SUBJECT', 'NON-COMPLIANCE WITH STUDY DRUG', 'PROTOCOL VIOLATION', 'PHYSICIAN DECISION',
-                 'Withdrew Consent', 'Death', 'Lost to Follow-Up')
-) %>% 
-  select(subjid, compreas) %>% 
+qtl0002_params$dfListing %>% 
+  select(subjid, invid, country, compreas) %>% 
   rename(
     `Subject ID` = subjid,
+    `Site ID` = invid,
+    `Country` = country,
     `Discontinuation Reason` = compreas
   ) %>% 
   gt()

@@ -5,9 +5,12 @@ test_that("Analyze One Side Prop works for Study", {
   )
 
   res <- Analyze_OneSideProp(test_transformed, nPropRate = 0.01, nNumDeviations = 3)
-  expect_equal(c(names(test_transformed), "Flag", "Score", "upper_funnel", "flatline"), names(res))
-  expect_equal(res %>% filter(GroupID == "ABC") %>% pull(Flag), 2)
+
+  expect_equal(nrow(res), 3) #calculates an upper funnel and flatline for each study
+  expect_equal(pull(filter(res, GroupID == "Upper_funnel"), Metric), (0.01 + 3*sqrt(0.01*0.99/100)))
+  expect_equal(pull(filter(res, GroupID == "Upper_funnel"), Flag), 2)
 })
+
 
 # No longer using site in rmd
 # test_that("Analyze One Side Prop works for Site",{

@@ -12,7 +12,7 @@ have one record per site with expected columns: \code{GroupID}, \code{GroupLevel
 \code{Numerator}, \code{Denominator}, and \code{Metric}. For more details see the Data
 Model vignette: \code{vignette("DataModel", package = "gsm.core")}. For this
 function, \code{dfTransformed} should typically be created using
-\code{\link[=Transform_Rate]{Transform_Rate()}}.}
+\code{\link[gsm.core:Transform_Rate]{gsm.core::Transform_Rate()}}.}
 
 \item{nPropRate}{a numeric, between 0 and 1, that represents a proportion of
 comparison, e.g. a historic screen failure rate}
@@ -40,7 +40,7 @@ one-sided Z proportion test.
 # Binary
 dftransformed <- tibble::tribble(
   ~GroupID, ~GroupLevel, ~Numerator, ~Denominator, ~Metric,
-  "ABC",     "Study",         25,          100,    0.25
+  "ABC", "Study", 25, 100, 0.25
 )
 
 dfAnalyzed <- Analyze_OneSideProp(dftransformed, nPropRate = 0.01, nNumDeviations = 3)

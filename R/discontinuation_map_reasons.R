@@ -1,15 +1,11 @@
 #' Filter Discontinuation Reasons in data.frame
-#'
-#' @param df A `data.frame` derived from mapping STUDCOMP
-#' @param strReasons A `string` of reasons for discontinuation
+#' @param df A `data.frame` that contains discontiuation reasons
+#' @param yaml_path A `string` that denotes path to yaml file that contains discontinuation reasons
 #'
 #' @returns A `data.frame`
 #' @export
-discontinuation_map_reasons <- function(df, strReasons) {
-  filtered_df <- df %>%
-    dplyr::filter(
-      compreas %in% strReasons,
-      compyn %in% c("N", "")
-    )
-  return(filtered_df)
+discontinuation_map_reasons <- function(df, yaml_path = system.file("workflow", "0_other", "disc_reasons.yaml", package = "gsm.qtl")) {
+  yaml_data <- yaml::read_yaml(yaml_path)
+  reasons <- yaml_data$steps[[1]]$params$reasons
+  df %>% filter(compreas %in% reasons)
 }
