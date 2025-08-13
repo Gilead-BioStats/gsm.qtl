@@ -76,7 +76,7 @@ Analyze_OneSideProp <- function(
         (.data$Metric - .data$vMu) /
           sqrt(.data$vMu * (1 - .data$vMu) / .data$Denominator)
       ),
-      upper_funnel = nPropRate + nNumDeviations * sqrt(nPropRate * (1 - nPropRate) / sum(.data$Denominator)/3 )
+      upper_funnel = nPropRate + nNumDeviations * sqrt(nPropRate * (1 - nPropRate) / sum(.data$Denominator/3) )
       # Additional cutoffs can be made to compare against `Metric` for flagging
     ) %>%
     mutate(Flag = case_when(
