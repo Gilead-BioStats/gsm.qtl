@@ -55,7 +55,7 @@ steps:
     params:
       dfInput: Analysis_Input
   - output: Analysis_Summary
-    name: Analyze_OneSideProp
+    name: gsm.qtl::Analyze_OneSideProp
     params:
       dfTransformed: Analysis_Transformed
       nPropRate: nPropRate
