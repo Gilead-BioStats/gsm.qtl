@@ -58,6 +58,14 @@ steps:
       dfTransformed: Analysis_Transformed
       nPropRate: nPropRate
       nNumDeviations: nNumDeviations
+      bGetFunnels: FALSE
+  - output: Analysis_Funnels
+    name: gsm.qtl::Analyze_OneSideProp
+    params:
+      dfTransformed: Analysis_Transformed
+      nPropRate: nPropRate
+      nNumDeviations: nNumDeviations
+      bGetFunnels: TRUE
   - output: lAnalysis
     name: list
     params:
@@ -65,3 +73,4 @@ steps:
       Analysis_Input: Analysis_Input
       Analysis_Transformed: Analysis_Transformed
       Analysis_Summary: Analysis_Summary
+      Analysis_Funnels: Analysis_Funnels
