@@ -5,7 +5,7 @@ library(gsm.core)
 library(gsm.kri)
 library(purrr)
 library(dplyr)
-library(gsm.qtl)
+devtools::load_all(".")
 set.seed(1234)
 
 # Single Study
