@@ -58,7 +58,6 @@ steps:
       dfTransformed: Analysis_Transformed
       nPropRate: nPropRate
       nNumDeviations: nNumDeviations
-      bGetFunnels: FALSE
   - output: lAnalysis
     name: list
     params:
