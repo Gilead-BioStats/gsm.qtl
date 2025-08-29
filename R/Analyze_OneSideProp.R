@@ -20,7 +20,6 @@
 #' comparison, e.g. a historic screen failure rate
 #' @param nNumDeviations a numeric, e.g. '3', standard deviations away from the value
 #' provided in `nPropRate` to calculate a threshold to which the `Metric` should be flagged
-#' @param bGetFunnels a logical, returns the upper funnel and `nPropRate` bounds like data.frame if true
 #'
 #' @return `data.frame` with one row per study with columns: GroupID, GroupLevel, Numerator,
 #'   Denominator, Metric, Flag or two rows with the upper-funnel and nPropRate flatline instead
@@ -39,8 +38,7 @@
 Analyze_OneSideProp <- function(
   dfTransformed,
   nPropRate = 0.1,
-  nNumDeviations = 3,
-  bGetFunnels = FALSE
+  nNumDeviations = 3
 ) {
   stop_if(cnd = !is.data.frame(dfTransformed), message = "dfTransformed is not a data.frame")
   stop_if(
@@ -54,10 +52,10 @@ Analyze_OneSideProp <- function(
     mutate(
       vMu = nPropRate,  # nPropRate is what we're trying to compare against
       z_0 =  (.data$Metric - .data$vMu) / sqrt(.data$vMu * (1 - .data$vMu) / .data$Denominator), # z-star value that is dependent on number of participants
-      upper_funnel = nPropRate + nNumDeviations * sqrt(nPropRate * (1 - nPropRate) / sum(.data$Denominator)), # calculates upper funnel, lower one doesn't matter
+      Upper_funnel = nPropRate + nNumDeviations * sqrt(nPropRate * (1 - nPropRate) / sum(.data$Denominator)), # calculates upper funnel, lower one doesn't matter
       Flag = case_when(
-        Metric >= upper_funnel ~ 2, # Flag instances where the metric exceeds the funnel
-        (Metric >= vMu & Metric < upper_funnel) ~ 1, # Do we need a flag for the middle, break nPropRate but less than funnel?
+        Metric >= Upper_funnel ~ 2, # Flag instances where the metric exceeds the funnel
+        (Metric >= vMu & Metric < Upper_funnel) ~ 1, # Do we need a flag for the middle, break nPropRate but less than funnel?
         TRUE ~ 0 # otherwise no flag
       )
     )
@@ -73,25 +71,5 @@ Analyze_OneSideProp <- function(
       "Flag",
       "Score" = z_0
     )
-
-  if(bGetFunnels) {
-    # This df should always be the same (i.e. equivalent) of study level
-    Upper_funnel <- dfTransformed %>%
-      group_by(GroupLevel) %>%
-      summarize(
-        GroupID = "Upper_funnel",
-        Numerator = sum(Numerator),
-        Denominator = sum(Denominator)
-      ) %>%
-      ungroup() %>%
-      mutate(Metric = nPropRate + nNumDeviations * sqrt(nPropRate * (1 - nPropRate) / sum(.data$Denominator))) # To plot the funnel need funnel data under metric
-
-    flat_line <- Upper_funnel %>%
-      mutate(
-        GroupID = "Flatline",
-        Metric = nPropRate
-      )
-    funnels <- dplyr::bind_rows(Upper_funnel, flat_line)
-    return(funnels)
-  } else return(dfAnalyzed)
+  return(dfAnalyzed)
 }

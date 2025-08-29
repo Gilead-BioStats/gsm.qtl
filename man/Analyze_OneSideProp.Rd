@@ -4,12 +4,7 @@
 \alias{Analyze_OneSideProp}
 \title{Funnel Plot Analysis with Normal Approximation for Binary and Rate Outcomes.}
 \usage{
-Analyze_OneSideProp(
-  dfTransformed,
-  nPropRate = 0.1,
-  nNumDeviations = 3,
-  bGetFunnels = FALSE
-)
+Analyze_OneSideProp(dfTransformed, nPropRate = 0.1, nNumDeviations = 3)
 }
 \arguments{
 \item{dfTransformed}{\code{data.frame} Transformed data for analysis. Data should
@@ -24,8 +19,6 @@ comparison, e.g. a historic screen failure rate}
 
 \item{nNumDeviations}{a numeric, e.g. '3', standard deviations away from the value
 provided in \code{nPropRate} to calculate a threshold to which the \code{Metric} should be flagged}
-
-\item{bGetFunnels}{a logical, returns the upper funnel and \code{nPropRate} bounds like data.frame if true}
 }
 \value{
 \code{data.frame} with one row per study with columns: GroupID, GroupLevel, Numerator,
