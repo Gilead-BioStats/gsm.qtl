@@ -4,7 +4,12 @@
 \alias{Analyze_OneSideProp}
 \title{Funnel Plot Analysis with Normal Approximation for Binary and Rate Outcomes.}
 \usage{
-Analyze_OneSideProp(dfTransformed, nPropRate = 0.1, nNumDeviations = 3)
+Analyze_OneSideProp(
+  dfTransformed,
+  nPropRate = 0.1,
+  nNumDeviations = 3,
+  bGetFunnels = FALSE
+)
 }
 \arguments{
 \item{dfTransformed}{\code{data.frame} Transformed data for analysis. Data should
@@ -19,10 +24,12 @@ comparison, e.g. a historic screen failure rate}
 
 \item{nNumDeviations}{a numeric, e.g. '3', standard deviations away from the value
 provided in \code{nPropRate} to calculate a threshold to which the \code{Metric} should be flagged}
+
+\item{bGetFunnels}{a logical, returns the upper funnel and \code{nPropRate} bounds like data.frame if true}
 }
 \value{
-\code{data.frame} with one row per site with columns: GroupID, GroupLevel, Numerator,
-Denominator, Metric, upper_funnel and flag
+\code{data.frame} with one row per study with columns: GroupID, GroupLevel, Numerator,
+Denominator, Metric, Flag or two rows with the upper-funnel and nPropRate flatline instead
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}

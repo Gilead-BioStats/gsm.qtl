@@ -11,31 +11,31 @@
 #' @export
 
 QTL_Overview <- function(dfResults,
-  dSnapshot,
-  strNum,
-  strDenom,
-  strQTL) {
+                         dSnapshot,
+                         strNum,
+                         strDenom,
+                         strQTL) {
   dfResults %>%
     filter(
       GroupLevel == "Study",
       SnapshotDate == dSnapshot,
       !(GroupID %in% c("Upper_funnel", "Flatline"))
     ) %>%
-    mutate_at(c("Metric", "upper_funnel", "Numerator", "Denominator", "Flag"), as.numeric) %>%
+    mutate_at(c("Metric", "Upper_funnel", "Numerator", "Denominator", "Flag"), as.numeric) %>%
     mutate(
       qtlrate = paste0(as.character(round(Metric * 100, 3)), "%"),
-      Deviation = ifelse(Metric > upper_funnel, "Yes", "No"),
-      upper_funnel = paste0(as.character(round(upper_funnel * 100, 3)), "%")
+      Deviation = ifelse(Metric > Upper_funnel, "Yes", "No"),
+      Upper_funnel = paste0(as.character(round(Upper_funnel * 100, 3)), "%")
     ) %>%
     mutate_all(as.character) %>%
-    select(GroupID, Numerator, Denominator, qtlrate, upper_funnel, Deviation) %>%
-    tidyr::pivot_longer(., cols = c(GroupID, Numerator, Denominator, qtlrate, upper_funnel, Deviation), names_to = "Param", values_to = "Value") %>%
+    select(GroupID, Numerator, Denominator, qtlrate, Upper_funnel, Deviation) %>%
+    tidyr::pivot_longer(., cols = c(GroupID, Numerator, Denominator, qtlrate, Upper_funnel, Deviation), names_to = "Param", values_to = "Value") %>%
     mutate(Param = case_when(
       Param == "GroupID" ~ "StudyID",
       Param == "Numerator" ~ strNum,
       Param == "Denominator" ~ strDenom,
       Param == "qtlrate" ~ strQTL,
-      Param == "upper_funnel" ~ "Current Threshold",
+      Param == "Upper_funnel" ~ "Current Threshold",
       Param == "Deviation" ~ "Deviation?"
     )) %>%
     gt::gt()

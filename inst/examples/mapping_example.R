@@ -28,15 +28,15 @@ mappings_wf <- gsm.core::MakeWorkflowList(
 )
 mappings_spec <- gsm.mapping::CombineSpecs(mappings_wf)
 metrics_wf <- gsm.core::MakeWorkflowList(strNames = c("qtl0001", "qtl0002"), strPath = "inst/workflow/2_metrics")
-reporting_wf1 <- gsm.core::MakeWorkflowList(strNames = c("Results", "Groups"), strPath = "workflow/3_reporting", strPackage = "gsm.reporting")
-reporting_wf2 <- gsm.core::MakeWorkflowList(strNames = c("QTLFunnels"), strPath = "inst/workflow/3_reporting")
+reporting_wf1 <- gsm.core::MakeWorkflowList(strNames = c("Results", "Groups", "Metrics"), strPath = "workflow/3_reporting", strPackage = "gsm.reporting")
+# reporting_wf2 <- gsm.core::MakeWorkflowList(strNames = c("QTLFunnels"), strPath = "inst/workflow/3_reporting")
 
 
 lRaw <- map_depth(ie_data, 1, gsm.mapping::Ingest, mappings_spec)
 mapped <- map_depth(lRaw, 1, ~ gsm.core::RunWorkflows(mappings_wf, .x))
 analyzed <- map_depth(mapped, 1, ~gsm.core::RunWorkflows(metrics_wf, .x))
-reporting <- map2(mapped, analyzed, ~ gsm.core::RunWorkflows(reporting_wf, c(.x, list(lAnalyzed = .y, lWorkflows = metrics_wf))))
-reporting2 <- map_depth(analyzed, 2, ~gsm.core::RunWorkflows(reporting_wf2, .x))
+reporting <- map2(mapped, analyzed, ~ gsm.core::RunWorkflows(reporting_wf1, c(.x, list(lAnalyzed = .y, lWorkflows = metrics_wf))))
+# reporting2 <- map_depth(analyzed, 2, ~gsm.core::RunWorkflows(reporting_wf2, .x))
 
 
 # Fix `SnapshotDate` column in reporting results, can be addressed in https://github.com/Gilead-BioStats/gsm.reporting/issues/24
@@ -48,7 +48,7 @@ reporting <- map2(reporting, dates, ~{
 
 # Bind multiple snapshots of data together
 all_reportingResults <- do.call(dplyr::bind_rows, lapply(reporting, function(x) x$Reporting_Results))
-
+all_reportingMetrics <- reporting[[length(reporting)]]$Reporting_Metrics
 # Only need 1 reporting group object
 all_reportingGroups <- reporting[[length(reporting)]]$Reporting_Groups
 
@@ -61,6 +61,7 @@ report_listings <- list(qtl0001 = mapped$`2012-06-30`$Mapped_EXCLUSION,
 gsm.kri::RenderRmd(
   lParams = list(
     dfResults = all_reportingResults,
+    dfMetrics = all_reportingMetrics,
     dfGroups = all_reportingGroups,
     lListings = report_listings
   ),

@@ -88,8 +88,7 @@ reporting <- map2(reporting, dates, ~{
 })
 
 # Bind multiple snapshots of data together
-all_reportingResults <- do.call(dplyr::bind_rows, lapply(reporting, function(x) x$Reporting_Results)) %>%
-  select(-c(upper_funnel, flatline))
+all_reportingResults <- do.call(dplyr::bind_rows, lapply(reporting, function(x) x$Reporting_Results)) 
 
 
 # Only need 1 reporting group object

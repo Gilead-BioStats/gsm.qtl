@@ -4,10 +4,12 @@
 \alias{ResultsProcessor}
 \title{Title}
 \usage{
-ResultsProcessor(df)
+ResultsProcessor(dfResults, dfMetrics)
 }
 \arguments{
-\item{df}{a data.frame}
+\item{dfResults}{a reporting results data.frame}
+
+\item{dfMetrics}{a reporting metrics data.frame}
 }
 \description{
 Title
