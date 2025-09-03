@@ -55,5 +55,6 @@ qtl0002_params$dfListing %>%
     `Country` = country,
     `Discontinuation Reason` = compreas
   ) %>% 
-  gt()
+  gt() %>% 
+  scrollable_gt(., height = "500px", min_table_width = "100px")
 ```

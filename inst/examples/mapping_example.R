@@ -81,3 +81,4 @@ gsm.kri::RenderRmd(
   strOutputFile = "test.html",
   strInputPath = system.file("report/Report_QTL.Rmd", package = "gsm.qtl")
 )
+
