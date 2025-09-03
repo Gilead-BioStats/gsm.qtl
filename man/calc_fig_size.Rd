@@ -2,20 +2,25 @@
 % Please edit documentation in R/utils-fig_size.R
 \name{calc_fig_size}
 \alias{calc_fig_size}
-\title{Calculate figure dimensions based on the data going in}
+\title{Compute a widget height from the number of y-axis groups}
 \usage{
 calc_fig_size(n_rows, base = 500, per = 22)
 }
 \arguments{
-\item{n_rows}{number of rows/groups (sites, reasons, etc.)}
+\item{n_rows}{A single non-negative number giving the number of rows/groups
+(e.g., distinct y-axis categories).}
 
-\item{base}{size for each row/group}
+\item{base}{Minimum height in \strong{pixels} to allocate regardless of \code{n_rows}.
+Default is \code{500}.}
 
-\item{per}{multiplier}
+\item{per}{Height in \strong{pixels} to allocate \strong{per} row/group. Default is \code{22}.}
 }
 \value{
-an approrpiate number for the size of a figure dimension
+An integer pixel value suitable for a widget's \verb{height =} argument.
 }
 \description{
-Calculate figure dimensions based on the data going in
+Convenience helper for HTML widgets (e.g., Plotly) that converts a count of
+categories/rows into a pixel height. The function returns the larger of
+\code{base} and \code{per * n_rows}, which keeps small plots readable while allowing
+tall plots when many groups are shown.
 }
