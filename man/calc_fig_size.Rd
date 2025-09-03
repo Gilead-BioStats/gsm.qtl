@@ -4,12 +4,10 @@
 \alias{calc_fig_size}
 \title{Calculate figure dimensions based on the data going in}
 \usage{
-calc_fig_size(n_rows, width = 7, base = 3, per = 0.25)
+calc_fig_size(n_rows, base = 500, per = 22)
 }
 \arguments{
 \item{n_rows}{number of rows/groups (sites, reasons, etc.)}
-
-\item{width}{desired width}
 
 \item{base}{size for each row/group}
 
