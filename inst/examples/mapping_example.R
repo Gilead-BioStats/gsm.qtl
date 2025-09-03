@@ -82,3 +82,4 @@ gsm.kri::RenderRmd(
   strInputPath = system.file("report/Report_QTL.Rmd", package = "gsm.qtl")
 )
 
+example_lparams$lListings$qtl0001 %>% filter(Source != "Neither") %>% pull(invid) %>% unique

@@ -3,6 +3,7 @@
 #' @param df A `data.frame` containing the participant level dataset with eligibility
 #' @param varGroupID A variable to make the stacked bar chart with, i.e. invid
 #' @param strGroupLabel A `string` to label the `varGroupID` in reference to axes, legend, footnotes.
+#' @param fig.height A numeric to modify height
 #'
 #' @returns A `plotly` object
 #'
@@ -40,7 +41,7 @@ eligibility_groupBar <- function(df, varGroupID, strGroupLabel) {
     theme_classic()
 
   # Create the plotly object
-  x <- plotly::ggplotly(group_bar, tooltip = c("text")) %>%
+  x <- plotly::ggplotly(group_bar, tooltip = c("text"), h = calc_fig_size(n_row = length(groups_with_ineligible), per = 75)) %>%
     layout(
       margin = list(l = 50, r = 50, b = 150, t = 50),
       annotations = list(
