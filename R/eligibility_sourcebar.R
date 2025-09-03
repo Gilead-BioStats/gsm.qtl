@@ -15,5 +15,5 @@ eligibility_sourceBar <- function(df) {
       axis.text.y = element_text(angle = 45, vjust = 1), # tilt to avoid overlap
       panel.grid.major.y = element_blank()
     )
-  plotly::ggplotly(source_bar, tooltip = c("x"), h = calc_fig_size(n_row = length(unique(df$Source)), per = 75))
+  plotly::ggplotly(source_bar, tooltip = c("x"), h = calc_fig_size(n_row = length(unique(df$Source)), per = 50))
 }

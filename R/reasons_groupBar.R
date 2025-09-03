@@ -26,7 +26,7 @@ reasons_groupBar <- function(df, varGroupID, strGroupLabel) {
       panel.grid.major.y = element_blank()
     )
   # Create plotly
-  plotly::ggplotly(group_reasons_bar, tooltip = c("y", "text")) %>%
+  plotly::ggplotly(group_reasons_bar, tooltip = c("y", "text"), h = calc_fig_size(n_row = length(unique(df$compreas)), per = 50)) %>%
     layout(
       margin = list(l = 180, r = 50, b = 60, t = 60),
       annotations = list(
