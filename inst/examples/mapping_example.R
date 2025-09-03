@@ -74,3 +74,10 @@ example_lparams <- list(
   lListings = report_listings
 )
 usethis::use_data(example_lparams, internal = TRUE, overwrite = TRUE)
+
+gsm.kri::RenderRmd(
+  lParams = gsm.qtl:::example_lparams,
+  strOutputDir = getwd(),
+  strOutputFile = "test.html",
+  strInputPath = system.file("report/Report_QTL.Rmd", package = "gsm.qtl")
+)

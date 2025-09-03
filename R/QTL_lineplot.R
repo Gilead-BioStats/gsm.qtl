@@ -56,12 +56,11 @@ QTL_lineplot <- function(dfResults, strQTL) {
       show.legend = FALSE
     ) +
 
-    # Colored points for Ineligibility Rate (keep color, hide legend)
+    # Colored points for Ineligibility Rate
     geom_point(
       data = df_joined %>% filter(group_type == strQTL),
       aes(color = point_color),
-      size = 2,
-      show.legend = FALSE
+      size = 2
     ) +
     scale_color_manual(
       values = c(
