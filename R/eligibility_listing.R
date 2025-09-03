@@ -64,7 +64,14 @@ eligibility_listing <- function(df) {
     #                 page_size_default = 25) %>%
     scrollable_gt(., height = "500px")
 }
-
+#' Add scrollability to listings
+#'
+#' @param gt_tbl a `gt` object
+#' @param height a string to denote pixel height
+#' @param min_table_width a string to denote pixel width
+#'
+#' @returns A `gt` object
+#' @export
 scrollable_gt <- function(gt_tbl, height = "300px", min_table_width = "1200px") {
   div(
     style = sprintf("
