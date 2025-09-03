@@ -7,13 +7,13 @@
 discontinuation_reasonBar <- function(df) {
   reasonbar <- df %>%
     # filter(compyn == "N") %>%
-    ggplot(., aes(x = compreas, fill = compreas)) +
+    ggplot(., aes(y = compreas, fill = compreas)) +
     geom_bar() +
-    labs(x = "Discontinuation Reasons", y = "Participant Count", title = "Participant Count by Reasons") +
+    labs(y = "Discontinuation Reasons", x = "Participant Count", title = "Participant Count by Reasons") +
     theme_classic() +
     theme(
-      axis.text.x = element_text(angle = 45, hjust = 1), # tilt to avoid overlap
-      panel.grid.major.x = element_blank()
+      axis.text.y = element_text(angle = 45, vjust = 1), # tilt to avoid overlap
+      panel.grid.major.y = element_blank()
     )
-  plotly::ggplotly(reasonbar, tooltip = c("y", "x"))
+  plotly::ggplotly(reasonbar, tooltip = c("x"))
 }
