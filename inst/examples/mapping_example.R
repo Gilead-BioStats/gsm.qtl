@@ -6,6 +6,9 @@ library(gsm.kri)
 library(purrr)
 library(dplyr)
 devtools::load_all(".")
+
+## No need to resimulate everything with the advent of the internal data - scroll to bottom to just test report
+# ----------------------------------------------------------------------
 set.seed(1234)
 
 # Single Study
@@ -67,19 +70,17 @@ gsm.kri::RenderRmd(
   strOutputFile = "test.html",
   strInputPath = system.file("report/Report_QTL.Rmd", package = "gsm.qtl")
 )
-
-example_lparams <- list(
-  dfResults = all_reportingResults,
-  dfGroups = all_reportingGroups,
-  lListings = report_listings
-)
-usethis::use_data(example_lparams, internal = TRUE, overwrite = TRUE)
-
-gsm.kri::RenderRmd(
-  lParams = gsm.qtl:::example_lparams,
-  strOutputDir = getwd(),
-  strOutputFile = "test.html",
-  strInputPath = system.file("report/Report_QTL.Rmd", package = "gsm.qtl")
-)
-
-example_lparams$lListings$qtl0001 %>% filter(Source != "Neither") %>% pull(invid) %>% unique
+#
+# example_lparams <- list(
+#   dfResults = all_reportingResults,
+#   dfGroups = all_reportingGroups,
+#   lListings = report_listings
+# )
+# usethis::use_data(example_lparams, internal = TRUE, overwrite = TRUE)
+#
+# gsm.kri::RenderRmd(
+#   lParams = gsm.qtl:::example_lparams,
+#   strOutputDir = getwd(),
+#   strOutputFile = "test.html",
+#   strInputPath = system.file("report/Report_QTL.Rmd", package = "gsm.qtl")
+# )
