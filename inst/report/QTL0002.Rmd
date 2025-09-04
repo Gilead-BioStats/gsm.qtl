@@ -61,6 +61,7 @@ discontinuation_listing %>%
   gt() %>% 
   scrollable_gt(., height = "500px", min_table_width = "100px")
 
+# prepare the download
 csv_txt <- paste(capture.output(write.csv(discontinuation_listing, row.names = FALSE)), collapse = "\n")# turn into a data-URI (single-file HTML friendly)
 href <- base64enc::dataURI(charToRaw(csv_txt), mime = "text/csv;charset=utf-8")
 
