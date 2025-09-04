@@ -1,8 +1,8 @@
 #' Generate Eligibility Listing
 #'
 #' @param df A `data.frame` containing the participant level dataset with eligibility
-#'
-#' @returns A `gt` object
+#' @param download a logical to determine whether or not to return a gt object or a plain data.frame ready for download
+#' @returns A `gt` object or `data.frame`
 #' @export
 eligibility_listing <- function(df, download = FALSE) {
   listing <- df %>%
