@@ -4,7 +4,7 @@
 \alias{eligibility_listing}
 \title{Generate Eligibility Listing}
 \usage{
-eligibility_listing(df)
+eligibility_listing(df, download = FALSE)
 }
 \arguments{
 \item{df}{A \code{data.frame} containing the participant level dataset with eligibility}
