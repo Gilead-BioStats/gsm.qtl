@@ -46,7 +46,7 @@ Analyze_OneSideProp <- function(
     message = "One or more of these columns not found: GroupID, GroupLevel, Denominator, Numerator, Metric"
   )
   stop_if(cnd = !all(!is.na(dfTransformed[["GroupID"]])), message = "NA value(s) found in GroupID")
-  stop_if(cnd = (nPropRate >= 1 | nPropRate <= 0), message = "`nPropRate` must be a value between 0 and 1.")
+  stop_if(cnd = (nPropRate >= 1 | nPropRate <= 0), message = "`nPropRate` must be a value between 0 and 1 (exclusive).")
 
   dfScore <- dfTransformed %>%
     mutate(
