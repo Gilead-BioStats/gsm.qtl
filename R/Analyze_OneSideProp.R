@@ -21,8 +21,8 @@
 #' @param nNumDeviations a numeric, e.g. '3', standard deviations away from the value
 #' provided in `nPropRate` to calculate a threshold to which the `Metric` should be flagged
 #'
-#' @return `data.frame` with one row per study with columns: GroupID, GroupLevel, Numerator,
-#'   Denominator, Metric, Flag or two rows with the upper-funnel and nPropRate flatline instead
+#' @return `data.frame` with one row per study-snapshot with columns: GroupID, GroupLevel, Numerator,
+#'   Denominator, Metric, Flag, Score
 #'
 #' @examples
 #' # Binary
