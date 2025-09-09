@@ -37,5 +37,5 @@ criteria_groupBar <- function(df, varGroupID, strGroupLabel) {
     length()
 
   # Create plotly
-  plotly::ggplotly(group_criteria_bar, tooltip = c("y", "text"), h = calc_fig_size(n_rows = distinct_n_ie, per = 35))
+  plotly::ggplotly(group_criteria_bar, tooltip = c("y", "text"), h = calc_fig_size(n_rows = distinct_n_ie))
 }

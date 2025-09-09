@@ -4,7 +4,7 @@
 \alias{calc_fig_size}
 \title{Compute a widget height from the number of y-axis groups}
 \usage{
-calc_fig_size(n_rows, base = 500, per = 22)
+calc_fig_size(n_rows, base = 500, per = 25)
 }
 \arguments{
 \item{n_rows}{A single non-negative number giving the number of rows/groups

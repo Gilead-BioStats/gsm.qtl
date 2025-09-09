@@ -13,7 +13,7 @@
 #'
 #' @return An integer pixel value suitable for a widget's `height =` argument.
 #' @export
-calc_fig_size <- function(n_rows, base = 500, per = 22) {
+calc_fig_size <- function(n_rows, base = 500, per = 25) {
   if (!is.numeric(n_rows) || length(n_rows) != 1L || is.na(n_rows) || n_rows < 0) {
     stop("`n_rows` must be a single non-negative number.")
   }

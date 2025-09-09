@@ -16,7 +16,7 @@ ie_data <- generate_rawdata_for_single_study(
   SnapshotCount = 6,
   SnapshotWidth = "months",
   ParticipantCount = 1000,
-  SiteCount = 10,
+  SiteCount = 50,
   StudyID = "ABC",
   workflow_path = "workflow/1_mappings",
   mappings = c("IE", "PD", "STUDCOMP"),
@@ -78,9 +78,9 @@ gsm.kri::RenderRmd(
 # )
 # usethis::use_data(example_lparams, internal = TRUE, overwrite = TRUE)
 #
-gsm.kri::RenderRmd(
-  lParams = gsm.qtl:::example_lparams,
-  strOutputDir = getwd(),
-  strOutputFile = "test.html",
-  strInputPath = system.file("report/Report_QTL.Rmd", package = "gsm.qtl")
-)
+# gsm.kri::RenderRmd(
+#   lParams = gsm.qtl:::example_lparams,
+#   strOutputDir = getwd(),
+#   strOutputFile = "test.html",
+#   strInputPath = system.file("report/Report_QTL.Rmd", package = "gsm.qtl")
+# )
