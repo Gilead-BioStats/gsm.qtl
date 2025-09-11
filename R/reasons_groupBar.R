@@ -12,27 +12,27 @@ reasons_groupBar <- function(df, varGroupID, strGroupLabel) {
   group_reasons_bar <- df %>%
     # filter(compyn == "N") %>%
     ggplot(., aes(
-      x = compreas, fill = !!enexpr(varGroupID),
+      y = compreas, fill = !!enexpr(varGroupID),
       text = paste0(
         strGroupLabel, ": ", !!enexpr(varGroupID),
         "\n Discontinuation Reason: ", compreas
       )
     )) +
     geom_bar() +
-    labs(x = "Reason", y = "Reason Count", fill = strGroupLabel, title = paste0("Discontinuation Reason by ", strGroupLabel)) +
+    labs(y = "Reason", x = "Reason Count", fill = strGroupLabel, title = paste0("Discontinuation Reason by ", strGroupLabel)) +
     theme_classic(base_size = 11) +
     theme(
-      axis.text.x = element_text(angle = 45, hjust = 1), # tilt to avoid overlap
-      panel.grid.major.x = element_blank()
+      axis.text.y = element_text(angle = 45, vjust = 1), # tilt to avoid overlap
+      panel.grid.major.y = element_blank()
     )
   # Create plotly
-  plotly::ggplotly(group_reasons_bar, tooltip = c("y", "text")) %>%
+  plotly::ggplotly(group_reasons_bar, tooltip = c("y", "text"), h = calc_fig_size(n_row = length(unique(df$compreas)))) %>%
     layout(
-      margin = list(l = 50, r = 50, b = 150, t = 50),
+      margin = list(l = 180, r = 50, b = 60, t = 60),
       annotations = list(
-        x = 1, y = -0.5,
+        x = 1, y = -0.12,
         xref = "paper", yref = "paper", showarrow = F,
-        xanchor = "right", yanchor = "auto", xshift = 0, yshift = 0,
+        xanchor = "right", yanchor = "top", xshift = 0, yshift = 0,
         font = list(size = 10)
       )
     )

@@ -1,31 +1,44 @@
-test_that("Analyze One Side Prop works for Study", {
+test_that("Analyze One Side Prop works for Study, when nProRate is clearly violated", {
   test_transformed <- tibble::tribble(
     ~GroupID, ~GroupLevel, ~Numerator, ~Denominator, ~Metric,
     "ABC", "Study", 25, 100, 0.25
   )
+  nPropRate <- 0.01
+  nNumDeviations <- 3
 
-  res <- Analyze_OneSideProp(test_transformed, nPropRate = 0.01, nNumDeviations = 3)
+  res <- Analyze_OneSideProp(test_transformed, nPropRate = nPropRate, nNumDeviations = nNumDeviations)
+  # There should only be 1 QTL Metric per study
+  expect_equal(nrow(res), 1)
 
-  expect_equal(nrow(res), 3) #calculates an upper funnel and flatline for each study
-  expect_equal(pull(filter(res, GroupID == "Upper_funnel"), Metric), (0.01 + 3*sqrt(0.01*0.99/100)))
-  expect_equal(pull(filter(res, GroupID == "Upper_funnel"), Flag), 2)
+  flag_crit <- nPropRate + 3*sqrt( (nPropRate*(1-nPropRate)) / res$Denominator)
+  actual_flag <- res$Flag
+  expected_flag <- case_when(res$Metric >= flag_crit ~ 2,
+                             res$Metric < flag_crit & res$Metric > nPropRate ~ 1,
+                             .default = 0)
+
+  # The flagging should be working as expected
+  expect_equal(actual_flag, expected_flag)
 })
 
 
-# No longer using site in rmd
-# test_that("Analyze One Side Prop works for Site",{
-#   test_transformed <- tibble::tribble(
-#     ~GroupID, ~GroupLevel, ~Numerator, ~Denominator, ~Metric,
-#      "SiteX",      "Site",         30,          100,    0.30,
-#      "SiteY",      "Site",         28,          100,    0.28,
-#      "SiteZ",      "Site",          2,          100,    0.02
-#   )
-#
-#   res <- Analyze_OneSideProp(test_transformed, nPropRate = 0.01, nNumDeviations = 3)
-#   expect_equal(nrow(res), 4)
-#   expect_equal(res %>% pull(Flag), c(2,2,0,2))
-#   expect_equal(res %>% filter(GroupID == "Upper_funnel") %>% pull(Numerator),
-#                60)
-#   expect_equal(res %>% filter(GroupID == "Upper_funnel") %>% pull(Metric),
-#                0.01 + 3*sqrt(0.01*0.99/300))
-# })
+test_that("Analyze One Side Prop works for Study, when nPropRate is the same", {
+  test_transformed <- tibble::tribble(
+    ~GroupID, ~GroupLevel, ~Numerator, ~Denominator, ~Metric,
+    "ABC", "Study", 25, 100, 0.25
+  )
+  nPropRate <- 0.25
+  nNumDeviations <- 1
+
+  res <- Analyze_OneSideProp(test_transformed, nPropRate = nPropRate, nNumDeviations = nNumDeviations)
+  # There should only be 1 QTL Metric per study
+  expect_equal(nrow(res), 1)
+
+  flag_crit <- nPropRate + 3*sqrt( (nPropRate*(1-nPropRate)) / res$Denominator)
+  actual_flag <- res$Flag
+  expected_flag <- case_when(res$Metric >= flag_crit ~ 2,
+                             res$Metric < flag_crit & res$Metric >= nPropRate ~ 1,
+                             .default = 0)
+
+  # The flagging should be working as expected
+  expect_equal(actual_flag, expected_flag)
+})

@@ -40,7 +40,7 @@ eligibility_groupBar <- function(df, varGroupID, strGroupLabel) {
     theme_classic()
 
   # Create the plotly object
-  x <- plotly::ggplotly(group_bar, tooltip = c("text")) %>%
+  x <- plotly::ggplotly(group_bar, tooltip = c("text"), h = calc_fig_size(n_row = length(groups_with_ineligible))) %>%
     layout(
       margin = list(l = 50, r = 50, b = 150, t = 50),
       annotations = list(

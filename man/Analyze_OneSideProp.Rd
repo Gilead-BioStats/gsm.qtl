@@ -21,8 +21,8 @@ comparison, e.g. a historic screen failure rate}
 provided in \code{nPropRate} to calculate a threshold to which the \code{Metric} should be flagged}
 }
 \value{
-\code{data.frame} with one row per site with columns: GroupID, GroupLevel, Numerator,
-Denominator, Metric, upper_funnel and flag
+\code{data.frame} with one row per study-snapshot with columns: GroupID, GroupLevel, Numerator,
+Denominator, Metric, Flag, Score
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}

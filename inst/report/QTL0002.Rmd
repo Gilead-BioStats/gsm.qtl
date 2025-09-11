@@ -47,13 +47,27 @@ reasons_groupBar(df = qtl0002_params$dfListing, varGroupID = country, strGroupLa
 
 ## Discontinuation Listing
 ```{r, echo = FALSE}
-qtl0002_params$dfListing %>% 
+discontinuation_listing <- qtl0002_params$dfListing %>% 
   select(subjid, invid, country, compreas) %>% 
   rename(
     `Subject ID` = subjid,
     `Site ID` = invid,
     `Country` = country,
     `Discontinuation Reason` = compreas
-  ) %>% 
-  gt()
+  )
+
+# output the listing in the html
+discontinuation_listing %>% 
+  gt() %>% 
+  scrollable_gt(., height = "500px", min_table_width = "100px")
+
+# prepare the download
+csv_txt <- paste(capture.output(write.csv(discontinuation_listing, row.names = FALSE)), collapse = "\n")# turn into a data-URI (single-file HTML friendly)
+href <- base64enc::dataURI(charToRaw(csv_txt), mime = "text/csv;charset=utf-8")
+
+knitr::asis_output(
+  sprintf('<p><a class="btn btn-primary" download="discontinuation_listing.csv" href="%s">
+            ⬇️ Download CSV
+          </a></p>', href)
+)
 ```

@@ -11,6 +11,7 @@
 #'  the report will be named based on the study ID, Group Level and Date.
 #' @param dfResults A results `data.frame` from the output of `gsm.reporting::BindResults()` used
 #' to create a variety of visualizations like the line plot, bar plot.
+#' @param dfMetrics A results `data.frame` from the output of `gsm.reporting::MakeMetric()`
 #' @param dfGroups A groups `data.frame` from the output of the `Groups.yaml` of `gsm.reporting`used
 #' to create a variety of visualizations like the line plot, bar plot.
 #' @param lListings A `list` of `data.frame`s that are used as listings to represent participants that are the numerators
@@ -22,6 +23,7 @@
 
 Report_QTL <- function(
   dfResults = NULL,
+  dfMetrics = NULL,
   dfGroups = NULL,
   lListings = NULL,
   strOutputDir = getwd(),
@@ -36,6 +38,7 @@ Report_QTL <- function(
     output_file = file.path(strOutputDir, strOutputFile),
     params = list(
       dfResults = dfResults,
+      dfMetrics = dfMetrics,
       dfGroups = dfGroups,
       lListings = lListings
     ),

@@ -9,6 +9,7 @@ output:
     css: styles.css
 params:
   dfResults: NA
+  dfMetrics: NA
   dfGroups: NA
   lListings: NA
 ---
@@ -28,7 +29,7 @@ library(knitr)
 knitr::opts_chunk$set(warning = FALSE, message = FALSE)
 
 
-dfResults <- ResultsProcessor(params$dfResults)
+dfResults <- ResultsProcessor(dfResults = params$dfResults, dfMetrics = params$dfMetrics)
 dfGroups <- params$dfGroups
 lListings <- params$lListings
 latest_snapshot = max(dfResults$SnapshotDate)

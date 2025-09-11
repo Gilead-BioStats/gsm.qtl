@@ -33,9 +33,9 @@ QTL_lineplot <- function(dfResults, strQTL) {
     mutate(
       # Point color logic for main group only
       point_color = case_when(
-        group_type != strQTL ~ NA_character_,
-        Metric > `Upper_funnel` ~ "red",
-        TRUE ~ "green"
+        group_type == "QTL Threshold" | Metric > `Upper_funnel` ~ "Above QTL Threshold",
+        group_type == "Nominal Threshold" ~ "Below QTL Threshold",
+        TRUE ~ "Below QTL Threshold"
       ),
       tooltip_text = case_when(
         group_type != strQTL ~ paste0(group_type, "\nDate: ", SnapshotDate, "\nMetric: ", round(Metric, 2)),
@@ -53,35 +53,24 @@ QTL_lineplot <- function(dfResults, strQTL) {
       data = df_joined %>%
         filter(group_type %in% c(strQTL, "QTL Threshold", "Nominal Threshold")),
       aes(color = group_type, linetype = group_type, linewidth = group_type),
-      size = 1,
       show.legend = FALSE
     ) +
 
-    # Colored points for Ineligibility Rate (keep color, hide legend)
+    # Colored points for Ineligibility Rate
     geom_point(
       data = df_joined %>% filter(group_type == strQTL),
       aes(color = point_color),
-      size = 2,
-      show.legend = FALSE
+      size = 2
     ) +
-
-    # Points for thresholds (hide legend)
-    geom_point(
-      data = df_joined %>% filter(group_type != strQTL),
-      aes(color = group_type),
-      size = 1,
-      show.legend = FALSE
-    ) +
-    # Combine all colors in scale but only show legend for line groups
     scale_color_manual(
       values = c(
         "QTL Threshold" = "#FF5859",
         "Nominal Threshold" = "grey80",
         strQTL = "grey50",
-        "red" = "#FF5859",
-        "green" = "#3DAF06"
+        "Above QTL Threshold" = "#FF5859",
+        "Below QTL Threshold" = "#3DAF06"
       ),
-      breaks = c(strQTL, "Nominal Threshold", "QTL Threshold"),
+      breaks = c(strQTL, "Nominal Threshold", "QTL Threshold", "Above QTL Threshold", "Below QTL Threshold"),
       name = NULL
     ) +
     scale_linetype_manual(
@@ -102,11 +91,19 @@ QTL_lineplot <- function(dfResults, strQTL) {
     theme_minimal() +
     theme(
       axis.text.x = element_text(angle = 30),
-      legend.position = "none"
+      legend.position = "right"
     ) +
     labs(
       y = strQTL,
       x = "Snapshot Date"
     )
-  ggplotly(p, tooltip = "text")
+    g <- ggplotly(p, tooltip = "text")
+  # hide legend entries for any marker traces
+    g$x$data <- purrr::map(g$x$data, ~{
+      if (!is.null(.x$name)) {
+        .x$name <- gsub(",.*|\\(", "", .x$name)  # remove ",1,NA"
+      }
+      .x
+    })
+    g
 }

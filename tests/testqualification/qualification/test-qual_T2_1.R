@@ -17,23 +17,22 @@ outputs <- map_vec(ineligibility_workflow$steps, ~ .x$output)
 testthat::test_that("Given appropriate mapped participant-level data, calculates appropriate QTL threshold.", {
 
   expect_true(all(outputs %in% names(analyzed_ineligibility[[1]])))
-  expect_true(all(map_lgl(analyzed_ineligibility[[1]][outputs[!outputs %in% c("lAnalysis")]], is.data.frame)))
 
   # This is a study level metric
   expect_equal(nrow(analyzed_ineligibility[[1]]$Analysis_Transformed), 1)
 
-  # Summary adds a row for Upper funnel and Flatline
-  expect_equal(nrow(analyzed_ineligibility[[1]]$Analysis_Summary), 3)
+  # Summary adds flag and score
+  expect_equal(names(analyzed_ineligibility[[1]]$Analysis_Summary), c(names(analyzed_ineligibility[[1]]$Analysis_Transformed), "Flag", "Score"))
 
   nPropRate <- ineligibility_workflow$meta$nPropRate
   nNumDeviations <- ineligibility_workflow$meta$nNumDeviations
 
-  # flatline value matches `nPropRate` in yaml
-  expect_equal(pull(filter(analyzed_ineligibility[[1]]$Analysis_Summary, GroupID == "Flatline"), Metric), nPropRate)
+  flag_crit <- nPropRate + nNumDeviations*sqrt( (nPropRate*(1-nPropRate)) / analyzed_ineligibility[[1]]$Analysis_Summary$Denominator)
+  actual_flag <- analyzed_ineligibility[[1]]$Analysis_Summary$Flag
+  expected_flag <- case_when(analyzed_ineligibility[[1]]$Analysis_Summary$Metric >= flag_crit ~ 2,
+                             analyzed_ineligibility[[1]]$Analysis_Summary$Metric < flag_crit & analyzed_ineligibility[[1]]$Analysis_Summary$Metric >= nPropRate ~ 1,
+                             .default = 0)
 
-  # upper funnel value matches `nPropRate` in yaml
-  expect_equal(
-    pull(filter(analyzed_ineligibility[[1]]$Analysis_Summary, GroupID == "Upper_funnel"), Metric),
-    (nPropRate  + nNumDeviations * sqrt(nPropRate * (1 - nPropRate) / sum(analyzed_ineligibility[[1]]$Analysis_Transformed$Denominator)))
-  )
+  # The flagging should be working as expected
+  expect_equal(actual_flag, expected_flag)
 })

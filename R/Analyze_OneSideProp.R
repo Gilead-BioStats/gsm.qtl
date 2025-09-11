@@ -21,8 +21,8 @@
 #' @param nNumDeviations a numeric, e.g. '3', standard deviations away from the value
 #' provided in `nPropRate` to calculate a threshold to which the `Metric` should be flagged
 #'
-#' @return `data.frame` with one row per site with columns: GroupID, GroupLevel, Numerator,
-#'   Denominator, Metric, upper_funnel and flag
+#' @return `data.frame` with one row per study-snapshot with columns: GroupID, GroupLevel, Numerator,
+#'   Denominator, Metric, Flag, Score
 #'
 #' @examples
 #' # Binary
@@ -46,44 +46,19 @@ Analyze_OneSideProp <- function(
     message = "One or more of these columns not found: GroupID, GroupLevel, Denominator, Numerator, Metric"
   )
   stop_if(cnd = !all(!is.na(dfTransformed[["GroupID"]])), message = "NA value(s) found in GroupID")
-  stop_if(cnd = (nPropRate > 1 | nPropRate < 0), message = "`nPropRate` must be a value between 0 and 1.")
+  stop_if(cnd = (nPropRate >= 1 | nPropRate <= 0), message = "`nPropRate` must be a value between 0 and 1 (exclusive).")
 
-  # Calculate a grouped summarization that accounts for groups by study, site, country
-  # This df should always be the same (i.e. equivalent) of study level
-  Upper_funnel <- dfTransformed %>%
-    group_by(GroupLevel) %>%
-    summarize(
-      GroupID = "Upper_funnel",
-      Numerator = sum(Numerator),
-      Denominator = sum(Denominator)
-    ) %>%
-    ungroup() %>%
-    mutate(Metric = nPropRate + nNumDeviations * sqrt(nPropRate * (1 - nPropRate) / sum(.data$Denominator))) # To plot the funnel need funnel data under metric
-
-  flat_line <- Upper_funnel %>%
+  dfScore <- dfTransformed %>%
     mutate(
-      GroupID = "Flatline",
-      Metric = nPropRate
+      vMu = nPropRate,  # nPropRate is what we're trying to compare against
+      z_0 =  (.data$Metric - .data$vMu) / sqrt(.data$vMu * (1 - .data$vMu) / .data$Denominator), # z-star value that is dependent on number of participants
+      Upper_funnel = nPropRate + nNumDeviations * sqrt(nPropRate * (1 - nPropRate) / sum(.data$Denominator)), # calculates upper funnel, lower one doesn't matter
+      Flag = case_when(
+        Metric >= Upper_funnel ~ 2, # Flag instances where the metric exceeds the funnel
+        (Metric >= vMu & Metric < Upper_funnel) ~ 1, # Do we need a flag for the middle, break nPropRate but less than funnel?
+        TRUE ~ 0 # otherwise no flag
+      )
     )
-
-  # Bind the upper funnel back together with original dataframe
-  dfScore <- dplyr::bind_rows(dfTransformed, Upper_funnel, flat_line) %>%
-    mutate(
-      vMu = nPropRate, # calculate one-sided proportion score against a historic rate
-      # Unsure if a dispersion correction is necessary especially at a study-level
-      z_0 = ifelse(.data$vMu == 0 | .data$vMu == 1,
-        0,
-        (.data$Metric - .data$vMu) /
-          sqrt(.data$vMu * (1 - .data$vMu) / .data$Denominator)
-      ),
-      upper_funnel = nPropRate + nNumDeviations * sqrt(nPropRate * (1 - nPropRate) / sum(.data$Denominator)/3 )
-      # Additional cutoffs can be made to compare against `Metric` for flagging
-    ) %>%
-    mutate(Flag = case_when(
-      Metric >= upper_funnel | GroupID == "Upper_funnel" ~ 2,
-      (Metric >= vMu & Metric < upper_funnel) | GroupID == "Flatline" ~ 1,
-      TRUE ~ 0
-    )) # Custom flag based on upper-funnel
 
   # dfAnalyzed -----------------------------------------------------------------
   dfAnalyzed <- dfScore %>%
@@ -96,6 +71,5 @@ Analyze_OneSideProp <- function(
       "Flag",
       "Score" = z_0
     )
-
   return(dfAnalyzed)
 }
