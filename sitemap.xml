@@ -1,5 +1,6 @@
 <urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
 <url><loc>https://gilead-biostats.github.io/gsm.qtl/404.html</loc></url>
+<url><loc>https://gilead-biostats.github.io/gsm.qtl/CONTRIBUTING.html</loc></url>
 <url><loc>https://gilead-biostats.github.io/gsm.qtl/LICENSE.html</loc></url>
 <url><loc>https://gilead-biostats.github.io/gsm.qtl/articles/IntroQTL.html</loc></url>
 <url><loc>https://gilead-biostats.github.io/gsm.qtl/articles/Qualification.html</loc></url>
@@ -12,7 +13,6 @@
 <url><loc>https://gilead-biostats.github.io/gsm.qtl/reference/QTL_lineplot.html</loc></url>
 <url><loc>https://gilead-biostats.github.io/gsm.qtl/reference/Report_QTL.html</loc></url>
 <url><loc>https://gilead-biostats.github.io/gsm.qtl/reference/ResultsProcessor.html</loc></url>
-<url><loc>https://gilead-biostats.github.io/gsm.qtl/reference/calc_fig_size.html</loc></url>
 <url><loc>https://gilead-biostats.github.io/gsm.qtl/reference/criteria_groupBar.html</loc></url>
 <url><loc>https://gilead-biostats.github.io/gsm.qtl/reference/discontinuation_groupBar.html</loc></url>
 <url><loc>https://gilead-biostats.github.io/gsm.qtl/reference/discontinuation_map_reasons.html</loc></url>
@@ -23,7 +23,6 @@
 <url><loc>https://gilead-biostats.github.io/gsm.qtl/reference/gsm.qtl-package.html</loc></url>
 <url><loc>https://gilead-biostats.github.io/gsm.qtl/reference/index.html</loc></url>
 <url><loc>https://gilead-biostats.github.io/gsm.qtl/reference/reasons_groupBar.html</loc></url>
-<url><loc>https://gilead-biostats.github.io/gsm.qtl/reference/scrollable_gt.html</loc></url>
 <url><loc>https://gilead-biostats.github.io/gsm.qtl/report_qtl.html</loc></url>
 </urlset>
 
