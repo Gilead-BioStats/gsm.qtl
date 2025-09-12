@@ -51,7 +51,7 @@ Remotes:
     gsm.core=Gilead-BioStats/gsm.core@dev,
     gsm.kri=Gilead-BioStats/gsm.kri@dev,
     gsm.mapping=Gilead-BioStats/gsm.mapping@dev,
-    gsm.reporting=Gilead-BioStats/gsm.reporting@dev
+    gsm.reporting=Gilead-BioStats/gsm.reporting@update-github-folder
 VignetteBuilder: knitr
 Config/testthat/edition: 3
 Config/testthat/parallel: true
