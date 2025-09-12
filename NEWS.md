@@ -1,6 +1,7 @@
 # gsm.qtl v0.1.1
 
-An updated `README` and website with example reports for QTL is now available. 
+An updated `README` and website with example reports for QTL is now available. Additional features like download buttons for listings were included and documentation/backend
+improvements accomplished as well.
 
 # gsm.qtl v0.1.0
 
