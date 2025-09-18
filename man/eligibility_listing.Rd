@@ -4,13 +4,15 @@
 \alias{eligibility_listing}
 \title{Generate Eligibility Listing}
 \usage{
-eligibility_listing(df)
+eligibility_listing(df, download = FALSE)
 }
 \arguments{
 \item{df}{A \code{data.frame} containing the participant level dataset with eligibility}
+
+\item{download}{a logical to determine whether or not to return a gt object or a plain data.frame ready for download}
 }
 \value{
-A \code{gt} object
+A \code{gt} object or \code{data.frame}
 }
 \description{
 Generate Eligibility Listing

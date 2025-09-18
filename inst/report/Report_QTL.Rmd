@@ -9,6 +9,7 @@ output:
     css: styles.css
 params:
   dfResults: NA
+  dfMetrics: NA
   dfGroups: NA
   lListings: NA
 ---
@@ -28,7 +29,7 @@ library(knitr)
 knitr::opts_chunk$set(warning = FALSE, message = FALSE)
 
 
-dfResults <- ResultsProcessor(params$dfResults)
+dfResults <- ResultsProcessor(dfResults = params$dfResults, dfMetrics = params$dfMetrics)
 dfGroups <- params$dfGroups
 lListings <- params$lListings
 latest_snapshot = max(dfResults$SnapshotDate)
@@ -42,12 +43,12 @@ date: "Snapshot Date: `r latest_snapshot`"
 
 ```{r QTL0001 Eligibility, echo = FALSE, results = 'asis'}
 # Feed and knit just QTL0001 using child rmd support
-if("Analysis_qtl0001_study" %in% dfResults$MetricID) {
+if("Analysis_qtl0001" %in% dfResults$MetricID) {
   qtl0001 <- knitr::knit_child(
     system.file("report", "QTL0001.Rmd", package = "gsm.qtl"),
     envir = list(
       qtl0001_params = list(
-        dfResults = dfResults %>% filter(MetricID == "Analysis_qtl0001_study"),
+        dfResults = dfResults %>% filter(MetricID == "Analysis_qtl0001"),
         dfListing = lListings$qtl0001,
         latest_snapshot = latest_snapshot
       )
@@ -61,12 +62,12 @@ if("Analysis_qtl0001_study" %in% dfResults$MetricID) {
 
 ```{r QTL0002 Premature Study Discontinuation, echo = FALSE, results = 'asis',}
 # Feed and knit just QTL0002 using child rmd support
-if("Analysis_qtl0002_study" %in% dfResults$MetricID) {
+if("Analysis_qtl0002" %in% dfResults$MetricID) {
   qtl0002 <- knitr::knit_child(
     system.file("report", "QTL0002.Rmd", package = "gsm.qtl"),
     envir = list(
       qtl0002_params = list(
-        dfResults = dfResults %>% filter(MetricID == "Analysis_qtl0002_study"),
+        dfResults = dfResults %>% filter(MetricID == "Analysis_qtl0002"),
         dfListing = lListings$qtl0002,
         latest_snapshot = latest_snapshot
       )

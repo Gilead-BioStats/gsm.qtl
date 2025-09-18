@@ -1,55 +1,49 @@
 meta:
   Type: Analysis
-  ID: qtl0002_study
+  ID: qtl0001
   GroupLevel: Study
-  Abbreviation: SDSC
-  Metric: Study Discontinuation Rate
-  Numerator: Subjects Discontinued - Study
-  Denominator: Enrolled Subjects
+  Abbreviation: IE
+  Metric: Inclusion/Exclusion Violation Rate
+  Numerator: Number of subjects ineligible
+  Denominator: Number of subjects enrolled
   Model: Normal Approximation
   Score: Adjusted Z-Score
   AnalysisType: binary
-  nPropRate: 0.05 # insert historical data
+  nPropRate: 0.5 # insert historical data
   nNumDeviations: 3
 spec:
-  Mapped_SUBJ:
+  Mapped_EXCLUSION:
     subjid:
+      type: character
+    subjectid:
+      type: character
+    Source:
       type: character
     studyid:
       type: character
     invid:
       type: character
-  Mapped_STUDCOMP:
-    studyid:
+    country:
       type: character
-    invid:
+    eligibility_criteria:
       type: character
-    subjid:
-      type: character
-    compyn:
-      type: character
-    compreas:
+    ie_violation:
       type: character
 steps:
-  - output: Temp_DROPOUT
-    name: gsm.qtl::discontinuation_map_reasons
+  - output: numerator_df
+    name: gsm.core::RunQuery
     params:
-      df: Mapped_STUDCOMP
-      strReasons:
-        - 'WITHDRAWAL BY SUBJECT'
-        - 'NON-COMPLIANCE WITH STUDY DRUG'
-        - 'PROTOCOL VIOLATION'
-        - 'PHYSICIAN DECISION'
-        - 'Withdrew Consent'
-        - 'Death'
-        - 'Lost to Follow-Up'
+      df: Mapped_EXCLUSION
+      strQuery: "SELECT * FROM df WHERE Source != 'Neither'"
   - output: Analysis_Input
     name: gsm.core::Input_Rate
     params:
-      dfSubjects: Mapped_SUBJ
-      dfNumerator: Temp_DROPOUT
-      dfDenominator: Mapped_SUBJ
-      strSubjectCol: subjid
+      dfSubjects: Mapped_EXCLUSION
+      dfNumerator: numerator_df
+      dfDenominator: Mapped_EXCLUSION
+      strNumeratorCol: subjectid
+      strDenominatorCol: subjectid
+      strSubjectCol: subjectid
       strGroupCol: studyid
       strGroupLevel: GroupLevel
       strNumeratorMethod: Count
@@ -59,7 +53,7 @@ steps:
     params:
       dfInput: Analysis_Input
   - output: Analysis_Summary
-    name: Analyze_OneSideProp
+    name: gsm.qtl::Analyze_OneSideProp
     params:
       dfTransformed: Analysis_Transformed
       nPropRate: nPropRate

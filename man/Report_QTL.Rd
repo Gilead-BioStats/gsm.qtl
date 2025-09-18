@@ -6,6 +6,7 @@
 \usage{
 Report_QTL(
   dfResults = NULL,
+  dfMetrics = NULL,
   dfGroups = NULL,
   lListings = NULL,
   strOutputDir = getwd(),
@@ -16,6 +17,8 @@ Report_QTL(
 \arguments{
 \item{dfResults}{A results \code{data.frame} from the output of \code{gsm.reporting::BindResults()} used
 to create a variety of visualizations like the line plot, bar plot.}
+
+\item{dfMetrics}{A results \code{data.frame} from the output of \code{gsm.reporting::MakeMetric()}}
 
 \item{dfGroups}{A groups \code{data.frame} from the output of the \code{Groups.yaml} of \code{gsm.reporting}used
 to create a variety of visualizations like the line plot, bar plot.}

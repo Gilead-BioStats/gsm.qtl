@@ -1,20 +1,30 @@
 #' Title
 #'
-#' @param df a data.frame
+#' @param dfResults a reporting results data.frame
+#' @param dfMetrics a reporting metrics data.frame
 #'
 #' @export
-ResultsProcessor <- function(df) {
-  df1 <- df
+ResultsProcessor <- function(dfResults, dfMetrics) {
+  process_metrics <- dfMetrics %>%
+    select(MetricID, nPropRate, nNumDeviations)
 
-  df2 <- df1 %>%
-    filter(
-      str_detect(MetricID, "qtl"),
-      GroupID %in% c("Upper_funnel", "Flatline")
-    ) %>%
-    select(SnapshotDate, MetricID, GroupID, Metric) %>%
-    mutate(GroupID = tolower(GroupID)) %>%
-    tidyr::pivot_wider(., names_from = "GroupID", values_from = "Metric")
+  process_results <- dfResults %>%
+    left_join(., process_metrics, by = "MetricID") %>%
+    mutate(Upper_funnel = nPropRate + nNumDeviations * sqrt(nPropRate * (1 - nPropRate) / Denominator),
+           Flatline = nPropRate)
 
-  dfResults <- full_join(df1, df2, by = c("SnapshotDate", "MetricID"))
-  return(dfResults)
+  Upper_funnel <- process_results %>%
+    mutate(
+      GroupID = "Upper_funnel",
+      Metric = Upper_funnel
+    )
+
+  flat_line <- Upper_funnel %>%
+    mutate(
+      GroupID = "Flatline",
+      Metric = nPropRate
+    )
+
+  binded_results <- dplyr::bind_rows(process_results, Upper_funnel, flat_line)
+  return(binded_results)
 }

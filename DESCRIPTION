@@ -1,6 +1,6 @@
 Package: gsm.qtl
 Title: Good Statistical Monitoring QTLs
-Version: 0.1.0
+Version: 1.0.0
 Authors@R: c(
     person("Zhongkai", "Wang", , "Zhongkai.Wang6@gilead.com", role = c("aut", "cre"),
             comment = c(ORCID = "0000-0002-1883-2265")),
@@ -12,12 +12,11 @@ Description: The Good Statistical Monitoring or 'gsm' suite of R packages
     is an extension that contains the additional functions, workflows,
     and document template to generate reports for QTL.
 License: Apache License (>= 2)
-Encoding: UTF-8
-Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.2
+URL: https://gilead-biostats.github.io/gsm.qtl,
+    https://github.com/Gilead-BioStats/gsm.qtl,
+BugReports: https://github.com/Gilead-BioStats/gsm.qtl/issues
 Depends:
   R (>= 4.0)
-LazyData: true
 Imports: 
   dplyr,
   forcats,
@@ -30,23 +29,36 @@ Imports:
   plotly,
   purrr,
   rlang,
+  stringr,
   tidyr,
   tibble,
-  utils
+  utils,
+  yaml
 Suggests: 
   glue,
   gsm.mapping (>= 1.1.0),
   gsm.reporting (>= 1.1.1),
+  gh,
+  here,
   htmltools,
   knitr,
   lubridate,
+  pander,
   rmarkdown,
-  stringr,
+  riskmetric,
   testthat (>= 3.0.0)
 Remotes:
     gsm.core=Gilead-BioStats/gsm.core@main,
     gsm.kri=Gilead-BioStats/gsm.kri@main,
     gsm.mapping=Gilead-BioStats/gsm.mapping@main,
     gsm.reporting=Gilead-BioStats/gsm.reporting@main
-URL: https://gilead-biostats.github.io/gsm.qtl
+VignetteBuilder: knitr
 Config/testthat/edition: 3
+Config/testthat/parallel: true
+Config/Needs/website: DT, here, pkgdown, devtools
+Encoding: UTF-8
+Language: en-US
+LazyData: true
+LazyDataCompression: xz
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.2
