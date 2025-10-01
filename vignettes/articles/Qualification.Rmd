@@ -1,9 +1,7 @@
 ---
-title: "Qualification Report"
+title: "Qualification Report for {gsm.qtl} R Package"
 date: "Report Run Date: `r Sys.Date()`"
-subtitle: |
-        | `r paste0('{gsm.qtl} v', packageVersion('gsm.qtl'))`
-description: "Report generated based on the qualification tests for all gsm.qtl"
+description: "Report generated based on the qualification tests for gsm.qtl"
 output: 
   pdf_document:
     toc: true
