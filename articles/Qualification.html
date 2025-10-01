@@ -11,6 +11,8 @@
 <script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Qualification Report">
+<meta name="description" content="Report generated based on the qualification tests for all gsm.qtl">
+<meta property="og:description" content="Report generated based on the qualification tests for all gsm.qtl">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
@@ -64,16 +66,75 @@
   <main id="main" class="col-md-9"><div class="page-header">
 
       <h1>Qualification Report</h1>
+            <h3 data-toc-skip class="subtitle"><div class="line-block">{gsm.qtl} v1.0.0</div></h3>
             
             <h4 data-toc-skip class="date">Report Run Date:
 2025-10-01</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/Gilead-BioStats/gsm.qtl/blob/dev/vignettes/articles/Qualification.Rmd" class="external-link"><code>vignettes/articles/Qualification.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/Gilead-BioStats/gsm.qtl/blob/update-qualification-report/vignettes/articles/Qualification.Rmd" class="external-link"><code>vignettes/articles/Qualification.Rmd</code></a></small>
       <div class="d-none name"><code>Qualification.Rmd</code></div>
     </div>
 
     
     
+<div class="section level2">
+<h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
+</h2>
+<p>Risk-Based Quality Monitoring (RBQM) is a proactive approach to
+clinical trial monitoring that focuses on identifying and addressing the
+most critical risks to the integrity of study data and patient safety.
+This approach aims to ensure that study data are accurate, reliable, and
+credible while optimizing the use of resources and minimizing the burden
+on study sites.</p>
+<p>The <code>{gsm}</code> suite of R packages supports RBQM by
+performing risk assessments primarily focused on detecting differences
+in quality at the site level. This approach is intended to detect
+potential issues related to critical data or process(es) across the
+major risk categories of safety, efficacy, disposition, treatment, and
+general quality. Each category consists of one or more risk
+assessment(s). Each risk assessment analyzes the data to flag sites with
+potential outliers and provides a visualization to help the user
+understand the issue.</p>
+</div>
+<div class="section level2">
+<h2 id="scope">Scope<a class="anchor" aria-label="anchor" href="#scope"></a>
+</h2>
+<p>Qualification testing ensures that core functions execute as expected
+on a system-wide scale. Qualification includes executing various
+functional, performance, and usability testing. Qualification tests are
+designed to provide developers with a repeatable process that is easy to
+update and document. This document summarizes the qualification testing
+performed on <code>gsm</code> functions essential to the analysis
+workflow.</p>
+</div>
+<div class="section level2">
+<h2 id="process-overview">Process Overview<a class="anchor" aria-label="anchor" href="#process-overview"></a>
+</h2>
+<p>Each essential <code>gsm</code> workflow function is independently
+qualified using specifications and test cases compiled in this report.
+Details are provided below.</p>
+<div class="section level3">
+<h3 id="specifications">Specifications<a class="anchor" aria-label="anchor" href="#specifications"></a>
+</h3>
+<p>Specifications capture the most critical use cases for a given
+function. Each function must have at least one (1) specification, and
+each specification must have at least one (1) associated test case.
+Multiple specifications may exist for a function, and multiple test
+cases may exist for a specification.</p>
+<p>Each specification includes the following components:</p>
+<ul>
+<li><p><strong>Description:</strong> outlines the use case for the
+specification</p></li>
+<li><p><strong>Risk Assessment</strong></p></li>
+<li><p><strong>Risk Level:</strong> assigned a value of “Low”, “Medium”,
+or “High”, corresponding to the risk associated with the specification
+failing</p></li>
+<li><p><strong>Risk Impact:</strong> assigned a value of “Low”,
+“Medium”, or “High”, corresponding to the severity of the impact
+associated with the specification failing</p></li>
+<li><p><strong>Test Cases:</strong> lists measurable test cases
+associated with the specification</p></li>
+</ul>
 <div id="mwlefoodfi" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>#mwlefoodfi table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
@@ -564,9 +625,10 @@
 </table>
 </div>
 <div style="page-break-after: always;"></div>
-<div class="section level2">
-<h2 id="one-row-per-test">One Row Per Test<a class="anchor" aria-label="anchor" href="#one-row-per-test"></a>
-</h2>
+</div>
+<div class="section level3">
+<h3 id="one-row-per-test">One Row Per Test<a class="anchor" aria-label="anchor" href="#one-row-per-test"></a>
+</h3>
 <div id="eexombwkke" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>#eexombwkke table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
@@ -1043,20 +1105,376 @@
 <td headers="Function" class="gt_row gt_left gt_striped">Ineligibility Assessment</td>
 <td headers="Spec ID" class="gt_row gt_left gt_striped">S2_1</td>
 <td headers="Test ID" class="gt_row gt_left gt_striped">T2_1</td>
-<td headers="Test Description" class="gt_row gt_left gt_striped">NA</td>
+<td headers="Test Description" class="gt_row gt_left gt_striped">Given appropriate inclusion/exclusion related data, calculates appropriate QTL threshold.</td>
 <td headers="Test Result" class="gt_row gt_left gt_striped">Pass</td>
 </tr>
 <tr>
 <td headers="Function" class="gt_row gt_left">Early Discontinuation Assessment</td>
 <td headers="Spec ID" class="gt_row gt_left">S3_1</td>
 <td headers="Test ID" class="gt_row gt_left">T3_1</td>
-<td headers="Test Description" class="gt_row gt_left">NA</td>
+<td headers="Test Description" class="gt_row gt_left">Given appropriate study discontinuation related data, calculates appropriate QTL threshold.</td>
 <td headers="Test Result" class="gt_row gt_left">Pass</td>
 </tr>
 </tbody>
 </table>
 </div>
 <div style="page-break-after: always;"></div>
+</div>
+</div>
+<div class="section level2">
+<h2 id="qualification-testing-environment">Qualification Testing Environment<a class="anchor" aria-label="anchor" href="#qualification-testing-environment"></a>
+</h2>
+<div class="section level3">
+<h3 id="session-information">Session Information<a class="anchor" aria-label="anchor" href="#session-information"></a>
+</h3>
+<p><strong>R version 4.5.1 (2025-06-13)</strong></p>
+<p><strong>Platform:</strong> x86_64-pc-linux-gnu</p>
+<p><strong>locale:</strong> <em>LC_CTYPE=C.UTF-8</em>,
+<em>LC_NUMERIC=C</em>, <em>LC_TIME=C.UTF-8</em>,
+<em>LC_COLLATE=C.UTF-8</em>, <em>LC_MONETARY=C.UTF-8</em>,
+<em>LC_MESSAGES=C.UTF-8</em>, <em>LC_PAPER=C.UTF-8</em>,
+<em>LC_NAME=C</em>, <em>LC_ADDRESS=C</em>, <em>LC_TELEPHONE=C</em>,
+<em>LC_MEASUREMENT=C.UTF-8</em> and <em>LC_IDENTIFICATION=C</em></p>
+<p><strong>attached base packages:</strong> <em>stats</em>,
+<em>graphics</em>, <em>grDevices</em>, <em>utils</em>,
+<em>datasets</em>, <em>methods</em> and <em>base</em></p>
+<p><strong>other attached packages:</strong> <em>gsm.qtl(v.1.0.0)</em>,
+<em>testthat(v.3.2.3)</em>, <em>riskmetric(v.0.2.5)</em>,
+<em>stringr(v.1.5.2)</em>, <em>gh(v.1.5.0)</em>,
+<em>pander(v.0.6.6)</em>, <em>purrr(v.1.1.0)</em>,
+<em>dplyr(v.1.1.4)</em>, <em>knitr(v.1.50)</em>, <em>gt(v.1.1.0)</em>
+and <em>gsm.core(v.1.1.5)</em></p>
+<p><strong>loaded via a namespace (and not attached):</strong>
+<em>tidyselect(v.1.2.1)</em>, <em>viridisLite(v.0.4.2)</em>,
+<em>farver(v.2.1.2)</em>, <em>urltools(v.1.7.3.1)</em>,
+<em>S7(v.0.2.0)</em>, <em>fastmap(v.1.2.0)</em>,
+<em>lazyeval(v.0.2.2)</em>, <em>promises(v.1.3.3)</em>,
+<em>rex(v.1.2.1)</em>, <em>digest(v.0.6.37)</em>, <em>mime(v.0.13)</em>,
+<em>lifecycle(v.1.0.4)</em>, <em>waldo(v.0.6.2)</em>,
+<em>ellipsis(v.0.3.2)</em>, <em>magrittr(v.2.0.4)</em>,
+<em>compiler(v.4.5.1)</em>, <em>rlang(v.1.1.6)</em>,
+<em>sass(v.0.4.10)</em>, <em>tools(v.4.5.1)</em>,
+<em>yaml(v.2.3.10)</em>, <em>data.table(v.1.17.8)</em>,
+<em>htmlwidgets(v.1.6.4)</em>, <em>pkgbuild(v.1.4.8)</em>,
+<em>curl(v.7.0.0)</em>, <em>here(v.1.0.2)</em>, <em>xml2(v.1.4.0)</em>,
+<em>RColorBrewer(v.1.1-3)</em>, <em>cranlogs(v.2.1.1)</em>,
+<em>pkgload(v.1.4.1)</em>, <em>miniUI(v.0.1.2)</em>,
+<em>covr(v.3.6.4)</em>, <em>withr(v.3.0.2)</em>, <em>desc(v.1.4.3)</em>,
+<em>triebeard(v.0.4.1)</em>, <em>grid(v.4.5.1)</em>,
+<em>urlchecker(v.1.0.1)</em>, <em>profvis(v.0.4.0)</em>,
+<em>xtable(v.1.8-4)</em>, <em>log4r(v.0.4.4)</em>,
+<em>ggplot2(v.4.0.0)</em>, <em>scales(v.1.4.0)</em>,
+<em>cli(v.3.6.5)</em>, <em>rmarkdown(v.2.30)</em>,
+<em>ragg(v.1.5.0)</em>, <em>generics(v.0.1.4)</em>,
+<em>remotes(v.2.5.0)</em>, <em>rstudioapi(v.0.17.1)</em>,
+<em>httr(v.1.4.7)</em>, <em>sessioninfo(v.1.2.3)</em>,
+<em>cachem(v.1.1.0)</em>, <em>BiocManager(v.1.30.26)</em>,
+<em>vctrs(v.0.6.5)</em>, <em>devtools(v.2.4.5)</em>,
+<em>jsonlite(v.2.0.0)</em>, <em>systemfonts(v.1.3.0)</em>,
+<em>plotly(v.4.11.0)</em>, <em>tidyr(v.1.3.1)</em>,
+<em>jquerylib(v.0.1.4)</em>, <em>glue(v.1.8.0)</em>,
+<em>pkgdown(v.2.1.3)</em>, <em>DT(v.0.34.0)</em>,
+<em>stringi(v.1.8.7)</em>, <em>gtable(v.0.3.6)</em>,
+<em>later(v.1.4.4)</em>, <em>tibble(v.3.3.0)</em>,
+<em>pillar(v.1.11.1)</em>, <em>htmltools(v.0.5.8.1)</em>,
+<em>brio(v.1.1.5)</em>, <em>R6(v.2.6.1)</em>,
+<em>textshaping(v.1.0.3)</em>, <em>rprojroot(v.2.1.1)</em>,
+<em>evaluate(v.1.0.5)</em>, <em>shiny(v.1.11.1)</em>,
+<em>backports(v.1.5.0)</em>, <em>memoise(v.2.0.1)</em>,
+<em>httpuv(v.1.6.16)</em>, <em>bslib(v.0.9.0)</em>,
+<em>Rcpp(v.1.1.0)</em>, <em>gsm.kri(v.1.3.1)</em>,
+<em>xfun(v.0.53)</em>, <em>fs(v.1.6.6)</em>, <em>forcats(v.1.0.1)</em>,
+<em>usethis(v.3.2.1)</em> and <em>pkgconfig(v.2.0.3)</em></p>
+<div style="page-break-after: always;"></div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+<div class="section level2">
+<h2 id="pull-request-history">Pull Request History<a class="anchor" aria-label="anchor" href="#pull-request-history"></a>
+</h2>
+<p>The GitHub Pull Request (PR) process begins with the creation of one
+or more issues that clearly define the proposed additions or revisions
+to the package. Each issue should be assigned to a product developer
+(PD) who then creates a <code>fix</code> branch named according to the
+related issue(s), and implements the necessary code updates. Once the
+work is complete, the PD opens a Pull Request to merge the
+<code>fix</code> branch into the target branch (typically the
+<code>dev</code> branch). They must assign the PR to themselves, request
+one or more reviewers, and link the PR to the associated issue(s).
+Before the fix branch can be merged, the PR must be approved by the
+designated reviewers and pass all required GitHub qualification checks.
+Once these conditions are met, the <code>fix</code> branch is merged
+into the target branch. This process is fully documented in the <a href="https://gilead-biostats.github.io/gsm.core/articles/ContributorGuidelines.html#development-process" class="external-link">Contributor
+Guidelines</a></p>
+<p>Below, the most recent 10 PRs into gsm.qtl are displayed. <a href="https://github.com/gilead-biostats/gsm.qtl/pulls" class="external-link">See all Pull
+Requests here.</a></p>
+<div class="section level4">
+<h4 id="pull-request-55-catch-dev-up-to-main-before-pushing-qual-report">Pull Request 55: Catch dev up to main before pushing qual
+report<a class="anchor" aria-label="anchor" href="#pull-request-55-catch-dev-up-to-main-before-pushing-qual-report"></a>
+</h4>
+<p>Merging main into dev</p>
+<p><a href="https://github.com/Gilead-BioStats/gsm.qtl/pull/55" class="external-link">https://github.com/Gilead-BioStats/gsm.qtl/pull/55</a></p>
+<table style="width:76%;" class="table">
+<colgroup>
+<col width="16%">
+<col width="18%">
+<col width="19%">
+<col width="22%">
+</colgroup>
+<thead><tr class="header">
+<th align="center">Requester</th>
+<th align="center">Date Requested</th>
+<th align="center">Reviewers</th>
+<th align="center">Review Status</th>
+</tr></thead>
+<tbody><tr class="odd">
+<td align="center">zdz2101</td>
+<td align="center">2025-10-01 15:03:41</td>
+<td align="center">nandriychuk</td>
+<td align="center">APPROVED</td>
+</tr></tbody>
+</table>
+</div>
+<div class="section level4">
+<h4 id="pull-request-52-gsm-qtl-v1-0-0-release-candidate">Pull Request 52: gsm.qtl v1.0.0 Release Candidate<a class="anchor" aria-label="anchor" href="#pull-request-52-gsm-qtl-v1-0-0-release-candidate"></a>
+</h4>
+<p>Merging gsm.qtl-rc-v.0.1.1 into main</p>
+<p><a href="https://github.com/Gilead-BioStats/gsm.qtl/pull/52" class="external-link">https://github.com/Gilead-BioStats/gsm.qtl/pull/52</a></p>
+<table style="width:74%;" class="table">
+<colgroup>
+<col width="16%">
+<col width="18%">
+<col width="16%">
+<col width="22%">
+</colgroup>
+<thead><tr class="header">
+<th align="center">Requester</th>
+<th align="center">Date Requested</th>
+<th align="center">Reviewers</th>
+<th align="center">Review Status</th>
+</tr></thead>
+<tbody><tr class="odd">
+<td align="center">zdz2101</td>
+<td align="center">2025-09-12 16:18:19</td>
+<td align="center">samussiah</td>
+<td align="center">COMMENTED</td>
+</tr></tbody>
+</table>
+</div>
+<div class="section level4">
+<h4 id="pull-request-51-update--github-folder-templates-using-github-api">Pull Request 51: Update .github folder templates using github
+API<a class="anchor" aria-label="anchor" href="#pull-request-51-update--github-folder-templates-using-github-api"></a>
+</h4>
+<p>Merging update-github-folder into dev</p>
+<p><a href="https://github.com/Gilead-BioStats/gsm.qtl/pull/51" class="external-link">https://github.com/Gilead-BioStats/gsm.qtl/pull/51</a></p>
+<table style="width:78%;" class="table">
+<colgroup>
+<col width="20%">
+<col width="18%">
+<col width="16%">
+<col width="22%">
+</colgroup>
+<thead><tr class="header">
+<th align="center">Requester</th>
+<th align="center">Date Requested</th>
+<th align="center">Reviewers</th>
+<th align="center">Review Status</th>
+</tr></thead>
+<tbody><tr class="odd">
+<td align="center">lauramaxwell</td>
+<td align="center">2025-09-11 15:39:29</td>
+<td align="center">zdz2101</td>
+<td align="center">APPROVED</td>
+</tr></tbody>
+</table>
+</div>
+<div class="section level4">
+<h4 id="pull-request-47-closes-25-46-50-preparing-gsm-qtl-for-q3-release">Pull Request 47: Closes #25, #46, #50 preparing <code>gsm.qtl</code>
+for Q3 release<a class="anchor" aria-label="anchor" href="#pull-request-47-closes-25-46-50-preparing-gsm-qtl-for-q3-release"></a>
+</h4>
+<p>Merging fix-46 into dev</p>
+<p><a href="https://github.com/Gilead-BioStats/gsm.qtl/pull/47" class="external-link">https://github.com/Gilead-BioStats/gsm.qtl/pull/47</a></p>
+<table class="table">
+<colgroup>
+<col width="15%">
+<col width="16%">
+<col width="47%">
+<col width="20%">
+</colgroup>
+<thead><tr class="header">
+<th align="center">Requester</th>
+<th align="center">Date Requested</th>
+<th align="center">Reviewers</th>
+<th align="center">Review Status</th>
+</tr></thead>
+<tbody><tr class="odd">
+<td align="center">zdz2101</td>
+<td align="center">2025-08-14 21:18:09</td>
+<td align="center">copilot-pull-request-reviewer[bot] lauramaxwell
+zdz2101</td>
+<td align="center">COMMENTED</td>
+</tr></tbody>
+</table>
+</div>
+<div class="section level4">
+<h4 id="pull-request-40-closes-35-37-39-42-adds-readme-website-and-qualifcation-report">Pull Request 40: Closes #35, #37, #39, #42 adds README, website, and
+qualifcation report<a class="anchor" aria-label="anchor" href="#pull-request-40-closes-35-37-39-42-adds-readme-website-and-qualifcation-report"></a>
+</h4>
+<p>Merging fix-39 into dev</p>
+<p><a href="https://github.com/Gilead-BioStats/gsm.qtl/pull/40" class="external-link">https://github.com/Gilead-BioStats/gsm.qtl/pull/40</a></p>
+<table style="width:79%;" class="table">
+<colgroup>
+<col width="16%">
+<col width="18%">
+<col width="22%">
+<col width="22%">
+</colgroup>
+<thead><tr class="header">
+<th align="center">Requester</th>
+<th align="center">Date Requested</th>
+<th align="center">Reviewers</th>
+<th align="center">Review Status</th>
+</tr></thead>
+<tbody><tr class="odd">
+<td align="center">zdz2101</td>
+<td align="center">2025-07-18 16:25:32</td>
+<td align="center">lauramaxwell zdz2101 Zhongkai-Wang</td>
+<td align="center">COMMENTED</td>
+</tr></tbody>
+</table>
+</div>
+<div class="section level4">
+<h4 id="pull-request-36-catch-dev-up-to-main">Pull Request 36: catch dev up to Main<a class="anchor" aria-label="anchor" href="#pull-request-36-catch-dev-up-to-main"></a>
+</h4>
+<p>Merging main into dev</p>
+<p><a href="https://github.com/Gilead-BioStats/gsm.qtl/pull/36" class="external-link">https://github.com/Gilead-BioStats/gsm.qtl/pull/36</a></p>
+<table style="width:79%;" class="table">
+<colgroup>
+<col width="16%">
+<col width="18%">
+<col width="22%">
+<col width="22%">
+</colgroup>
+<thead><tr class="header">
+<th align="center">Requester</th>
+<th align="center">Date Requested</th>
+<th align="center">Reviewers</th>
+<th align="center">Review Status</th>
+</tr></thead>
+<tbody><tr class="odd">
+<td align="center">zdz2101</td>
+<td align="center">2025-06-27 15:27:41</td>
+<td align="center">Zhongkai-Wang</td>
+<td align="center">APPROVED</td>
+</tr></tbody>
+</table>
+</div>
+<div class="section level4">
+<h4 id="pull-request-34-closes-23-elongates-reasons-for-eligibility-on-ietest-iin-chart">Pull Request 34: Closes #23 elongates reasons for eligibility on
+ietest iin chart<a class="anchor" aria-label="anchor" href="#pull-request-34-closes-23-elongates-reasons-for-eligibility-on-ietest-iin-chart"></a>
+</h4>
+<p>Merging fix-23 into gsm.qtl-rc-v.0.0.1</p>
+<p><a href="https://github.com/Gilead-BioStats/gsm.qtl/pull/34" class="external-link">https://github.com/Gilead-BioStats/gsm.qtl/pull/34</a></p>
+<table style="width:74%;" class="table">
+<colgroup>
+<col width="16%">
+<col width="18%">
+<col width="16%">
+<col width="22%">
+</colgroup>
+<thead><tr class="header">
+<th align="center">Requester</th>
+<th align="center">Date Requested</th>
+<th align="center">Reviewers</th>
+<th align="center">Review Status</th>
+</tr></thead>
+<tbody><tr class="odd">
+<td align="center">zdz2101</td>
+<td align="center">2025-06-18 18:37:31</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr></tbody>
+</table>
+</div>
+<div class="section level4">
+<h4 id="pull-request-33-test-template">Pull Request 33: Test template<a class="anchor" aria-label="anchor" href="#pull-request-33-test-template"></a>
+</h4>
+<p>Merging test-template into fix-30</p>
+<p><a href="https://github.com/Gilead-BioStats/gsm.qtl/pull/33" class="external-link">https://github.com/Gilead-BioStats/gsm.qtl/pull/33</a></p>
+<table style="width:74%;" class="table">
+<colgroup>
+<col width="16%">
+<col width="18%">
+<col width="16%">
+<col width="22%">
+</colgroup>
+<thead><tr class="header">
+<th align="center">Requester</th>
+<th align="center">Date Requested</th>
+<th align="center">Reviewers</th>
+<th align="center">Review Status</th>
+</tr></thead>
+<tbody><tr class="odd">
+<td align="center">zdz2101</td>
+<td align="center">2025-06-16 20:21:43</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr></tbody>
+</table>
+</div>
+<div class="section level4">
+<h4 id="pull-request-32-gsm-qtl-rc-v-0-1-0">Pull Request 32: Gsm.qtl rc v.0.1.0<a class="anchor" aria-label="anchor" href="#pull-request-32-gsm-qtl-rc-v-0-1-0"></a>
+</h4>
+<p>Merging gsm.qtl-rc-v.0.0.1 into main</p>
+<p><a href="https://github.com/Gilead-BioStats/gsm.qtl/pull/32" class="external-link">https://github.com/Gilead-BioStats/gsm.qtl/pull/32</a></p>
+<table class="table">
+<colgroup>
+<col width="15%">
+<col width="16%">
+<col width="47%">
+<col width="20%">
+</colgroup>
+<thead><tr class="header">
+<th align="center">Requester</th>
+<th align="center">Date Requested</th>
+<th align="center">Reviewers</th>
+<th align="center">Review Status</th>
+</tr></thead>
+<tbody><tr class="odd">
+<td align="center">zdz2101</td>
+<td align="center">2025-06-11 16:51:13</td>
+<td align="center">copilot-pull-request-reviewer[bot] lauramaxwell</td>
+<td align="center">COMMENTED</td>
+</tr></tbody>
+</table>
+</div>
+<div class="section level4">
+<h4 id="pull-request-31-closes-30-conditionally-run-chunks-for-visualizations-dependent-on-if-the-data-is-avaiablefed-in">Pull Request 31: Closes #30 Conditionally run chunks for
+visualizations dependent on if the data is avaiable/fed in<a class="anchor" aria-label="anchor" href="#pull-request-31-closes-30-conditionally-run-chunks-for-visualizations-dependent-on-if-the-data-is-avaiablefed-in"></a>
+</h4>
+<p>Merging fix-30 into gsm.qtl-rc-v.0.0.1</p>
+<p><a href="https://github.com/Gilead-BioStats/gsm.qtl/pull/31" class="external-link">https://github.com/Gilead-BioStats/gsm.qtl/pull/31</a></p>
+<table style="width:74%;" class="table">
+<colgroup>
+<col width="16%">
+<col width="18%">
+<col width="16%">
+<col width="22%">
+</colgroup>
+<thead><tr class="header">
+<th align="center">Requester</th>
+<th align="center">Date Requested</th>
+<th align="center">Reviewers</th>
+<th align="center">Review Status</th>
+</tr></thead>
+<tbody><tr class="odd">
+<td align="center">zdz2101</td>
+<td align="center">2025-06-11 16:11:17</td>
+<td align="center">zdz2101</td>
+<td align="center">COMMENTED</td>
+</tr></tbody>
+</table>
+</div>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
