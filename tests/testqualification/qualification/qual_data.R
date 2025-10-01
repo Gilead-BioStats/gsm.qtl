@@ -127,3 +127,29 @@ robust_runworkflow <- function(
     return(lWorkflow)
   }
 }
+
+# Test Setup -------------------------------------------------------
+ineligibility_workflow <- purrr::flatten(
+  gsm.core::MakeWorkflowList(
+    strNames = c("qtl0001"),
+    strPath = yaml_path_custom_metrics,
+    strPackage = "gsm.qtl"
+  )
+)
+discontinuation_workflow <- purrr::flatten(
+  gsm.core::MakeWorkflowList(
+    strNames = c("qtl0002"),
+    strPath = yaml_path_custom_metrics,
+    strPackage = "gsm.qtl"
+  )
+)
+
+# define Data ------------------------------------------------------
+analyzed_ineligibility <- purrr::map_depth(mapped, 1, ~robust_runworkflow(ineligibility_workflow, .x, bKeepInputData = FALSE))
+analyzed_discontinuation <- purrr::map_depth(mapped, 1, ~robust_runworkflow(discontinuation_workflow, .x, bKeepInputData = FALSE))
+
+
+## define outputs --------------------------------------------------
+IE_outputs <- map_vec(ineligibility_workflow$steps, ~ .x$output)
+SDSC_outputs <- map_vec(discontinuation_workflow$steps, ~ .x$output)
+
