@@ -13,7 +13,7 @@ vignette: >
   %\VignetteEncoding{UTF-8}
   %\VignetteEngine{knitr::rmarkdown_notangle}
 params: 
-  repo: "gsm.qc"
+  repo: "gsm.qtl"
 ---
 
 ```{r setup, echo=FALSE, warning=FALSE}
