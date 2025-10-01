@@ -1,22 +1,6 @@
-# Test Setup -------------------------------------------------------
-discontinuation_workflow <- purrr::flatten(
-  gsm.core::MakeWorkflowList(
-    strNames = c("qtl0002"),
-    strPath = yaml_path_custom_metrics,
-    strPackage = "gsm.qtl"
-  )
-)
+testthat::test_that("Given appropriate study discontinuation related data, calculates appropriate QTL threshold.", {
 
-# define Data ------------------------------------------------------
-analyzed_discontinuation <- purrr::map_depth(mapped, 1, ~robust_runworkflow(discontinuation_workflow, .x, bKeepInputData = FALSE))
-
-## define outputs --------------------------------------------------
-outputs <- map_vec(discontinuation_workflow$steps, ~ .x$output)
-
-## Test Code -------------------------------------------------------
-testthat::test_that("Given appropriate mapped participant-level data, calculates appropriate QTL threshold.", {
-
-  expect_true(all(outputs %in% names(analyzed_discontinuation[[1]])))
+  expect_true(all(SDSC_outputs %in% names(analyzed_discontinuation[[1]])))
 
   # This is a study level metric
   expect_equal(nrow(analyzed_discontinuation[[1]]$Analysis_Transformed), 1)
