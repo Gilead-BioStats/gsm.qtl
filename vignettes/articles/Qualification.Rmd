@@ -1,6 +1,7 @@
 ---
-title: "Qualification Report"
+title: "Qualification Report for {gsm.qtl} R Package"
 date: "Report Run Date: `r Sys.Date()`"
+description: "Report generated based on the qualification tests for gsm.qtl"
 output: 
   pdf_document:
     toc: true
@@ -9,6 +10,8 @@ vignette: >
   %\VignetteIndexEntry{Qualification}
   %\VignetteEncoding{UTF-8}
   %\VignetteEngine{knitr::rmarkdown_notangle}
+params: 
+  repo: "gsm.qtl"
 ---
 
 ```{r setup, echo=FALSE, warning=FALSE}
@@ -39,6 +42,38 @@ source(here::here("inst", "qualification", "specs.R"))
 source(here::here("inst", "qualification", "test_cases.R"))
 spec_df <- import_specs()
 ```
+
+# Introduction
+
+Risk-Based Quality Monitoring (RBQM) is a proactive approach to clinical trial monitoring that focuses on identifying and addressing the most critical risks to the integrity of study data and patient safety. This approach aims to ensure that study data are accurate, reliable, and credible while optimizing the use of resources and minimizing the burden on study sites.
+
+The `{gsm}` suite of R packages supports RBQM by performing risk assessments primarily focused on detecting differences in quality at the site level. This approach is intended to detect potential issues related to critical data or process(es) across the major risk categories of safety, efficacy, disposition, treatment, and general quality. Each category consists of one or more risk assessment(s). Each risk assessment analyzes the data to flag sites with potential outliers and provides a visualization to help the user understand the issue.
+
+# Scope
+
+Qualification testing ensures that core functions execute as expected on a system-wide scale. Qualification includes executing various functional, performance, and usability testing. Qualification tests are designed to provide developers with a repeatable process that is easy to update and document. This document summarizes the qualification testing performed on `gsm` functions essential to the analysis workflow.
+
+# Process Overview
+
+Each essential `gsm` workflow function is independently qualified using specifications and test cases compiled in this report. Details are provided below.
+
+## Specifications
+
+Specifications capture the most critical use cases for a given function. Each function must have at least one (1) specification, and each specification must have at least one (1) associated test case. Multiple specifications may exist for a function, and multiple test cases may exist for a specification.
+
+Each specification includes the following components:
+
+-   **Description:** outlines the use case for the specification
+
+-   **Risk Assessment**
+
+-   **Risk Level:** assigned a value of "Low", "Medium", or "High", corresponding to the risk associated with the specification failing
+
+-   **Risk Impact:** assigned a value of "Low", "Medium", or "High", corresponding to the severity of the impact associated with the specification failing
+
+-   **Test Cases:** lists measurable test cases associated with the specification
+
+
 ```{r}
 spec_list <- list.files(here::here('tests', 'testqualification', 'qualification'), pattern = "test-qual_", full.names = TRUE)
 
@@ -130,3 +165,111 @@ Results %>%
 ```
 
 \newpage
+
+# Qualification Testing Environment
+
+## Session Information
+
+```{r sessioninfo}
+pander::pander(sessionInfo())
+pander::pandoc.p('\\pagebreak')
+```
+
+\newpage
+
+# Pull Request History
+
+The GitHub Pull Request (PR) process begins with the creation of one or more issues that clearly define the proposed additions or revisions to the package. Each issue should be assigned to a product developer (PD) who then creates a `fix` branch named according to the related issue(s), and implements the necessary code updates. Once the work is complete, the PD opens a Pull Request to merge the `fix` branch into the target branch (typically the `dev` branch). They must assign the PR to themselves, request one or more reviewers, and link the PR to the associated issue(s). Before the fix branch can be merged, the PR must be approved by the designated reviewers and pass all required GitHub qualification checks. Once these conditions are met, the `fix` branch is merged into the target branch. This process is fully documented in the [Contributor Guidelines](https://gilead-biostats.github.io/gsm.core/articles/ContributorGuidelines.html#development-process)
+
+
+Below, the most recent 10 PRs into `r params$repo` are displayed. [See all Pull Requests here.](`r paste0("https://github.com/gilead-biostats/",params$repo,"/pulls")`)
+
+```{r prs}
+release <- gh(paste0("/repos/Gilead-BioStats/",params$repo,"/releases"), .token = remotes:::github_pat())[[1]]
+release_date <- ifelse(is.null(release$published_at), release$created_at, release$published_at)
+
+pr_at_date <- FALSE
+page_num <- 1
+prs <- list()
+while(pr_at_date != TRUE){
+  resp <- gh(paste0("/repos/Gilead-BioStats/",params$repo,"/pulls"), per_page = 100, .token = remotes:::github_pat(),
+             .params = list(page = page_num, state = "closed"))
+
+  map(resp, function(x){
+    if (!is.null(x$closed_at) &
+        min(as.character(x$closed_at), as.POSIXct(Sys.time())) < as.character(release_date)){
+      pr_at_date <<- TRUE
+      }
+    })
+
+  if (pr_at_date == TRUE){
+    resp_sub <- resp %>%
+      keep(~ !is.null(.$merged_at) &
+             min(as.character(.$merged_at), as.POSIXct(Sys.time())) < as.character(release_date))
+    prs <<- append(prs, resp_sub)
+
+  }else{
+    prs <<- append(prs, resp)
+  }
+  page_num <<- page_num + 1
+}
+
+getRepoDetails <- function(x) {
+
+  PullRequest <- x[["number"]]
+  Requester <- x[["user"]][["login"]]
+  DateRequested <- x[["created_at"]]
+  Branch <- x[["head"]][["ref"]]
+  Target <- x[["base"]][["ref"]]
+  Title <- x[["title"]]
+  Link <- x[["html_url"]]
+
+
+  tempReviews <- gh(paste0("GET /repos/Gilead-BioStats/", params$repo, "/pulls/", PullRequest, "/reviews"))
+
+  if (length(tempReviews) > 0) {
+  ReviewStatus <- tempReviews[[1]][["state"]]
+  ReviewComments <- tempReviews[[1]][["body"]]
+  Reviewers <- lapply(tempReviews, function(x) x[["user"]][["login"]]) %>% unlist() %>% unique() %>% paste(., collapse = "\n ")
+  } else {
+    ReviewStatus <- ""
+    ReviewComments <- "None"
+    Reviewers = ""
+  }
+
+  pr <- tibble(
+    `Pull Request` = PullRequest,
+    Requester = Requester,
+    `Date Requested` = gsub("T|Z", " ", DateRequested),
+    Branch = Branch,
+    Target = Target,
+    Title = Title,
+    Reviewers = Reviewers,
+    `Review Status` = ReviewStatus,
+    Link = Link
+  ) %>%
+    map(~ gsub("[^\u0001-\u007F]+|<U\\+\\w+>","", .x)) %>%
+    map(~ gsub("`", " ` ", .x)) %>%
+    map(~ str_squish(.x)) %>%
+    map(~ trimws(.x))
+
+  return(pr)
+
+}
+
+tbl <- map_df(prs, ~getRepoDetails(.))
+
+#display most recent 10 PRs
+for (i in 1:10){
+  pander::pandoc.p(
+    c(
+      pander::pandoc.header(paste0("Pull Request ", tbl[i, "Pull Request"], ": ", tbl[i, "Title"]), level = 3),
+      pander::pandoc.p(paste0("Merging ", tbl[i, "Branch"], " into ", tbl[i, "Target"], "\n")),
+      pander::pandoc.p(pander::pandoc.link(tbl[i, "Link"])),
+      pander::pandoc.table(tbl[i, c("Requester", "Date Requested",
+                                    "Reviewers", "Review Status")],
+                           split.cells = 13)
+      )
+    )
+}
+```

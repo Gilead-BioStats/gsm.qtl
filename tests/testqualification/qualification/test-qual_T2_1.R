@@ -1,22 +1,6 @@
-# Test Setup -------------------------------------------------------
-ineligibility_workflow <- purrr::flatten(
-  gsm.core::MakeWorkflowList(
-    strNames = c("qtl0001"),
-    strPath = yaml_path_custom_metrics,
-    strPackage = "gsm.qtl"
-  )
-)
+testthat::test_that("Given appropriate inclusion/exclusion related data, calculates appropriate QTL threshold.", {
 
-# define Data ------------------------------------------------------
-analyzed_ineligibility <- purrr::map_depth(mapped, 1, ~robust_runworkflow(ineligibility_workflow, .x, bKeepInputData = FALSE))
-
-## define outputs --------------------------------------------------
-outputs <- map_vec(ineligibility_workflow$steps, ~ .x$output)
-
-## Test Code -------------------------------------------------------
-testthat::test_that("Given appropriate mapped participant-level data, calculates appropriate QTL threshold.", {
-
-  expect_true(all(outputs %in% names(analyzed_ineligibility[[1]])))
+  expect_true(all(IE_outputs %in% names(analyzed_ineligibility[[1]])))
 
   # This is a study level metric
   expect_equal(nrow(analyzed_ineligibility[[1]]$Analysis_Transformed), 1)
