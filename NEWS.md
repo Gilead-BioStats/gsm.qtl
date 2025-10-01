@@ -1,3 +1,7 @@
+# gsm.qtl v1.0.1
+
+Updated Qualification Report and streamlined qualification tests structure for the `gsm.qtl` package.
+
 # gsm.qtl v1.0.0
 
 We are excited to announce the first major production ready release of the `gsm.qtl` package.
