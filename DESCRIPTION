@@ -22,7 +22,6 @@ Imports:
   forcats,
   ggplot2,
   gsm.core (>= 1.1.2),
-  gsm.kri (>= 1.2.0),
   gt,
   htmlwidgets,
   jsonlite,
@@ -36,6 +35,7 @@ Imports:
   yaml
 Suggests: 
   glue,
+  gsm.kri (>= 1.2.0),
   gsm.mapping (>= 1.1.0),
   gsm.reporting (>= 1.1.1),
   gh,
