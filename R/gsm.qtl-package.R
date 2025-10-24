@@ -5,7 +5,6 @@
 #' @import dplyr
 #' @import ggplot2
 #' @import gsm.core
-#' @import gsm.kri
 #' @import gt
 #' @import htmlwidgets
 #' @import tibble
