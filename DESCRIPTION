@@ -49,7 +49,7 @@ Suggests:
   testthat (>= 3.0.0)
 Remotes:
     gsm.core=Gilead-BioStats/gsm.core@fix-96,
-    gsm.kri=Gilead-BioStats/gsm.kri@fix-131,
+    gsm.kri=Gilead-BioStats/gsm.kri@dev,
     gsm.mapping=Gilead-BioStats/gsm.mapping@main,
     gsm.reporting=Gilead-BioStats/gsm.reporting@main
 VignetteBuilder: knitr
