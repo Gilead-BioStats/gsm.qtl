@@ -23,7 +23,6 @@
 #' @param bAddGroupSelect unused
 #' @param strShinyGroupSelectID unused
 #' @param bDebug  `logical` Print debug messages? Default: `FALSE`
-#' @export
 #' @noRd
 
 Widget_TimeSeriesQTL <- function(
