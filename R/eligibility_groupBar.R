@@ -3,6 +3,7 @@
 #' @param df A `data.frame` containing the participant level dataset with eligibility
 #' @param varGroupID A variable to make the stacked bar chart with, i.e. invid
 #' @param strGroupLabel A `string` to label the `varGroupID` in reference to axes, legend, footnotes.
+#' @param bPercentage A `boolean` to denote whether or not the group bar chart should be visualized as percentages instead of absolute counts.
 #'
 #' @returns A `plotly` object
 #'
@@ -24,8 +25,7 @@ eligibility_groupBar <- function(df, varGroupID, strGroupLabel, bPercentage = FA
                      .groups = "keep") %>%
     ungroup() %>%
     dplyr::group_by(!!enexpr(varGroupID)) %>%
-    dplyr::summarize(perc = 100*totals/sum(totals),
-                     .groups = "keep") %>%
+    dplyr::mutate(perc = round((100*totals/sum(totals)), 1)) %>%
     ungroup() %>%
     ggplot(., aes(
       y = !!enexpr(varGroupID), fill = fillcol, x = totals,
