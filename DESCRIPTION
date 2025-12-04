@@ -29,6 +29,7 @@ Imports:
   plotly,
   purrr,
   rlang,
+  scales,
   stringr,
   tidyr,
   tibble,
