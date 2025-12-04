@@ -71,7 +71,7 @@ eligibility_groupBar <- function(df, varGroupID, strGroupLabel, bPercentage = FA
   }
 
   # Create the plotly object
-  x <- plotly::ggplotly(group_bar, tooltip = c("text")) %>%
+  x <- plotly::ggplotly(group_bar, tooltip = c("text"), height = 800) %>%
     layout(
       margin = list(l = 50, r = 50, b = 150, t = 50),
       annotations = list(
