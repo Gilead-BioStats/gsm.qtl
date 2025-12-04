@@ -19,7 +19,8 @@ eligibility_groupBar <- function(df, varGroupID, strGroupLabel, bPercentage = FA
   interim_bar <- df %>%
     mutate(fillcol = ifelse(Source == "Neither", "No Eligibility Risk", "Ineligible")) %>%
     filter(!!enexpr(varGroupID) %in% groups_with_ineligible) %>%
-    mutate(!!enexpr(varGroupID) := forcats::fct_rev(forcats::fct_infreq(!!enexpr(varGroupID)))) %>%
+    mutate(!!enexpr(varGroupID) := forcats::fct_rev(forcats::fct_infreq(!!enexpr(varGroupID))),
+           fillcol = fct_rev(fillcol)) %>%
     dplyr::group_by(!!enexpr(varGroupID), fillcol) %>%
     dplyr::summarize(totals = n(),
                      .groups = "keep") %>%
