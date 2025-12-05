@@ -100,7 +100,7 @@ Each specification includes the following components:
 *data.table(v.1.17.8)*, *RColorBrewer(v.1.1-3)*, *S7(v.0.2.1)*,
 *desc(v.1.4.3)*, *lifecycle(v.1.0.4)*, *farver(v.2.1.2)*,
 *compiler(v.4.5.2)*, *brio(v.1.1.5)*, *textshaping(v.1.0.4)*,
-*htmltools(v.0.5.8.1)*, *usethis(v.3.2.1)*, *sass(v.0.4.10)*,
+*htmltools(v.0.5.9)*, *usethis(v.3.2.1)*, *sass(v.0.4.10)*,
 *yaml(v.2.3.11)*, *lazyeval(v.0.2.2)*, *plotly(v.4.11.0)*,
 *pillar(v.1.11.1)*, *pkgdown(v.2.2.0)*, *jquerylib(v.0.1.4)*,
 *tidyr(v.1.3.1)*, *ellipsis(v.0.3.2)*, *cranlogs(v.2.1.1)*,
