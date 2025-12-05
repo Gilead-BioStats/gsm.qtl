@@ -19,7 +19,7 @@ eligibility_groupBar <- function(df, varGroupID, strGroupLabel, bPercentage = FA
   interim_bar <- df %>%
     mutate(fillcol = ifelse(Source == "Neither", "No Eligibility Risk", "Ineligible")) %>%
     filter(!!enexpr(varGroupID) %in% groups_with_ineligible) %>%
-    mutate(!!enexpr(varGroupID) := forcats::fct_infreq(!!enexpr(varGroupID)),
+    mutate(!!enexpr(varGroupID) := forcats::fct_rev(forcats::fct_infreq(!!enexpr(varGroupID))),
            fillcol = fct_rev(fillcol)) %>%
     dplyr::group_by(!!enexpr(varGroupID), fillcol) %>%
     dplyr::summarize(totals = n(),
@@ -29,7 +29,7 @@ eligibility_groupBar <- function(df, varGroupID, strGroupLabel, bPercentage = FA
     dplyr::mutate(perc = round((100*totals/sum(totals)), 1)) %>%
     ungroup() %>%
     ggplot(., aes(
-      x = !!enexpr(varGroupID), fill = fillcol, y = totals,
+      y = !!enexpr(varGroupID), fill = fillcol, x = totals,
       text = paste0(
         "Count: ", totals,
         "\nPercentage: ", perc, " %",
@@ -41,37 +41,29 @@ eligibility_groupBar <- function(df, varGroupID, strGroupLabel, bPercentage = FA
   if(bPercentage) {
     group_bar <- interim_bar +
       geom_bar(stat = "identity", position = "fill") +
-      labs(x = strGroupLabel, y = "Participant Percentage", fill = "Eligibility", title = paste0("Participant Percentage by ", strGroupLabel)) +
+      labs(y = strGroupLabel, x = "Participant Percentage", fill = "Eligibility", title = paste0("Participant Percentage by ", strGroupLabel)) +
       scale_fill_manual(values = c(
         "Ineligible" = "#FF5859",
         "No Eligibility Risk" = "#00BFC4",
         "Neither" = "#7CAE00"
       )) +
-      scale_y_continuous(labels = scales::percent_format()) +
-      theme_classic()+
-      theme(
-        axis.text.x = element_blank(),
-        axis.ticks.x = element_blank()
-      )
+      scale_x_continuous(labels = scales::percent_format()) +
+      theme_classic()
 
   } else {
     group_bar <- interim_bar +
       geom_bar(stat = "identity") +
-      labs(x = strGroupLabel, y = "Participant Count", fill = "Eligibility", title = paste0("Participant Count by ", strGroupLabel)) +
+      labs(y = strGroupLabel, x = "Participant Count", fill = "Eligibility", title = paste0("Participant Count by ", strGroupLabel)) +
       scale_fill_manual(values = c(
         "Ineligible" = "#FF5859",
         "No Eligibility Risk" = "#00BFC4",
         "Neither" = "#7CAE00"
       )) +
-      theme_classic() +
-      theme(
-        axis.text.x = element_blank(),
-        axis.ticks.x = element_blank()
-      )
+      theme_classic()
   }
 
   # Create the plotly object
-  x <- plotly::ggplotly(group_bar, tooltip = c("text"), height = 800) %>%
+  x <- plotly::ggplotly(group_bar, tooltip = c("text"), h = calc_fig_size(n_row = length(groups_with_ineligible))) %>%
     layout(
       margin = list(l = 50, r = 50, b = 150, t = 50),
       annotations = list(
