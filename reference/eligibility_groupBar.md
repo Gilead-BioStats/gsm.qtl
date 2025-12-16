@@ -5,7 +5,7 @@ Stacked Eligibility Bar Chart
 ## Usage
 
 ``` r
-eligibility_groupBar(df, varGroupID, strGroupLabel, bPercentage = FALSE)
+eligibility_groupBar(df, varGroupID, strGroupLabel)
 ```
 
 ## Arguments
@@ -23,11 +23,6 @@ eligibility_groupBar(df, varGroupID, strGroupLabel, bPercentage = FALSE)
 
   A `string` to label the `varGroupID` in reference to axes, legend,
   footnotes.
-
-- bPercentage:
-
-  A `boolean` to denote whether or not the group bar chart should be
-  visualized as percentages instead of absolute counts.
 
 ## Value
 
