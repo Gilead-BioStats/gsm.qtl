@@ -101,23 +101,22 @@ Each specification includes the following components:
 *desc(v.1.4.3)*, *lifecycle(v.1.0.4)*, *farver(v.2.1.2)*,
 *compiler(v.4.5.2)*, *brio(v.1.1.5)*, *textshaping(v.1.0.4)*,
 *htmltools(v.0.5.9)*, *usethis(v.3.2.1)*, *sass(v.0.4.10)*,
-*yaml(v.2.3.11)*, *lazyeval(v.0.2.2)*, *plotly(v.4.11.0)*,
+*yaml(v.2.3.12)*, *lazyeval(v.0.2.2)*, *plotly(v.4.11.0)*,
 *pillar(v.1.11.1)*, *pkgdown(v.2.2.0)*, *jquerylib(v.0.1.4)*,
 *tidyr(v.1.3.1)*, *ellipsis(v.0.3.2)*, *cranlogs(v.2.1.1)*,
-*DT(v.0.34.0)*, *cachem(v.1.1.0)*, *sessioninfo(v.1.2.3)*,
-*tidyselect(v.1.2.1)*, *digest(v.0.6.39)*, *stringi(v.1.8.7)*,
-*forcats(v.1.0.1)*, *rprojroot(v.2.1.1)*, *fastmap(v.1.2.0)*,
-*grid(v.4.5.2)*, *here(v.1.0.2)*, *gsm.kri(v.1.3.2)*, *cli(v.3.6.5)*,
-*magrittr(v.2.0.4)*, *triebeard(v.0.4.1)*, *pkgbuild(v.1.4.8)*,
-*withr(v.3.0.2)*, *waldo(v.0.6.2)*, *scales(v.1.4.0)*,
-*backports(v.1.5.0)*, *rmarkdown(v.2.30)*, *httr(v.1.4.7)*,
-*ragg(v.1.5.0)*, *memoise(v.2.0.1)*, *evaluate(v.1.0.5)*,
-*log4r(v.0.4.4)*, *covr(v.3.6.5)*, *rex(v.1.2.1)*,
-*viridisLite(v.0.4.2)*, *rlang(v.1.1.6)*, *urltools(v.1.7.3.1)*,
-*Rcpp(v.1.1.0)*, *glue(v.1.8.0)*, *BiocManager(v.1.30.27)*,
-*xml2(v.1.5.1)*, *pkgload(v.1.4.1)*, *rstudioapi(v.0.17.1)*,
-*jsonlite(v.2.0.0)*, *R6(v.2.6.1)*, *systemfonts(v.1.3.1)* and
-*fs(v.1.6.6)*
+*cachem(v.1.1.0)*, *sessioninfo(v.1.2.3)*, *tidyselect(v.1.2.1)*,
+*digest(v.0.6.39)*, *stringi(v.1.8.7)*, *forcats(v.1.0.1)*,
+*rprojroot(v.2.1.1)*, *fastmap(v.1.2.0)*, *grid(v.4.5.2)*,
+*here(v.1.0.2)*, *cli(v.3.6.5)*, *magrittr(v.2.0.4)*,
+*triebeard(v.0.4.1)*, *pkgbuild(v.1.4.8)*, *withr(v.3.0.2)*,
+*waldo(v.0.6.2)*, *scales(v.1.4.0)*, *backports(v.1.5.0)*,
+*rmarkdown(v.2.30)*, *httr(v.1.4.7)*, *ragg(v.1.5.0)*,
+*memoise(v.2.0.1)*, *evaluate(v.1.0.5)*, *log4r(v.0.4.4)*,
+*covr(v.3.6.5)*, *rex(v.1.2.1)*, *viridisLite(v.0.4.2)*,
+*rlang(v.1.1.6)*, *urltools(v.1.7.3.1)*, *Rcpp(v.1.1.0)*,
+*glue(v.1.8.0)*, *BiocManager(v.1.30.27)*, *xml2(v.1.5.1)*,
+*pkgload(v.1.4.1)*, *rstudioapi(v.0.17.1)*, *jsonlite(v.2.0.0)*,
+*R6(v.2.6.1)*, *systemfonts(v.1.3.1)* and *fs(v.1.6.6)*
 
 ## Pull Request History
 
@@ -138,6 +137,16 @@ Guidelines](https://gilead-biostats.github.io/gsm.core/articles/ContributorGuide
 
 Below, the most recent 10 PRs into gsm.qtl are displayed. [See all Pull
 Requests here.](https://github.com/gilead-biostats/gsm.qtl/pulls)
+
+#### Pull Request 59: Closes \#58 removes `gsm.kri` dependency
+
+Merging fix-58 into dev
+
+<https://github.com/Gilead-BioStats/gsm.qtl/pull/59>
+
+| Requester |   Date Requested    |                       Reviewers                        | Review Status |
+|:---------:|:-------------------:|:------------------------------------------------------:|:-------------:|
+|  zdz2101  | 2025-10-28 18:07:16 | samussiah copilot-pull-request-reviewer\[bot\] zdz2101 |   COMMENTED   |
 
 #### Pull Request 57: Catch main branch up to dev
 
@@ -228,13 +237,3 @@ Merging main into dev
 | Requester |   Date Requested    |   Reviewers   | Review Status |
 |:---------:|:-------------------:|:-------------:|:-------------:|
 |  zdz2101  | 2025-06-27 15:27:41 | Zhongkai-Wang |   APPROVED    |
-
-#### Pull Request 34: Closes \#23 elongates reasons for eligibility on ietest iin chart
-
-Merging fix-23 into gsm.qtl-rc-v.0.0.1
-
-<https://github.com/Gilead-BioStats/gsm.qtl/pull/34>
-
-| Requester |   Date Requested    | Reviewers | Review Status |
-|:---------:|:-------------------:|:---------:|:-------------:|
-|  zdz2101  | 2025-06-18 18:37:31 |           |               |
