@@ -54,8 +54,8 @@ Analyze_OneSideProp <- function(
       z_0 =  (.data$Metric - .data$vMu) / sqrt(.data$vMu * (1 - .data$vMu) / .data$Denominator), # z-star value that is dependent on number of participants
       Upper_funnel = nPropRate + nNumDeviations * sqrt(nPropRate * (1 - nPropRate) / sum(.data$Denominator)), # calculates upper funnel, lower one doesn't matter
       Flag = case_when(
-        Metric >= Upper_funnel ~ 2, # Flag instances where the metric exceeds the funnel
-        (Metric >= vMu & Metric < Upper_funnel) ~ 1, # Do we need a flag for the middle, break nPropRate but less than funnel?
+        .data$Metric >= .data$Upper_funnel ~ 2, # Flag instances where the metric exceeds the funnel
+        (.data$Metric >= .data$vMu & .data$Metric < .data$Upper_funnel) ~ 1, # Do we need a flag for the middle, break nPropRate but less than funnel?
         TRUE ~ 0 # otherwise no flag
       )
     )

@@ -26,8 +26,6 @@ globalVariables(
     "ietestcd_concat",
     "invid",
     "layout",
-    "nNumDeviations",
-    "nPropRate",
     "point_color",
     "qtlrate",
     "subjid",
