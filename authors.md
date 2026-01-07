@@ -12,7 +12,7 @@
 ## Citation
 
 Source:
-[`DESCRIPTION`](https://github.com/Gilead-BioStats/gsm.qtl/blob/dev/DESCRIPTION)
+[`DESCRIPTION`](https://github.com/Gilead-BioStats/gsm.qtl/blob/fix-circ-deps/DESCRIPTION)
 
 Wang Z, Maxwell L, Zhu Z (2026). *gsm.qtl: Good Statistical Monitoring
 QTLs*. R package version 1.0.1,
