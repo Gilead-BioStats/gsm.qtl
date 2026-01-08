@@ -4,7 +4,7 @@
 \alias{eligibility_groupBar}
 \title{Stacked Eligibility Bar Chart}
 \usage{
-eligibility_groupBar(df, varGroupID, strGroupLabel)
+eligibility_groupBar(df, varGroupID, strGroupLabel, bPercentage = FALSE)
 }
 \arguments{
 \item{df}{A \code{data.frame} containing the participant level dataset with eligibility}
@@ -12,6 +12,8 @@ eligibility_groupBar(df, varGroupID, strGroupLabel)
 \item{varGroupID}{A variable to make the stacked bar chart with, i.e. invid}
 
 \item{strGroupLabel}{A \code{string} to label the \code{varGroupID} in reference to axes, legend, footnotes.}
+
+\item{bPercentage}{A \code{boolean} to denote whether or not the group bar chart should be visualized as percentages instead of absolute counts.}
 }
 \value{
 A \code{plotly} object

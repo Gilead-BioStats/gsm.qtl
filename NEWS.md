@@ -1,3 +1,10 @@
+# gsm.qtl v1.1.0
+
+### Key Enhancements:
+
+- Updated `eligibility_groupBar()` to support counts and percentage bar charts
+- Removed suggests of `gsm.mapping`, `gsm.kri`, and `gsm.reporting`
+
 # gsm.qtl v1.0.1
 
 Updated Qualification Report and streamlined qualification tests structure for the `gsm.qtl` package.

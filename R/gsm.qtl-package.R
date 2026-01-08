@@ -5,7 +5,6 @@
 #' @import dplyr
 #' @import ggplot2
 #' @import gsm.core
-#' @import gsm.kri
 #' @import gt
 #' @import htmlwidgets
 #' @import tibble
@@ -14,6 +13,7 @@
 #' @importFrom plotly ggplotly layout
 #' @importFrom purrr map
 #' @importFrom rlang check_installed enexpr
+#' @importFrom scales percent_format
 #' @importFrom stringr str_detect
 #' @importFrom tidyr pivot_longer pivot_wider separate unite separate_longer_delim
 #' @importFrom utils globalVariables
