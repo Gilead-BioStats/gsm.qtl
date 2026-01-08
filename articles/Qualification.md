@@ -87,7 +87,7 @@ Each specification includes the following components:
 **attached base packages:** *stats*, *graphics*, *grDevices*, *utils*,
 *datasets*, *methods* and *base*
 
-**other attached packages:** *gsm.qtl(v.1.1.0)*, *testthat(v.3.3.1)*,
+**other attached packages:** *gsm.qtl(v.1.0.1)*, *testthat(v.3.3.1)*,
 *riskmetric(v.0.2.5)*, *stringr(v.1.6.0)*, *gh(v.1.5.0)*,
 *pander(v.0.6.6)*, *purrr(v.1.2.0)*, *dplyr(v.1.1.4)*, *knitr(v.1.51)*,
 *gt(v.1.2.0)* and *gsm.core(v.1.1.7)*
@@ -137,6 +137,16 @@ Guidelines](https://gilead-biostats.github.io/gsm.core/articles/ContributorGuide
 
 Below, the most recent 10 PRs into gsm.qtl are displayed. [See all Pull
 Requests here.](https://github.com/gilead-biostats/gsm.qtl/pulls)
+
+#### Pull Request 62: Circular Dependency Workaround
+
+Merging fix-circ-deps into dev
+
+<https://github.com/Gilead-BioStats/gsm.qtl/pull/62>
+
+| Requester |   Date Requested    |      Reviewers       | Review Status |
+|:---------:|:-------------------:|:--------------------:|:-------------:|
+|  zdz2101  | 2026-01-07 20:37:07 | zdz2101 lauramaxwell |   COMMENTED   |
 
 #### Pull Request 61: Closes \#60 adds functionality for a percentage based plot for barcharts
 
@@ -227,13 +237,3 @@ Merging fix-46 into dev
 | Requester |   Date Requested    |                         Reviewers                         | Review Status |
 |:---------:|:-------------------:|:---------------------------------------------------------:|:-------------:|
 |  zdz2101  | 2025-08-14 21:18:09 | copilot-pull-request-reviewer\[bot\] lauramaxwell zdz2101 |   COMMENTED   |
-
-#### Pull Request 40: Closes \#35, \#37, \#39, \#42 adds README, website, and qualifcation report
-
-Merging fix-39 into dev
-
-<https://github.com/Gilead-BioStats/gsm.qtl/pull/40>
-
-| Requester |   Date Requested    |             Reviewers              | Review Status |
-|:---------:|:-------------------:|:----------------------------------:|:-------------:|
-|  zdz2101  | 2025-07-18 16:25:32 | lauramaxwell zdz2101 Zhongkai-Wang |   COMMENTED   |
