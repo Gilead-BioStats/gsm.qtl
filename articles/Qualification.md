@@ -87,7 +87,7 @@ Each specification includes the following components:
 **attached base packages:** *stats*, *graphics*, *grDevices*, *utils*,
 *datasets*, *methods* and *base*
 
-**other attached packages:** *gsm.qtl(v.1.0.1)*, *testthat(v.3.3.1)*,
+**other attached packages:** *gsm.qtl(v.1.1.0)*, *testthat(v.3.3.1)*,
 *riskmetric(v.0.2.5)*, *stringr(v.1.6.0)*, *gh(v.1.5.0)*,
 *pander(v.0.6.6)*, *purrr(v.1.2.0)*, *dplyr(v.1.1.4)*, *knitr(v.1.51)*,
 *gt(v.1.2.0)* and *gsm.core(v.1.1.7)*
@@ -137,6 +137,16 @@ Guidelines](https://gilead-biostats.github.io/gsm.core/articles/ContributorGuide
 
 Below, the most recent 10 PRs into gsm.qtl are displayed. [See all Pull
 Requests here.](https://github.com/gilead-biostats/gsm.qtl/pulls)
+
+#### Pull Request 63: Release v1.1.0
+
+Merging rc-v1.1.0 into main
+
+<https://github.com/Gilead-BioStats/gsm.qtl/pull/63>
+
+| Requester |   Date Requested    |  Reviewers   | Review Status |
+|:---------:|:-------------------:|:------------:|:-------------:|
+|  zdz2101  | 2026-01-08 18:15:53 | lauramaxwell |   APPROVED    |
 
 #### Pull Request 62: Circular Dependency Workaround
 
@@ -227,13 +237,3 @@ Merging update-github-folder into dev
 |  Requester   |   Date Requested    | Reviewers | Review Status |
 |:------------:|:-------------------:|:---------:|:-------------:|
 | lauramaxwell | 2025-09-11 15:39:29 |  zdz2101  |   APPROVED    |
-
-#### Pull Request 47: Closes \#25, \#46, \#50 preparing `gsm.qtl` for Q3 release
-
-Merging fix-46 into dev
-
-<https://github.com/Gilead-BioStats/gsm.qtl/pull/47>
-
-| Requester |   Date Requested    |                         Reviewers                         | Review Status |
-|:---------:|:-------------------:|:---------------------------------------------------------:|:-------------:|
-|  zdz2101  | 2025-08-14 21:18:09 | copilot-pull-request-reviewer\[bot\] lauramaxwell zdz2101 |   COMMENTED   |
