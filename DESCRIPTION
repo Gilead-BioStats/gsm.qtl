@@ -36,9 +36,6 @@ Imports:
   yaml
 Suggests: 
   glue,
-  gsm.kri (>= 1.2.0),
-  gsm.mapping (>= 1.1.0),
-  gsm.reporting (>= 1.1.1),
   gh,
   here,
   htmltools,
@@ -49,10 +46,7 @@ Suggests:
   riskmetric,
   testthat (>= 3.0.0)
 Remotes:
-    gsm.core=Gilead-BioStats/gsm.core@main,
-    gsm.kri=Gilead-BioStats/gsm.kri@main,
-    gsm.mapping=Gilead-BioStats/gsm.mapping@main,
-    gsm.reporting=Gilead-BioStats/gsm.reporting@main
+    gsm.core=Gilead-BioStats/gsm.core@main
 VignetteBuilder: knitr
 Config/testthat/edition: 3
 Config/testthat/parallel: true
