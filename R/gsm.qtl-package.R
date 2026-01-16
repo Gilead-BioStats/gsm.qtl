@@ -9,6 +9,7 @@
 #' @import htmlwidgets
 #' @import tibble
 #' @importFrom forcats fct_rev fct_infreq
+#' @importFrom htmltools div htmlEscape
 #' @importFrom jsonlite toJSON
 #' @importFrom plotly ggplotly layout
 #' @importFrom purrr map

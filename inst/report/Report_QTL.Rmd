@@ -15,16 +15,8 @@ params:
 ---
 
 ```{r setup, include=FALSE} 
-library(dplyr)
-library(stringr)
-library(tidyr)
 library(gsm.kri)
 library(gsm.qtl)
-library(ggplot2)
-library(plotly)
-library(gt)
-library(htmltools)
-library(knitr)
 
 knitr::opts_chunk$set(warning = FALSE, message = FALSE)
 
