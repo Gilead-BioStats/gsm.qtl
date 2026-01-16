@@ -138,6 +138,16 @@ Guidelines](https://gilead-biostats.github.io/gsm.core/articles/ContributorGuide
 Below, the most recent 10 PRs into gsm.qtl are displayed. [See all Pull
 Requests here.](https://github.com/gilead-biostats/gsm.qtl/pulls)
 
+#### Pull Request 67: Catch up dev from main
+
+Merging main into dev
+
+<https://github.com/Gilead-BioStats/gsm.qtl/pull/67>
+
+| Requester |   Date Requested    |  Reviewers   | Review Status |
+|:---------:|:-------------------:|:------------:|:-------------:|
+|  zdz2101  | 2026-01-16 19:24:52 | lauramaxwell |   APPROVED    |
+
 #### Pull Request 63: Release v1.1.0
 
 Merging rc-v1.1.0 into main
@@ -227,13 +237,3 @@ Merging gsm.qtl-rc-v.0.1.1 into main
 | Requester |   Date Requested    | Reviewers | Review Status |
 |:---------:|:-------------------:|:---------:|:-------------:|
 |  zdz2101  | 2025-09-12 16:18:19 | samussiah |   COMMENTED   |
-
-#### Pull Request 51: Update .github folder templates using github API
-
-Merging update-github-folder into dev
-
-<https://github.com/Gilead-BioStats/gsm.qtl/pull/51>
-
-|  Requester   |   Date Requested    | Reviewers | Review Status |
-|:------------:|:-------------------:|:---------:|:-------------:|
-| lauramaxwell | 2025-09-11 15:39:29 |  zdz2101  |   APPROVED    |
