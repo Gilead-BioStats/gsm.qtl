@@ -1,10 +1,4 @@
 library(gsm.datasim)
-#library(gsm.mapping)
-#library(gsm.reporting)
-#library(gsm.core)
-#library(gsm.kri)
-#library(purrr)
-#library(dplyr)
 devtools::load_all(".")
 
 ## No need to resimulate everything with the advent of the internal data - scroll to bottom to just test report
