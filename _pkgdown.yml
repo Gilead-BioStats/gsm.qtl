@@ -12,4 +12,4 @@ navbar:
       text: Sample Reports
       menu:
         - text: QTL Report
-          href: report_qtl.html
+          href: examples/Example_QTL.html
