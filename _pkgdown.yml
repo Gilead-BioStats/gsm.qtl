@@ -5,11 +5,11 @@ template:
 
 navbar:
   structure:
-    left: [articles, Reports, reference, news]
+    left: [articles, reference, news, examples]
     right: [search, github]
   components:
     Reports:
-      text: Sample Reports
+      text: Examples
       menu:
         - text: QTL Report
           href: examples/Example_QTL.html
