@@ -1,3 +1,7 @@
+# gsm.qtl v1.1.1
+
+- Updated address small bugs that were affecting the eligibility report.
+
 # gsm.qtl v1.1.0
 
 ### Key Enhancements:
