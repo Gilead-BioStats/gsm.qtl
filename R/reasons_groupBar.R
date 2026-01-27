@@ -8,17 +8,26 @@
 #'
 #' @export
 reasons_groupBar <- function(df, varGroupID, strGroupLabel) {
+  var_sym  <- rlang::ensym(varGroupID)
+  var_name <- rlang::as_string(var_sym)
+
+  df_counts <-df %>%
+    filter(compreas != "") %>%
+    dplyr::count(compreas, !!var_sym, name = "n")
+
+  distinct_n_compreas <- df_counts %>% filter(compreas != "") %>% dplyr::distinct(compreas) %>% nrow()
+
   # Create GG object
-  group_reasons_bar <- df %>%
+  group_reasons_bar <- df_counts %>%
     # filter(compyn == "N") %>%
-    ggplot(., aes(
-      y = compreas, fill = !!enexpr(varGroupID),
+    ggplot(aes(x = n, y = compreas, fill = .data[[var_name]])) +
+    geom_col(aes(
       text = paste0(
         strGroupLabel, ": ", !!enexpr(varGroupID),
-        "\n Discontinuation Reason: ", compreas
+        "\n Discontinuation Reason: ", compreas,
+        "\nCount: ", n
       )
     )) +
-    geom_bar() +
     labs(y = "Reason", x = "Reason Count", fill = strGroupLabel, title = paste0("Discontinuation Reason by ", strGroupLabel)) +
     theme_classic(base_size = 11) +
     theme(
@@ -26,14 +35,14 @@ reasons_groupBar <- function(df, varGroupID, strGroupLabel) {
       panel.grid.major.y = element_blank()
     )
   # Create plotly
-  plotly::ggplotly(group_reasons_bar, tooltip = c("text"), h = calc_fig_size(n_rows = length(unique(df$compreas)))) %>%
-    layout(
-      margin = list(l = 180, r = 50, b = 60, t = 60),
-      annotations = list(
-        x = 1, y = -0.12,
-        xref = "paper", yref = "paper", showarrow = F,
-        xanchor = "right", yanchor = "top", xshift = 0, yshift = 0,
-        font = list(size = 10)
-      )
-    )
+  plotly::ggplotly(group_reasons_bar, tooltip = c("text"), h = calc_fig_size(n_rows = distinct_n_compreas))
+    # layout(
+    #   margin = list(l = 180, r = 50, b = 60, t = 60),
+    #   annotations = list(
+    #     x = 1, y = -0.12,
+    #     xref = "paper", yref = "paper", showarrow = F,
+    #     xanchor = "right", yanchor = "top", xshift = 0, yshift = 0,
+    #     font = list(size = 10)
+    #   )
+    # )
 }

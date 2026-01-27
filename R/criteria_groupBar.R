@@ -8,33 +8,33 @@
 #'
 #' @export
 criteria_groupBar <- function(df, varGroupID, strGroupLabel) {
+  var_sym  <- rlang::ensym(varGroupID)
+  var_name <- rlang::as_string(var_sym)
+
   # Create GG object
-  group_criteria_bar <- df %>%
+  df_counts <-df %>%
     filter(!is.na(ietestcd_concat) | Source == "Eligibility IPD") %>%
     tidyr::separate_longer_delim(ietestcd_concat, ";;;") %>%
-    mutate(ietestcd_concat = ifelse(Source == "Eligibility IPD", "No EDC I/E available", ietestcd_concat)) %>%
-    ggplot(., aes(
-      y = ietestcd_concat, fill = !!enexpr(varGroupID),
+    mutate(ietestcd_concat = ifelse(Source == "Eligibility IPD", "No EDC I/E available", ietestcd_concat))%>%
+    dplyr::count(ietestcd_concat, !!var_sym, name = "n")
+
+  distinct_n_ie <- df_counts %>% dplyr::distinct(ietestcd_concat) %>% nrow()
+
+  group_criteria_bar <- df_counts %>%
+    ggplot(aes(x = n, y = ietestcd_concat, fill = .data[[var_name]])) +
+    geom_col(aes(
       text = paste0(
-        strGroupLabel, ": ", !!enexpr(varGroupID),
-        "\nEligibility Status: ", ietestcd_concat
+        strGroupLabel, ": ", .data[[var_name]],
+        "\nEligibility Status: ", ietestcd_concat,
+        "\nCount: ", n
       )
     )) +
-    geom_bar() +
     labs(y = "Criteria", x = "Criteria Count", fill = strGroupLabel, title = paste0("Eligibility by ", strGroupLabel)) +
     theme_classic(base_size = 11) +
     theme(
       axis.text.y = element_text(angle = 45, vjust = 1), # tilt to avoid overlap
       panel.grid.major.y = element_blank()
     )
-
-  distinct_n_ie <-  df %>%
-    filter(!is.na(ietestcd_concat) | Source == "Eligibility IPD") %>%
-    tidyr::separate_longer_delim(ietestcd_concat, ";;;") %>%
-    mutate(ietestcd_concat = ifelse(Source == "Eligibility IPD", "No EDC I/E available", ietestcd_concat)) %>%
-    pull(ietestcd_concat) %>%
-    unique() %>%
-    length()
 
   # Create plotly
   plotly::ggplotly(group_criteria_bar, tooltip = c("text"), h = calc_fig_size(n_rows = distinct_n_ie))

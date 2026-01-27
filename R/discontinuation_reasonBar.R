@@ -6,6 +6,7 @@
 #' @export
 discontinuation_reasonBar <- function(df) {
   reasonbar <- df %>%
+    filter(compreas != "") %>%
     # filter(compyn == "N") %>%
     ggplot(., aes(y = compreas, fill = compreas)) +
     geom_bar() +
