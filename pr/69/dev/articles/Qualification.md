@@ -90,18 +90,18 @@ Each specification includes the following components:
 **other attached packages:** *gsm.qtl(v.1.1.0)*, *testthat(v.3.3.2)*,
 *riskmetric(v.0.2.6)*, *stringr(v.1.6.0)*, *gh(v.1.5.0)*,
 *pander(v.0.6.6)*, *purrr(v.1.2.1)*, *dplyr(v.1.1.4)*, *knitr(v.1.51)*,
-*gt(v.1.2.0)* and *gsm.core(v.1.1.7)*
+*gt(v.1.3.0)* and *gsm.core(v.1.1.7)*
 
 **loaded via a namespace (and not attached):** *gtable(v.0.3.6)*,
-*xfun(v.0.56)*, *bslib(v.0.9.0)*, *ggplot2(v.4.0.1)*,
+*xfun(v.0.56)*, *bslib(v.0.10.0)*, *ggplot2(v.4.0.1)*,
 *htmlwidgets(v.1.6.4)*, *devtools(v.2.4.6)*, *remotes(v.2.5.0)*,
-*vctrs(v.0.7.0)*, *tools(v.4.5.2)*, *generics(v.0.1.4)*,
+*vctrs(v.0.7.1)*, *tools(v.4.5.2)*, *generics(v.0.1.4)*,
 *curl(v.7.0.0)*, *tibble(v.3.3.1)*, *pkgconfig(v.2.0.3)*,
 *data.table(v.1.18.0)*, *RColorBrewer(v.1.1-3)*, *S7(v.0.2.1)*,
 *desc(v.1.4.3)*, *lifecycle(v.1.0.5)*, *farver(v.2.1.2)*,
 *compiler(v.4.5.2)*, *brio(v.1.1.5)*, *textshaping(v.1.0.4)*,
 *htmltools(v.0.5.9)*, *usethis(v.3.2.1)*, *sass(v.0.4.10)*,
-*yaml(v.2.3.12)*, *lazyeval(v.0.2.2)*, *plotly(v.4.11.0)*,
+*yaml(v.2.3.12)*, *lazyeval(v.0.2.2)*, *plotly(v.4.12.0)*,
 *pillar(v.1.11.1)*, *pkgdown(v.2.2.0)*, *jquerylib(v.0.1.4)*,
 *tidyr(v.1.3.2)*, *ellipsis(v.0.3.2)*, *cranlogs(v.2.1.1)*,
 *cachem(v.1.1.0)*, *sessioninfo(v.1.2.3)*, *tidyselect(v.1.2.1)*,
