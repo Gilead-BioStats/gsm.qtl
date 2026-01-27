@@ -5,6 +5,8 @@
 - [`Analyze_OneSideProp()`](https://gilead-biostats.github.io/gsm.qtl/dev/reference/Analyze_OneSideProp.md)
   **\[stable\]** : Funnel Plot Analysis with Normal Approximation for
   Binary and Rate Outcomes.
+- [`Eligibility_Overview()`](https://gilead-biostats.github.io/gsm.qtl/dev/reference/Eligibility_Overview.md)
+  : Eligibility Overview Table
 - [`QTL_Overview()`](https://gilead-biostats.github.io/gsm.qtl/dev/reference/QTL_Overview.md)
   : QTL Overview Table
 - [`QTL_lineplot()`](https://gilead-biostats.github.io/gsm.qtl/dev/reference/QTL_lineplot.md)

@@ -15,13 +15,13 @@ Source:
 [`DESCRIPTION`](https://github.com/Gilead-BioStats/gsm.qtl/blob/fix-70/DESCRIPTION)
 
 Wang Z, Maxwell L, Zhu Z (2026). *gsm.qtl: Good Statistical Monitoring
-QTLs*. R package version 1.1.0,
+QTLs*. R package version 1.1.1,
 <https://gilead-biostats.github.io/gsm.qtl>.
 
     @Manual{,
       title = {gsm.qtl: Good Statistical Monitoring QTLs},
       author = {Zhongkai Wang and Laura Maxwell and Zelos Zhu},
       year = {2026},
-      note = {R package version 1.1.0},
+      note = {R package version 1.1.1},
       url = {https://gilead-biostats.github.io/gsm.qtl},
     }
