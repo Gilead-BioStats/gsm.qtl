@@ -4,10 +4,12 @@
 \alias{discontinuation_reasonBar}
 \title{Discontinuation Reasons Bar Chart}
 \usage{
-discontinuation_reasonBar(df)
+discontinuation_reasonBar(df, varCompreas)
 }
 \arguments{
 \item{df}{A \code{data.frame} containing the participant level dataset with eligibility}
+
+\item{varCompreas}{A variable to identify study completion/discontinuation reasons}
 }
 \value{
 A \code{plotly} object

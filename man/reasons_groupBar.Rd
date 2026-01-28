@@ -4,12 +4,14 @@
 \alias{reasons_groupBar}
 \title{Bar Chart by Group and Reasons}
 \usage{
-reasons_groupBar(df, varGroupID, strGroupLabel)
+reasons_groupBar(df, varGroupID, varCompreas, strGroupLabel)
 }
 \arguments{
 \item{df}{A \code{data.frame} containing the participant level dataset with eligibility}
 
-\item{varGroupID}{A variable to make the stacked bar chart with, i.e. invid}
+\item{varGroupID}{A variable to make the stacked bar chart with, i.e. invid.}
+
+\item{varCompreas}{A variable to identify study completion/discontinuation reasons}
 
 \item{strGroupLabel}{A \code{string} to label the \code{varGroupID} in reference to axes, legend, footnotes.}
 }
