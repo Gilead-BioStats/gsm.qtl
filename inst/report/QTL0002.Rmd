@@ -32,7 +32,7 @@ discontinuation_groupBar(df = qtl0002_params$dfListing, varGroupID = country, st
 
 ### Reasons
 ```{r, echo = FALSE, results = 'asis', fig.height=4}
-discontinuation_reasonBar(df = qtl0002_params$dfListing)
+discontinuation_reasonBar(df = qtl0002_params$dfListing, varCompreas = compreas)
 ```
 
 ### Reasons/Site

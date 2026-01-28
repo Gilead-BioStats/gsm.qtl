@@ -1,6 +1,6 @@
 # gsm.qtl v1.1.1
 
-- Updated address small bugs that were affecting the eligibility report.
+- Updated `critera_groupBar()` and `reasons_groupBar()` address small bugs that were affecting barchart's tooltip text.
 
 # gsm.qtl v1.1.0
 
