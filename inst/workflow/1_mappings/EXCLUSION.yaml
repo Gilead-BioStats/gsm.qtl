@@ -93,8 +93,8 @@ steps:
       df: premapped
       strQuery: "SELECT *,
         CASE
-          WHEN ie_violation = 'Y' AND eligibility_criteria IS NULL THEN 'EDC I/E'
-          WHEN ie_violation IS NULL AND eligibility_criteria IS NOT NULL THEN 'Eligibility IPD'
+          WHEN ie_violation = 'Y' AND eligibility_criteria IS NULL THEN 'EDC I/E only'
+          WHEN ie_violation IS NULL AND eligibility_criteria IS NOT NULL THEN 'Eligibility IPD only'
           WHEN ie_violation = 'Y' AND eligibility_criteria IS NOT NULL THEN 'Ineligible, Both Sources'
         ELSE 'Neither'
       END AS Source  FROM df WHERE enrollyn = 'Y'"
