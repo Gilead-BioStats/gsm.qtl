@@ -97,7 +97,7 @@ Each specification includes the following components:
 *htmlwidgets(v.1.6.4)*, *devtools(v.2.4.6)*, *remotes(v.2.5.0)*,
 *vctrs(v.0.7.1)*, *tools(v.4.5.2)*, *generics(v.0.1.4)*,
 *curl(v.7.0.0)*, *tibble(v.3.3.1)*, *pkgconfig(v.2.0.3)*,
-*data.table(v.1.18.0)*, *RColorBrewer(v.1.1-3)*, *S7(v.0.2.1)*,
+*data.table(v.1.18.2.1)*, *RColorBrewer(v.1.1-3)*, *S7(v.0.2.1)*,
 *desc(v.1.4.3)*, *lifecycle(v.1.0.5)*, *farver(v.2.1.2)*,
 *compiler(v.4.5.2)*, *brio(v.1.1.5)*, *textshaping(v.1.0.4)*,
 *htmltools(v.0.5.9)*, *usethis(v.3.2.1)*, *sass(v.0.4.10)*,
