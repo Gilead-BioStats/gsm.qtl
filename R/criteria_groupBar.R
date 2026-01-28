@@ -29,6 +29,14 @@ criteria_groupBar <- function(df, varGroupID, strGroupLabel) {
         "\nCount: ", n
       )
     )) +
+    geom_text(
+      data = df_counts %>% group_by(ietestcd_concat) %>% summarise(n = sum(n), .groups = "drop"),
+      aes(x = n, y = ietestcd_concat, label = n),
+      inherit.aes = FALSE,
+      nudge_x = 0.5,
+      size = 4,
+      color = "black"
+    ) +
     labs(y = "Criteria", x = "Criteria Count", fill = strGroupLabel, title = paste0("Eligibility by ", strGroupLabel)) +
     theme_classic(base_size = 11) +
     theme(
