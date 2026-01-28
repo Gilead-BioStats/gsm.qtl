@@ -1,7 +1,7 @@
 #' Discontinuation Reasons Bar Chart
 #'
 #' @param df A `data.frame` containing the participant level dataset with eligibility
-#' @param varGroupID A variable to identify study completion/discontinuation reasons
+#' @param varCompreas A variable to identify study completion/discontinuation reasons
 
 #' @returns A `plotly` object
 #' @export
