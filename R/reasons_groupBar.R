@@ -9,7 +9,7 @@
 #'
 #' @export
 reasons_groupBar <- function(df, varGroupID, varCompreas, strGroupLabel) {
-  df_counts <-df %>%
+  df_counts <- df %>%
     filter({{varCompreas}} != "") %>%
     dplyr::count({{varCompreas}}, {{varGroupID}}, name = "n")
 

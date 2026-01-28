@@ -12,7 +12,7 @@ criteria_groupBar <- function(df, varGroupID, strGroupLabel) {
   var_name <- rlang::as_string(var_sym)
 
   # Create GG object
-  df_counts <-df %>%
+  df_counts <- df %>%
     filter(!is.na(ietestcd_concat) | Source == "Eligibility IPD") %>%
     tidyr::separate_longer_delim(ietestcd_concat, ";;;") %>%
     mutate(ietestcd_concat = ifelse(Source == "Eligibility IPD", "No EDC I/E available", ietestcd_concat))%>%
