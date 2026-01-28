@@ -5,7 +5,7 @@ Discontinuation Reasons Bar Chart
 ## Usage
 
 ``` r
-discontinuation_reasonBar(df)
+discontinuation_reasonBar(df, varCompreas)
 ```
 
 ## Arguments
@@ -14,6 +14,10 @@ discontinuation_reasonBar(df)
 
   A `data.frame` containing the participant level dataset with
   eligibility
+
+- varCompreas:
+
+  A variable to identify study completion/discontinuation reasons
 
 ## Value
 

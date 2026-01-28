@@ -5,7 +5,7 @@ Bar Chart by Group and Reasons
 ## Usage
 
 ``` r
-reasons_groupBar(df, varGroupID, strGroupLabel)
+reasons_groupBar(df, varGroupID, varCompreas, strGroupLabel)
 ```
 
 ## Arguments
@@ -17,7 +17,11 @@ reasons_groupBar(df, varGroupID, strGroupLabel)
 
 - varGroupID:
 
-  A variable to make the stacked bar chart with, i.e. invid
+  A variable to make the stacked bar chart with, i.e. invid.
+
+- varCompreas:
+
+  A variable to identify study completion/discontinuation reasons
 
 - strGroupLabel:
 
