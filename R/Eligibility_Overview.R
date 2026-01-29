@@ -23,7 +23,7 @@ Eligibility_Overview <- function(dfResults,
     ) %>%
     mutate_at(c("Metric", "Numerator", "Denominator"), as.numeric) %>%
     mutate(
-      qtlrate = paste0(as.character(round(Metric * 100, 3)), "%")
+      qtlrate = paste0(as.character(round(Metric * 100, 1)), "%")
     ) %>%
     mutate_all(as.character) %>%
     select(GroupID, Numerator, Denominator, qtlrate) %>%
