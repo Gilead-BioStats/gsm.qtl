@@ -10,6 +10,13 @@ discontinuation_reasonBar <- function(df, varCompreas) {
     filter({{varCompreas}} != "") %>%
     ggplot(., aes(y = {{varCompreas}}, fill = {{varCompreas}})) +
     geom_bar() +
+    geom_text(
+      stat = "count",
+      aes(label = after_stat(count)),
+      nudge_x = 1,
+      color = "black",
+      size  = 4
+    ) +
     labs(y = "Discontinuation Reasons", x = "Participant Count", title = "Participant Count by Reasons") +
     theme_classic() +
     theme(
