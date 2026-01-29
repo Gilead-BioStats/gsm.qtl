@@ -47,7 +47,7 @@ Suggests:
   testthat (>= 3.0.0),
   gsm.datasim
 Remotes:
-    gsm.core=Gilead-BioStats/gsm.core@main
+    gsm.core=Gilead-BioStats/gsm.core@main,
     gsm.datasim=Gilead-BioStats/gsm.datasim@main
 VignetteBuilder: knitr
 Config/testthat/edition: 3
