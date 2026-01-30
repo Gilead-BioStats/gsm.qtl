@@ -80,7 +80,7 @@ Each specification includes the following components:
 -   **Test Cases:** lists measurable test cases associated with the specification
 
 
-```{r, message=FALSE, warning=FALSE, include=FALSE}
+```{r, message=FALSE, warning=FALSE}
 spec_list <- list.files(here::here('tests', 'testthat'), pattern = "test-qual_", full.names = TRUE)
 
 # Suppress logger output
@@ -88,16 +88,19 @@ if (requireNamespace("logger", quietly = TRUE)) {
   logger::log_threshold(logger::FATAL)
 }
 
-scrape <- map_df(spec_list, function(x) {
-    testResultsRaw <- suppressMessages(suppressWarnings(
-      testthat::test_file(x, reporter = testthat::ListReporter, package = "gsm.qtl")
-    )) %>%
-      as_tibble()
-
-    return(testResultsRaw)
-}) %>%
-  mutate(Tests = gsub("test-qual_", "", file),
-         Tests = gsub(".R", "", Tests))
+# Capture all output to suppress INFO messages but keep results
+invisible(capture.output({
+  scrape <- map_df(spec_list, function(x) {
+      testResultsRaw <- suppressMessages(suppressWarnings(
+        testthat::test_file(x, reporter = testthat::ListReporter, package = "gsm.qtl")
+      )) %>%
+        as_tibble()
+  
+      return(testResultsRaw)
+  }) %>%
+    mutate(Tests = gsub("test-qual_", "", file),
+           Tests = gsub(".R", "", Tests))
+}, type = "output"))
 
 funcs <- spec_df %>%
   select(Tests, Assessment) %>%
