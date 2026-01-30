@@ -87,21 +87,21 @@ Each specification includes the following components:
 **attached base packages:** *stats*, *graphics*, *grDevices*, *utils*,
 *datasets*, *methods* and *base*
 
-**other attached packages:** *gsm.qtl(v.1.1.0)*, *testthat(v.3.3.2)*,
+**other attached packages:** *gsm.qtl(v.1.1.1)*, *testthat(v.3.3.2)*,
 *riskmetric(v.0.2.6)*, *stringr(v.1.6.0)*, *gh(v.1.5.0)*,
 *pander(v.0.6.6)*, *purrr(v.1.2.1)*, *dplyr(v.1.1.4)*, *knitr(v.1.51)*,
-*gt(v.1.2.0)* and *gsm.core(v.1.1.7)*
+*gt(v.1.3.0)* and *gsm.core(v.1.1.7)*
 
 **loaded via a namespace (and not attached):** *gtable(v.0.3.6)*,
-*xfun(v.0.55)*, *bslib(v.0.9.0)*, *ggplot2(v.4.0.1)*,
+*xfun(v.0.56)*, *bslib(v.0.10.0)*, *ggplot2(v.4.0.1)*,
 *htmlwidgets(v.1.6.4)*, *devtools(v.2.4.6)*, *remotes(v.2.5.0)*,
-*vctrs(v.0.6.5)*, *tools(v.4.5.2)*, *generics(v.0.1.4)*,
+*vctrs(v.0.7.1)*, *tools(v.4.5.2)*, *generics(v.0.1.4)*,
 *curl(v.7.0.0)*, *tibble(v.3.3.1)*, *pkgconfig(v.2.0.3)*,
-*data.table(v.1.18.0)*, *RColorBrewer(v.1.1-3)*, *S7(v.0.2.1)*,
+*data.table(v.1.18.2.1)*, *RColorBrewer(v.1.1-3)*, *S7(v.0.2.1)*,
 *desc(v.1.4.3)*, *lifecycle(v.1.0.5)*, *farver(v.2.1.2)*,
 *compiler(v.4.5.2)*, *brio(v.1.1.5)*, *textshaping(v.1.0.4)*,
 *htmltools(v.0.5.9)*, *usethis(v.3.2.1)*, *sass(v.0.4.10)*,
-*yaml(v.2.3.12)*, *lazyeval(v.0.2.2)*, *plotly(v.4.11.0)*,
+*yaml(v.2.3.12)*, *lazyeval(v.0.2.2)*, *plotly(v.4.12.0)*,
 *pillar(v.1.11.1)*, *pkgdown(v.2.2.0)*, *jquerylib(v.0.1.4)*,
 *tidyr(v.1.3.2)*, *ellipsis(v.0.3.2)*, *cranlogs(v.2.1.1)*,
 *cachem(v.1.1.0)*, *sessioninfo(v.1.2.3)*, *tidyselect(v.1.2.1)*,
@@ -114,8 +114,8 @@ Each specification includes the following components:
 *memoise(v.2.0.1)*, *evaluate(v.1.0.5)*, *log4r(v.0.4.4)*,
 *covr(v.3.6.5)*, *rex(v.1.2.1)*, *viridisLite(v.0.4.2)*,
 *rlang(v.1.1.7)*, *urltools(v.1.7.3.1)*, *Rcpp(v.1.1.1)*,
-*glue(v.1.8.0)*, *BiocManager(v.1.30.27)*, *xml2(v.1.5.1)*,
-*pkgload(v.1.4.1)*, *rstudioapi(v.0.17.1)*, *jsonlite(v.2.0.0)*,
+*glue(v.1.8.0)*, *BiocManager(v.1.30.27)*, *xml2(v.1.5.2)*,
+*pkgload(v.1.4.1)*, *rstudioapi(v.0.18.0)*, *jsonlite(v.2.0.0)*,
 *R6(v.2.6.1)*, *systemfonts(v.1.3.1)* and *fs(v.1.6.6)*
 
 ## Pull Request History
@@ -138,6 +138,26 @@ Guidelines](https://gilead-biostats.github.io/gsm.core/articles/ContributorGuide
 Below, the most recent 10 PRs into gsm.qtl are displayed. [See all Pull
 Requests here.](https://github.com/gilead-biostats/gsm.qtl/pulls)
 
+#### Pull Request 74: gsm.qtl v1.1.1
+
+Merging rc-v1.1.1 into main
+
+<https://github.com/Gilead-BioStats/gsm.qtl/pull/74>
+
+| Requester |   Date Requested    |  Reviewers   | Review Status |
+|:---------:|:-------------------:|:------------:|:-------------:|
+|  zdz2101  | 2026-01-30 16:24:40 | lauramaxwell |   APPROVED    |
+
+#### Pull Request 71: Closes \#70 addresses bugs found in eligibility report
+
+Merging fix-70 into dev
+
+<https://github.com/Gilead-BioStats/gsm.qtl/pull/71>
+
+| Requester |   Date Requested    |                       Reviewers                        | Review Status |
+|:---------:|:-------------------:|:------------------------------------------------------:|:-------------:|
+|  zdz2101  | 2026-01-27 18:44:24 | copilot-pull-request-reviewer\[bot\] samussiah zdz2101 |   COMMENTED   |
+
 #### Pull Request 67: Catch up dev from main
 
 Merging main into dev
@@ -147,6 +167,16 @@ Merging main into dev
 | Requester |   Date Requested    |  Reviewers   | Review Status |
 |:---------:|:-------------------:|:------------:|:-------------:|
 |  zdz2101  | 2026-01-16 19:24:52 | lauramaxwell |   APPROVED    |
+
+#### Pull Request 66: Update package dependencies.
+
+Merging fix-65 into dev
+
+<https://github.com/Gilead-BioStats/gsm.qtl/pull/66>
+
+| Requester |   Date Requested    |                       Reviewers                        | Review Status |
+|:---------:|:-------------------:|:------------------------------------------------------:|:-------------:|
+| samussiah | 2026-01-16 19:23:10 | copilot-pull-request-reviewer\[bot\] zdz2101 samussiah |   COMMENTED   |
 
 #### Pull Request 63: Release v1.1.0
 
@@ -207,33 +237,3 @@ Merging release-1.0.1 into main
 |  Requester  |   Date Requested    | Reviewers | Review Status |
 |:-----------:|:-------------------:|:---------:|:-------------:|
 | nandriychuk | 2025-10-01 20:08:39 |  zdz2101  |   APPROVED    |
-
-#### Pull Request 55: Catch dev up to main before pushing qual report
-
-Merging main into dev
-
-<https://github.com/Gilead-BioStats/gsm.qtl/pull/55>
-
-| Requester |   Date Requested    |  Reviewers  | Review Status |
-|:---------:|:-------------------:|:-----------:|:-------------:|
-|  zdz2101  | 2025-10-01 15:03:41 | nandriychuk |   APPROVED    |
-
-#### Pull Request 54: Update qualification report
-
-Merging update-qualification-report into dev
-
-<https://github.com/Gilead-BioStats/gsm.qtl/pull/54>
-
-|  Requester  |   Date Requested    |     Reviewers     | Review Status |
-|:-----------:|:-------------------:|:-----------------:|:-------------:|
-| nandriychuk | 2025-10-01 14:59:01 | zdz2101 jwildfire |   APPROVED    |
-
-#### Pull Request 52: gsm.qtl v1.0.0 Release Candidate
-
-Merging gsm.qtl-rc-v.0.1.1 into main
-
-<https://github.com/Gilead-BioStats/gsm.qtl/pull/52>
-
-| Requester |   Date Requested    | Reviewers | Review Status |
-|:---------:|:-------------------:|:---------:|:-------------:|
-|  zdz2101  | 2025-09-12 16:18:19 | samussiah |   COMMENTED   |
