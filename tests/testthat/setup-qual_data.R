@@ -19,10 +19,6 @@ ie_data <- generate_rawdata_for_single_study(
 )
 
 ## custom qtl path instead of inst/workflow
-GetYamlPathCustomMetrics <- function() {
-  test_path("qual_workflows/2_metrics")
-}
-## custom qtl path instead of inst/workflow
 GetYamlPathDefaultMappings <- function() {
   file.path(system.file(package = "gsm.qtl"), "workflow", "1_mappings")
 }
@@ -33,7 +29,6 @@ GetYamlPathDefaultMetrics <- function() {
 }
 
 yaml_path_custom_mappings <- "workflow/1_mappings"
-# yaml_path_custom_metrics <- "tests/testqualification/qualification/qual_workflows/2_metrics"
 
 mappings_wf <- gsm.core::MakeWorkflowList(
   strNames = c("SUBJ", "ENROLL", "IE", "PD", "STUDY", "SITE", "COUNTRY", "EXCLUSION", "STUDCOMP"),
@@ -48,7 +43,7 @@ mapped <- purrr::map_depth(lRaw, 1, ~ gsm.core::RunWorkflows(mappings_wf, .x))
 # mappings_spec <- gsm.mapping::CombineSpecs(mappings_wf)
 metrics_wf <- gsm.core::MakeWorkflowList(
   strNames = c("qtl0001", "qtl0002"),
-  strPath = GetYamlPathCustomMetrics()
+  strPath = GetYamlPathDefaultMetrics()
 )
 
 analyzed <- purrr::map_depth(mapped, 1, ~ gsm.core::RunWorkflows(metrics_wf, .x))
@@ -151,7 +146,7 @@ ineligibility_workflow <- purrr::flatten(
 discontinuation_workflow <- purrr::flatten(
   gsm.core::MakeWorkflowList(
     strNames = c("qtl0002"),
-    strPath = GetYamlPathCustomMetrics()
+    strPath = GetYamlPathDefaultMetrics()
   )
 )
 
