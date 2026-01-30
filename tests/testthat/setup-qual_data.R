@@ -1,6 +1,7 @@
 set.seed(123)
 library(dplyr)
 library(gsm.datasim)
+library(gsm.mapping)
 library(gsm.qtl)
 library(purrr)
 
