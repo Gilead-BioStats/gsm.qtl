@@ -46,10 +46,12 @@ Suggests:
   rmarkdown,
   riskmetric,
   testthat (>= 3.0.0),
-  gsm.datasim
+  gsm.datasim,
+  gsm.mapping
 Remotes:
     gsm.core=Gilead-BioStats/gsm.core@main,
     gsm.datasim=Gilead-BioStats/gsm.datasim@main
+    gsm.mapping=Gilead-BioStats/gsm.mapping@main
 VignetteBuilder: knitr
 Config/testthat/edition: 3
 Config/testthat/parallel: false
