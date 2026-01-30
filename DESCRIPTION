@@ -50,7 +50,7 @@ Suggests:
   gsm.mapping
 Remotes:
     gsm.core=Gilead-BioStats/gsm.core@main,
-    gsm.datasim=Gilead-BioStats/gsm.datasim@main,
+    gsm.datasim=Gilead-BioStats/gsm.datasim@qtl_tabletop,
     gsm.mapping=Gilead-BioStats/gsm.mapping@main
 VignetteBuilder: knitr
 Config/testthat/edition: 3
