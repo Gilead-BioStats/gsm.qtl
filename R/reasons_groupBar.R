@@ -1,24 +1,39 @@
 #' Bar Chart by Group and Reasons
 #'
 #' @param df A `data.frame` containing the participant level dataset with eligibility
-#' @param varGroupID A variable to make the stacked bar chart with, i.e. invid
+#' @param varGroupID A variable to make the stacked bar chart with, i.e. invid.
+#' @param varCompreas A variable to identify study completion/discontinuation reasons
 #' @param strGroupLabel A `string` to label the `varGroupID` in reference to axes, legend, footnotes.
 #'
 #' @returns A `plotly` object
 #'
 #' @export
-reasons_groupBar <- function(df, varGroupID, strGroupLabel) {
+reasons_groupBar <- function(df, varGroupID, varCompreas, strGroupLabel) {
+  df_counts <- df %>%
+    filter({{varCompreas}} != "") %>%
+    dplyr::count({{varCompreas}}, {{varGroupID}}, name = "n")
+
+  distinct_n_compreas <- df_counts %>% filter({{varCompreas}} != "") %>% dplyr::distinct({{varCompreas}}) %>% nrow()
+
   # Create GG object
-  group_reasons_bar <- df %>%
+  group_reasons_bar <- df_counts %>%
     # filter(compyn == "N") %>%
-    ggplot(., aes(
-      y = compreas, fill = !!enexpr(varGroupID),
+    ggplot(aes(x = n, y = {{varCompreas}}, fill = {{varGroupID}})) +
+    geom_col(aes(
       text = paste0(
         strGroupLabel, ": ", !!enexpr(varGroupID),
-        "\n Discontinuation Reason: ", compreas
+        "\n Discontinuation Reason: ", !!enexpr(varCompreas),
+        "\nCount: ", n
       )
     )) +
-    geom_bar() +
+    geom_text(
+      data = df_counts %>% group_by({{varCompreas}}) %>% summarise(n = sum(n), .groups = "drop"),
+      aes(x = n, y = {{varCompreas}}, label = n),
+      inherit.aes = FALSE,
+      nudge_x = 0.5,
+      size = 4,
+      color = "black"
+    ) +
     labs(y = "Reason", x = "Reason Count", fill = strGroupLabel, title = paste0("Discontinuation Reason by ", strGroupLabel)) +
     theme_classic(base_size = 11) +
     theme(
@@ -26,14 +41,5 @@ reasons_groupBar <- function(df, varGroupID, strGroupLabel) {
       panel.grid.major.y = element_blank()
     )
   # Create plotly
-  plotly::ggplotly(group_reasons_bar, tooltip = c("y", "text"), h = calc_fig_size(n_rows = length(unique(df$compreas)))) %>%
-    layout(
-      margin = list(l = 180, r = 50, b = 60, t = 60),
-      annotations = list(
-        x = 1, y = -0.12,
-        xref = "paper", yref = "paper", showarrow = F,
-        xanchor = "right", yanchor = "top", xshift = 0, yshift = 0,
-        font = list(size = 10)
-      )
-    )
+  plotly::ggplotly(group_reasons_bar, tooltip = c("text"), h = calc_fig_size(n_rows = distinct_n_compreas))
 }
