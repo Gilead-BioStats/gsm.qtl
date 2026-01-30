@@ -61,6 +61,12 @@ Each specification includes the following components:
 - **Test Cases:** lists measurable test cases associated with the
   specification
 
+| Spec ID | Spec Description                                                                                                             | Risk | Impact | Associated Test IDs |
+|---------|------------------------------------------------------------------------------------------------------------------------------|------|--------|---------------------|
+| S1_1    | Given a thresold and multiplier, function can appropriately calculate an upper funnel metric for comparison                  | High | High   | T1_1                |
+| S2_1    | Given appropriate raw participant-level data, an Ineligibility Assessment can be done using methods cited in gsm.qtl         | High | High   | T2_1                |
+| S3_1    | Given appropriate raw participant-level data, an Early Discontinuation Assessment can be done using methods cited in gsm.qtl | High | High   | T3_1                |
+
 ### One Row Per Test
 
 | Function                         | Spec ID | Test ID | Test Description                                                                            | Test Result |
