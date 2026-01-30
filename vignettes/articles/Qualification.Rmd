@@ -75,7 +75,7 @@ Each specification includes the following components:
 
 
 ```{r}
-spec_list <- list.files(here::here('tests', 'testqualification', 'qualification'), pattern = "test-qual_", full.names = TRUE)
+spec_list <- list.files(here::here('tests', 'testthat'), pattern = "test-qual_", full.names = TRUE)
 
 scrape <- map_df(spec_list, function(x) {
     testResultsRaw <- testthat::test_file(x, reporter = testthat::ListReporter, package = "gsm.qtl") %>%
