@@ -35,8 +35,14 @@ opts_chunk$set(
   echo = FALSE,
   results = "asis",
   message = FALSE,
+  warning = FALSE,
   tidy = FALSE
 )
+
+# Suppress logger output globally
+if (requireNamespace("logger", quietly = TRUE)) {
+  logger::log_threshold(logger::FATAL)
+}
 
 source(here::here("inst", "qualification", "specs.R"))
 source(here::here("inst", "qualification", "test_cases.R"))
@@ -74,11 +80,18 @@ Each specification includes the following components:
 -   **Test Cases:** lists measurable test cases associated with the specification
 
 
-```{r}
+```{r, message=FALSE, warning=FALSE, include=FALSE}
 spec_list <- list.files(here::here('tests', 'testthat'), pattern = "test-qual_", full.names = TRUE)
 
+# Suppress logger output
+if (requireNamespace("logger", quietly = TRUE)) {
+  logger::log_threshold(logger::FATAL)
+}
+
 scrape <- map_df(spec_list, function(x) {
-    testResultsRaw <- testthat::test_file(x, reporter = testthat::ListReporter, package = "gsm.qtl") %>%
+    testResultsRaw <- suppressMessages(suppressWarnings(
+      testthat::test_file(x, reporter = testthat::ListReporter, package = "gsm.qtl")
+    )) %>%
       as_tibble()
 
     return(testResultsRaw)
