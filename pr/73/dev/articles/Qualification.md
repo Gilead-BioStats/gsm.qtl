@@ -1,5 +1,9 @@
 # Qualification Report for {gsm.qtl} R Package
 
+    ## Registered S3 method overwritten by 'logger':
+    ##   method         from 
+    ##   print.loglevel log4r
+
 ## Introduction
 
 Risk-Based Quality Monitoring (RBQM) is a proactive approach to clinical
@@ -56,81 +60,6 @@ Each specification includes the following components:
 
 - **Test Cases:** lists measurable test cases associated with the
   specification
-
-INFO \[2026-01-30 21:40:39\] – Adding snapshot 1… INFO \[2026-01-30
-21:40:39\] —- Adding dataset Raw_SITE… INFO \[2026-01-30 21:40:39\] —-
-Dataset Raw_SITE added successfully INFO \[2026-01-30 21:40:39\] —-
-Adding dataset Raw_SUBJ… INFO \[2026-01-30 21:40:39\] —- Dataset
-Raw_SUBJ added successfully INFO \[2026-01-30 21:40:39\] —- Adding
-dataset Raw_ENROLL… INFO \[2026-01-30 21:40:39\] —- Dataset Raw_ENROLL
-added successfully INFO \[2026-01-30 21:40:39\] —- Adding dataset
-Raw_SV… INFO \[2026-01-30 21:40:39\] —- Dataset Raw_SV added
-successfully INFO \[2026-01-30 21:40:39\] —- Adding dataset Raw_VISIT…
-INFO \[2026-01-30 21:40:39\] —- Dataset Raw_VISIT added successfully
-INFO \[2026-01-30 21:40:39\] —- Adding dataset Raw_STUDCOMP… INFO
-\[2026-01-30 21:40:39\] —- Dataset Raw_STUDCOMP added successfully INFO
-\[2026-01-30 21:40:39\] —- Adding dataset Raw_IE… INFO \[2026-01-30
-21:40:39\] —- Dataset Raw_IE added successfully INFO \[2026-01-30
-21:40:39\] —- Adding dataset Raw_PD… INFO \[2026-01-30 21:40:39\] —-
-Dataset Raw_PD added successfully INFO \[2026-01-30 21:40:39\] –
-Snapshot 1 added successfully
-
-    #> Warning in file(file, "rt", encoding = fileEncoding): file("") only supports
-    #> open = "w+" and open = "w+b": using the former
-    #> Warning in file(file, "rt", encoding = fileEncoding): file("") only supports
-    #> open = "w+" and open = "w+b": using the former
-
-INFO \[2026-01-30 21:40:43\] – Adding snapshot 1… INFO \[2026-01-30
-21:40:43\] —- Adding dataset Raw_SITE… INFO \[2026-01-30 21:40:43\] —-
-Dataset Raw_SITE added successfully INFO \[2026-01-30 21:40:43\] —-
-Adding dataset Raw_SUBJ… INFO \[2026-01-30 21:40:43\] —- Dataset
-Raw_SUBJ added successfully INFO \[2026-01-30 21:40:43\] —- Adding
-dataset Raw_ENROLL… INFO \[2026-01-30 21:40:43\] —- Dataset Raw_ENROLL
-added successfully INFO \[2026-01-30 21:40:43\] —- Adding dataset
-Raw_SV… INFO \[2026-01-30 21:40:43\] —- Dataset Raw_SV added
-successfully INFO \[2026-01-30 21:40:43\] —- Adding dataset Raw_VISIT…
-INFO \[2026-01-30 21:40:43\] —- Dataset Raw_VISIT added successfully
-INFO \[2026-01-30 21:40:43\] —- Adding dataset Raw_STUDCOMP… INFO
-\[2026-01-30 21:40:43\] —- Dataset Raw_STUDCOMP added successfully INFO
-\[2026-01-30 21:40:43\] —- Adding dataset Raw_IE… INFO \[2026-01-30
-21:40:43\] —- Dataset Raw_IE added successfully INFO \[2026-01-30
-21:40:43\] —- Adding dataset Raw_PD… INFO \[2026-01-30 21:40:43\] —-
-Dataset Raw_PD added successfully INFO \[2026-01-30 21:40:43\] –
-Snapshot 1 added successfully
-
-    #> Warning in file(file, "rt", encoding = fileEncoding): file("") only supports
-    #> open = "w+" and open = "w+b": using the former
-    #> Warning in file(file, "rt", encoding = fileEncoding): file("") only supports
-    #> open = "w+" and open = "w+b": using the former
-
-INFO \[2026-01-30 21:40:46\] – Adding snapshot 1… INFO \[2026-01-30
-21:40:46\] —- Adding dataset Raw_SITE… INFO \[2026-01-30 21:40:46\] —-
-Dataset Raw_SITE added successfully INFO \[2026-01-30 21:40:46\] —-
-Adding dataset Raw_SUBJ… INFO \[2026-01-30 21:40:46\] —- Dataset
-Raw_SUBJ added successfully INFO \[2026-01-30 21:40:46\] —- Adding
-dataset Raw_ENROLL… INFO \[2026-01-30 21:40:46\] —- Dataset Raw_ENROLL
-added successfully INFO \[2026-01-30 21:40:46\] —- Adding dataset
-Raw_SV… INFO \[2026-01-30 21:40:46\] —- Dataset Raw_SV added
-successfully INFO \[2026-01-30 21:40:46\] —- Adding dataset Raw_VISIT…
-INFO \[2026-01-30 21:40:46\] —- Dataset Raw_VISIT added successfully
-INFO \[2026-01-30 21:40:46\] —- Adding dataset Raw_STUDCOMP… INFO
-\[2026-01-30 21:40:46\] —- Dataset Raw_STUDCOMP added successfully INFO
-\[2026-01-30 21:40:46\] —- Adding dataset Raw_IE… INFO \[2026-01-30
-21:40:46\] —- Dataset Raw_IE added successfully INFO \[2026-01-30
-21:40:46\] —- Adding dataset Raw_PD… INFO \[2026-01-30 21:40:46\] —-
-Dataset Raw_PD added successfully INFO \[2026-01-30 21:40:46\] –
-Snapshot 1 added successfully
-
-    #> Warning in file(file, "rt", encoding = fileEncoding): file("") only supports
-    #> open = "w+" and open = "w+b": using the former
-    #> Warning in file(file, "rt", encoding = fileEncoding): file("") only supports
-    #> open = "w+" and open = "w+b": using the former
-
-| Spec ID | Spec Description                                                                                                             | Risk | Impact | Associated Test IDs |
-|---------|------------------------------------------------------------------------------------------------------------------------------|------|--------|---------------------|
-| S1_1    | Given a thresold and multiplier, function can appropriately calculate an upper funnel metric for comparison                  | High | High   | T1_1                |
-| S2_1    | Given appropriate raw participant-level data, an Ineligibility Assessment can be done using methods cited in gsm.qtl         | High | High   | T2_1                |
-| S3_1    | Given appropriate raw participant-level data, an Early Discontinuation Assessment can be done using methods cited in gsm.qtl | High | High   | T3_1                |
 
 ### One Row Per Test
 
