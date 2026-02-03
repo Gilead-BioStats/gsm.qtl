@@ -18,11 +18,6 @@ ie_data <- generate_rawdata_for_single_study(
   desired_specs = NULL
 )
 
-## custom qtl path instead of inst/workflow
-GetYamlPathDefaultMappings <- function() {
-  file.path(system.file(package = "gsm.qtl"), "workflow", "1_mappings")
-}
-
 ## default qtl path instead of inst/workflow
 GetYamlPathDefaultMetrics <- function() {
   file.path(system.file(package = "gsm.qtl"), "workflow", "2_metrics")
