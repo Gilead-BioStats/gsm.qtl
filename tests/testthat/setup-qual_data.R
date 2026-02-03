@@ -1,6 +1,7 @@
 set.seed(123)
 library(dplyr)
 library(gsm.datasim)
+library(gsm.mapping)
 library(gsm.qtl)
 library(purrr)
 
@@ -17,12 +18,15 @@ ie_data <- generate_rawdata_for_single_study(
   desired_specs = NULL
 )
 
-## custom kris path instead of inst/workflow
+## default qtl path instead of inst/workflow
+GetYamlPathDefaultMetrics <- function() {
+  file.path(system.file(package = "gsm.qtl"), "workflow", "2_metrics")
+}
+
 yaml_path_custom_mappings <- "workflow/1_mappings"
-yaml_path_custom_metrics <- "tests/testqualification/qualification/qual_workflows/2_metrics"
 
 mappings_wf <- gsm.core::MakeWorkflowList(
-  strNames =c("SUBJ", "ENROLL", "IE", "PD", "STUDY", "SITE", "COUNTRY", "EXCLUSION", "STUDCOMP"),
+  strNames = c("SUBJ", "ENROLL", "IE", "PD", "STUDY", "SITE", "COUNTRY", "EXCLUSION", "STUDCOMP"),
   strPath = yaml_path_custom_mappings,
   strPackage = "gsm.mapping"
 )
@@ -34,11 +38,10 @@ mapped <- purrr::map_depth(lRaw, 1, ~ gsm.core::RunWorkflows(mappings_wf, .x))
 # mappings_spec <- gsm.mapping::CombineSpecs(mappings_wf)
 metrics_wf <- gsm.core::MakeWorkflowList(
   strNames = c("qtl0001", "qtl0002"),
-  strPath = yaml_path_custom_metrics,
-  strPackage = "gsm.qtl"
+  strPath = GetYamlPathDefaultMetrics()
 )
 
-analyzed <- purrr::map_depth(mapped, 1, ~gsm.core::RunWorkflows(metrics_wf, .x))
+analyzed <- purrr::map_depth(mapped, 1, ~ gsm.core::RunWorkflows(metrics_wf, .x))
 
 # Robust version of Runworkflow no config that will always run even with errors, and can be specified for specific steps in workflow to run
 robust_runworkflow <- function(
@@ -132,24 +135,21 @@ robust_runworkflow <- function(
 ineligibility_workflow <- purrr::flatten(
   gsm.core::MakeWorkflowList(
     strNames = c("qtl0001"),
-    strPath = yaml_path_custom_metrics,
-    strPackage = "gsm.qtl"
+    strPath = GetYamlPathDefaultMetrics()
   )
 )
 discontinuation_workflow <- purrr::flatten(
   gsm.core::MakeWorkflowList(
     strNames = c("qtl0002"),
-    strPath = yaml_path_custom_metrics,
-    strPackage = "gsm.qtl"
+    strPath = GetYamlPathDefaultMetrics()
   )
 )
 
 # define Data ------------------------------------------------------
-analyzed_ineligibility <- purrr::map_depth(mapped, 1, ~robust_runworkflow(ineligibility_workflow, .x, bKeepInputData = FALSE))
-analyzed_discontinuation <- purrr::map_depth(mapped, 1, ~robust_runworkflow(discontinuation_workflow, .x, bKeepInputData = FALSE))
+analyzed_ineligibility <- purrr::map_depth(mapped, 1, ~ robust_runworkflow(ineligibility_workflow, .x, bKeepInputData = FALSE))
+analyzed_discontinuation <- purrr::map_depth(mapped, 1, ~ robust_runworkflow(discontinuation_workflow, .x, bKeepInputData = FALSE))
 
 
 ## define outputs --------------------------------------------------
 IE_outputs <- map_vec(ineligibility_workflow$steps, ~ .x$output)
 SDSC_outputs <- map_vec(discontinuation_workflow$steps, ~ .x$output)
-
