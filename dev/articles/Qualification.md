@@ -1,5 +1,9 @@
 # Qualification Report for {gsm.qtl} R Package
 
+    ## Registered S3 method overwritten by 'logger':
+    ##   method         from 
+    ##   print.loglevel log4r
+
 ## Introduction
 
 Risk-Based Quality Monitoring (RBQM) is a proactive approach to clinical
@@ -87,36 +91,41 @@ Each specification includes the following components:
 **attached base packages:** *stats*, *graphics*, *grDevices*, *utils*,
 *datasets*, *methods* and *base*
 
-**other attached packages:** *gsm.qtl(v.1.1.1)*, *testthat(v.3.3.2)*,
+**other attached packages:** *gsm.mapping(v.1.1.2)*,
+*gsm.datasim(v.1.1.2)*, *gsm.qtl(v.1.1.1)*, *testthat(v.3.3.2)*,
 *riskmetric(v.0.2.6)*, *stringr(v.1.6.0)*, *gh(v.1.5.0)*,
 *pander(v.0.6.6)*, *purrr(v.1.2.1)*, *dplyr(v.1.1.4)*, *knitr(v.1.51)*,
 *gt(v.1.3.0)* and *gsm.core(v.1.1.7)*
 
-**loaded via a namespace (and not attached):** *gtable(v.0.3.6)*,
-*xfun(v.0.56)*, *bslib(v.0.10.0)*, *ggplot2(v.4.0.1)*,
-*htmlwidgets(v.1.6.4)*, *devtools(v.2.4.6)*, *remotes(v.2.5.0)*,
-*vctrs(v.0.7.1)*, *tools(v.4.5.2)*, *generics(v.0.1.4)*,
-*curl(v.7.0.0)*, *tibble(v.3.3.1)*, *pkgconfig(v.2.0.3)*,
-*data.table(v.1.18.2.1)*, *RColorBrewer(v.1.1-3)*, *S7(v.0.2.1)*,
-*desc(v.1.4.3)*, *lifecycle(v.1.0.5)*, *farver(v.2.1.2)*,
-*compiler(v.4.5.2)*, *brio(v.1.1.5)*, *textshaping(v.1.0.4)*,
-*htmltools(v.0.5.9)*, *usethis(v.3.2.1)*, *sass(v.0.4.10)*,
-*yaml(v.2.3.12)*, *lazyeval(v.0.2.2)*, *plotly(v.4.12.0)*,
-*pillar(v.1.11.1)*, *pkgdown(v.2.2.0)*, *jquerylib(v.0.1.4)*,
-*tidyr(v.1.3.2)*, *ellipsis(v.0.3.2)*, *cranlogs(v.2.1.1)*,
-*cachem(v.1.1.0)*, *sessioninfo(v.1.2.3)*, *tidyselect(v.1.2.1)*,
-*digest(v.0.6.39)*, *stringi(v.1.8.7)*, *forcats(v.1.0.1)*,
-*rprojroot(v.2.1.1)*, *fastmap(v.1.2.0)*, *grid(v.4.5.2)*,
-*here(v.1.0.2)*, *cli(v.3.6.5)*, *magrittr(v.2.0.4)*,
-*triebeard(v.0.4.1)*, *pkgbuild(v.1.4.8)*, *withr(v.3.0.2)*,
-*waldo(v.0.6.2)*, *scales(v.1.4.0)*, *backports(v.1.5.0)*,
-*rmarkdown(v.2.30)*, *httr(v.1.4.7)*, *otel(v.0.2.0)*, *ragg(v.1.5.0)*,
-*memoise(v.2.0.1)*, *evaluate(v.1.0.5)*, *log4r(v.0.4.4)*,
-*covr(v.3.6.5)*, *rex(v.1.2.1)*, *viridisLite(v.0.4.2)*,
-*rlang(v.1.1.7)*, *urltools(v.1.7.3.1)*, *Rcpp(v.1.1.1)*,
-*glue(v.1.8.0)*, *BiocManager(v.1.30.27)*, *xml2(v.1.5.2)*,
-*pkgload(v.1.4.1)*, *rstudioapi(v.0.18.0)*, *jsonlite(v.2.0.0)*,
-*R6(v.2.6.1)*, *systemfonts(v.1.3.1)* and *fs(v.1.6.6)*
+**loaded via a namespace (and not attached):** *tidyselect(v.1.2.1)*,
+*viridisLite(v.0.4.2)*, *farver(v.2.1.2)*, *urltools(v.1.7.3.1)*,
+*arrow(v.23.0.0)*, *S7(v.0.2.1)*, *fastmap(v.1.2.0)*,
+*lazyeval(v.0.2.2)*, *duckdb(v.1.4.4)*, *rex(v.1.2.1)*,
+*digest(v.0.6.39)*, *timechange(v.0.4.0)*, *lifecycle(v.1.0.5)*,
+*waldo(v.0.6.2)*, *ellipsis(v.0.3.2)*, *magrittr(v.2.0.4)*,
+*compiler(v.4.5.2)*, *rlang(v.1.1.7)*, *sass(v.0.4.10)*,
+*tools(v.4.5.2)*, *yaml(v.2.3.12)*, *data.table(v.1.18.2.1)*,
+*htmlwidgets(v.1.6.4)*, *bit(v.4.6.0)*, *pkgbuild(v.1.4.8)*,
+*curl(v.7.0.0)*, *here(v.1.0.2)*, *xml2(v.1.5.2)*,
+*RColorBrewer(v.1.1-3)*, *cranlogs(v.2.1.1)*, *pkgload(v.1.4.1)*,
+*covr(v.3.6.5)*, *withr(v.3.0.2)*, *desc(v.1.4.3)*,
+*triebeard(v.0.4.1)*, *grid(v.4.5.2)*, *log4r(v.0.4.4)*,
+*ggplot2(v.4.0.1)*, *scales(v.1.4.0)*, *cli(v.3.6.5)*,
+*rmarkdown(v.2.30)*, *ragg(v.1.5.0)*, *generics(v.0.1.4)*,
+*remotes(v.2.5.0)*, *otel(v.0.2.0)*, *rstudioapi(v.0.18.0)*,
+*httr(v.1.4.7)*, *sessioninfo(v.1.2.3)*, *DBI(v.1.2.3)*,
+*cachem(v.1.1.0)*, *assertthat(v.0.2.1)*, *BiocManager(v.1.30.27)*,
+*vctrs(v.0.7.1)*, *devtools(v.2.4.6)*, *jsonlite(v.2.0.0)*,
+*bit64(v.4.6.0-1)*, *systemfonts(v.1.3.1)*, *plotly(v.4.12.0)*,
+*tidyr(v.1.3.2)*, *jquerylib(v.0.1.4)*, *glue(v.1.8.0)*,
+*pkgdown(v.2.2.0)*, *lubridate(v.1.9.4)*, *stringi(v.1.8.7)*,
+*gtable(v.0.3.6)*, *tibble(v.3.3.1)*, *logger(v.0.4.1)*,
+*pillar(v.1.11.1)*, *htmltools(v.0.5.9)*, *brio(v.1.1.5)*,
+*R6(v.2.6.1)*, *dbplyr(v.2.5.1)*, *textshaping(v.1.0.4)*,
+*rprojroot(v.2.1.1)*, *evaluate(v.1.0.5)*, *tictoc(v.1.2.1)*,
+*backports(v.1.5.0)*, *memoise(v.2.0.1)*, *bslib(v.0.10.0)*,
+*Rcpp(v.1.1.1)*, *xfun(v.0.56)*, *fs(v.1.6.6)*, *forcats(v.1.0.1)*,
+*usethis(v.3.2.1)* and *pkgconfig(v.2.0.3)*
 
 ## Pull Request History
 
@@ -137,6 +146,36 @@ Guidelines](https://gilead-biostats.github.io/gsm.core/articles/ContributorGuide
 
 Below, the most recent 10 PRs into gsm.qtl are displayed. [See all Pull
 Requests here.](https://github.com/gilead-biostats/gsm.qtl/pulls)
+
+#### Pull Request 75: Catch dev up to main
+
+Merging main into dev
+
+<https://github.com/Gilead-BioStats/gsm.qtl/pull/75>
+
+| Requester |   Date Requested    |  Reviewers   | Review Status |
+|:---------:|:-------------------:|:------------:|:-------------:|
+|  zdz2101  | 2026-02-02 19:20:48 | lauramaxwell |   APPROVED    |
+
+#### Pull Request 74: gsm.qtl v1.1.1
+
+Merging rc-v1.1.1 into main
+
+<https://github.com/Gilead-BioStats/gsm.qtl/pull/74>
+
+| Requester |   Date Requested    |  Reviewers   | Review Status |
+|:---------:|:-------------------:|:------------:|:-------------:|
+|  zdz2101  | 2026-01-30 16:24:40 | lauramaxwell |   APPROVED    |
+
+#### Pull Request 73: Migrate qualification tests to `/testthat` and ensure no duplicate workflows
+
+Merging fix-72 into dev
+
+<https://github.com/Gilead-BioStats/gsm.qtl/pull/73>
+
+|  Requester  |   Date Requested    |      Reviewers      | Review Status |
+|:-----------:|:-------------------:|:-------------------:|:-------------:|
+| nandriychuk | 2026-01-29 15:06:35 | zdz2101 nandriychuk |   COMMENTED   |
 
 #### Pull Request 71: Closes \#70 addresses bugs found in eligibility report
 
@@ -207,33 +246,3 @@ Merging fix-58 into dev
 | Requester |   Date Requested    |                       Reviewers                        | Review Status |
 |:---------:|:-------------------:|:------------------------------------------------------:|:-------------:|
 |  zdz2101  | 2025-10-28 18:07:16 | samussiah copilot-pull-request-reviewer\[bot\] zdz2101 |   COMMENTED   |
-
-#### Pull Request 57: Catch main branch up to dev
-
-Merging main into dev
-
-<https://github.com/Gilead-BioStats/gsm.qtl/pull/57>
-
-|  Requester  |   Date Requested    | Reviewers | Review Status |
-|:-----------:|:-------------------:|:---------:|:-------------:|
-| nandriychuk | 2025-10-01 20:20:41 |  zdz2101  |   APPROVED    |
-
-#### Pull Request 56: Release v1.0.1
-
-Merging release-1.0.1 into main
-
-<https://github.com/Gilead-BioStats/gsm.qtl/pull/56>
-
-|  Requester  |   Date Requested    | Reviewers | Review Status |
-|:-----------:|:-------------------:|:---------:|:-------------:|
-| nandriychuk | 2025-10-01 20:08:39 |  zdz2101  |   APPROVED    |
-
-#### Pull Request 55: Catch dev up to main before pushing qual report
-
-Merging main into dev
-
-<https://github.com/Gilead-BioStats/gsm.qtl/pull/55>
-
-| Requester |   Date Requested    |  Reviewers  | Review Status |
-|:---------:|:-------------------:|:-----------:|:-------------:|
-|  zdz2101  | 2025-10-01 15:03:41 | nandriychuk |   APPROVED    |
