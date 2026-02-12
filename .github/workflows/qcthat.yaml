@@ -54,7 +54,7 @@ jobs:
 
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
-          extra-packages: local::., Gilead-BioStats/qcthat@main
+          extra-packages: local::., Gilead-BioStats/qcthat@fix-52-53-tag_tests_with_issues
 
       - name: Manage User Acceptance Testing
         if: >-
