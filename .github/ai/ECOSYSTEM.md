@@ -3,6 +3,11 @@
 This document defines the **suite-level architecture** across gsm.* packages.
 It is intended to be stable and shared across repos.
 
+Ownership note:
+- This is a suite-canonical document managed from `gsm.utils` and synced into package repos.
+- If a suite-level dependency/contract rule must change, update it in `gsm.utils` first, then re-sync.
+- Do not make one-off local ECOSYSTEM changes in a single package repo unless that repo is the designated source for a coordinated suite update.
+
 Machine-readable metadata for AI tooling is tracked in `ai_manifest.json`.
 
 ## Dependency DAG (suite)

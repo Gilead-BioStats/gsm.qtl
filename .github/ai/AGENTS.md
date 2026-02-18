@@ -10,11 +10,16 @@ Every ticket MUST include:
 2) Target repo + branch (usually dev)
 3) Allowed-to-touch file list (explicit paths)
 4) Entry points (exports/functions involved)
-5) Tests to run (commands + relevant test files)
+5) Tests to run (additional targeted/downstream checks beyond baseline full-suite run)
 6) Definition of done
 7) DAG impact (which downstream packages are affected)
 
 If any item is missing, STOP and request it.
+
+Required Context Pack fields must never be left empty. Use explicit placeholders:
+- `TBD` = not decided yet
+- `Unknown` = cannot determine yet
+- `None` = explicitly not applicable
 
 ## Protected core docs (default no-edit)
 Agents should treat these as read-only unless they are explicitly included in
@@ -28,6 +33,19 @@ Allowed-to-touch Files:
 
 Repo-local `ARCHITECTURE.md` is editable when required by the ticket scope.
 
+Ownership guardrail:
+- `AGENTS.md`, `ECOSYSTEM.md`, `SKILLS.md`, `PR_SUMMARY_GUIDE.md`, `CONTRIBUTING.md`, and `SECURITY.md` are suite-canonical standards from `gsm.utils`.
+- Prefer updating these in `gsm.utils` and re-syncing target repos, rather than making ad-hoc local edits.
+- `ARCHITECTURE.md` is intentionally repo-local and should be updated in the target repo when package-specific contracts/entry points change.
+
+Quick routing table:
+
+| Change type | Where to edit first |
+|---|---|
+| Suite policy/standards (`AGENTS`, `ECOSYSTEM`, `SKILLS`, `PR_SUMMARY_GUIDE`, `CONTRIBUTING`, `SECURITY`) | `gsm.utils` (then re-sync target repos) |
+| Package-specific contracts/entry points/downstream notes | Target repo `ARCHITECTURE.md` + Context Pack |
+| Ticket scope/tests/allowed files | Target repo Context Pack issue |
+
 ### Context Pack template (copy/paste)
 ```
 Goal:
@@ -35,10 +53,17 @@ Non-goals:
 Target repo + branch:
 Allowed-to-touch files:
 Entry points:
-Tests to run:
+Tests to run (additional exact commands beyond full-suite baseline):
 Definition of done:
 DAG impact:
 ```
+
+For R packages, baseline protocol always includes full-suite `devtools::test()`.
+Use `Tests to run` to list additional exact commands (targeted tests, integration checks, downstream verifications).
+If no additional checks are needed, write `None (full-suite only)`.
+If function signatures, exported APIs, or roxygen docs change, include `devtools::document()` as well.
+
+Do not leave any field blank; use `TBD` / `Unknown` / `None` when needed.
 
 ## Dependency-aware orchestration (how it “knows what to do”)
 The suite DAG is defined in ECOSYSTEM.md and (mechanically) in DESCRIPTION Imports.

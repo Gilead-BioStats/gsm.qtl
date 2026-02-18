@@ -1,5 +1,8 @@
 # ARCHITECTURE
 
+This document is repo-local and should be maintained in each package repo.
+Unlike `ECOSYSTEM.md` (suite-canonical), `ARCHITECTURE.md` captures package-specific contracts, entry points, and downstream impact details.
+
 ## Package purpose
 (TODO: replace with repo-specific purpose. Keep it to ~5–10 lines.)
 

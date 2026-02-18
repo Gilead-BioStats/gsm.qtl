@@ -23,6 +23,23 @@ Templates live in `inst/ai_templates/` and are copied into target repos under `.
 - Suite dependency and contracts live in `ECOSYSTEM.md`.
 - Other files should reference these sources rather than restating full policy text.
 
+## Ownership model (recommended)
+Use a two-layer model for agentic programming:
+
+1) **Suite-canonical layer (originates in `gsm.utils`)**
+	- `AGENTS.md`, `ECOSYSTEM.md`, `SKILLS.md`, `PR_SUMMARY_GUIDE.md`, `CONTRIBUTING.md`, `SECURITY.md`
+	- Treat these as centrally managed standards and sync them into each repo.
+
+2) **Repo-local layer (owned by each target repo)**
+	- `ARCHITECTURE.md` and ticket Context Packs
+	- Keep package-specific entry points, downstream impacts, and contract details current in each repo.
+
+Practical rule:
+- If the change is suite-wide policy/contract language, edit `gsm.utils` first and re-sync.
+- If the change is package-specific behavior/contracts, update that repo's `ARCHITECTURE.md` (and issue Context Pack) in the same PR.
+
+For quick edit-routing decisions, use the "Quick routing table" in `AGENTS.md`.
+
 ## Syncing templates
 Use:
 
@@ -56,8 +73,9 @@ cat(prompt)
 ## Maintainer workflow
 1) Update templates in `gsm.utils` first.
 2) Sync templates into target repos.
-3) Run package tests/checks in each touched repo.
-4) For behavior/API changes in any suite package, verify downstream packages per `ECOSYSTEM.md`.
+3) In each target repo, refresh repo-local `ARCHITECTURE.md` when package contracts/entry points/consumers change.
+4) Run package tests/checks in each touched repo.
+5) For behavior/API changes in any suite package, verify downstream packages per `ECOSYSTEM.md`.
 
 ## CI drift gate (recommended)
 If target repos use gsm.utils GitHub Actions templates, include `ai-template-drift-check.yaml`.
@@ -74,4 +92,8 @@ Then commit the updated template files.
 ## Agent guardrails
 - Do not run from whole-repo context when a scoped Context Pack is available.
 - If Context Pack fields are missing, request them before making behavioral changes.
+- Context Pack required fields must not be empty; use explicit placeholders: `TBD`, `Unknown`, or `None`.
+- For R repos, baseline protocol always runs full-suite `devtools::test()`.
+- Use Context Pack `Tests to Run` for additional exact commands (targeted, integration, or downstream checks), or `None (full-suite only)`.
+- If function signatures, exported APIs, or roxygen docs change, run `devtools::document()` and include generated `man/` and `NAMESPACE` updates when applicable.
 - Keep mechanical/doc synchronization separate from behavior changes.
