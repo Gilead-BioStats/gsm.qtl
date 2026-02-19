@@ -26,7 +26,7 @@ jobs:
         shell: Rscript {0}
         run: |
           install.packages("pak")
-          pak::pak("Gilead-BioStats/gsm.utils@dev")
+          pak::pak("Gilead-BioStats/gsm.utils@ai-playground")
 
       - name: Check AI template drift
         shell: Rscript {0}
