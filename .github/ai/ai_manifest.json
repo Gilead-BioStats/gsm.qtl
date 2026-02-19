@@ -1,0 +1,20 @@
+{
+  "manifest_version": "1.0.0",
+  "template_bundle": "gsm.utils-ai-templates",
+  "template_bundle_version": "0.1.0",
+  "canonical_sources": {
+    "orchestration": "AGENTS.md",
+    "ecosystem_contracts": "ECOSYSTEM.md"
+  },
+  "templates": [
+    "AGENTS.md",
+    "AI_README.md",
+    "ARCHITECTURE.md",
+    "CONTRIBUTING.md",
+    "ECOSYSTEM.md",
+    "PR_SUMMARY_GUIDE.md",
+    ".github/pull_request_template.md",
+    "SECURITY.md",
+    "SKILLS.md"
+  ]
+}
