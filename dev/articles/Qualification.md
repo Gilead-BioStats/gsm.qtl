@@ -94,12 +94,12 @@ Each specification includes the following components:
 **other attached packages:** *gsm.mapping(v.1.1.2)*,
 *gsm.datasim(v.1.1.2)*, *gsm.qtl(v.1.1.1)*, *testthat(v.3.3.2)*,
 *riskmetric(v.0.2.6)*, *stringr(v.1.6.0)*, *gh(v.1.5.0)*,
-*pander(v.0.6.6)*, *purrr(v.1.2.1)*, *dplyr(v.1.1.4)*, *knitr(v.1.51)*,
+*pander(v.0.6.6)*, *purrr(v.1.2.1)*, *dplyr(v.1.2.0)*, *knitr(v.1.51)*,
 *gt(v.1.3.0)* and *gsm.core(v.1.1.7)*
 
 **loaded via a namespace (and not attached):** *tidyselect(v.1.2.1)*,
-*viridisLite(v.0.4.2)*, *farver(v.2.1.2)*, *urltools(v.1.7.3.1)*,
-*arrow(v.23.0.0)*, *S7(v.0.2.1)*, *fastmap(v.1.2.0)*,
+*viridisLite(v.0.4.3)*, *farver(v.2.1.2)*, *urltools(v.1.7.3.1)*,
+*arrow(v.23.0.1)*, *S7(v.0.2.1)*, *fastmap(v.1.2.0)*,
 *lazyeval(v.0.2.2)*, *duckdb(v.1.4.4)*, *rex(v.1.2.1)*,
 *digest(v.0.6.39)*, *timechange(v.0.4.0)*, *lifecycle(v.1.0.5)*,
 *waldo(v.0.6.2)*, *ellipsis(v.0.3.2)*, *magrittr(v.2.0.4)*,
@@ -107,21 +107,21 @@ Each specification includes the following components:
 *tools(v.4.5.2)*, *yaml(v.2.3.12)*, *data.table(v.1.18.2.1)*,
 *htmlwidgets(v.1.6.4)*, *bit(v.4.6.0)*, *pkgbuild(v.1.4.8)*,
 *curl(v.7.0.0)*, *here(v.1.0.2)*, *xml2(v.1.5.2)*,
-*RColorBrewer(v.1.1-3)*, *cranlogs(v.2.1.1)*, *pkgload(v.1.4.1)*,
+*RColorBrewer(v.1.1-3)*, *cranlogs(v.2.1.1)*, *pkgload(v.1.5.0)*,
 *covr(v.3.6.5)*, *withr(v.3.0.2)*, *desc(v.1.4.3)*,
 *triebeard(v.0.4.1)*, *grid(v.4.5.2)*, *log4r(v.0.4.4)*,
-*ggplot2(v.4.0.1)*, *scales(v.1.4.0)*, *cli(v.3.6.5)*,
+*ggplot2(v.4.0.2)*, *scales(v.1.4.0)*, *cli(v.3.6.5)*,
 *rmarkdown(v.2.30)*, *ragg(v.1.5.0)*, *generics(v.0.1.4)*,
 *remotes(v.2.5.0)*, *otel(v.0.2.0)*, *rstudioapi(v.0.18.0)*,
-*httr(v.1.4.7)*, *sessioninfo(v.1.2.3)*, *DBI(v.1.2.3)*,
+*httr(v.1.4.8)*, *sessioninfo(v.1.2.3)*, *DBI(v.1.2.3)*,
 *cachem(v.1.1.0)*, *assertthat(v.0.2.1)*, *BiocManager(v.1.30.27)*,
 *vctrs(v.0.7.1)*, *devtools(v.2.4.6)*, *jsonlite(v.2.0.0)*,
 *bit64(v.4.6.0-1)*, *systemfonts(v.1.3.1)*, *plotly(v.4.12.0)*,
 *tidyr(v.1.3.2)*, *jquerylib(v.0.1.4)*, *glue(v.1.8.0)*,
-*pkgdown(v.2.2.0)*, *lubridate(v.1.9.4)*, *stringi(v.1.8.7)*,
+*pkgdown(v.2.2.0)*, *lubridate(v.1.9.5)*, *stringi(v.1.8.7)*,
 *gtable(v.0.3.6)*, *tibble(v.3.3.1)*, *logger(v.0.4.1)*,
 *pillar(v.1.11.1)*, *htmltools(v.0.5.9)*, *brio(v.1.1.5)*,
-*R6(v.2.6.1)*, *dbplyr(v.2.5.1)*, *textshaping(v.1.0.4)*,
+*R6(v.2.6.1)*, *dbplyr(v.2.5.2)*, *textshaping(v.1.0.4)*,
 *rprojroot(v.2.1.1)*, *evaluate(v.1.0.5)*, *tictoc(v.1.2.1)*,
 *backports(v.1.5.0)*, *memoise(v.2.0.1)*, *bslib(v.0.10.0)*,
 *Rcpp(v.1.1.1)*, *xfun(v.0.56)*, *fs(v.1.6.6)*, *forcats(v.1.0.1)*,
@@ -146,6 +146,16 @@ Guidelines](https://gilead-biostats.github.io/gsm.core/articles/ContributorGuide
 
 Below, the most recent 10 PRs into gsm.qtl are displayed. [See all Pull
 Requests here.](https://github.com/gilead-biostats/gsm.qtl/pulls)
+
+#### Pull Request 83: Update qualification_report GHA
+
+Merging fix-82 into dev
+
+<https://github.com/Gilead-BioStats/gsm.qtl/pull/83>
+
+|  Requester  |   Date Requested    |                  Reviewers                   | Review Status |
+|:-----------:|:-------------------:|:--------------------------------------------:|:-------------:|
+| nandriychuk | 2026-02-23 18:02:00 | copilot-pull-request-reviewer\[bot\] zdz2101 |   COMMENTED   |
 
 #### Pull Request 75: Catch dev up to main
 
@@ -236,13 +246,3 @@ Merging fix-60 into dev
 | Requester |   Date Requested    |                       Reviewers                        | Review Status |
 |:---------:|:-------------------:|:------------------------------------------------------:|:-------------:|
 |  zdz2101  | 2025-12-04 18:54:22 | jwildfire copilot-pull-request-reviewer\[bot\] zdz2101 |   APPROVED    |
-
-#### Pull Request 59: Closes \#58 removes `gsm.kri` dependency
-
-Merging fix-58 into dev
-
-<https://github.com/Gilead-BioStats/gsm.qtl/pull/59>
-
-| Requester |   Date Requested    |                       Reviewers                        | Review Status |
-|:---------:|:-------------------:|:------------------------------------------------------:|:-------------:|
-|  zdz2101  | 2025-10-28 18:07:16 | samussiah copilot-pull-request-reviewer\[bot\] zdz2101 |   COMMENTED   |
