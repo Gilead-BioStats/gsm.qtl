@@ -25,7 +25,7 @@ QTL_Overview <- function(dfResults,
     mutate(
       qtlrate = paste0(as.character(round(Metric * 100, 3)), "%"),
       Deviation = ifelse(Metric > Upper_funnel, "Yes", "No"),
-      Upper_funnel = paste0(as.character(round(Upper_funnel * 100, 3)), "%")
+      Upper_funnel = paste0(as.character(round(Upper_funnel * 100, 1)), "%")
     ) %>%
     mutate_all(as.character) %>%
     select(GroupID, Numerator, Denominator, qtlrate, Upper_funnel, Deviation) %>%
