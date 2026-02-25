@@ -160,15 +160,19 @@ function timeSeriesQTL(
           ds.borderDash = [2, 4];
         }
 
-        ds.pointStyle = "line";
-        ds.pointRadius = 0;
+        ds.borderWidth = 1.25;
+        ds.pointStyle = "circle";
+        ds.pointRadius = 2;
+        ds.pointHoverRadius = 4;
+        ds.pointHitRadius = 7;
       } else if (ds.type === "line" && ds.purpose === "highlight") {
         ds.borderDash = [];
         ds.borderColor = COLOR_METRIC;
         ds.backgroundColor = COLOR_METRIC;
         ds.segment = {};
-        ds.pointRadius = 3;
-        ds.pointHoverRadius = 4;
+        ds.pointRadius = 4;
+        ds.pointHoverRadius = 7;
+        ds.pointHitRadius = 12;
         ds.pointBackgroundColor = ds.data.map(point => isAboveThreshold(point) ? COLOR_ABOVE : COLOR_BELOW);
         ds.pointBorderColor = ds.pointBackgroundColor;
 
@@ -216,6 +220,8 @@ function timeSeriesQTL(
     }
 
     chart.options.plugins.legend.labels.usePointStyle = false;
+    chart.options.plugins.legend.labels.usePointStyle = true;
+    chart.options.plugins.legend.labels.boxWidth = 18;
 
     const defaultGenerateLabels = chart.options.plugins.legend.labels.generateLabels;
     chart.options.plugins.legend.labels.generateLabels = function(currentChart) {
@@ -231,9 +237,26 @@ function timeSeriesQTL(
       const filtered = generated
         .map(item => {
           const text = normalizeLabel(item.text || "");
+          const lower = String(text).toLowerCase();
+          const isQtlThreshold = lower === "qtl threshold";
+          const isNominalThreshold = lower === "nominal threshold";
+
+          let strokeStyle = item.strokeStyle;
+          let lineWidth = item.lineWidth;
+          if (isQtlThreshold) {
+            strokeStyle = COLOR_ABOVE;
+            lineWidth = 2.25;
+          } else if (isNominalThreshold) {
+            strokeStyle = COLOR_FLAT;
+            lineWidth = 2.25;
+          }
+
           return {
             ...item,
-            text
+            text,
+            pointStyle: "line",
+            strokeStyle,
+            lineWidth
           };
         })
         .filter(item => {
