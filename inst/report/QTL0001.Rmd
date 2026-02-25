@@ -15,12 +15,6 @@ QTL_Overview(dfResults = qtl0001_params$dfResults,
 
 ## Time Series Chart
 ```{r, echo=FALSE, results='asis', fig.height=4}
-# gsm.qtl::Widget_TimeSeriesQTL(
-#   dfResults = dfResults %>% filter(GroupLevel == "Study"),
-#   dfGroups = dfGroups,
-#   strOutcome = "Metric"
-# )
-# Create reference table for funnel bounds per date
 QTL_lineplot_v2(dfResults = qtl0001_params$dfResults, strQTL = "Ineligibility Rate")
 ```
 
