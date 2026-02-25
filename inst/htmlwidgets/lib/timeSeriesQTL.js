@@ -6,8 +6,113 @@ function timeSeriesQTL(
   intervals,
   groupMetadata
 ) {
-  // 1) Now ALWAYS is an array!
-  const ALWAYS = ["Upper_funnel", "Flatline"];
+  const ALWAYS = ["Upper_funnel", "flat_line"];
+  const THRESHOLD_LABELS = {
+    Upper_funnel: "QTL Threshold",
+    flat_line: "Nominal Threshold"
+  };
+  const COLOR_ABOVE = "#FF5859";
+  const COLOR_BELOW = "#3DAF06";
+  const COLOR_FLAT = "#9ca3af";
+  const COLOR_METRIC = "#6b7280";
+
+  const ALWAYS_ALIASES = {
+    Upper_funnel: ["upper_funnel"],
+    flat_line: ["flat_line", "flatline"]
+  };
+
+  function normalizeGroupId(groupID) {
+    if (groupID === undefined || groupID === null) {
+      return null;
+    }
+
+    const key = String(groupID).toLowerCase();
+
+    if (ALWAYS_ALIASES.Upper_funnel.includes(key)) {
+      return "Upper_funnel";
+    }
+
+    if (ALWAYS_ALIASES.flat_line.includes(key)) {
+      return "flat_line";
+    }
+
+    return groupID;
+  }
+
+  function normalizeLabel(text) {
+    if (text === undefined || text === null) {
+      return text;
+    }
+
+    const value = String(text)
+      .replace(/\bSite\b/g, "Study")
+      .replace(/Green Flag/g, "Below QTL Threshold")
+      .replace(/Red Flag/g, "Above QTL Threshold");
+
+    if (/^Upper_funnel$/i.test(value)) {
+      return THRESHOLD_LABELS.Upper_funnel;
+    }
+
+    if (/^(flat_line|flatline)$/i.test(value)) {
+      return THRESHOLD_LABELS.flat_line;
+    }
+
+    return value;
+  }
+
+  function metricValue(raw, parsed) {
+    if (raw && raw.Metric !== undefined && raw.Metric !== null) {
+      const num = Number(raw.Metric);
+      if (!Number.isNaN(num)) {
+        return num;
+      }
+    }
+
+    if (parsed && parsed.y !== undefined && parsed.y !== null) {
+      const num = Number(parsed.y);
+      if (!Number.isNaN(num)) {
+        return num;
+      }
+    }
+
+    return null;
+  }
+
+  function displayDate(raw, tooltipItem) {
+    if (raw && raw.SnapshotDate !== undefined && raw.SnapshotDate !== null) {
+      return String(raw.SnapshotDate);
+    }
+
+    if (tooltipItem && tooltipItem.label !== undefined && tooltipItem.label !== null) {
+      return String(tooltipItem.label);
+    }
+
+    return "NA";
+  }
+
+  function isAboveThreshold(point) {
+    if (!point) {
+      return false;
+    }
+
+    if (point.Flag !== undefined && point.Flag !== null) {
+      const flag = String(point.Flag).toLowerCase();
+      if (flag.includes("above qtl threshold") || flag.includes("red flag")) {
+        return true;
+      }
+      if (flag.includes("below qtl threshold") || flag.includes("green flag")) {
+        return false;
+      }
+    }
+
+    const metric = Number(point.Metric);
+    const upper = Number(point.Upper_funnel);
+    if (!Number.isNaN(metric) && !Number.isNaN(upper)) {
+      return metric > upper;
+    }
+
+    return false;
+  }
 
   // 2) Build the chart as usual
   const chart = gsmViz.default.timeSeries(
@@ -21,23 +126,172 @@ function timeSeriesQTL(
     );
   }
 
-  // 4) Style *all* ALWAYS lines
+  // 4) Style threshold lines
   function styleAlways() {
+    const metricLabel = (config && config.Abbreviation) ? String(config.Abbreviation) : "Metric";
+    let mainMetricLineLabeled = false;
+
     chart.data.datasets.forEach(ds => {
+      const datasetGroupID = ds.data && ds.data[0] ? normalizeGroupId(ds.data[0].GroupID) : null;
+      const isThreshold = ALWAYS.includes(datasetGroupID);
+
+      if (ds.label) {
+        ds.label = normalizeLabel(ds.label);
+      }
+
+      if (ds.name) {
+        ds.name = normalizeLabel(ds.name);
+      }
+
       if (
         ds.type === "line" &&
         ds.purpose === "highlight" &&
-        // check if this dataset’s GroupID is in our ALWAYS list
-        ds.data[0] &&
-        ALWAYS.includes(ds.data[0].GroupID)
+        isThreshold
       ) {
-        ds.borderColor     = "red";
-        ds.backgroundColor = "red";
-        ds.borderDash      = [5,5];
-        ds.pointStyle      = "circle";
-        ds.pointRadius     = 4;
+        ds.label = THRESHOLD_LABELS[datasetGroupID] || ds.label;
+
+        if (datasetGroupID === "Upper_funnel") {
+          ds.borderColor = COLOR_ABOVE;
+          ds.backgroundColor = COLOR_ABOVE;
+          ds.borderDash = [2, 4];
+        } else {
+          ds.borderColor = COLOR_FLAT;
+          ds.backgroundColor = COLOR_FLAT;
+          ds.borderDash = [2, 4];
+        }
+
+        ds.pointStyle = "line";
+        ds.pointRadius = 0;
+      } else if (ds.type === "line" && ds.purpose === "highlight") {
+        ds.borderDash = [];
+        ds.borderColor = COLOR_METRIC;
+        ds.backgroundColor = COLOR_METRIC;
+        ds.segment = {};
+        ds.pointRadius = 3;
+        ds.pointHoverRadius = 4;
+        ds.pointBackgroundColor = ds.data.map(point => isAboveThreshold(point) ? COLOR_ABOVE : COLOR_BELOW);
+        ds.pointBorderColor = ds.pointBackgroundColor;
+
+        if (!mainMetricLineLabeled) {
+          ds.label = metricLabel;
+          ds.name = metricLabel;
+          mainMetricLineLabeled = true;
+        }
       }
     });
+
+    if (!chart.options.scales) {
+      chart.options.scales = {};
+    }
+
+    const yScaleKeys = ["y", "_value_"];
+    yScaleKeys.forEach((key) => {
+      if (chart.options.scales[key]) {
+        if (!chart.options.scales[key].title) {
+          chart.options.scales[key].title = {};
+        }
+        chart.options.scales[key].title.display = true;
+        chart.options.scales[key].title.text = metricLabel;
+      }
+    });
+
+    if (!chart.options.plugins) {
+      chart.options.plugins = {};
+    }
+
+    if (!chart.options.plugins.tooltip) {
+      chart.options.plugins.tooltip = {};
+    }
+
+    if (!chart.options.plugins.tooltip.callbacks) {
+      chart.options.plugins.tooltip.callbacks = {};
+    }
+
+    if (!chart.options.plugins.legend) {
+      chart.options.plugins.legend = {};
+    }
+
+    if (!chart.options.plugins.legend.labels) {
+      chart.options.plugins.legend.labels = {};
+    }
+
+    chart.options.plugins.legend.labels.usePointStyle = false;
+
+    const defaultGenerateLabels = chart.options.plugins.legend.labels.generateLabels;
+    chart.options.plugins.legend.labels.generateLabels = function(currentChart) {
+      const generated = typeof defaultGenerateLabels === "function"
+        ? defaultGenerateLabels(currentChart)
+        : currentChart.data.datasets.map((dataset, index) => ({
+            text: dataset.label,
+            datasetIndex: index,
+            strokeStyle: dataset.borderColor,
+            lineDash: dataset.borderDash || []
+          }));
+
+      const filtered = generated
+        .map(item => {
+          const text = normalizeLabel(item.text || "");
+          return {
+            ...item,
+            text
+          };
+        })
+        .filter(item => {
+          const text = String(item.text || "").toLowerCase();
+          return !text.includes("amber flag") &&
+            !text.includes("no flag") &&
+            !text.includes("below qtl threshold") &&
+            !text.includes("above qtl threshold");
+        });
+
+      filtered.push(
+        {
+          text: "Below QTL Threshold",
+          fillStyle: COLOR_BELOW,
+          strokeStyle: COLOR_BELOW,
+          lineWidth: 0,
+          pointStyle: "circle",
+          hidden: false,
+          datasetIndex: null
+        },
+        {
+          text: "Above QTL Threshold",
+          fillStyle: COLOR_ABOVE,
+          strokeStyle: COLOR_ABOVE,
+          lineWidth: 0,
+          pointStyle: "circle",
+          hidden: false,
+          datasetIndex: null
+        }
+      );
+
+      return filtered;
+    };
+    chart.options.plugins.tooltip.callbacks.label = function(tooltipItem) {
+      const raw = tooltipItem.raw || {};
+      const groupID = normalizeGroupId(raw.GroupID);
+      const value = metricValue(raw, tooltipItem.parsed);
+      const date = displayDate(raw, tooltipItem);
+
+      if (groupID && ALWAYS.includes(groupID)) {
+        return [`Date: ${date}`, `Value: ${value === null ? "NA" : value}`];
+      }
+
+      const numerator = raw.Numerator !== undefined && raw.Numerator !== null ? raw.Numerator : "NA";
+      const denominator = raw.Denominator !== undefined && raw.Denominator !== null ? raw.Denominator : "NA";
+
+      return [
+        `Metric: ${value === null ? "NA" : value}`,
+        `Numerator: ${numerator}`,
+        `Denominator: ${denominator}`
+      ];
+    };
+
+    chart.options.plugins.tooltip.callbacks.title = function(items) {
+      const first = Array.isArray(items) && items.length > 0 ? items[0] : null;
+      const raw = first && first.raw ? first.raw : {};
+      return `Date: ${displayDate(raw, first)}`;
+    };
   }
 
   // 5) First pass: strip, style, redraw

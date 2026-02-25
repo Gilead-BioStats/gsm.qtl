@@ -15,7 +15,7 @@ QTL_Overview(dfResults = qtl0002_params$dfResults,
 
 ## Time Series Chart
 ```{r, echo=FALSE, results='asis', fig.height=4}
-QTL_lineplot(dfResults = qtl0002_params$dfResults, strQTL = "Premature Discontinuation Rate")
+QTL_lineplot_v2(dfResults = qtl0002_params$dfResults, strQTL = "Premature Discontinuation Rate")
 ```
 
 ## Bar Charts {.tabset .tabset-pills}

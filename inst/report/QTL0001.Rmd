@@ -21,7 +21,7 @@ QTL_Overview(dfResults = qtl0001_params$dfResults,
 #   strOutcome = "Metric"
 # )
 # Create reference table for funnel bounds per date
-QTL_lineplot(dfResults = qtl0001_params$dfResults, strQTL = "Ineligibility Rate")
+QTL_lineplot_v2(dfResults = qtl0001_params$dfResults, strQTL = "Ineligibility Rate")
 ```
 
 ## Bar Charts {.tabset .tabset-pills}
