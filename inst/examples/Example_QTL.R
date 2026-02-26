@@ -72,6 +72,7 @@ devtools::load_all(".")
 #   lListings = report_listings
 # )
 # usethis::use_data(example_lparams, internal = TRUE, overwrite = TRUE)
+options("yaml.eval.expr" = TRUE)
 
 gsm.kri::RenderRmd(
   lParams = gsm.qtl:::example_lparams,
