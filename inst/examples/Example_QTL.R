@@ -1,9 +1,9 @@
-library(gsm.qtl)
-library(gsm.kri)
-devtools::load_all(".")
-
-## No need to resimulate everything with the advent of the internal data - scroll to bottom to just test report
-# ----------------------------------------------------------------------
+# library(gsm.qtl)
+# library(gsm.kri)
+# devtools::load_all(".")
+#
+# ## No need to resimulate everything with the advent of the internal data - scroll to bottom to just test report
+# # ----------------------------------------------------------------------
 # set.seed(1234)
 #
 # # Single Study
@@ -51,19 +51,7 @@ devtools::load_all(".")
 # report_listings <- list(qtl0001 = mapped[[length(mapped)]]$Mapped_EXCLUSION,
 #                         qtl0002 = left_join(mapped[[length(mapped)]]$Mapped_STUDCOMP,
 #                                             select(mapped[[length(mapped)]]$Mapped_SUBJ, subjid, country),
-#                                             by = "subjid"))
-# Test if new Report_QTL rmd works
-# gsm.kri::RenderRmd(
-#   lParams = list(
-#     dfResults = all_reportingResults,
-#     dfMetrics = all_reportingMetrics,
-#     dfGroups = all_reportingGroups,
-#     lListings = report_listings
-#   ),
-#   strOutputDir = getwd(),
-#   strOutputFile = "pkgdown/assets/examples/Example_QTL.html",
-#   strInputPath = system.file("report/Report_QTL.Rmd", package = "gsm.qtl")
-# )
+#                                             by = "subjid") %>% mutate(compreas = ifelse(.data$compreas, "Completed/Ongoing", .data$compreas)))
 #
 # example_lparams <- list(
 #   dfResults = all_reportingResults,
@@ -72,8 +60,8 @@ devtools::load_all(".")
 #   lListings = report_listings
 # )
 # usethis::use_data(example_lparams, internal = TRUE, overwrite = TRUE)
-options("yaml.eval.expr" = TRUE)
-
+# options("yaml.eval.expr" = TRUE)
+#
 gsm.kri::RenderRmd(
   lParams = gsm.qtl:::example_lparams,
   strOutputDir = getwd(),
