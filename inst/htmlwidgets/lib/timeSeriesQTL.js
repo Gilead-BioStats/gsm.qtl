@@ -219,7 +219,6 @@ function timeSeriesQTL(
       chart.options.plugins.legend.labels = {};
     }
 
-    chart.options.plugins.legend.labels.usePointStyle = false;
     chart.options.plugins.legend.labels.usePointStyle = true;
     chart.options.plugins.legend.labels.boxWidth = 18;
 
