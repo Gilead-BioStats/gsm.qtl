@@ -113,7 +113,7 @@ Each specification includes the following components:
 *ggplot2(v.4.0.2)*, *scales(v.1.4.0)*, *cli(v.3.6.5)*,
 *rmarkdown(v.2.30)*, *ragg(v.1.5.0)*, *generics(v.0.1.4)*,
 *remotes(v.2.5.0)*, *otel(v.0.2.0)*, *rstudioapi(v.0.18.0)*,
-*httr(v.1.4.8)*, *sessioninfo(v.1.2.3)*, *DBI(v.1.2.3)*,
+*httr(v.1.4.8)*, *sessioninfo(v.1.2.3)*, *DBI(v.1.3.0)*,
 *cachem(v.1.1.0)*, *assertthat(v.0.2.1)*, *BiocManager(v.1.30.27)*,
 *vctrs(v.0.7.1)*, *devtools(v.2.4.6)*, *jsonlite(v.2.0.0)*,
 *bit64(v.4.6.0-1)*, *systemfonts(v.1.3.1)*, *plotly(v.4.12.0)*,
