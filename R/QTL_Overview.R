@@ -23,7 +23,7 @@ QTL_Overview <- function(dfResults,
     ) %>%
     mutate_at(c("Metric", "Upper_funnel", "Numerator", "Denominator", "Flag"), as.numeric) %>%
     mutate(
-      qtlrate = paste0(as.character(round(Metric * 100, 3)), "%"),
+      qtlrate = paste0(as.character(round(Metric * 100, 1)), "%"),
       Deviation = ifelse(Metric > Upper_funnel, "Yes", "No"),
       Upper_funnel = paste0(as.character(round(Upper_funnel * 100, 1)), "%")
     ) %>%
