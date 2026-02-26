@@ -12,14 +12,16 @@ QTL_lineplot_v2 <- function(dfResults, strQTL) {
 
   threshold_aliases <- c("upper_funnel", "flatline", "flat_line")
 
-  get_col_value <- function(df, names) {
-    matched <- names[match(tolower(names(df)), tolower(names), nomatch = 0)]
-    matched <- matched[!is.na(matched)]
-    if (length(matched) == 0) {
+  get_col_value <- function(df, candidate_names) {
+    df_names <- names(df)
+    # Find the first candidate that matches a column name in df, case-insensitively
+    idx <- match(tolower(candidate_names), tolower(df_names), nomatch = 0)
+    idx <- idx[idx > 0]
+    if (length(idx) == 0) {
       return(rep(NA_real_, nrow(df)))
     }
 
-    as.numeric(df[[matched[1]]])
+    as.numeric(df[[df_names[idx[1]]]])
   }
 
   if (!"GroupID" %in% names(dfResults)) {
