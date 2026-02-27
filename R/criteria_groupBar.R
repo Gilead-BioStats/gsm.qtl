@@ -21,14 +21,19 @@ criteria_groupBar <- function(df, varGroupID, strGroupLabel) {
   distinct_n_ie <- df_counts %>% dplyr::distinct(ietestcd_concat) %>% nrow()
 
   group_criteria_bar <- df_counts %>%
-    ggplot(aes(x = n, y = ietestcd_concat, fill = .data[[var_name]])) +
-    geom_col(aes(
-      text = paste0(
-        strGroupLabel, ": ", .data[[var_name]],
-        "\nEligibility Status: ", ietestcd_concat,
-        "\nCount: ", n
+    ggplot(
+      aes(
+        x = n,
+        y = ietestcd_concat,
+        fill = .data[[var_name]],
+        text = paste0(
+          strGroupLabel, ": ", .data[[var_name]],
+          "\nEligibility Status: ", ietestcd_concat,
+          "\nCount: ", n
+        )
       )
-    )) +
+    ) +
+    geom_col() +
     geom_text(
       data = df_counts %>% group_by(ietestcd_concat) %>% summarise(n = sum(n), .groups = "drop"),
       aes(x = n, y = ietestcd_concat, label = n),
