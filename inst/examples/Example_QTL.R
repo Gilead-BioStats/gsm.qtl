@@ -64,7 +64,12 @@ example_lparams <- list(
 usethis::use_data(example_lparams, internal = TRUE, overwrite = TRUE)
 
 gsm.kri::RenderRmd(
-  lParams = gsm.qtl:::example_lparams,
+  lParams = list(
+    dfResults = gsm.qtl:::example_lparams$dfResults,
+    dfGroups = gsm.qtl:::example_lparams$dfGroups,
+    dfMetrics = gsm.qtl:::example_lparams$dfMetrics,
+    lListings = gsm.qtl:::example_lparams$lListings
+  ),
   strOutputDir = getwd(),
   strOutputFile = "pkgdown/assets/examples/Example_QTL.html",
   strInputPath = system.file("report/Report_QTL.Rmd", package = "gsm.qtl")

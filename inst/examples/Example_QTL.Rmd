@@ -41,7 +41,10 @@ lParams = gsm.qtl:::example_lparams
 child_env <- list2env(
   list(
     params = list(
-      lCharts = lParams
+      dfResults = lParams$dfResults,
+      dfGroups = lParams$dfGroups,
+      dfMetrics = lParams$dfMetrics,
+      lListings = lParams$lListings
     )
   ),
   parent = environment()
