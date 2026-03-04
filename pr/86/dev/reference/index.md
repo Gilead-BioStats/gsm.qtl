@@ -11,6 +11,8 @@
   : QTL Overview Table
 - [`QTL_lineplot()`](https://gilead-biostats.github.io/gsm.qtl/dev/reference/QTL_lineplot.md)
   : QTL Time Series Lineplot
+- [`QTL_lineplot_v2()`](https://gilead-biostats.github.io/gsm.qtl/dev/reference/QTL_lineplot_v2.md)
+  : QTL Time Series Widget (v2)
 - [`Report_QTL()`](https://gilead-biostats.github.io/gsm.qtl/dev/reference/Report_QTL.md)
   **\[stable\]** : Report_QTL function
 - [`ResultsProcessor()`](https://gilead-biostats.github.io/gsm.qtl/dev/reference/ResultsProcessor.md)

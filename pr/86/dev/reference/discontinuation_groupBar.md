@@ -10,7 +10,7 @@ discontinuation_groupBar(
   varGroupID,
   strGroupLabel,
   varStatus = compyn,
-  valuesDiscontinued = c("N", "")
+  valuesDiscontinued = c("N")
 )
 ```
 
@@ -37,7 +37,7 @@ discontinuation_groupBar(
 - valuesDiscontinued:
 
   A vector of values in `varStatus` considered discontinued, defaults to
-  `c("N", "")`.
+  `c("N")`.
 
 ## Value
 
