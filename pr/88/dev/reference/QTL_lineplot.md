@@ -24,3 +24,9 @@ QTL_lineplot(dfResults, strQTL)
 ## Value
 
 A `plotly` object
+
+## Details
+
+This function is retained as a legacy Plotly-based compatibility path.
+For report rendering, prefer
+[`QTL_lineplot_v2()`](https://gilead-biostats.github.io/gsm.qtl/dev/reference/QTL_lineplot_v2.md).
