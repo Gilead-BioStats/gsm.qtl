@@ -11,7 +11,7 @@ discontinuation_reasonBar <- function(df, varCompreas) {
       aes(y = {{varCompreas}},
           fill = {{varCompreas}},
           text = paste0(
-            "Reason: ", {{ varCompreas }},
+            "Reason: ",!!enexpr(varCompreas),
             "<br>Count: ", after_stat(count)
           )
       )
