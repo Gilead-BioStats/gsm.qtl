@@ -7,7 +7,6 @@
 #' @export
 discontinuation_reasonBar <- function(df, varCompreas) {
   reasonbar <- df %>%
-    filter({{varCompreas}} != "") %>%
     ggplot(., aes(y = {{varCompreas}}, fill = {{varCompreas}})) +
     geom_bar() +
     geom_text(

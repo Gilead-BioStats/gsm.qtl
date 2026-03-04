@@ -9,7 +9,7 @@ discontinuation_groupBar(
   varGroupID,
   strGroupLabel,
   varStatus = compyn,
-  valuesDiscontinued = c("N", "")
+  valuesDiscontinued = c("N")
 )
 }
 \arguments{
@@ -21,7 +21,7 @@ discontinuation_groupBar(
 
 \item{varStatus}{A variable indicating participant study status, defaults to \code{compyn}.}
 
-\item{valuesDiscontinued}{A vector of values in \code{varStatus} considered discontinued, defaults to \code{c("N", "")}.}
+\item{valuesDiscontinued}{A vector of values in \code{varStatus} considered discontinued, defaults to \code{c("N")}.}
 }
 \value{
 A \code{plotly} object
