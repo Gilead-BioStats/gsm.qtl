@@ -17,7 +17,7 @@ params:
 ```{r setup, include=FALSE} 
 library(gsm.kri)
 library(gsm.qtl)
-
+library(gt)
 knitr::opts_chunk$set(warning = FALSE, message = FALSE)
 
 
