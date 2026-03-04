@@ -7,39 +7,28 @@
 #' @export
 discontinuation_reasonBar <- function(df, varCompreas) {
   reasonbar <- df %>%
-    ggplot(aes(
-      y = {{ varCompreas }},
-      fill = {{ varCompreas }},
-      text = paste0(
-        "Reason: ", {{ varCompreas }},
-        "<br>Count: ", after_stat(count)
+    ggplot(.,
+      aes(y = {{varCompreas}},
+          fill = {{varCompreas}},
+          text = paste0(
+            "Reason: ", {{ varCompreas }},
+            "<br>Count: ", after_stat(count)
+          )
       )
-    )) +
+    ) +
     geom_bar() +
     geom_text(
       stat = "count",
       aes(label = after_stat(count)),
       nudge_x = 1,
       color = "black",
-      size = 4,
-      show.legend = FALSE
+      size  = 4
     ) +
-    labs(
-      y = "Discontinuation Reasons",
-      x = "Participant Count",
-      title = "Participant Count by Reasons"
-    ) +
+    labs(y = "Discontinuation Reasons", x = "Participant Count", title = "Participant Count by Reasons") +
     theme_classic() +
     theme(
-      axis.text.y = element_text(angle = 45, vjust = 1),
+      axis.text.y = element_text(angle = 45, vjust = 1), # tilt to avoid overlap
       panel.grid.major.y = element_blank()
     )
-
-  plotly::ggplotly(
-    reasonbar,
-    tooltip = "text",
-    h = calc_fig_size(
-      n_rows = dplyr::n_distinct(dplyr::pull(df, {{ varCompreas }}))
-    )
-  )
+  plotly::ggplotly(reasonbar, tooltip = c("text"), h = calc_fig_size(n_rows = dplyr::n_distinct(dplyr::pull(df, {{ varCompreas }}))))
 }
