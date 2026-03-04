@@ -5,6 +5,15 @@
 - Updated `critera_groupBar()` and
   [`reasons_groupBar()`](https://gilead-biostats.github.io/gsm.qtl/dev/reference/reasons_groupBar.md)
   address small bugs that were affecting barchart’s tooltip text.
+- Added
+  [`QTL_lineplot_v2()`](https://gilead-biostats.github.io/gsm.qtl/dev/reference/QTL_lineplot_v2.md)
+  as the new report-facing time-series API using the htmlwidget stack.
+- Updated QTL report templates to use
+  [`QTL_lineplot_v2()`](https://gilead-biostats.github.io/gsm.qtl/dev/reference/QTL_lineplot_v2.md)
+  for time-series rendering.
+- Kept legacy
+  [`QTL_lineplot()`](https://gilead-biostats.github.io/gsm.qtl/dev/reference/QTL_lineplot.md)
+  available for backward compatibility.
 
 ## gsm.qtl v1.1.0
 

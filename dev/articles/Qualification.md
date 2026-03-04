@@ -99,7 +99,7 @@ Each specification includes the following components:
 
 **loaded via a namespace (and not attached):** *tidyselect(v.1.2.1)*,
 *viridisLite(v.0.4.3)*, *farver(v.2.1.2)*, *urltools(v.1.7.3.1)*,
-*arrow(v.23.0.1)*, *S7(v.0.2.1)*, *fastmap(v.1.2.0)*,
+*arrow(v.23.0.1.1)*, *S7(v.0.2.1)*, *fastmap(v.1.2.0)*,
 *lazyeval(v.0.2.2)*, *duckdb(v.1.4.4)*, *rex(v.1.2.1)*,
 *digest(v.0.6.39)*, *timechange(v.0.4.0)*, *lifecycle(v.1.0.5)*,
 *waldo(v.0.6.2)*, *ellipsis(v.0.3.2)*, *magrittr(v.2.0.4)*,
@@ -113,7 +113,7 @@ Each specification includes the following components:
 *ggplot2(v.4.0.2)*, *scales(v.1.4.0)*, *cli(v.3.6.5)*,
 *rmarkdown(v.2.30)*, *ragg(v.1.5.0)*, *generics(v.0.1.4)*,
 *remotes(v.2.5.0)*, *otel(v.0.2.0)*, *rstudioapi(v.0.18.0)*,
-*httr(v.1.4.8)*, *sessioninfo(v.1.2.3)*, *DBI(v.1.2.3)*,
+*httr(v.1.4.8)*, *sessioninfo(v.1.2.3)*, *DBI(v.1.3.0)*,
 *cachem(v.1.1.0)*, *assertthat(v.0.2.1)*, *BiocManager(v.1.30.27)*,
 *vctrs(v.0.7.1)*, *devtools(v.2.4.6)*, *jsonlite(v.2.0.0)*,
 *bit64(v.4.6.0-1)*, *systemfonts(v.1.3.1)*, *plotly(v.4.12.0)*,
@@ -146,6 +146,16 @@ Guidelines](https://gilead-biostats.github.io/gsm.core/articles/ContributorGuide
 
 Below, the most recent 10 PRs into gsm.qtl are displayed. [See all Pull
 Requests here.](https://github.com/gilead-biostats/gsm.qtl/pulls)
+
+#### Pull Request 85: Closes \#84 begins to address to feedback from in person QTL Tabletop session
+
+Merging fix-84 into dev
+
+<https://github.com/Gilead-BioStats/gsm.qtl/pull/85>
+
+| Requester |   Date Requested    |                        Reviewers                         | Review Status |
+|:---------:|:-------------------:|:--------------------------------------------------------:|:-------------:|
+|  zdz2101  | 2026-02-25 17:59:23 | copilot-pull-request-reviewer\[bot\] nandriychuk zdz2101 |   COMMENTED   |
 
 #### Pull Request 83: Update qualification_report GHA
 
@@ -236,13 +246,3 @@ Merging fix-circ-deps into dev
 | Requester |   Date Requested    |      Reviewers       | Review Status |
 |:---------:|:-------------------:|:--------------------:|:-------------:|
 |  zdz2101  | 2026-01-07 20:37:07 | zdz2101 lauramaxwell |   COMMENTED   |
-
-#### Pull Request 61: Closes \#60 adds functionality for a percentage based plot for barcharts
-
-Merging fix-60 into dev
-
-<https://github.com/Gilead-BioStats/gsm.qtl/pull/61>
-
-| Requester |   Date Requested    |                       Reviewers                        | Review Status |
-|:---------:|:-------------------:|:------------------------------------------------------:|:-------------:|
-|  zdz2101  | 2025-12-04 18:54:22 | jwildfire copilot-pull-request-reviewer\[bot\] zdz2101 |   APPROVED    |
