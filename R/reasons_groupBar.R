@@ -10,10 +10,9 @@
 #' @export
 reasons_groupBar <- function(df, varGroupID, varCompreas, strGroupLabel) {
   df_counts <- df %>%
-    filter({{varCompreas}} != "") %>%
     dplyr::count({{varCompreas}}, {{varGroupID}}, name = "n")
 
-  distinct_n_compreas <- df_counts %>% filter({{varCompreas}} != "") %>% dplyr::distinct({{varCompreas}}) %>% nrow()
+  distinct_n_compreas <- df_counts %>% %>% dplyr::distinct({{varCompreas}}) %>% nrow()
 
   # Create GG object
   group_reasons_bar <- df_counts %>%
