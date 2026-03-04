@@ -7,15 +7,8 @@
 #' @export
 discontinuation_reasonBar <- function(df, varCompreas) {
   reasonbar <- df %>%
-    ggplot(.,
-      aes(y = {{varCompreas}},
-          fill = {{varCompreas}},
-          text = paste0(
-            "Reason: ",!!enexpr(varCompreas),
-            "<br>Count: ", after_stat(count)
-          )
-      )
-    ) +
+    ggplot(., aes(y = {{varCompreas}},
+                  fill = {{varCompreas}})) +
     geom_bar() +
     geom_text(
       stat = "count",
@@ -30,5 +23,5 @@ discontinuation_reasonBar <- function(df, varCompreas) {
       axis.text.y = element_text(angle = 45, vjust = 1), # tilt to avoid overlap
       panel.grid.major.y = element_blank()
     )
-  plotly::ggplotly(reasonbar, tooltip = c("text"), h = calc_fig_size(n_rows = dplyr::n_distinct(dplyr::pull(df, {{ varCompreas }}))))
+  plotly::ggplotly(reasonbar, tooltip = c("label"), h = calc_fig_size(n_rows = dplyr::n_distinct(dplyr::pull(df, {{ varCompreas }}))))
 }
