@@ -45,8 +45,7 @@ Suggests:
   pander,
   rmarkdown,
   riskmetric,
-  testthat (>= 3.0.0),
-  gsm.datasim
+  testthat (>= 3.0.0)
 Remotes:
     gsm.core=Gilead-BioStats/gsm.core@main
 VignetteBuilder: knitr
