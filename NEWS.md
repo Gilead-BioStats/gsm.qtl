@@ -1,6 +1,9 @@
 # gsm.qtl v1.1.1
 
 - Updated `critera_groupBar()` and `reasons_groupBar()` address small bugs that were affecting barchart's tooltip text.
+- Added `QTL_lineplot_v2()` as the new report-facing time-series API using the htmlwidget stack.
+- Updated QTL report templates to use `QTL_lineplot_v2()` for time-series rendering.
+- Kept legacy `QTL_lineplot()` available for backward compatibility.
 
 # gsm.qtl v1.1.0
 
