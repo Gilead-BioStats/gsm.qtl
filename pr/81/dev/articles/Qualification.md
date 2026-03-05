@@ -147,6 +147,16 @@ Guidelines](https://gilead-biostats.github.io/gsm.core/articles/ContributorGuide
 Below, the most recent 10 PRs into gsm.qtl are displayed. [See all Pull
 Requests here.](https://github.com/gilead-biostats/gsm.qtl/pulls)
 
+#### Pull Request 85: Closes \#84 begins to address to feedback from in person QTL Tabletop session
+
+Merging fix-84 into dev
+
+<https://github.com/Gilead-BioStats/gsm.qtl/pull/85>
+
+| Requester |   Date Requested    |                        Reviewers                         | Review Status |
+|:---------:|:-------------------:|:--------------------------------------------------------:|:-------------:|
+|  zdz2101  | 2026-02-25 17:59:23 | copilot-pull-request-reviewer\[bot\] nandriychuk zdz2101 |   COMMENTED   |
+
 #### Pull Request 83: Update qualification_report GHA
 
 Merging fix-82 into dev
@@ -236,13 +246,3 @@ Merging fix-circ-deps into dev
 | Requester |   Date Requested    |      Reviewers       | Review Status |
 |:---------:|:-------------------:|:--------------------:|:-------------:|
 |  zdz2101  | 2026-01-07 20:37:07 | zdz2101 lauramaxwell |   COMMENTED   |
-
-#### Pull Request 61: Closes \#60 adds functionality for a percentage based plot for barcharts
-
-Merging fix-60 into dev
-
-<https://github.com/Gilead-BioStats/gsm.qtl/pull/61>
-
-| Requester |   Date Requested    |                       Reviewers                        | Review Status |
-|:---------:|:-------------------:|:------------------------------------------------------:|:-------------:|
-|  zdz2101  | 2025-12-04 18:54:22 | jwildfire copilot-pull-request-reviewer\[bot\] zdz2101 |   APPROVED    |
