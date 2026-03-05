@@ -43,7 +43,7 @@ criteria_groupBar <- function(df, varGroupID, strGroupLabel) {
       axis.text.y = element_text(angle = 45, vjust = 1), # tilt to avoid overlap
       panel.grid.major.y = element_blank()
     )
-
+  group_criteria_bar
   # Create plotly
-  plotly::ggplotly(group_criteria_bar, tooltip = c("text"))
+  # plotly::ggplotly(group_criteria_bar, tooltip = c("text"))
 }
