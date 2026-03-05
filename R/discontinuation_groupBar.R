@@ -3,20 +3,21 @@
 #' @param df A `data.frame` containing the participant level dataset with discontinuation
 #' @param varGroupID A variable to make the stacked bar chart with, i.e. invid
 #' @param strGroupLabel A `string` to label the `varGroupID` in reference to axes, legend, footnotes.
+#' @param varStatus A variable indicating participant study status, defaults to `compyn`.
+#' @param valuesDiscontinued A vector of values in `varStatus` considered discontinued, defaults to `c("N")`.
 #'
 #' @returns A `plotly` object
 #'
 #' @export
-discontinuation_groupBar <- function(df, varGroupID, strGroupLabel) {
-  # Parse out groups with 0 ineligible
+discontinuation_groupBar <- function(df, varGroupID, strGroupLabel, varStatus = compyn, valuesDiscontinued = c("N")) {
   groups_with_discontinuation <- df %>%
-    # filter(compyn %in% c("N", "")) %>%
+    filter(!!enexpr(varStatus) %in% valuesDiscontinued) %>%
     pull(!!enexpr(varGroupID)) %>%
     unique()
 
   # Create the gg object
   group_bar <- df %>%
-    mutate(fillcol = ifelse(compyn %in% c("N", ""), "Premature Discontinuation", "Completed/Ongoing")) %>%
+    mutate(fillcol = ifelse(!!enexpr(varStatus) %in% valuesDiscontinued, "Premature Discontinuation", "Completed/Ongoing")) %>%
     filter(!!enexpr(varGroupID) %in% groups_with_discontinuation) %>%
     mutate(!!enexpr(varGroupID) := forcats::fct_rev(forcats::fct_infreq(!!enexpr(varGroupID)))) %>%
     dplyr::group_by(!!enexpr(varGroupID), fillcol) %>%
