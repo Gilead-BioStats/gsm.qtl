@@ -13,9 +13,8 @@ criteria_groupBar <- function(df, varGroupID, strGroupLabel) {
 
   # Create GG object
   df_counts <- df %>%
-    filter(!is.na(ietestcd_concat) | Source == "Eligibility IPD only") %>%
+    filter(!is.na(ietestcd_concat)) %>%
     tidyr::separate_longer_delim(ietestcd_concat, ",") %>%
-    mutate(ietestcd_concat = ifelse(Source == "Eligibility IPD only", "PD without EDC I/E", ietestcd_concat))%>%
     dplyr::count(ietestcd_concat, !!var_sym, name = "n")
 
   distinct_n_ie <- df_counts %>% dplyr::distinct(ietestcd_concat) %>% nrow()
