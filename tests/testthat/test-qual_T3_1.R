@@ -1,4 +1,4 @@
-testthat::test_that("Given appropriate study discontinuation related data, calculates appropriate QTL threshold.", {
+testthat::test_that("Given appropriate study discontinuation related data, calculates appropriate QTL threshold. (#64)", {
 
   expect_true(all(SDSC_outputs %in% names(analyzed_discontinuation[[1]])))
 

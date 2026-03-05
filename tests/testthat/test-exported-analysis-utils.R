@@ -1,4 +1,4 @@
-test_that("Analyze_OneSideProp handles required and optional arguments", {
+test_that("Analyze_OneSideProp handles required and optional arguments (#80)", {
   df_transformed <- tibble::tribble(
     ~GroupID, ~GroupLevel, ~Numerator, ~Denominator, ~Metric,
     "ABC", "Study", 25, 100, 0.25
@@ -18,7 +18,7 @@ test_that("Analyze_OneSideProp handles required and optional arguments", {
   expect_true(out_custom$Flag %in% c(0, 1, 2))
 })
 
-test_that("Analyze_OneSideProp validates nPropRate argument bounds", {
+test_that("Analyze_OneSideProp validates nPropRate argument bounds (#80)", {
   df_transformed <- tibble::tribble(
     ~GroupID, ~GroupLevel, ~Numerator, ~Denominator, ~Metric,
     "ABC", "Study", 25, 100, 0.25
@@ -30,13 +30,13 @@ test_that("Analyze_OneSideProp validates nPropRate argument bounds", {
   )
 })
 
-test_that("calc_fig_size covers n_rows, base, and per arguments", {
+test_that("calc_fig_size covers n_rows, base, and per arguments (#80)", {
   expect_equal(calc_fig_size(n_rows = 10), 500L)
   expect_equal(calc_fig_size(n_rows = 12, base = 100, per = 50), 600L)
   expect_error(calc_fig_size(n_rows = -1), "single non-negative")
 })
 
-test_that("ResultsProcessor uses dfResults and dfMetrics arguments", {
+test_that("ResultsProcessor uses dfResults and dfMetrics arguments (#80)", {
   inputs <- qtl_test_processor_inputs()
 
   out <- ResultsProcessor(
