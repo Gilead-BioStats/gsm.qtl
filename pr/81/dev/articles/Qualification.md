@@ -143,6 +143,16 @@ Guidelines](https://gilead-biostats.github.io/gsm.core/articles/ContributorGuide
 Below, the most recent 10 PRs into gsm.qtl are displayed. [See all Pull
 Requests here.](https://github.com/gilead-biostats/gsm.qtl/pulls)
 
+#### Pull Request 86: Closes \#76 addresses hard coded discontinuation filters and parameterizes it
+
+Merging fix-78v2 into dev
+
+<https://github.com/Gilead-BioStats/gsm.qtl/pull/86>
+
+| Requester |   Date Requested    |                        Reviewers                         | Review Status |
+|:---------:|:-------------------:|:--------------------------------------------------------:|:-------------:|
+|  zdz2101  | 2026-02-25 18:25:33 | copilot-pull-request-reviewer\[bot\] nandriychuk zdz2101 |   COMMENTED   |
+
 #### Pull Request 85: Closes \#84 begins to address to feedback from in person QTL Tabletop session
 
 Merging fix-84 into dev
@@ -232,13 +242,3 @@ Merging rc-v1.1.0 into main
 | Requester |   Date Requested    |  Reviewers   | Review Status |
 |:---------:|:-------------------:|:------------:|:-------------:|
 |  zdz2101  | 2026-01-08 18:15:53 | lauramaxwell |   APPROVED    |
-
-#### Pull Request 62: Circular Dependency Workaround
-
-Merging fix-circ-deps into dev
-
-<https://github.com/Gilead-BioStats/gsm.qtl/pull/62>
-
-| Requester |   Date Requested    |      Reviewers       | Review Status |
-|:---------:|:-------------------:|:--------------------:|:-------------:|
-|  zdz2101  | 2026-01-07 20:37:07 | zdz2101 lauramaxwell |   COMMENTED   |
