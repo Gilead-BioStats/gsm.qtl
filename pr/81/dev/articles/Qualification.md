@@ -69,11 +69,11 @@ Each specification includes the following components:
 
 ### One Row Per Test
 
-| Function                         | Spec ID | Test ID | Test Description                                                                            | Test Result |
-|----------------------------------|---------|---------|---------------------------------------------------------------------------------------------|-------------|
-| One Side Prop unit test          | S1_1    | T1_1    | Analyze One Side Prop works for Study, when nProRate is clearly violated                    | Pass        |
-| Ineligibility Assessment         | S2_1    | T2_1    | Given appropriate inclusion/exclusion related data, calculates appropriate QTL threshold.   | Pass        |
-| Early Discontinuation Assessment | S3_1    | T3_1    | Given appropriate study discontinuation related data, calculates appropriate QTL threshold. | Pass        |
+| Function                         | Spec ID | Test ID | Test Description                                                                                  | Test Result |
+|----------------------------------|---------|---------|---------------------------------------------------------------------------------------------------|-------------|
+| One Side Prop unit test          | S1_1    | T1_1    | Analyze One Side Prop works for Study, when nProRate is clearly violated (#64)                    | Pass        |
+| Ineligibility Assessment         | S2_1    | T2_1    | Given appropriate inclusion/exclusion related data, calculates appropriate QTL threshold. (#64)   | Pass        |
+| Early Discontinuation Assessment | S3_1    | T3_1    | Given appropriate study discontinuation related data, calculates appropriate QTL threshold. (#64) | Pass        |
 
 ## Qualification Testing Environment
 
