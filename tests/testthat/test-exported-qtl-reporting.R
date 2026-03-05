@@ -5,6 +5,38 @@ test_that("QTL_lineplot uses dfResults and strQTL arguments", {
   expect_s3_class(out, "plotly")
 })
 
+test_that("QTL_lineplot_v2 returns timeseries widget with threshold flags", {
+  df_results <- qtl_test_results_df()
+
+  out <- QTL_lineplot_v2(dfResults = df_results, strQTL = "QTL Rate")
+
+  expect_s3_class(out, "htmlwidget")
+  expect_s3_class(out, "Widget_TimeSeriesQTL")
+
+  df_payload <- jsonlite::fromJSON(out$x$dfResults)
+  expect_true(all(c("StudyA", "Upper_funnel", "flat_line") %in% unique(df_payload$GroupID)))
+  expect_true(all(c("Above QTL Threshold", "Below QTL Threshold") %in% unique(stats::na.omit(df_payload$Flag))))
+
+  l_metric <- jsonlite::fromJSON(out$x$lMetric)
+  expect_equal(l_metric$Abbreviation, "QTL Rate")
+  expect_equal(l_metric$GroupLevel, "Study")
+  expect_true("StudyA" %in% l_metric$selectedGroupIDs)
+})
+
+test_that("QTL_lineplot_v2 validates required arguments", {
+  expect_error(
+    QTL_lineplot_v2(dfResults = NULL, strQTL = "QTL Rate"),
+    "dfResults is not a data.frame",
+    fixed = TRUE
+  )
+
+  expect_error(
+    QTL_lineplot_v2(dfResults = qtl_test_results_df(), strQTL = c("A", "B")),
+    "strQTL must be a length-1 character",
+    fixed = TRUE
+  )
+})
+
 test_that("QTL_Overview uses all arguments", {
   df_results <- qtl_test_results_df()
 
@@ -150,6 +182,7 @@ test_that("Report_QTL renders key visualization and UX sections", {
   expect_match(html, "Discontinuation Listing", fixed = TRUE)
   expect_match(html, "eligibility_listing\\.csv")
   expect_match(html, "discontinuation_listing\\.csv")
+  expect_match(html, "Widget_TimeSeriesQTL", fixed = TRUE)
 
   expect_true(
     stringr::str_detect(html, "plotly html-widget") ||

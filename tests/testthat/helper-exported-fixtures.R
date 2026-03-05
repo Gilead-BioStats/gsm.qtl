@@ -39,11 +39,11 @@ qtl_test_processor_inputs <- function() {
 
 qtl_test_report_params <- function(include_metric_ids = c("Analysis_qtl0001", "Analysis_qtl0002")) {
   df_results <- tibble::tribble(
-    ~MetricID, ~GroupID, ~GroupLevel, ~Numerator, ~Denominator, ~Metric, ~SnapshotDate,
-    "Analysis_qtl0001", "StudyA", "Study", 10, 100, 0.10, as.Date("2024-01-01"),
-    "Analysis_qtl0001", "StudyA", "Study", 12, 100, 0.12, as.Date("2024-02-01"),
-    "Analysis_qtl0002", "StudyA", "Study", 5, 100, 0.05, as.Date("2024-01-01"),
-    "Analysis_qtl0002", "StudyA", "Study", 9, 100, 0.09, as.Date("2024-02-01")
+    ~MetricID, ~GroupID, ~GroupLevel, ~Numerator, ~Denominator, ~Metric, ~SnapshotDate, ~Flag,
+    "Analysis_qtl0001", "StudyA", "Study", 10, 100, 0.10, as.Date("2024-01-01"), 1,
+    "Analysis_qtl0001", "StudyA", "Study", 12, 100, 0.12, as.Date("2024-02-01"), 2,
+    "Analysis_qtl0002", "StudyA", "Study", 5, 100, 0.05, as.Date("2024-01-01"), 1,
+    "Analysis_qtl0002", "StudyA", "Study", 9, 100, 0.09, as.Date("2024-02-01"), 2
   ) %>%
     dplyr::filter(.data$MetricID %in% include_metric_ids)
 

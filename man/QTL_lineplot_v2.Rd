@@ -18,7 +18,3 @@ A \code{htmlwidget} object.
 \description{
 QTL Time Series Widget (v2)
 }
-\details{
-This is the report-facing time-series API. It normalizes threshold aliases
-for compatibility and applies breach classification against \code{Upper_funnel} only.
-}

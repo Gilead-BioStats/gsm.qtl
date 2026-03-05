@@ -79,7 +79,8 @@ QTL_lineplot_v2 <- function(dfResults, strQTL) {
       GroupID = dplyr::case_when(
         .data$GroupID_norm == "upper_funnel" ~ "Upper_funnel",
         TRUE ~ "flat_line"
-      )
+      ),
+      Flag = NA_character_
     )
 
   if (all(is.na(threshold_upper$Metric)) && any(legacy_thresholds$GroupID == "Upper_funnel")) {
