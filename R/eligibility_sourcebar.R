@@ -13,7 +13,7 @@ eligibility_sourceBar <- function(df) {
         fill = Source,
         text = paste0("\nSource: ", Source)
       )
-    )+
+    ) +
     geom_bar() +
     geom_text(
       stat = "count",
