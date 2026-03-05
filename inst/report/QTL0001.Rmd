@@ -15,13 +15,7 @@ QTL_Overview(dfResults = qtl0001_params$dfResults,
 
 ## Time Series Chart
 ```{r, echo=FALSE, results='asis', fig.height=4}
-# gsm.qtl::Widget_TimeSeriesQTL(
-#   dfResults = dfResults %>% filter(GroupLevel == "Study"),
-#   dfGroups = dfGroups,
-#   strOutcome = "Metric"
-# )
-# Create reference table for funnel bounds per date
-QTL_lineplot(dfResults = qtl0001_params$dfResults, strQTL = "Ineligibility Rate")
+QTL_lineplot_v2(dfResults = qtl0001_params$dfResults, strQTL = "Ineligibility Rate")
 ```
 
 ## Bar Charts {.tabset .tabset-pills}
@@ -50,12 +44,12 @@ eligibility_groupBar(df = qtl0001_params$dfListing, varGroupID = country, strGro
 eligibility_sourceBar(df = qtl0001_params$dfListing)
 ```
 
-### Criteria/Site
+### Criteria/Site (EDC I/E data only)
 ```{r, echo = FALSE, results = 'asis', fig.height=4}
 criteria_groupBar(df = qtl0001_params$dfListing, varGroupID = invid, strGroupLabel = "Site")
 ```
 
-### Criteria/Country
+### Criteria/Country (EDC I/E data only)
 ```{r, echo = FALSE, results = 'asis', fig.height=4}
 criteria_groupBar(df = qtl0001_params$dfListing, varGroupID = country, strGroupLabel = "Country")
 ```
