@@ -14,7 +14,7 @@ criteria_groupBar <- function(df, varGroupID, strGroupLabel) {
   # Create GG object
   df_counts <- df %>%
     filter(!is.na(ietestcd_concat) | Source == "Eligibility IPD only") %>%
-    tidyr::separate_longer_delim(ietestcd_concat, ";;;") %>%
+    tidyr::separate_longer_delim(ietestcd_concat, ";") %>%
     mutate(ietestcd_concat = ifelse(Source == "Eligibility IPD only", "PD without EDC I/E", ietestcd_concat))%>%
     dplyr::count(ietestcd_concat, !!var_sym, name = "n")
 
@@ -43,7 +43,7 @@ criteria_groupBar <- function(df, varGroupID, strGroupLabel) {
       axis.text.y = element_text(angle = 45, vjust = 1), # tilt to avoid overlap
       panel.grid.major.y = element_blank()
     )
-  group_criteria_bar
+
   # Create plotly
-  # plotly::ggplotly(group_criteria_bar, tooltip = c("text"))
+  plotly::ggplotly(group_criteria_bar, tooltip = c("text"), h = calc_fig_size(n_rows = distinct_n_ie))
 }
