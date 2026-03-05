@@ -36,3 +36,48 @@ qtl_test_processor_inputs <- function() {
 
   list(dfResults = df_results, dfMetrics = df_metrics)
 }
+
+qtl_test_report_params <- function(include_metric_ids = c("Analysis_qtl0001", "Analysis_qtl0002")) {
+  df_results <- tibble::tribble(
+    ~MetricID, ~GroupID, ~GroupLevel, ~Numerator, ~Denominator, ~Metric, ~SnapshotDate,
+    "Analysis_qtl0001", "StudyA", "Study", 10, 100, 0.10, as.Date("2024-01-01"),
+    "Analysis_qtl0001", "StudyA", "Study", 12, 100, 0.12, as.Date("2024-02-01"),
+    "Analysis_qtl0002", "StudyA", "Study", 5, 100, 0.05, as.Date("2024-01-01"),
+    "Analysis_qtl0002", "StudyA", "Study", 9, 100, 0.09, as.Date("2024-02-01")
+  ) %>%
+    dplyr::filter(.data$MetricID %in% include_metric_ids)
+
+  df_metrics <- tibble::tribble(
+    ~MetricID, ~nPropRate, ~nNumDeviations,
+    "Analysis_qtl0001", 0.08, 3,
+    "Analysis_qtl0002", 0.04, 3
+  ) %>%
+    dplyr::filter(.data$MetricID %in% include_metric_ids)
+
+  df_groups <- tibble::tibble(
+    GroupID = "StudyA",
+    GroupLevel = "Study"
+  )
+
+  listing <- qtl_test_participant_df() %>%
+    dplyr::mutate(studyid = "StudyA")
+
+  l_listings <- list()
+  if ("Analysis_qtl0001" %in% include_metric_ids) {
+    l_listings$qtl0001 <- listing
+  }
+  if ("Analysis_qtl0002" %in% include_metric_ids) {
+    l_listings$qtl0002 <- listing
+  }
+
+  if (length(l_listings) == 0) {
+    l_listings$qtl0001 <- listing
+  }
+
+  list(
+    dfResults = df_results,
+    dfMetrics = df_metrics,
+    dfGroups = df_groups,
+    lListings = l_listings
+  )
+}
