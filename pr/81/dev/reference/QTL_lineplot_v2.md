@@ -23,9 +23,3 @@ QTL_lineplot_v2(dfResults, strQTL)
 ## Value
 
 A `htmlwidget` object.
-
-## Details
-
-This is the report-facing time-series API. It normalizes threshold
-aliases for compatibility and applies breach classification against
-`Upper_funnel` only.
