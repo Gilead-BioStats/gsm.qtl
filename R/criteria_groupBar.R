@@ -32,7 +32,7 @@ criteria_groupBar <- function(df, varGroupID, strGroupLabel) {
       data = df_counts %>% group_by(ietestcd_concat) %>% summarise(n = sum(n), .groups = "drop"),
       aes(x = n, y = ietestcd_concat, label = n),
       inherit.aes = FALSE,
-      nudge_x = 0.5,
+      nudge_x = 0.1,
       size = 4,
       color = "black"
     ) +
