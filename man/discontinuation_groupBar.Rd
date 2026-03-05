@@ -4,7 +4,13 @@
 \alias{discontinuation_groupBar}
 \title{Stacked Discontinuation Bar Chart}
 \usage{
-discontinuation_groupBar(df, varGroupID, strGroupLabel)
+discontinuation_groupBar(
+  df,
+  varGroupID,
+  strGroupLabel,
+  varStatus = compyn,
+  valuesDiscontinued = c("N")
+)
 }
 \arguments{
 \item{df}{A \code{data.frame} containing the participant level dataset with discontinuation}
@@ -12,6 +18,10 @@ discontinuation_groupBar(df, varGroupID, strGroupLabel)
 \item{varGroupID}{A variable to make the stacked bar chart with, i.e. invid}
 
 \item{strGroupLabel}{A \code{string} to label the \code{varGroupID} in reference to axes, legend, footnotes.}
+
+\item{varStatus}{A variable indicating participant study status, defaults to \code{compyn}.}
+
+\item{valuesDiscontinued}{A vector of values in \code{varStatus} considered discontinued, defaults to \code{c("N")}.}
 }
 \value{
 A \code{plotly} object
