@@ -95,7 +95,7 @@ Each specification includes the following components:
 *gsm.datasim(v.1.1.2)*, *gsm.qtl(v.1.1.1)*, *testthat(v.3.3.2)*,
 *riskmetric(v.0.2.6)*, *stringr(v.1.6.0)*, *gh(v.1.5.0)*,
 *pander(v.0.6.6)*, *purrr(v.1.2.1)*, *dplyr(v.1.2.0)*, *knitr(v.1.51)*,
-*gt(v.1.3.0)* and *gsm.core(v.1.1.7)*
+*gt(v.1.3.0)* and *gsm.core(v.1.1.8)*
 
 **loaded via a namespace (and not attached):** *tidyselect(v.1.2.1)*,
 *viridisLite(v.0.4.3)*, *farver(v.2.1.2)*, *urltools(v.1.7.3.1)*,
@@ -116,7 +116,7 @@ Each specification includes the following components:
 *httr(v.1.4.8)*, *sessioninfo(v.1.2.3)*, *DBI(v.1.3.0)*,
 *cachem(v.1.1.0)*, *assertthat(v.0.2.1)*, *BiocManager(v.1.30.27)*,
 *vctrs(v.0.7.1)*, *devtools(v.2.4.6)*, *jsonlite(v.2.0.0)*,
-*bit64(v.4.6.0-1)*, *systemfonts(v.1.3.1)*, *plotly(v.4.12.0)*,
+*bit64(v.4.6.0-1)*, *systemfonts(v.1.3.2)*, *plotly(v.4.12.0)*,
 *tidyr(v.1.3.2)*, *jquerylib(v.0.1.4)*, *glue(v.1.8.0)*,
 *pkgdown(v.2.2.0)*, *lubridate(v.1.9.5)*, *stringi(v.1.8.7)*,
 *gtable(v.0.3.6)*, *tibble(v.3.3.1)*, *logger(v.0.4.1)*,
@@ -146,6 +146,16 @@ Guidelines](https://gilead-biostats.github.io/gsm.core/articles/ContributorGuide
 
 Below, the most recent 10 PRs into gsm.qtl are displayed. [See all Pull
 Requests here.](https://github.com/gilead-biostats/gsm.qtl/pulls)
+
+#### Pull Request 86: Closes \#76 addresses hard coded discontinuation filters and parameterizes it
+
+Merging fix-78v2 into dev
+
+<https://github.com/Gilead-BioStats/gsm.qtl/pull/86>
+
+| Requester |   Date Requested    |                        Reviewers                         | Review Status |
+|:---------:|:-------------------:|:--------------------------------------------------------:|:-------------:|
+|  zdz2101  | 2026-02-25 18:25:33 | copilot-pull-request-reviewer\[bot\] nandriychuk zdz2101 |   COMMENTED   |
 
 #### Pull Request 85: Closes \#84 begins to address to feedback from in person QTL Tabletop session
 
@@ -236,13 +246,3 @@ Merging rc-v1.1.0 into main
 | Requester |   Date Requested    |  Reviewers   | Review Status |
 |:---------:|:-------------------:|:------------:|:-------------:|
 |  zdz2101  | 2026-01-08 18:15:53 | lauramaxwell |   APPROVED    |
-
-#### Pull Request 62: Circular Dependency Workaround
-
-Merging fix-circ-deps into dev
-
-<https://github.com/Gilead-BioStats/gsm.qtl/pull/62>
-
-| Requester |   Date Requested    |      Reviewers       | Review Status |
-|:---------:|:-------------------:|:--------------------:|:-------------:|
-|  zdz2101  | 2026-01-07 20:37:07 | zdz2101 lauramaxwell |   COMMENTED   |
