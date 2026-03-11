@@ -69,11 +69,11 @@ Each specification includes the following components:
 
 ### One Row Per Test
 
-| Function                         | Spec ID | Test ID | Test Description                                                                                  | Test Result |
-|----------------------------------|---------|---------|---------------------------------------------------------------------------------------------------|-------------|
-| One Side Prop unit test          | S1_1    | T1_1    | Analyze One Side Prop works for Study, when nProRate is clearly violated (#64)                    | Pass        |
-| Ineligibility Assessment         | S2_1    | T2_1    | Given appropriate inclusion/exclusion related data, calculates appropriate QTL threshold. (#64)   | Pass        |
-| Early Discontinuation Assessment | S3_1    | T3_1    | Given appropriate study discontinuation related data, calculates appropriate QTL threshold. (#64) | Pass        |
+| Function                         | Spec ID | Test ID | Test Description                                                                                                                        | Test Result |
+|----------------------------------|---------|---------|-----------------------------------------------------------------------------------------------------------------------------------------|-------------|
+| One Side Prop unit test          | S1_1    | T1_1    | Analyze One Side Prop works for Study, when nProRate is clearly violated (#5, \#11, \#50, \#73)                                         | Pass        |
+| Ineligibility Assessment         | S2_1    | T2_1    | Given appropriate inclusion/exclusion related data, calculates appropriate QTL threshold. (#2, \#5, \#11, \#17, \#39, \#42, \#50, \#73) | Pass        |
+| Early Discontinuation Assessment | S3_1    | T3_1    | Given appropriate study discontinuation related data, calculates appropriate QTL threshold. (#3, \#21, \#39, \#42, \#50, \#73)          | Pass        |
 
 ## Qualification Testing Environment
 
@@ -94,7 +94,7 @@ Each specification includes the following components:
 **other attached packages:** *gsm.qtl(v.1.1.1)*, *testthat(v.3.3.2)*,
 *riskmetric(v.0.2.6)*, *stringr(v.1.6.0)*, *gh(v.1.5.0)*,
 *pander(v.0.6.6)*, *purrr(v.1.2.1)*, *dplyr(v.1.2.0)*, *knitr(v.1.51)*,
-*gt(v.1.3.0)* and *gsm.core(v.1.1.7)*
+*gt(v.1.3.0)* and *gsm.core(v.1.1.8)*
 
 **loaded via a namespace (and not attached):** *gtable(v.0.3.6)*,
 *xfun(v.0.56)*, *bslib(v.0.10.0)*, *ggplot2(v.4.0.2)*,
@@ -103,7 +103,7 @@ Each specification includes the following components:
 *curl(v.7.0.0)*, *tibble(v.3.3.1)*, *pkgconfig(v.2.0.3)*,
 *data.table(v.1.18.2.1)*, *RColorBrewer(v.1.1-3)*, *S7(v.0.2.1)*,
 *desc(v.1.4.3)*, *lifecycle(v.1.0.5)*, *farver(v.2.1.2)*,
-*compiler(v.4.5.2)*, *brio(v.1.1.5)*, *textshaping(v.1.0.4)*,
+*compiler(v.4.5.2)*, *brio(v.1.1.5)*, *textshaping(v.1.0.5)*,
 *htmltools(v.0.5.9)*, *usethis(v.3.2.1)*, *sass(v.0.4.10)*,
 *yaml(v.2.3.12)*, *lazyeval(v.0.2.2)*, *plotly(v.4.12.0)*,
 *pillar(v.1.11.1)*, *pkgdown(v.2.2.0)*, *jquerylib(v.0.1.4)*,
@@ -115,13 +115,13 @@ Each specification includes the following components:
 *magrittr(v.2.0.4)*, *triebeard(v.0.4.1)*, *pkgbuild(v.1.4.8)*,
 *withr(v.3.0.2)*, *waldo(v.0.6.2)*, *scales(v.1.4.0)*,
 *backports(v.1.5.0)*, *rmarkdown(v.2.30)*, *httr(v.1.4.8)*,
-*otel(v.0.2.0)*, *ragg(v.1.5.0)*, *memoise(v.2.0.1)*,
+*otel(v.0.2.0)*, *ragg(v.1.5.1)*, *memoise(v.2.0.1)*,
 *evaluate(v.1.0.5)*, *log4r(v.0.4.4)*, *covr(v.3.6.5)*, *rex(v.1.2.1)*,
 *viridisLite(v.0.4.3)*, *rlang(v.1.1.7)*, *urltools(v.1.7.3.1)*,
 *Rcpp(v.1.1.1)*, *DBI(v.1.3.0)*, *glue(v.1.8.0)*,
 *BiocManager(v.1.30.27)*, *xml2(v.1.5.2)*, *pkgload(v.1.5.0)*,
 *rstudioapi(v.0.18.0)*, *jsonlite(v.2.0.0)*, *R6(v.2.6.1)*,
-*systemfonts(v.1.3.1)* and *fs(v.1.6.6)*
+*systemfonts(v.1.3.2)* and *fs(v.1.6.7)*
 
 ## Pull Request History
 
@@ -142,6 +142,16 @@ Guidelines](https://gilead-biostats.github.io/gsm.core/articles/ContributorGuide
 
 Below, the most recent 10 PRs into gsm.qtl are displayed. [See all Pull
 Requests here.](https://github.com/gilead-biostats/gsm.qtl/pulls)
+
+#### Pull Request 89: Initialize qcthat
+
+Merging qcthat into dev
+
+<https://github.com/Gilead-BioStats/gsm.qtl/pull/89>
+
+| Requester  |   Date Requested    | Reviewers | Review Status |
+|:----------:|:-------------------:|:---------:|:-------------:|
+| jonthegeek | 2026-03-04 20:18:20 |  zdz2101  |   APPROVED    |
 
 #### Pull Request 86: Closes \#76 addresses hard coded discontinuation filters and parameterizes it
 
@@ -232,13 +242,3 @@ Merging fix-65 into dev
 | Requester |   Date Requested    |                       Reviewers                        | Review Status |
 |:---------:|:-------------------:|:------------------------------------------------------:|:-------------:|
 | samussiah | 2026-01-16 19:23:10 | copilot-pull-request-reviewer\[bot\] zdz2101 samussiah |   COMMENTED   |
-
-#### Pull Request 63: Release v1.1.0
-
-Merging rc-v1.1.0 into main
-
-<https://github.com/Gilead-BioStats/gsm.qtl/pull/63>
-
-| Requester |   Date Requested    |  Reviewers   | Review Status |
-|:---------:|:-------------------:|:------------:|:-------------:|
-|  zdz2101  | 2026-01-08 18:15:53 | lauramaxwell |   APPROVED    |
