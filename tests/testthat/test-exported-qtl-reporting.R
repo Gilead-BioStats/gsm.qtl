@@ -5,7 +5,7 @@ test_that("QTL_lineplot uses dfResults and strQTL arguments (#80)", {
   expect_s3_class(out, "plotly")
 })
 
-test_that("QTL_lineplot_v2 returns timeseries widget with threshold flags (#80)", {
+test_that("QTL_lineplot_v2 returns timeseries widget with threshold flags (#16, #27, #49, #84)", {
   df_results <- qtl_test_results_df()
 
   out <- QTL_lineplot_v2(dfResults = df_results, strQTL = "QTL Rate")
@@ -23,7 +23,7 @@ test_that("QTL_lineplot_v2 returns timeseries widget with threshold flags (#80)"
   expect_true("StudyA" %in% l_metric$selectedGroupIDs)
 })
 
-test_that("QTL_lineplot_v2 validates required arguments (#80)", {
+test_that("QTL_lineplot_v2 validates required arguments (#49, #84)", {
   expect_error(
     QTL_lineplot_v2(dfResults = NULL, strQTL = "QTL Rate"),
     "dfResults is not a data.frame",
@@ -37,7 +37,7 @@ test_that("QTL_lineplot_v2 validates required arguments (#80)", {
   )
 })
 
-test_that("QTL_Overview uses all arguments (#80)", {
+test_that("QTL_Overview uses all arguments (#4, #9)", {
   df_results <- qtl_test_results_df()
 
   out <- QTL_Overview(
@@ -51,7 +51,7 @@ test_that("QTL_Overview uses all arguments (#80)", {
   expect_s3_class(out, "gt_tbl")
 })
 
-test_that("Report_QTL validates required structures (#80)", {
+test_that("Report_QTL validates required structures (#4, #9, #19)", {
   report_params <- qtl_test_report_params()
   template <- tempfile(fileext = ".Rmd")
   writeLines(c("---", "output: html_document", "---", "test"), con = template)
@@ -99,7 +99,7 @@ test_that("Report_QTL validates required structures (#80)", {
   )
 })
 
-test_that("Report_QTL passes arguments to render (#80)", {
+test_that("Report_QTL passes arguments to render (#4, #9, #19)", {
   skip_if_not_installed("rmarkdown")
   skip_if_not_installed("knitr")
 
@@ -152,7 +152,7 @@ test_that("Report_QTL passes arguments to render (#80)", {
   expect_equal(captured$params$lListings, l_listings)
 })
 
-test_that("Report_QTL renders key visualization and UX sections (#80)", {
+test_that("Report_QTL renders key visualization and UX sections (#4, #9, #19, #35)", {
   skip_if_not_installed("rmarkdown")
   skip_if_not_installed("knitr")
   skip_if_not_installed("gsm.kri")
@@ -191,7 +191,7 @@ test_that("Report_QTL renders key visualization and UX sections (#80)", {
   expect_gte(stringr::str_count(html, "gt_table"), 2)
 })
 
-test_that("Report_QTL conditionally excludes metric sections (#80)", {
+test_that("Report_QTL conditionally excludes metric sections (#4, #9, #19, #30)", {
   skip_if_not_installed("rmarkdown")
   skip_if_not_installed("knitr")
   skip_if_not_installed("gsm.kri")
