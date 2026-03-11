@@ -63,7 +63,8 @@ jobs:
 
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
-          extra-packages: Gilead-BioStats/qcthat@main
+          extra-packages: Gilead-BioStats/qcthat@main, any::rcmdcheck
+          needs: check
 
       - name: Manage User Acceptance Testing
         if: >-
