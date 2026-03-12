@@ -54,6 +54,16 @@ criteria_groupBar(df = qtl0001_params$dfListing, varGroupID = invid, strGroupLab
 criteria_groupBar(df = qtl0001_params$dfListing, varGroupID = country, strGroupLabel = "Country")
 ```
 
+### Site/Criteria (EDC I/E data only)
+```{r, echo = FALSE, results = 'asis', fig.height=4}
+criteria_groupBar(df = qtl0001_params$dfListing, varGroupID = invid, strGroupLabel = "Site", bSwapAxes = TRUE)
+```
+
+### Country/Criteria (EDC I/E data only)
+```{r, echo = FALSE, results = 'asis', fig.height=4}
+criteria_groupBar(df = qtl0001_params$dfListing, varGroupID = country, strGroupLabel = "Country", bSwapAxes = TRUE)
+```
+
 ## Inclusion/Exclusion Listing
 ```{r, echo = FALSE}
 # output the listing on the html

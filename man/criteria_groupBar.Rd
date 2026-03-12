@@ -4,7 +4,7 @@
 \alias{criteria_groupBar}
 \title{Bar Chart by Group and Criteria}
 \usage{
-criteria_groupBar(df, varGroupID, strGroupLabel)
+criteria_groupBar(df, varGroupID, strGroupLabel, bSwapAxes = FALSE)
 }
 \arguments{
 \item{df}{A \code{data.frame} containing the participant level dataset with eligibility}
@@ -12,6 +12,8 @@ criteria_groupBar(df, varGroupID, strGroupLabel)
 \item{varGroupID}{A variable to make the stacked bar chart with, i.e. invid}
 
 \item{strGroupLabel}{A \code{string} to label the \code{varGroupID} in reference to axes, legend, footnotes.}
+
+\item{bSwapAxes}{A \code{boolean} to denote whether or not the y-axis and fill groups should be swapped.}
 }
 \value{
 A \code{plotly} object
