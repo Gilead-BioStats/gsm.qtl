@@ -13,8 +13,8 @@ QTL_lineplot_v2(dfResults, strQTL)
 - dfResults:
 
   A results `data.frame` from the output of
-  [`gsm.reporting::BindResults()`](https://gilead-biostats.github.io/gsm.reporting/reference/BindResults.html)
-  used to create time-series visualizations.
+  `gsm.reporting::BindResults()` used to create time-series
+  visualizations.
 
 - strQTL:
 

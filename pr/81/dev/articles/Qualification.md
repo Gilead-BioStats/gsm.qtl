@@ -1,9 +1,5 @@
 # Qualification Report for {gsm.qtl} R Package
 
-    ## Registered S3 method overwritten by 'logger':
-    ##   method         from 
-    ##   print.loglevel log4r
-
 ## Introduction
 
 Risk-Based Quality Monitoring (RBQM) is a proactive approach to clinical
@@ -79,7 +75,7 @@ Each specification includes the following components:
 
 ### Session Information
 
-**R version 4.5.2 (2025-10-31)**
+**R version 4.5.3 (2026-03-11)**
 
 **Platform:** x86_64-pc-linux-gnu
 
@@ -99,11 +95,11 @@ Each specification includes the following components:
 **loaded via a namespace (and not attached):** *gtable(v.0.3.6)*,
 *xfun(v.0.56)*, *bslib(v.0.10.0)*, *ggplot2(v.4.0.2)*,
 *htmlwidgets(v.1.6.4)*, *devtools(v.2.4.6)*, *remotes(v.2.5.0)*,
-*vctrs(v.0.7.1)*, *tools(v.4.5.2)*, *generics(v.0.1.4)*,
+*vctrs(v.0.7.1)*, *tools(v.4.5.3)*, *generics(v.0.1.4)*,
 *curl(v.7.0.0)*, *tibble(v.3.3.1)*, *pkgconfig(v.2.0.3)*,
 *data.table(v.1.18.2.1)*, *RColorBrewer(v.1.1-3)*, *S7(v.0.2.1)*,
 *desc(v.1.4.3)*, *lifecycle(v.1.0.5)*, *farver(v.2.1.2)*,
-*compiler(v.4.5.2)*, *brio(v.1.1.5)*, *textshaping(v.1.0.5)*,
+*compiler(v.4.5.3)*, *brio(v.1.1.5)*, *textshaping(v.1.0.5)*,
 *htmltools(v.0.5.9)*, *usethis(v.3.2.1)*, *sass(v.0.4.10)*,
 *yaml(v.2.3.12)*, *lazyeval(v.0.2.2)*, *plotly(v.4.12.0)*,
 *pillar(v.1.11.1)*, *pkgdown(v.2.2.0)*, *jquerylib(v.0.1.4)*,
@@ -111,17 +107,17 @@ Each specification includes the following components:
 *cachem(v.1.1.0)*, *sessioninfo(v.1.2.3)*, *tidyselect(v.1.2.1)*,
 *digest(v.0.6.39)*, *stringi(v.1.8.7)*, *duckdb(v.1.4.4)*,
 *forcats(v.1.0.1)*, *rprojroot(v.2.1.1)*, *fastmap(v.1.2.0)*,
-*grid(v.4.5.2)*, *here(v.1.0.2)*, *cli(v.3.6.5)*, *logger(v.0.4.1)*,
-*magrittr(v.2.0.4)*, *triebeard(v.0.4.1)*, *pkgbuild(v.1.4.8)*,
-*withr(v.3.0.2)*, *waldo(v.0.6.2)*, *scales(v.1.4.0)*,
-*backports(v.1.5.0)*, *rmarkdown(v.2.30)*, *httr(v.1.4.8)*,
-*otel(v.0.2.0)*, *ragg(v.1.5.1)*, *memoise(v.2.0.1)*,
-*evaluate(v.1.0.5)*, *log4r(v.0.4.4)*, *covr(v.3.6.5)*, *rex(v.1.2.1)*,
-*viridisLite(v.0.4.3)*, *rlang(v.1.1.7)*, *urltools(v.1.7.3.1)*,
-*Rcpp(v.1.1.1)*, *DBI(v.1.3.0)*, *glue(v.1.8.0)*,
-*BiocManager(v.1.30.27)*, *xml2(v.1.5.2)*, *pkgload(v.1.5.0)*,
-*rstudioapi(v.0.18.0)*, *jsonlite(v.2.0.0)*, *R6(v.2.6.1)*,
-*systemfonts(v.1.3.2)* and *fs(v.1.6.7)*
+*grid(v.4.5.3)*, *here(v.1.0.2)*, *cli(v.3.6.5)*, *magrittr(v.2.0.4)*,
+*triebeard(v.0.4.1)*, *pkgbuild(v.1.4.8)*, *withr(v.3.0.2)*,
+*waldo(v.0.6.2)*, *scales(v.1.4.0)*, *backports(v.1.5.0)*,
+*rmarkdown(v.2.30)*, *httr(v.1.4.8)*, *otel(v.0.2.0)*, *ragg(v.1.5.1)*,
+*memoise(v.2.0.1)*, *evaluate(v.1.0.5)*, *log4r(v.0.4.4)*,
+*covr(v.3.6.5)*, *rex(v.1.2.1)*, *viridisLite(v.0.4.3)*,
+*rlang(v.1.1.7)*, *urltools(v.1.7.3.1)*, *Rcpp(v.1.1.1)*,
+*DBI(v.1.3.0)*, *glue(v.1.8.0)*, *BiocManager(v.1.30.27)*,
+*xml2(v.1.5.2)*, *pkgload(v.1.5.0)*, *rstudioapi(v.0.18.0)*,
+*jsonlite(v.2.0.0)*, *R6(v.2.6.1)*, *systemfonts(v.1.3.2)* and
+*fs(v.1.6.7)*
 
 ## Pull Request History
 
