@@ -9,8 +9,6 @@
 library(testthat)
 library(gsm.qtl)
 library(dplyr)
-library(gsm.datasim)
-library(gsm.qtl)
 library(purrr)
 
 test_check("gsm.qtl")

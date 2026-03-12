@@ -1,5 +1,5 @@
 ---
-title: "QTL0001 - Ineligibilty"
+title: "QTL0001 - Ineligibility"
 ---
 
 # QTL0001 - Ineligibility

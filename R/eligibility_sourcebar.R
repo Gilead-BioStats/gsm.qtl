@@ -7,11 +7,14 @@
 eligibility_sourceBar <- function(df) {
   source_bar <- df %>%
     filter(Source != "Neither") %>%
-    ggplot(., aes(y = Source, fill = Source)) +
-    geom_bar(aes(
-      text = paste0(
-        "\nSource: ", Source
-      ))) +
+    ggplot(
+      aes(
+        y = Source,
+        fill = Source,
+        text = paste0("\nSource: ", Source)
+      )
+    ) +
+    geom_bar() +
     geom_text(
       stat = "count",
       aes(label = after_stat(count)),

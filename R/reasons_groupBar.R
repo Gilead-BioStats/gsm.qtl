@@ -19,14 +19,19 @@ reasons_groupBar <- function(df, varGroupID, varCompreas, strGroupLabel) {
   # Create GG object
   group_reasons_bar <- df_counts %>%
     # filter(compyn == "N") %>%
-    ggplot(aes(x = n, y = {{varCompreas}}, fill = {{varGroupID}})) +
-    geom_col(aes(
-      text = paste0(
-        strGroupLabel, ": ", !!enexpr(varGroupID),
-        "\n Discontinuation Reason: ", !!enexpr(varCompreas),
-        "\nCount: ", n
+    ggplot(
+      aes(
+        x = n,
+        y = {{varCompreas}},
+        fill = {{varGroupID}},
+        text = paste0(
+          strGroupLabel, ": ", !!enexpr(varGroupID),
+          "\n Discontinuation Reason: ", !!enexpr(varCompreas),
+          "\nCount: ", n
+        )
       )
-    )) +
+    ) +
+    geom_col() +
     geom_text(
       data = df_counts %>% group_by({{varCompreas}}) %>% summarise(n = sum(n), .groups = "drop"),
       aes(x = n, y = {{varCompreas}}, label = n),

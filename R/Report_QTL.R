@@ -30,6 +30,49 @@ Report_QTL <- function(
   strOutputFile = NULL,
   strInputPath = system.file("report", "Report_QTL.Rmd", package = "gsm.qtl")
 ) {
+  gsm.core::stop_if(cnd = !is.data.frame(dfResults), message = "dfResults must be a data.frame")
+  gsm.core::stop_if(cnd = !is.data.frame(dfMetrics), message = "dfMetrics must be a data.frame")
+  gsm.core::stop_if(cnd = !is.data.frame(dfGroups), message = "dfGroups must be a data.frame")
+  gsm.core::stop_if(cnd = !(is.list(lListings) && !is.data.frame(lListings)), message = "lListings must be a list")
+
+  required_results_cols <- c("MetricID", "GroupID", "GroupLevel", "Numerator", "Denominator", "Metric", "SnapshotDate")
+  missing_results_cols <- setdiff(required_results_cols, names(dfResults))
+  gsm.core::stop_if(
+    cnd = length(missing_results_cols) > 0,
+    message = paste0("dfResults is missing required column(s): ", paste(missing_results_cols, collapse = ", "))
+  )
+
+  required_metrics_cols <- c("MetricID", "nPropRate", "nNumDeviations")
+  missing_metrics_cols <- setdiff(required_metrics_cols, names(dfMetrics))
+  gsm.core::stop_if(
+    cnd = length(missing_metrics_cols) > 0,
+    message = paste0("dfMetrics is missing required column(s): ", paste(missing_metrics_cols, collapse = ", "))
+  )
+
+  gsm.core::stop_if(
+    cnd = !(length(lListings) > 0 && is.data.frame(lListings[[1]]) && "studyid" %in% names(lListings[[1]])),
+    message = "lListings[[1]] must be a data.frame containing studyid"
+  )
+
+  gsm.core::stop_if(
+    cnd = !(is.character(strOutputDir) && length(strOutputDir) == 1 && nzchar(strOutputDir)),
+    message = "strOutputDir must be a single non-empty character value"
+  )
+  if (!dir.exists(strOutputDir)) {
+    dir.create(strOutputDir, recursive = TRUE, showWarnings = FALSE)
+  }
+  gsm.core::stop_if(cnd = !dir.exists(strOutputDir), message = "strOutputDir does not exist and could not be created")
+
+  gsm.core::stop_if(
+    cnd = !(is.character(strOutputFile) && length(strOutputFile) == 1 && nzchar(strOutputFile)),
+    message = "strOutputFile must be a single non-empty character value"
+  )
+
+  gsm.core::stop_if(
+    cnd = !(is.character(strInputPath) && length(strInputPath) == 1 && nzchar(strInputPath) && file.exists(strInputPath)),
+    message = "strInputPath must be a single existing file path"
+  )
+
   rlang::check_installed("rmarkdown", reason = "to run `Report_QTL()`")
   rlang::check_installed("knitr", reason = "to run `Report_QTL()`")
 

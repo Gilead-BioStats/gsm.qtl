@@ -28,15 +28,19 @@ eligibility_groupBar <- function(df, varGroupID, strGroupLabel, bPercentage = FA
     dplyr::group_by(!!enexpr(varGroupID)) %>%
     dplyr::mutate(perc = round((100*totals/sum(totals)), 1)) %>%
     ungroup() %>%
-    ggplot(., aes(
-      y = !!enexpr(varGroupID), fill = fillcol, x = totals,
-      text = paste0(
-        "Count: ", totals,
-        "\nPercentage: ", perc, " %",
-        "\n", strGroupLabel, ": ", !!enexpr(varGroupID),
-        "\nEligibility Status: ", fillcol
+    ggplot(
+     aes(
+       y = !!enexpr(varGroupID),
+       fill = fillcol,
+       x = totals,
+       text = paste0(
+         "Count: ", totals,
+         "\nPercentage: ", perc, " %",
+         "\n", strGroupLabel, ": ", !!enexpr(varGroupID),
+         "\nEligibility Status: ", fillcol
+       )
       )
-    ))
+    )
 
   if(bPercentage) {
     group_bar <- interim_bar +
