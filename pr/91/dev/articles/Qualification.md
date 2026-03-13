@@ -179,6 +179,16 @@ Merging fix-82 into dev
 |:-----------:|:-------------------:|:--------------------------------------------:|:-------------:|
 | nandriychuk | 2026-02-23 18:02:00 | copilot-pull-request-reviewer\[bot\] zdz2101 |   COMMENTED   |
 
+#### Pull Request 81: Closes \#80 add testthat suite
+
+Merging fix-80 into dev
+
+<https://github.com/Gilead-BioStats/gsm.qtl/pull/81>
+
+| Requester |   Date Requested    |                        Reviewers                         | Review Status |
+|:---------:|:-------------------:|:--------------------------------------------------------:|:-------------:|
+|  zdz2101  | 2026-02-19 00:16:10 | copilot-pull-request-reviewer\[bot\] nandriychuk zdz2101 |   COMMENTED   |
+
 #### Pull Request 75: Catch dev up to main
 
 Merging main into dev
@@ -228,13 +238,3 @@ Merging main into dev
 | Requester |   Date Requested    |  Reviewers   | Review Status |
 |:---------:|:-------------------:|:------------:|:-------------:|
 |  zdz2101  | 2026-01-16 19:24:52 | lauramaxwell |   APPROVED    |
-
-#### Pull Request 66: Update package dependencies.
-
-Merging fix-65 into dev
-
-<https://github.com/Gilead-BioStats/gsm.qtl/pull/66>
-
-| Requester |   Date Requested    |                       Reviewers                        | Review Status |
-|:---------:|:-------------------:|:------------------------------------------------------:|:-------------:|
-| samussiah | 2026-01-16 19:23:10 | copilot-pull-request-reviewer\[bot\] zdz2101 samussiah |   COMMENTED   |
