@@ -30,6 +30,7 @@ Imports:
   purrr,
   rlang,
   scales,
+  stats,
   stringr,
   tidyr,
   tibble,

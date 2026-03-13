@@ -79,7 +79,8 @@ QTL_lineplot_v2 <- function(dfResults, strQTL) {
       GroupID = dplyr::case_when(
         .data$GroupID_norm == "upper_funnel" ~ "Upper_funnel",
         TRUE ~ "flat_line"
-      )
+      ),
+      Flag = NA_character_
     )
 
   if (all(is.na(threshold_upper$Metric)) && any(legacy_thresholds$GroupID == "Upper_funnel")) {
@@ -99,8 +100,8 @@ QTL_lineplot_v2 <- function(dfResults, strQTL) {
     filter(!is.na(.data$Metric))
 
   upper_lookup <- threshold_upper %>%
-    select(.data$SnapshotDate, Upper_funnel_lookup = .data$Metric) %>%
-    distinct(.data$SnapshotDate, .keep_all = TRUE)
+    select(SnapshotDate, Upper_funnel_lookup = Metric) %>%
+    distinct(SnapshotDate, .keep_all = TRUE)
 
   df_main <- df_main %>%
     left_join(upper_lookup, by = "SnapshotDate") %>%
@@ -122,8 +123,8 @@ QTL_lineplot_v2 <- function(dfResults, strQTL) {
     arrange(.data$SnapshotDate)
 
   selected_groups <- df_main %>%
-    distinct(.data$GroupID) %>%
-    pull(.data$GroupID)
+    distinct(GroupID) %>%
+    pull(GroupID)
 
   lMetric <- list(
     MetricID = if ("MetricID" %in% names(df_widget)) unique(df_widget$MetricID)[1] else "QTL",

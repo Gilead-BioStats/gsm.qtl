@@ -7,10 +7,9 @@
 # * https://testthat.r-lib.org/articles/special-files.html
 
 library(testthat)
+library(gsm.core)
 library(gsm.qtl)
 library(dplyr)
-library(gsm.datasim)
-library(gsm.qtl)
 library(purrr)
 
 test_check("gsm.qtl")
