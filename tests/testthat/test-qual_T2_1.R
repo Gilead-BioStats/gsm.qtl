@@ -1,4 +1,4 @@
-testthat::test_that("Given appropriate inclusion/exclusion related data, calculates appropriate QTL threshold.", {
+testthat::test_that("Given appropriate inclusion/exclusion related data, calculates appropriate QTL threshold. (#2, #5, #11, #17, #39, #42, #50, #73)", {
 
   expect_true(all(IE_outputs %in% names(analyzed_ineligibility[[1]])))
 
