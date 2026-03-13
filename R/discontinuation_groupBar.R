@@ -17,7 +17,7 @@ discontinuation_groupBar <- function(df, varGroupID, strGroupLabel, varStatus = 
 
   # Create the gg object
   group_bar <- df %>%
-    mutate(fillcol = ifelse(!!enexpr(varStatus) %in% valuesDiscontinued, "Premature Discontinuation", "Completed/Ongoing")) %>%
+    mutate(fillcol = ifelse(!!enexpr(varStatus) %in% valuesDiscontinued, "Premature Discontinuation", "Completed/Ongoing")) %>% # we need to get to bottom of studies vs datasim here
     filter(!!enexpr(varGroupID) %in% groups_with_discontinuation) %>%
     mutate(!!enexpr(varGroupID) := forcats::fct_rev(forcats::fct_infreq(!!enexpr(varGroupID)))) %>%
     dplyr::group_by(!!enexpr(varGroupID), fillcol) %>%
