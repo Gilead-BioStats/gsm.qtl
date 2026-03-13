@@ -1,10 +1,5 @@
 set.seed(123)
 
-library(dplyr)
-library(gsm.core)
-library(gsm.qtl)
-library(purrr)
-
 ## default qtl path instead of inst/workflow
 GetYamlPathDefaultMetrics <- function() {
   file.path(system.file(package = "gsm.qtl"), "workflow", "2_metrics")

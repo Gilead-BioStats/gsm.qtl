@@ -1,4 +1,4 @@
-test_that("Analyze One Side Prop works for Study, when nProRate is clearly violated (#5, #11, #50, #73)", {
+test_that("Analyze One Side Prop works for Study, when nProRate is clearly violated (#5, #11, #39, #42, #50, #73)", {
   test_transformed <- tibble::tribble(
     ~GroupID, ~GroupLevel, ~Numerator, ~Denominator, ~Metric,
     "ABC", "Study", 25, 100, 0.25
