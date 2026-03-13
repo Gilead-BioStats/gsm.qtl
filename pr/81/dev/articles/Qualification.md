@@ -67,7 +67,7 @@ Each specification includes the following components:
 
 | Function                         | Spec ID | Test ID | Test Description                                                                                                                        | Test Result |
 |----------------------------------|---------|---------|-----------------------------------------------------------------------------------------------------------------------------------------|-------------|
-| One Side Prop unit test          | S1_1    | T1_1    | Analyze One Side Prop works for Study, when nProRate is clearly violated (#5, \#11, \#50, \#73)                                         | Pass        |
+| One Side Prop unit test          | S1_1    | T1_1    | Analyze One Side Prop works for Study, when nProRate is clearly violated (#5, \#11, \#39, \#42, \#50, \#73)                             | Pass        |
 | Ineligibility Assessment         | S2_1    | T2_1    | Given appropriate inclusion/exclusion related data, calculates appropriate QTL threshold. (#2, \#5, \#11, \#17, \#39, \#42, \#50, \#73) | Pass        |
 | Early Discontinuation Assessment | S3_1    | T3_1    | Given appropriate study discontinuation related data, calculates appropriate QTL threshold. (#3, \#21, \#39, \#42, \#50, \#73)          | Pass        |
 
