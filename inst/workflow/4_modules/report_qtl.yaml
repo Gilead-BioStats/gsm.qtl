@@ -51,7 +51,7 @@ steps:
     name: dplyr::mutate
     params:
       .data: qtl0002_preprocess
-      'compreas': !expr rlang::expr(ifelse(is.na(.data[["compreas"]]), "Ongoing", .data[["compreas"]]))
+      'compreas': !expr rlang::expr(ifelse(is.na(.data[["compreas"]]), "Completed/Ongoing", .data[["compreas"]]))
   - output: reporting_listings
     names: list
     params:
