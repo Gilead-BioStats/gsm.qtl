@@ -22,14 +22,19 @@ criteria_groupBar <- function(df, varGroupID, strGroupLabel, bSwapAxes = FALSE) 
     distinct_n_y <- df_counts %>% dplyr::distinct(!!var_sym) %>% nrow()
 
     group_criteria_bar <- df_counts %>%
-      ggplot(aes(x = n, y = .data[[var_name]], fill = ietestcd_concat)) +
-      geom_col(aes(
-        text = paste0(
-          strGroupLabel, ": ", .data[[var_name]],
-          "\nCriteria: ", ietestcd_concat,
-          "\nCount: ", n
+      ggplot(
+        aes(
+          x = n,
+          y = .data[[var_name]],
+          fill = ietestcd_concat,
+          text = paste0(
+            strGroupLabel, ": ", .data[[var_name]],
+            "\nCriteria: ", ietestcd_concat,
+            "\nCount: ", n
+          )
         )
-      )) +
+      ) +
+      geom_col() +
       geom_text(
         data = df_counts %>% dplyr::group_by(!!var_sym) %>% dplyr::summarise(n = sum(n), .groups = "drop"),
         aes(x = n, y = .data[[var_name]], label = n),
@@ -47,14 +52,19 @@ criteria_groupBar <- function(df, varGroupID, strGroupLabel, bSwapAxes = FALSE) 
     distinct_n_y <- df_counts %>% dplyr::distinct(ietestcd_concat) %>% nrow()
 
     group_criteria_bar <- df_counts %>%
-      ggplot(aes(x = n, y = ietestcd_concat, fill = .data[[var_name]])) +
-      geom_col(aes(
-        text = paste0(
-          strGroupLabel, ": ", .data[[var_name]],
-          "\nCriteria: ", ietestcd_concat,
-          "\nCount: ", n
-        )
-      )) +
+      ggplot(
+        aes(
+          x = n,
+          y = ietestcd_concat,
+          fill = .data[[var_name]],
+          text = paste0(
+            strGroupLabel, ": ", .data[[var_name]],
+            "\nCriteria: ", ietestcd_concat,
+            "\nCount: ", n
+          )
+       )
+      ) +
+      geom_col() +
       geom_text(
         data = df_counts %>% dplyr::group_by(ietestcd_concat) %>% dplyr::summarise(n = sum(n), .groups = "drop"),
         aes(x = n, y = ietestcd_concat, label = n),

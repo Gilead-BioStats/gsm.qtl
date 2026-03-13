@@ -50,6 +50,21 @@ test_that("criteria_groupBar uses grouping and label arguments (#14, #21, #22, #
   expect_match(built$x$layout$title$text, "Eligibility by Site", fixed = TRUE)
 })
 
+test_that("criteria_groupBar uses grouping and label arguments correctly when swapping axes (#90)", {
+  df <- qtl_test_participant_df() %>%
+    dplyr::mutate(ietestcd_concat = gsub(";;;", ",", ietestcd_concat, fixed = TRUE))
+
+  out <- criteria_groupBar(df = df, varGroupID = invid, strGroupLabel = "Site", bSwapAxes = TRUE)
+  built <- plotly::plotly_build(out)
+
+  expect_s3_class(out, "plotly")
+
+  criteria_text <- plotly_trace_text(out)
+  expect_true(any(grepl("Eligibility Status: I001", criteria_text, fixed = TRUE)))
+  expect_true(any(grepl("Eligibility Status: E010", criteria_text, fixed = TRUE)))
+  expect_match(built$x$layout$title$text, "Eligibility by Site", fixed = TRUE)
+})
+
 test_that("eligibility_listing covers df and download arguments (#21, #22, #24, #25)", {
   df <- qtl_test_participant_df()
 
