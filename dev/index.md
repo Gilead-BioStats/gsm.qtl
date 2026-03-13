@@ -51,8 +51,7 @@ pak::pak("Gilead-BioStats/gsm.qtl@dev")
 ## Sample Code
 
 This is a basic example showing how to create interactive widget
-visualizations based on reporting outputs from the
-[gsm.reporting](https://gilead-biostats.github.io/gsm.reporting/)
+visualizations based on reporting outputs from the `{gsm.reporting}`
 package:
 
 ``` r
