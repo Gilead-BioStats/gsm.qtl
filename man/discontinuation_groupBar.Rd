@@ -8,8 +8,10 @@ discontinuation_groupBar(
   df,
   varGroupID,
   strGroupLabel,
-  varStatus = compyn,
-  valuesDiscontinued = c("N")
+  varStatus = compreas,
+  valuesDiscontinued = c("WITHDRAWAL BY SUBJECT", "NON-COMPLIANCE WITH STUDY DRUG",
+    "PROTOCOL VIOLATION", "PHYSICIAN DECISION", "WITHDREW CONESENT", "DEATH",
+    "LOST TO FOLLOW UP", "Withdrew Consent", "Death", "Lost to Follow-Up")
 )
 }
 \arguments{
@@ -19,9 +21,9 @@ discontinuation_groupBar(
 
 \item{strGroupLabel}{A \code{string} to label the \code{varGroupID} in reference to axes, legend, footnotes.}
 
-\item{varStatus}{A variable indicating participant study status, defaults to \code{compyn}.}
+\item{varStatus}{A variable indicating participant study status, defaults to \code{comprea}.}
 
-\item{valuesDiscontinued}{A vector of values in \code{varStatus} considered discontinued, defaults to \code{c("N")}.}
+\item{valuesDiscontinued}{A vector of values in \code{varStatus} considered premature discontinuations, defaults to a string of known reasons.}
 }
 \value{
 A \code{plotly} object

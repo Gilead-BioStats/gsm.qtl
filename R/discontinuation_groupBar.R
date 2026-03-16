@@ -3,13 +3,19 @@
 #' @param df A `data.frame` containing the participant level dataset with discontinuation
 #' @param varGroupID A variable to make the stacked bar chart with, i.e. invid
 #' @param strGroupLabel A `string` to label the `varGroupID` in reference to axes, legend, footnotes.
-#' @param varStatus A variable indicating participant study status, defaults to `compyn`.
-#' @param valuesDiscontinued A vector of values in `varStatus` considered discontinued, defaults to `c("N")`.
+#' @param varStatus A variable indicating participant study status, defaults to `comprea`.
+#' @param valuesDiscontinued A vector of values in `varStatus` considered premature discontinuations, defaults to a string of known reasons.
 #'
 #' @returns A `plotly` object
 #'
 #' @export
-discontinuation_groupBar <- function(df, varGroupID, strGroupLabel, varStatus = compyn, valuesDiscontinued = c("N")) {
+discontinuation_groupBar <- function(df,
+                                     varGroupID,
+                                     strGroupLabel,
+                                     varStatus = compreas,
+                                     valuesDiscontinued = c('WITHDRAWAL BY SUBJECT', 'NON-COMPLIANCE WITH STUDY DRUG', 'PROTOCOL VIOLATION', 'PHYSICIAN DECISION',
+                                                            'WITHDREW CONESENT', 'DEATH', 'LOST TO FOLLOW UP',
+                                                            'Withdrew Consent', 'Death', 'Lost to Follow-Up')) {
   groups_with_discontinuation <- df %>%
     filter(!!enexpr(varStatus) %in% valuesDiscontinued) %>%
     pull(!!enexpr(varGroupID)) %>%
