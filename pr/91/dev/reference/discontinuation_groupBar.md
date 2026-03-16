@@ -34,7 +34,8 @@ discontinuation_groupBar(
 
 - varStatus:
 
-  A variable indicating participant study status, defaults to `comprea`.
+  A variable indicating participant study status, defaults to
+  `compreas`.
 
 - valuesDiscontinued:
 
