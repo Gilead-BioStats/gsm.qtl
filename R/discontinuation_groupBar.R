@@ -3,7 +3,7 @@
 #' @param df A `data.frame` containing the participant level dataset with discontinuation
 #' @param varGroupID A variable to make the stacked bar chart with, i.e. invid
 #' @param strGroupLabel A `string` to label the `varGroupID` in reference to axes, legend, footnotes.
-#' @param varStatus A variable indicating participant study status, defaults to `comprea`.
+#' @param varStatus A variable indicating participant study status, defaults to `compreas`.
 #' @param valuesDiscontinued A vector of values in `varStatus` considered premature discontinuations, defaults to a string of known reasons.
 #'
 #' @returns A `plotly` object

@@ -21,7 +21,7 @@ discontinuation_groupBar(
 
 \item{strGroupLabel}{A \code{string} to label the \code{varGroupID} in reference to axes, legend, footnotes.}
 
-\item{varStatus}{A variable indicating participant study status, defaults to \code{comprea}.}
+\item{varStatus}{A variable indicating participant study status, defaults to \code{compreas}.}
 
 \item{valuesDiscontinued}{A vector of values in \code{varStatus} considered premature discontinuations, defaults to a string of known reasons.}
 }
