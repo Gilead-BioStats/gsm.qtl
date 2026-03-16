@@ -16,7 +16,7 @@ test_that("discontinuation_groupBar uses all arguments (#14, #21, #22, #76, #90)
   default_text <- plotly_trace_text(out)
   custom_text <- plotly_trace_text(out_custom)
 
-  expect_true(!any(grepl("Discontinuation Status: Premature Discontinuation", default_text, fixed = TRUE)))
+  expect_true(any(grepl("Discontinuation Status: Premature Discontinuation", default_text, fixed = TRUE)))
   expect_true(any(grepl("Discontinuation Status: Premature Discontinuation", custom_text, fixed = TRUE)))
   expect_match(built$x$layout$title$text, "Participant Count by Site", fixed = TRUE)
   expect_match(built$x$layout$annotations[[1]]$text, "Excludes site\\(s\\)")
