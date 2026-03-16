@@ -52,8 +52,10 @@
 <span>  <span class="va">df</span>,</span>
 <span>  <span class="va">varGroupID</span>,</span>
 <span>  <span class="va">strGroupLabel</span>,</span>
-<span>  varStatus <span class="op">=</span> <span class="va">compyn</span>,</span>
-<span>  valuesDiscontinued <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"N"</span><span class="op">)</span></span>
+<span>  varStatus <span class="op">=</span> <span class="va">compreas</span>,</span>
+<span>  valuesDiscontinued <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"WITHDRAWAL BY SUBJECT"</span>, <span class="st">"NON-COMPLIANCE WITH STUDY DRUG"</span>,</span>
+<span>    <span class="st">"PROTOCOL VIOLATION"</span>, <span class="st">"PHYSICIAN DECISION"</span>, <span class="st">"WITHDREW CONESENT"</span>, <span class="st">"DEATH"</span>,</span>
+<span>    <span class="st">"LOST TO FOLLOW UP"</span>, <span class="st">"Withdrew Consent"</span>, <span class="st">"Death"</span>, <span class="st">"Lost to Follow-Up"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -74,11 +76,11 @@
 
 
 <dt id="arg-varstatus">varStatus<a class="anchor" aria-label="anchor" href="#arg-varstatus"></a></dt>
-<dd><p>A variable indicating participant study status, defaults to <code>compyn</code>.</p></dd>
+<dd><p>A variable indicating participant study status, defaults to <code>comprea</code>.</p></dd>
 
 
 <dt id="arg-valuesdiscontinued">valuesDiscontinued<a class="anchor" aria-label="anchor" href="#arg-valuesdiscontinued"></a></dt>
-<dd><p>A vector of values in <code>varStatus</code> considered discontinued, defaults to <code>c("N")</code>.</p></dd>
+<dd><p>A vector of values in <code>varStatus</code> considered premature discontinuations, defaults to a string of known reasons.</p></dd>
 
 </dl></div>
     <div class="section level2">

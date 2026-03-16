@@ -9,8 +9,10 @@ discontinuation_groupBar(
   df,
   varGroupID,
   strGroupLabel,
-  varStatus = compyn,
-  valuesDiscontinued = c("N")
+  varStatus = compreas,
+  valuesDiscontinued = c("WITHDRAWAL BY SUBJECT", "NON-COMPLIANCE WITH STUDY DRUG",
+    "PROTOCOL VIOLATION", "PHYSICIAN DECISION", "WITHDREW CONESENT", "DEATH",
+    "LOST TO FOLLOW UP", "Withdrew Consent", "Death", "Lost to Follow-Up")
 )
 ```
 
@@ -32,12 +34,12 @@ discontinuation_groupBar(
 
 - varStatus:
 
-  A variable indicating participant study status, defaults to `compyn`.
+  A variable indicating participant study status, defaults to `comprea`.
 
 - valuesDiscontinued:
 
-  A vector of values in `varStatus` considered discontinued, defaults to
-  `c("N")`.
+  A vector of values in `varStatus` considered premature
+  discontinuations, defaults to a string of known reasons.
 
 ## Value
 
