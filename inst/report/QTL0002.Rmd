@@ -22,24 +22,12 @@ QTL_lineplot_v2(dfResults = qtl0002_params$dfResults, strQTL = "Premature Discon
 
 ### Site
 ```{r, echo = FALSE, results = 'asis', fig.height=4}
-discontinuation_groupBar(
-  df = qtl0002_params$dfListing,
-  varGroupID = invid,
-  strGroupLabel = "Site", 
-  varStatus = compreas, 
-  valuesDiscontinued = c('WITHDRAWAL BY SUBJECT', 'NON-COMPLIANCE WITH STUDY DRUG', 'PROTOCOL VIOLATION', 'PHYSICIAN DECISION', 'Withdrew Consent', 'Death', 'Lost to Follow-Up')
-)
+discontinuation_groupBar(df = qtl0002_params$dfListing, varGroupID = invid, strGroupLabel = "Site")
 ```
 
 ### Country
 ```{r, echo = FALSE, results = 'asis', fig.height=4}
-discontinuation_groupBar(
-  df = qtl0002_params$dfListing,
-  varGroupID = country,
-  strGroupLabel = "Country", 
-  varStatus = compreas, 
-  valuesDiscontinued = c('WITHDRAWAL BY SUBJECT', 'NON-COMPLIANCE WITH STUDY DRUG', 'PROTOCOL VIOLATION', 'PHYSICIAN DECISION', 'Withdrew Consent', 'Death', 'Lost to Follow-Up')
-)
+discontinuation_groupBar(df = qtl0002_params$dfListing, varGroupID = country, strGroupLabel = "Country")
 ```
 
 ### Reasons
