@@ -1,5 +1,6 @@
 test_that("discontinuation_groupBar uses all arguments (#14, #21, #22, #76, #90)", {
   df <- qtl_test_participant_df()
+  out <- discontinuation_groupBar(df = df, varGroupID = invid, strGroupLabel = "Site")
   out_custom <- discontinuation_groupBar(
     df = df,
     varGroupID = invid,
@@ -9,11 +10,13 @@ test_that("discontinuation_groupBar uses all arguments (#14, #21, #22, #76, #90)
   )
   built <- plotly::plotly_build(out)
 
+  expect_s3_class(out, "plotly")
   expect_s3_class(out_custom, "plotly")
 
   default_text <- plotly_trace_text(out)
   custom_text <- plotly_trace_text(out_custom)
 
+  expect_true(!any(grepl("Discontinuation Status: Premature Discontinuation", default_text, fixed = TRUE)))
   expect_true(any(grepl("Discontinuation Status: Premature Discontinuation", custom_text, fixed = TRUE)))
   expect_match(built$x$layout$title$text, "Participant Count by Site", fixed = TRUE)
   expect_match(built$x$layout$annotations[[1]]$text, "Excludes site\\(s\\)")
