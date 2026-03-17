@@ -12,7 +12,8 @@ discontinuation_groupBar(
   varStatus = compreas,
   valuesDiscontinued = c("WITHDRAWAL BY SUBJECT", "NON-COMPLIANCE WITH STUDY DRUG",
     "PROTOCOL VIOLATION", "PHYSICIAN DECISION", "WITHDREW CONESENT", "DEATH",
-    "LOST TO FOLLOW UP", "Withdrew Consent", "Death", "Lost to Follow-Up")
+    "LOST TO FOLLOW UP", "LOST TO FOLLOW-UP", "Withdrew Consent", "Death",
+    "Lost to Follow-Up")
 )
 ```
 
