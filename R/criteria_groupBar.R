@@ -73,7 +73,7 @@ criteria_groupBar <- function(df, varGroupID, strGroupLabel, bSwapAxes = FALSE) 
         size = 4,
         color = "black"
       ) +
-      labs(y = "Criteria", x = "Criteria Count", fill = strGroupLabel, title = paste0("Eligibility by ", strGroupLabel)) +
+      labs(y = "Criteria", x = "Criteria Count", fill = strGroupLabel, title = paste0("Criteria by ", strGroupLabel)) +
       theme_classic(base_size = 11) +
       theme(
         axis.text.y = element_text(angle = 45, vjust = 1), # tilt to avoid overlap
