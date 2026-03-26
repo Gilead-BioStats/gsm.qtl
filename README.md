@@ -36,7 +36,7 @@ You can install the development version of `gsm.qtl` like so:
 
 ``` r
 # install.packages("pak")
-pak::pak("Gilead-BioStats/gsm.qtl@for-gsm.kri-193")
+pak::pak("Gilead-BioStats/gsm.qtl@dev")
 ```
 
 ## Sample Code
