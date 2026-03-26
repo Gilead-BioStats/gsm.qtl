@@ -48,7 +48,7 @@ Suggests:
   riskmetric,
   testthat (>= 3.0.0)
 Remotes:
-    gsm.core=Gilead-BioStats/gsm.core@main
+    gsm.core=Gilead-BioStats/gsm.core@fix-130
 VignetteBuilder: knitr
 Config/testthat/edition: 3
 Config/testthat/parallel: false
