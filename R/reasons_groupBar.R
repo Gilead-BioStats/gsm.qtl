@@ -10,6 +10,7 @@
 #' @export
 reasons_groupBar <- function(df, varGroupID, varCompreas, strGroupLabel) {
   df_counts <- df %>%
+    dplyr::filter(!!enexpr(varCompreas) != "Completed/Ongoing") %>%
     dplyr::count({{varCompreas}}, {{varGroupID}}, name = "n")
 
   distinct_n_compreas <- df_counts %>%
