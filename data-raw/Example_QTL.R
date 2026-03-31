@@ -1,6 +1,7 @@
 library(gsm.qtl)
 library(gsm.datasim)
 library(gsm.kri)
+library(dplyr)
 library(purrr)
 devtools::load_all(".")
 
@@ -79,8 +80,8 @@ all_reportingGroups <- reporting[[length(reporting)]]$Reporting_Groups
 
 report_listings <- list(qtl0001 = mapped[[length(mapped)]]$Mapped_EXCLUSION,
                         qtl0002 = left_join(
-                          mapped[[length(mapped)]]$Mapped_STUDCOMP,
                           select(mapped[[length(mapped)]]$Mapped_SUBJ, subjid, country),
+                          mapped[[length(mapped)]]$Mapped_STUDCOMP,
                           by = "subjid"
                         ) %>%
                           mutate(compreas = ifelse(is.na(compreas) | compreas == "", "Completed/Ongoing", compreas)))
