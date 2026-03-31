@@ -17,7 +17,7 @@ discontinuation_reasonBar <- function(df, varCompreas) {
       color = "black",
       size  = 4
     ) +
-    labs(y = "Discontinuation Reasons", x = "Participant Count", title = "Participant Count by Reasons") +
+    labs(y = "Discontinuation Reasons", x = "Participant Count", title = "Participant Count by Reasons", fill = "Discontinuation Reasons") +
     theme_classic() +
     theme(
       axis.text.y = element_text(angle = 45, vjust = 1), # tilt to avoid overlap
