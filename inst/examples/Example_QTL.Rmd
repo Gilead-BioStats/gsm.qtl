@@ -36,7 +36,7 @@ lParams = gsm.qtl:::example_lparams
 
 # Report
 
-```{r, echo=FALSE, results='asis'}
+```{r, echo=FALSE, results='asis', warning = FALSE, message = FALSE}
 ## Render example report inline using knit_child
 child_env <- list2env(
   list(
