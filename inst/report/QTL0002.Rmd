@@ -47,7 +47,8 @@ reasons_groupBar(df = qtl0002_params$dfListing, varGroupID = country, varComprea
 
 ## Discontinuation Listing
 ```{r, echo = FALSE}
-discontinuation_listing <- qtl0002_params$dfListing %>% 
+discontinuation_listing <- qtl0002_params$dfListing %>%
+  dplyr::filter(compyn %in% c("N")) %>% 
   select(subjid, invid, country, compreas) %>% 
   rename(
     `Subject ID` = subjid,

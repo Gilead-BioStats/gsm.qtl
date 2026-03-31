@@ -30,15 +30,11 @@ spec:
       type: character
 steps:
 # study specific, can grab the default in gsm.qtl too
-  - output: disc_reasons_path
-    name: c
-    params:
-      ...: "workflow/0_other/disc_reasons.yaml"
   - output: Mapped_DROPOUT
-    name: gsm.qtl::discontinuation_map_reasons
+    name: gsm.core::RunQuery
     params:
       df: Mapped_STUDCOMP
-      # yaml_path: disc_reasons_path
+      strQuery: "SELECT * FROM df WHERE compyn = 'N'"
   - output: Analysis_Input
     name: gsm.core::Input_Rate
     params:
