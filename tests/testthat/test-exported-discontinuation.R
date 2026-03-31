@@ -5,8 +5,8 @@ test_that("discontinuation_groupBar uses all arguments (#14, #21, #22, #76, #90)
     df = df,
     varGroupID = invid,
     strGroupLabel = "Site",
-    varStatus = compreas,
-    valuesDiscontinued = c("Adverse event", "Lost to follow-up", "Protocol deviation", "Withdrawal")
+    varStatus = compyn,
+    valuesDiscontinued = c("Y", "N", "N", "Y")
   )
   built <- plotly::plotly_build(out)
 

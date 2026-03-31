@@ -3,8 +3,8 @@
 #' @param df A `data.frame` containing the participant level dataset with discontinuation
 #' @param varGroupID A variable to make the stacked bar chart with, i.e. invid
 #' @param strGroupLabel A `string` to label the `varGroupID` in reference to axes, legend, footnotes.
-#' @param varStatus A variable indicating participant study status, defaults to `compreas`.
-#' @param valuesDiscontinued A vector of values in `varStatus` considered premature discontinuations, defaults to a string of known reasons.
+#' @param varStatus A variable indicating participant study status, defaults to `compyn`.
+#' @param valuesDiscontinued A vector of values in `varStatus` considered premature discontinuations, defaults to 'N'.
 #'
 #' @returns A `plotly` object
 #'
@@ -12,10 +12,8 @@
 discontinuation_groupBar <- function(df,
                                      varGroupID,
                                      strGroupLabel,
-                                     varStatus = compreas,
-                                     valuesDiscontinued = c('WITHDRAWAL BY SUBJECT', 'NON-COMPLIANCE WITH STUDY DRUG', 'PROTOCOL VIOLATION', 'PHYSICIAN DECISION',
-                                                            'WITHDREW CONESENT', 'DEATH', 'LOST TO FOLLOW UP', 'LOST TO FOLLOW-UP',
-                                                            'Withdrew Consent', 'Death', 'Lost to Follow-Up')) {
+                                     varStatus = compyn,
+                                     valuesDiscontinued = c('N')) {
   groups_with_discontinuation <- df %>%
     filter(!!enexpr(varStatus) %in% valuesDiscontinued) %>%
     pull(!!enexpr(varGroupID)) %>%
@@ -23,7 +21,7 @@ discontinuation_groupBar <- function(df,
 
   # Create the gg object
   group_bar <- df %>%
-    mutate(fillcol = ifelse(!!enexpr(varStatus) %in% valuesDiscontinued, "Premature Discontinuation", "Completed/Ongoing")) %>% # we need to get to bottom of studies vs datasim here
+    mutate(fillcol = ifelse(!!enexpr(varStatus) %in% valuesDiscontinued, "Premature Discontinuation", "Completed/Ongoing")) %>%
     filter(!!enexpr(varGroupID) %in% groups_with_discontinuation) %>%
     mutate(!!enexpr(varGroupID) := forcats::fct_rev(forcats::fct_infreq(!!enexpr(varGroupID)))) %>%
     dplyr::group_by(!!enexpr(varGroupID), fillcol) %>%
