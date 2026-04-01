@@ -22,7 +22,7 @@ test_that("eligibility_groupBar uses all arguments (#14, #15, #21, #22, #60)", {
   expect_equal(built_counts$x$layout$margin$b, 50)
 })
 
-test_that("eligibility_groupBar reserves space when a footnote is present", {
+test_that("eligibility_groupBar reserves space when a footnote is present (#90)", {
   df <- dplyr::bind_rows(
     qtl_test_participant_df(),
     tibble::tribble(
