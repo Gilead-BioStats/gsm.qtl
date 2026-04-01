@@ -246,4 +246,4 @@ test_that("Example QTL Report for 2026Q1 meets ui/ux/aesthetics expectations (#9
       "Align the Numerator of the QTL Overviews with all the respective visualizations to avoid any confusion",
     )
   )
-}
+})
