@@ -233,3 +233,17 @@ test_that("Report_QTL renders a valid HTML report for single metric input (#4, #
 
   expect_valid_html_output(out)
 })
+
+test_that("Example QTL Report for 2026Q1 meets ui/ux/aesthetics expectations (#93)"){
+  qcthat::ExpectUserAccepts(
+    "Example QTL Report for 2026Q1 meets ui/ux/aesthetics expectations.",
+    intIssue = 93,
+    chrInstructions = "Load example report attached to #91",
+    chrChecks = c(
+      "Ensure the Criteria/Site and Criteria/Country have an appropriate zoom at initial display",
+      "Add Site/Criteria and Country/Criteria where the axes and fill legend are flipped to get an alternative view",
+      "Cleanup the Premature Discontinuation QTL visualizations such that Completed/Ongoing cases do not appear alongside discontinuation reasons, and listing",
+      "Align the Numerator of the QTL Overviews with all the respective visualizations to avoid any confusion",
+    )
+  )
+}
