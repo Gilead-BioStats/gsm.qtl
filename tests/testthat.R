@@ -7,6 +7,7 @@
 # * https://testthat.r-lib.org/articles/special-files.html
 
 library(testthat)
+library(gsm.core)
 library(gsm.qtl)
 library(dplyr)
 library(purrr)
