@@ -234,10 +234,10 @@ test_that("Report_QTL renders a valid HTML report for single metric input (#4, #
   expect_valid_html_output(out)
 })
 
-test_that("Example QTL Report for 2026Q1 meets ui/ux/aesthetics expectations (#93)", {
+test_that("Example QTL Report for 2026Q1 meets ui/ux/aesthetics expectations (#94)", {
   qcthat::ExpectUserAccepts(
     "Example QTL Report for 2026Q1 meets ui/ux/aesthetics expectations.",
-    intIssue = 93,
+    intIssue = 94,
     chrInstructions = "Load example report attached to #91",
     chrChecks = c(
       "Ensure the Criteria/Site and Criteria/Country have an appropriate zoom at initial display",
