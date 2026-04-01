@@ -36,7 +36,7 @@ test_that("calc_fig_size covers n_rows, base, and per arguments (#80)", {
   expect_error(calc_fig_size(n_rows = -1), "single non-negative")
 })
 
-test_that("calc_plotly_footnote_layout expands bottom margin for wrapped footnotes", {
+test_that("calc_plotly_footnote_layout expands bottom margin for wrapped footnotes (#90)", {
   layout <- gsm.qtl:::calc_plotly_footnote_layout(
     paste(rep("footnote", 30), collapse = " "),
     margins = list(l = 40, r = 40, b = 50, t = 40),
