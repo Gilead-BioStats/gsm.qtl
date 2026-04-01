@@ -44,13 +44,13 @@ discontinuation_groupBar <- function(df,
     theme_classic()
 
   n_groups_without_discontinuation <- df %>%
-    filter(!(!!enexpr(varStatus) %in% valuesDiscontinued)) %>%
+    filter(!(!!enexpr(varGroupID) %in% groups_with_discontinuation)) %>%
     pull(!!enexpr(varGroupID)) %>%
     unique() %>%
     length()
 
   n_participants_without_discontinuation <- df %>%
-    filter(!(!!enexpr(varStatus) %in% valuesDiscontinued)) %>%
+    filter(!(!!enexpr(varGroupID) %in% groups_with_discontinuation)) %>%
     nrow()
 
   footnote_text <- if (n_groups_without_discontinuation > 0) {
@@ -67,16 +67,13 @@ discontinuation_groupBar <- function(df,
     NULL
   }
 
+  footnote_layout <- calc_plotly_footnote_layout(footnote_text)
+
   # Create the plotly object
   x <- plotly::ggplotly(group_bar, tooltip = c("text"), h = calc_fig_size(n_rows = length(groups_with_discontinuation))) %>%
     layout(
-      margin = list(l = 50, r = 50, b = 150, t = 50),
-      annotations = list(
-        x = 1, y = -0.5, text = footnote_text,
-        xref = "paper", yref = "paper", showarrow = F,
-        xanchor = "right", yanchor = "auto", xshift = 0, yshift = 0,
-        font = list(size = 10)
-      )
+      margin = footnote_layout$margin,
+      annotations = footnote_layout$annotations
     )
   return(x)
 }

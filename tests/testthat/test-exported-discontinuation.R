@@ -15,11 +15,16 @@ test_that("discontinuation_groupBar uses all arguments (#14, #21, #22, #76, #90)
 
   default_text <- plotly_trace_text(out)
   custom_text <- plotly_trace_text(out_custom)
+  annotations <- built$x$layout[["annotations"]]
 
   expect_true(any(grepl("Discontinuation Status: Premature Discontinuation", default_text, fixed = TRUE)))
   expect_true(any(grepl("Discontinuation Status: Premature Discontinuation", custom_text, fixed = TRUE)))
   expect_match(built$x$layout$title$text, "Participant Count by Site", fixed = TRUE)
-  expect_match(built$x$layout$annotations[[1]]$text, "Excludes site\\(s\\)")
+  expect_match(annotations[[1]][["text"]], "Excludes .* site\\(s\\)")
+  expect_match(annotations[[1]][["text"]], "prematurely discontinued participants")
+  expect_equal(annotations[[1]][["yanchor"]], "top")
+  expect_lt(annotations[[1]][["yshift"]], 0)
+  expect_gt(built$x$layout$margin$b, 50)
 })
 
 test_that("discontinuation_reasonBar uses df and reason variable (#14, #21, #22)", {

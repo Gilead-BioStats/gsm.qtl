@@ -11,13 +11,36 @@ test_that("eligibility_groupBar uses all arguments (#14, #15, #21, #22, #60)", {
 
   count_text <- plotly_trace_text(out_counts)
   perc_text <- plotly_trace_text(out_perc)
+  annotations <- built_counts$x$layout[["annotations"]]
 
   expect_true(any(grepl("Eligibility Status: Ineligible", count_text, fixed = TRUE)))
   expect_true(any(grepl("Site: S01", count_text, fixed = TRUE)))
   expect_true(any(grepl("Percentage:", perc_text, fixed = TRUE)))
   expect_match(built_counts$x$layout$title$text, "Participant Count by Site", fixed = TRUE)
   expect_match(built_perc$x$layout$title$text, "Participant Percentage by Site", fixed = TRUE)
-  expect_match(built_counts$x$layout$annotations[[1]]$text, "Excludes site\\(s\\)")
+  expect_null(annotations)
+  expect_equal(built_counts$x$layout$margin$b, 50)
+})
+
+test_that("eligibility_groupBar reserves space when a footnote is present", {
+  df <- dplyr::bind_rows(
+    qtl_test_participant_df(),
+    tibble::tribble(
+      ~invid, ~country, ~subjid, ~Source, ~ietestcd_concat, ~dvdtm, ~eligibility_criteria, ~compyn, ~compreas,
+      "S04", "US", "SUBJ-007", "Neither", "", "2024-04-01", "", "Y", "",
+      "S04", "US", "SUBJ-008", "Neither", "", "2024-04-02", "", "", ""
+    )
+  )
+
+  out <- eligibility_groupBar(df = df, varGroupID = invid, strGroupLabel = "Site", bPercentage = FALSE)
+  annotations <- out$x$layoutAttrs[[1]][["annotations"]]
+  margins <- out$x$layoutAttrs[[1]][["margin"]]
+
+  expect_match(annotations[[1]][["text"]], "Excludes .* site\\(s\\)")
+  expect_match(annotations[[1]][["text"]], "no ineligible participants")
+  expect_equal(annotations[[1]][["yanchor"]], "top")
+  expect_lt(annotations[[1]][["yshift"]], 0)
+  expect_gt(margins[["b"]], 50)
 })
 
 test_that("eligibility_groupBar bPercentage = FALSE shows counts (#60)", {
