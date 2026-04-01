@@ -1,4 +1,4 @@
-test_that("Analyze_OneSideProp handles required and optional arguments (#80)", {
+test_that("Analyze_OneSideProp handles required and optional arguments (#5, #11, #46)", {
   df_transformed <- tibble::tribble(
     ~GroupID, ~GroupLevel, ~Numerator, ~Denominator, ~Metric,
     "ABC", "Study", 25, 100, 0.25

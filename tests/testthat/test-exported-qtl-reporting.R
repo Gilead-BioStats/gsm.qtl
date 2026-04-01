@@ -184,7 +184,7 @@ test_that("Report_QTL passes arguments to render (#4, #9, #19)", {
   expect_equal(captured$params$lListings, l_listings)
 })
 
-test_that("Report_QTL renders a valid HTML report for full metric input (#4, #9, #19, #35)", {
+test_that("Report_QTL renders a valid HTML report for full metric input (#4, #9, #19, #30, #35)", {
   skip_if_not_installed("rmarkdown")
   skip_if_not_installed("knitr")
   skip_if_not_installed("gsm.kri")
