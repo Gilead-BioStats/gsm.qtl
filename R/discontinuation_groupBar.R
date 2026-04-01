@@ -43,12 +43,36 @@ discontinuation_groupBar <- function(df,
     )) +
     theme_classic()
 
+  n_groups_without_discontinuation <- df %>%
+    filter(!(!!enexpr(varStatus) %in% valuesDiscontinued)) %>%
+    pull(!!enexpr(varGroupID)) %>%
+    unique() %>%
+    length()
+
+  n_participants_without_discontinuation <- df %>%
+    filter(!(!!enexpr(varStatus) %in% valuesDiscontinued)) %>%
+    nrow()
+
+  footnote_text <- if (n_groups_without_discontinuation > 0) {
+    paste0(
+      "Note: Excludes ",
+      n_groups_without_discontinuation,
+      " ",
+      tolower(strGroupLabel),
+      "(s) with no prematurely discontinued participants (",
+      n_participants_without_discontinuation,
+      " participants)."
+    )
+  } else {
+    NULL
+  }
+
   # Create the plotly object
   x <- plotly::ggplotly(group_bar, tooltip = c("text"), h = calc_fig_size(n_rows = length(groups_with_discontinuation))) %>%
     layout(
       margin = list(l = 50, r = 50, b = 150, t = 50),
       annotations = list(
-        x = 1, y = -0.5, text = paste0("Note: Excludes ", tolower(strGroupLabel), "(s)", " with no ineligible participants."),
+        x = 1, y = -0.5, text = footnote_text,
         xref = "paper", yref = "paper", showarrow = F,
         xanchor = "right", yanchor = "auto", xshift = 0, yshift = 0,
         font = list(size = 10)

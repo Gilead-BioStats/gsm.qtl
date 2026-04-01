@@ -66,12 +66,29 @@ eligibility_groupBar <- function(df, varGroupID, strGroupLabel, bPercentage = FA
       theme_classic()
   }
 
+  n_groups_without_ineligible <- df %>%
+    filter(Source == "Neither") %>%
+    pull(!!enexpr(varGroupID)) %>%
+    unique() %>%
+    length()
+
+  n_participants_without_ineligible <- df %>%
+    filter(Source == "Neither") %>%
+    nrow()
+
+   # Add footnote text to plot if there are groups with 0 ineligible participants
+  footnote_text <- if (n_groups_without_ineligible > 0) {
+    paste0("Note: Excludes ", n_groups_without_ineligible, " ", tolower(strGroupLabel), "(s) with no ineligible participants (", n_participants_without_ineligible, " participants).")
+  } else {
+    NULL
+  }
+
   # Create the plotly object
   x <- plotly::ggplotly(group_bar, tooltip = c("text"), h = calc_fig_size(n_rows = length(groups_with_ineligible))) %>%
     layout(
       margin = list(l = 50, r = 50, b = 150, t = 50),
       annotations = list(
-        x = 1, y = -0.5, text = paste0("Note: Excludes ", tolower(strGroupLabel), "(s)", " with no ineligible participants."),
+        x = 1, y = -0.5, text = footnote_text,
         xref = "paper", yref = "paper", showarrow = F,
         xanchor = "right", yanchor = "auto", xshift = 0, yshift = 0,
         font = list(size = 10)
