@@ -243,7 +243,7 @@ test_that("Example QTL Report for 2026Q1 meets ui/ux/aesthetics expectations (#9
       "Ensure the Criteria/Site and Criteria/Country have an appropriate zoom at initial display",
       "Add Site/Criteria and Country/Criteria where the axes and fill legend are flipped to get an alternative view",
       "Cleanup the Premature Discontinuation QTL visualizations such that Completed/Ongoing cases do not appear alongside discontinuation reasons, and listing",
-      "Align the Numerator of the QTL Overviews with all the respective visualizations to avoid any confusion",
+      "Align the Numerator of the QTL Overviews with all the respective visualizations to avoid any confusion"
     )
   )
 })
