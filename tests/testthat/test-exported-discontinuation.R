@@ -52,6 +52,19 @@ test_that("reasons_groupBar uses group and reason arguments (#14, #21, #22)", {
   expect_match(built$x$layout$title$text, "Discontinuation Reason by Site", fixed = TRUE)
 })
 
+test_that("reasons_groupBar swaps axes correctly when bSwapAxes is TRUE (#90)", {
+  df <- qtl_test_participant_df()
+  out <- reasons_groupBar(df = df, varGroupID = invid, varCompreas = compreas, strGroupLabel = "Site", bSwapAxes = TRUE)
+  built <- plotly::plotly_build(out)
+
+  expect_s3_class(out, "plotly")
+
+  tooltip_text <- plotly_trace_text(out)
+  expect_true(any(grepl("Site:", tooltip_text, fixed = TRUE)))
+  expect_true(any(grepl("Discontinuation Reason:", tooltip_text, fixed = TRUE)))
+  expect_match(built$x$layout$title$text, "Site by Discontinuation Reason", fixed = TRUE)
+})
+
 test_that("discontinuation_map_reasons respects yaml_path (#21, #22)", {
   df <- qtl_test_participant_df()
 

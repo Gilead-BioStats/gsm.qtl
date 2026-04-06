@@ -73,7 +73,9 @@ discontinuation_groupBar <- function(df,
   x <- plotly::ggplotly(group_bar, tooltip = c("text"), h = calc_fig_size(n_rows = length(groups_with_discontinuation))) %>%
     layout(
       margin = footnote_layout$margin,
-      annotations = footnote_layout$annotations
+      annotations = footnote_layout$annotations,
+      xaxis = list(autorange = TRUE),
+      yaxis = list(autorange = TRUE)
     )
   return(x)
 }

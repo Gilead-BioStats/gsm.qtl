@@ -82,5 +82,6 @@ criteria_groupBar <- function(df, varGroupID, strGroupLabel, bSwapAxes = FALSE) 
   }
 
   # Create plotly
-  plotly::ggplotly(group_criteria_bar, tooltip = c("text"), h = calc_fig_size(n_rows = distinct_n_y))
+  plotly::ggplotly(group_criteria_bar, tooltip = c("text"), h = calc_fig_size(n_rows = distinct_n_y)) %>%
+    layout(xaxis = list(autorange = TRUE), yaxis = list(autorange = TRUE))
 }

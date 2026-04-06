@@ -8,7 +8,7 @@ title: "QTL0002 - Premature Study Discontinuation"
 ```{r, echo=FALSE}
 QTL_Overview(dfResults = qtl0002_params$dfResults,
              dSnapshot = qtl0002_params$latest_snapshot,
-             strNum = "Subjects Discontinued - Study",
+             strNum = "Participants Discontinued - Study",
              strDenom = "Total Enrolled", 
              strQTL = "Current Premature Discontinuation Rate")
 ```
@@ -45,15 +45,25 @@ reasons_groupBar(df = qtl0002_params$dfListing, varGroupID = invid, varCompreas 
 reasons_groupBar(df = qtl0002_params$dfListing, varGroupID = country, varCompreas = compreas, strGroupLabel = "Country")
 ```
 
+### Site/Reasons
+```{r, echo = FALSE, results = 'asis', fig.height=4}
+reasons_groupBar(df = qtl0002_params$dfListing, varGroupID = invid, varCompreas = compreas, strGroupLabel = "Site", bSwapAxes = TRUE)
+```
+
+### Country/Reasons
+```{r, echo = FALSE, results = 'asis', fig.height=4}
+reasons_groupBar(df = qtl0002_params$dfListing, varGroupID = country, varCompreas = compreas, strGroupLabel = "Country", bSwapAxes = TRUE)
+```
+
 ## Discontinuation Listing
 ```{r, echo = FALSE}
 discontinuation_listing <- qtl0002_params$dfListing %>%
   dplyr::filter(compyn %in% c("N")) %>% 
-  select(subjid, invid, country, compreas) %>% 
+  select(country, invid, subjid, compreas) %>%
   rename(
-    `Subject ID` = subjid,
+    Country = country,
     `Site ID` = invid,
-    `Country` = country,
+    `Participant ID` = subjid,
     `Discontinuation Reason` = compreas
   )
 

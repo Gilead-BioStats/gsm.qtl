@@ -7,6 +7,7 @@
 eligibility_sourceBar <- function(df) {
   source_bar <- df %>%
     filter(Source != "Neither") %>%
+    mutate(Source = ifelse(Source == "Eligibility IPD only", "Eligibility PD Only", Source)) %>%
     ggplot(
       aes(
         y = Source,
@@ -28,5 +29,6 @@ eligibility_sourceBar <- function(df) {
       axis.text.y = element_text(angle = 45, vjust = 1), # tilt to avoid overlap
       panel.grid.major.y = element_blank()
     )
-  plotly::ggplotly(source_bar, tooltip = c("text"), h = calc_fig_size(n_rows = length(unique(df$Source))))
+  plotly::ggplotly(source_bar, tooltip = c("text"), h = calc_fig_size(n_rows = length(unique(df$Source)))) %>%
+    layout(xaxis = list(autorange = TRUE), yaxis = list(autorange = TRUE))
 }

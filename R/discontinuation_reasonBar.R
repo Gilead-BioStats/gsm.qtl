@@ -24,5 +24,6 @@ discontinuation_reasonBar <- function(df, varCompreas) {
       axis.text.y = element_text(angle = 45, vjust = 1), # tilt to avoid overlap
       panel.grid.major.y = element_blank()
     )
-  plotly::ggplotly(reasonbar, tooltip = c("label"), h = calc_fig_size(n_rows = dplyr::n_distinct(dplyr::pull(df, {{ varCompreas }}))))
+  plotly::ggplotly(reasonbar, tooltip = c("label"), h = calc_fig_size(n_rows = dplyr::n_distinct(dplyr::pull(df, {{ varCompreas }})))) %>%
+    layout(xaxis = list(autorange = TRUE), yaxis = list(autorange = TRUE))
 }

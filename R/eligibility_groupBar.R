@@ -10,6 +10,9 @@
 #' @export
 eligibility_groupBar <- function(df, varGroupID, strGroupLabel, bPercentage = FALSE) {
   # Parse out groups with 0 ineligible
+  df <- df %>%
+    mutate(Source = ifelse(Source == "Eligibility IPD only", "Eligibility PD Only", Source))
+
   groups_with_ineligible <- df %>%
     filter(Source != "Neither") %>%
     pull(!!enexpr(varGroupID)) %>%
@@ -89,7 +92,9 @@ eligibility_groupBar <- function(df, varGroupID, strGroupLabel, bPercentage = FA
   x <- plotly::ggplotly(group_bar, tooltip = c("text"), h = calc_fig_size(n_rows = length(groups_with_ineligible))) %>%
     layout(
       margin = footnote_layout$margin,
-      annotations = footnote_layout$annotations
+      annotations = footnote_layout$annotations,
+      xaxis = list(autorange = TRUE),
+      yaxis = list(autorange = TRUE)
     )
   return(x)
 }

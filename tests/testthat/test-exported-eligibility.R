@@ -132,7 +132,7 @@ test_that("eligibility_listing covers df and download arguments (#21, #22, #24, 
 
   expect_s3_class(out_download, "data.frame")
   expect_true(inherits(out_gt, "shiny.tag") || inherits(out_gt, "shiny.tag.list"))
-  expect_true(all(c("Site", "Country", "Subject ID", "Which I/E") %in% names(out_download)))
+  expect_true(all(c("Country", "Site", "Participant ID", "Which I/E") %in% names(out_download)))
   expect_true(nrow(out_download) > 0)
 })
 
