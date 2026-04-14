@@ -6,7 +6,7 @@ title: "QTL0002 - Premature Study Discontinuation"
 
 ## Study Overview
 ```{r, echo=FALSE}
-QTL_Overview(dfResults = qtl0002_params$dfResults,
+gsm.qtl::QTL_Overview(dfResults = qtl0002_params$dfResults,
              dSnapshot = qtl0002_params$latest_snapshot,
              strNum = "Participants Discontinued - Study",
              strDenom = "Total Enrolled", 
@@ -15,65 +15,71 @@ QTL_Overview(dfResults = qtl0002_params$dfResults,
 
 ## Time Series Chart
 ```{r, echo=FALSE, results='asis', fig.height=4}
-QTL_lineplot_v2(dfResults = qtl0002_params$dfResults, strQTL = "Premature Discontinuation Rate")
+gsm.qtl::QTL_lineplot_v2(dfResults = qtl0002_params$dfResults, strQTL = "Premature Discontinuation Rate")
 ```
 
 ## Bar Charts {.tabset .tabset-pills}
 
 ### Site
 ```{r, echo = FALSE, results = 'asis', fig.height=4}
-discontinuation_groupBar(df = qtl0002_params$dfListing, varGroupID = invid, strGroupLabel = "Site")
+gsm.qtl::discontinuation_groupBar(df = qtl0002_params$dfListing, varGroupID = invid, strGroupLabel = "Site")
 ```
 
 ### Country
 ```{r, echo = FALSE, results = 'asis', fig.height=4}
-discontinuation_groupBar(df = qtl0002_params$dfListing, varGroupID = country, strGroupLabel = "Country")
+gsm.qtl::discontinuation_groupBar(df = qtl0002_params$dfListing, varGroupID = country, strGroupLabel = "Country")
 ```
 
 ### Reasons
 ```{r, echo = FALSE, results = 'asis', fig.height=4}
-discontinuation_reasonBar(df = qtl0002_params$dfListing, varCompreas = compreas)
+gsm.qtl::discontinuation_reasonBar(df = qtl0002_params$dfListing, varCompreas = compreas)
 ```
 
 ### Reasons/Site
 ```{r, echo = FALSE, results = 'asis', fig.height=4}
-reasons_groupBar(df = qtl0002_params$dfListing, varGroupID = invid, varCompreas = compreas, strGroupLabel = "Site")
+gsm.qtl::reasons_groupBar(df = qtl0002_params$dfListing, varGroupID = invid, varCompreas = compreas, strGroupLabel = "Site")
 ```
 
 ### Reasons/Country
 ```{r, echo = FALSE, results = 'asis', fig.height=4}
-reasons_groupBar(df = qtl0002_params$dfListing, varGroupID = country, varCompreas = compreas, strGroupLabel = "Country")
+gsm.qtl::reasons_groupBar(df = qtl0002_params$dfListing, varGroupID = country, varCompreas = compreas, strGroupLabel = "Country")
 ```
 
 ### Site/Reasons
 ```{r, echo = FALSE, results = 'asis', fig.height=4}
-reasons_groupBar(df = qtl0002_params$dfListing, varGroupID = invid, varCompreas = compreas, strGroupLabel = "Site", bSwapAxes = TRUE)
+gsm.qtl::reasons_groupBar(df = qtl0002_params$dfListing, varGroupID = invid, varCompreas = compreas, strGroupLabel = "Site", bSwapAxes = TRUE)
 ```
 
 ### Country/Reasons
 ```{r, echo = FALSE, results = 'asis', fig.height=4}
-reasons_groupBar(df = qtl0002_params$dfListing, varGroupID = country, varCompreas = compreas, strGroupLabel = "Country", bSwapAxes = TRUE)
+gsm.qtl::reasons_groupBar(df = qtl0002_params$dfListing, varGroupID = country, varCompreas = compreas, strGroupLabel = "Country", bSwapAxes = TRUE)
 ```
 
 ## Discontinuation Listing
 ```{r, echo = FALSE}
-discontinuation_listing <- qtl0002_params$dfListing %>%
-  dplyr::filter(compyn %in% c("N")) %>% 
-  select(country, invid, subjid, compreas) %>%
-  rename(
-    Country = country,
-    `Site ID` = invid,
-    `Participant ID` = subjid,
-    `Discontinuation Reason` = compreas
-  )
+discontinuation_listing <- dplyr::rename(
+  dplyr::select(
+    dplyr::filter(qtl0002_params$dfListing, compyn %in% c("N")),
+    country,
+    invid,
+    subjid,
+    compreas
+  ),
+  Country = country,
+  `Site ID` = invid,
+  `Participant ID` = subjid,
+  `Discontinuation Reason` = compreas
+)
 
 # output the listing in the html
-discontinuation_listing %>% 
-  gt() %>% 
-  scrollable_gt(., height = "500px", min_table_width = "100px")
+gsm.qtl::scrollable_gt(
+  gt::gt(discontinuation_listing),
+  height = "500px",
+  min_table_width = "100px"
+)
 
 # prepare the download
-csv_txt <- paste(capture.output(write.csv(discontinuation_listing, row.names = FALSE)), collapse = "\n")# turn into a data-URI (single-file HTML friendly)
+csv_txt <- paste(utils::capture.output(utils::write.csv(discontinuation_listing, row.names = FALSE)), collapse = "\n")# turn into a data-URI (single-file HTML friendly)
 href <- base64enc::dataURI(charToRaw(csv_txt), mime = "text/csv;charset=utf-8")
 
 knitr::asis_output(
