@@ -48,15 +48,25 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">eligibility_groupBar</span><span class="op">(</span><span class="va">df</span>, <span class="va">varGroupID</span>, <span class="va">strGroupLabel</span>, bPercentage <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">eligibility_groupBar</span><span class="op">(</span></span>
+<span>  <span class="va">dfNum</span>,</span>
+<span>  <span class="va">dfDenom</span>,</span>
+<span>  <span class="va">varGroupID</span>,</span>
+<span>  <span class="va">strGroupLabel</span>,</span>
+<span>  bPercentage <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
 
 
-<dl><dt id="arg-df">df<a class="anchor" aria-label="anchor" href="#arg-df"></a></dt>
-<dd><p>A <code>data.frame</code> containing the participant level dataset with eligibility</p></dd>
+<dl><dt id="arg-dfnum">dfNum<a class="anchor" aria-label="anchor" href="#arg-dfnum"></a></dt>
+<dd><p>A <code>data.frame</code> containing the participant level dataset with only ineligibility values</p></dd>
+
+
+<dt id="arg-dfdenom">dfDenom<a class="anchor" aria-label="anchor" href="#arg-dfdenom"></a></dt>
+<dd><p>A <code>data.frame</code> containing the participant level dataset with all inc/exc values.</p></dd>
 
 
 <dt id="arg-vargroupid">varGroupID<a class="anchor" aria-label="anchor" href="#arg-vargroupid"></a></dt>

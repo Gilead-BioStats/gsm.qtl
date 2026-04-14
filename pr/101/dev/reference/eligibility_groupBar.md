@@ -5,15 +5,26 @@ Stacked Eligibility Bar Chart
 ## Usage
 
 ``` r
-eligibility_groupBar(df, varGroupID, strGroupLabel, bPercentage = FALSE)
+eligibility_groupBar(
+  dfNum,
+  dfDenom,
+  varGroupID,
+  strGroupLabel,
+  bPercentage = FALSE
+)
 ```
 
 ## Arguments
 
-- df:
+- dfNum:
 
-  A `data.frame` containing the participant level dataset with
-  eligibility
+  A `data.frame` containing the participant level dataset with only
+  ineligibility values
+
+- dfDenom:
+
+  A `data.frame` containing the participant level dataset with all
+  inc/exc values.
 
 - varGroupID:
 
