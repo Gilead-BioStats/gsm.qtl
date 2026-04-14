@@ -1,8 +1,9 @@
 test_that("eligibility_groupBar uses all arguments (#14, #15, #21, #22, #60)", {
   df <- qtl_test_participant_df()
+  dfNum <- df %>% dplyr::filter(Source != "Neither")
 
-  out_counts <- eligibility_groupBar(df = df, varGroupID = invid, strGroupLabel = "Site", bPercentage = FALSE)
-  out_perc <- eligibility_groupBar(df = df, varGroupID = invid, strGroupLabel = "Site", bPercentage = TRUE)
+  out_counts <- eligibility_groupBar(dfNum = dfNum, dfDenom = df, varGroupID = invid, strGroupLabel = "Site", bPercentage = FALSE)
+  out_perc <- eligibility_groupBar(dfNum = dfNum, dfDenom = df, varGroupID = invid, strGroupLabel = "Site", bPercentage = TRUE)
   built_counts <- plotly::plotly_build(out_counts)
   built_perc <- plotly::plotly_build(out_perc)
 
@@ -31,8 +32,9 @@ test_that("eligibility_groupBar reserves space when a footnote is present (#90)"
       "S04", "US", "SUBJ-008", "Neither", "", "2024-04-02", "", "", ""
     )
   )
+  dfNum <- df %>% dplyr::filter(Source != "Neither")
 
-  out <- eligibility_groupBar(df = df, varGroupID = invid, strGroupLabel = "Site", bPercentage = FALSE)
+  out <- eligibility_groupBar(dfNum = dfNum, dfDenom = df, varGroupID = invid, strGroupLabel = "Site", bPercentage = FALSE)
   annotations <- out$x$layoutAttrs[[1]][["annotations"]]
   margins <- out$x$layoutAttrs[[1]][["margin"]]
 
@@ -45,7 +47,8 @@ test_that("eligibility_groupBar reserves space when a footnote is present (#90)"
 
 test_that("eligibility_groupBar bPercentage = FALSE shows counts (#60)", {
   df <- qtl_test_participant_df()
-  out <- eligibility_groupBar(df = df, varGroupID = invid, strGroupLabel = "Site", bPercentage = FALSE)
+  dfNum <- df %>% dplyr::filter(Source != "Neither")
+  out <- eligibility_groupBar(dfNum = dfNum, dfDenom = df, varGroupID = invid, strGroupLabel = "Site", bPercentage = FALSE)
   built <- plotly::plotly_build(out)
 
   expect_s3_class(out, "plotly")
@@ -55,7 +58,8 @@ test_that("eligibility_groupBar bPercentage = FALSE shows counts (#60)", {
 
 test_that("eligibility_groupBar bPercentage = TRUE shows percentages (#60)", {
   df <- qtl_test_participant_df()
-  out <- eligibility_groupBar(df = df, varGroupID = invid, strGroupLabel = "Site", bPercentage = TRUE)
+  dfNum <- df %>% dplyr::filter(Source != "Neither")
+  out <- eligibility_groupBar(dfNum = dfNum, dfDenom = df, varGroupID = invid, strGroupLabel = "Site", bPercentage = TRUE)
   built <- plotly::plotly_build(out)
 
   expect_s3_class(out, "plotly")
@@ -65,8 +69,9 @@ test_that("eligibility_groupBar bPercentage = TRUE shows percentages (#60)", {
 
 test_that("eligibility_groupBar bPercentage TRUE uses stacked fill position (#60)", {
   df <- qtl_test_participant_df()
-  out_counts <- eligibility_groupBar(df = df, varGroupID = invid, strGroupLabel = "Site", bPercentage = FALSE)
-  out_perc <- eligibility_groupBar(df = df, varGroupID = invid, strGroupLabel = "Site", bPercentage = TRUE)
+  dfNum <- df %>% dplyr::filter(Source != "Neither")
+  out_counts <- eligibility_groupBar(dfNum = dfNum, dfDenom = df, varGroupID = invid, strGroupLabel = "Site", bPercentage = FALSE)
+  out_perc <- eligibility_groupBar(dfNum = dfNum, dfDenom = df, varGroupID = invid, strGroupLabel = "Site", bPercentage = TRUE)
   built_counts <- plotly::plotly_build(out_counts)
   built_perc <- plotly::plotly_build(out_perc)
 
