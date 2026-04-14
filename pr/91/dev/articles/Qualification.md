@@ -89,12 +89,12 @@ Each specification includes the following components:
 
 **other attached packages:** *gsm.qtl(v.1.1.1)*, *testthat(v.3.3.2)*,
 *riskmetric(v.0.2.7)*, *stringr(v.1.6.0)*, *gh(v.1.5.0)*,
-*pander(v.0.6.6)*, *purrr(v.1.2.1)*, *dplyr(v.1.2.1)*, *knitr(v.1.51)*,
+*pander(v.0.6.6)*, *purrr(v.1.2.2)*, *dplyr(v.1.2.1)*, *knitr(v.1.51)*,
 *gt(v.1.3.0)* and *gsm.core(v.1.1.8)*
 
 **loaded via a namespace (and not attached):** *gtable(v.0.3.6)*,
 *xfun(v.0.57)*, *bslib(v.0.10.0)*, *ggplot2(v.4.0.2)*,
-*htmlwidgets(v.1.6.4)*, *devtools(v.2.5.0)*, *vctrs(v.0.7.2)*,
+*htmlwidgets(v.1.6.4)*, *devtools(v.2.5.0)*, *vctrs(v.0.7.3)*,
 *tools(v.4.5.3)*, *generics(v.0.1.4)*, *curl(v.7.0.0)*,
 *tibble(v.3.3.1)*, *pkgconfig(v.2.0.3)*, *data.table(v.1.18.2.1)*,
 *RColorBrewer(v.1.1-3)*, *S7(v.0.2.1)*, *desc(v.1.4.3)*,
@@ -105,15 +105,15 @@ Each specification includes the following components:
 *pkgdown(v.2.2.0)*, *jquerylib(v.0.1.4)*, *tidyr(v.1.3.2)*,
 *ellipsis(v.0.3.3)*, *cranlogs(v.2.1.1)*, *cachem(v.1.1.0)*,
 *sessioninfo(v.1.2.3)*, *tidyselect(v.1.2.1)*, *digest(v.0.6.39)*,
-*stringi(v.1.8.7)*, *duckdb(v.1.5.1)*, *forcats(v.1.0.1)*,
+*stringi(v.1.8.7)*, *duckdb(v.1.5.2)*, *forcats(v.1.0.1)*,
 *rprojroot(v.2.1.1)*, *fastmap(v.1.2.0)*, *grid(v.4.5.3)*,
-*here(v.1.0.2)*, *cli(v.3.6.5)*, *magrittr(v.2.0.5)*,
+*here(v.1.0.2)*, *cli(v.3.6.6)*, *magrittr(v.2.0.5)*,
 *triebeard(v.0.4.1)*, *pkgbuild(v.1.4.8)*, *withr(v.3.0.2)*,
 *waldo(v.0.6.2)*, *scales(v.1.4.0)*, *backports(v.1.5.1)*,
 *rmarkdown(v.2.31)*, *httr(v.1.4.8)*, *otel(v.0.2.0)*, *ragg(v.1.5.2)*,
 *memoise(v.2.0.1)*, *evaluate(v.1.0.5)*, *log4r(v.0.4.4)*,
 *covr(v.3.6.5)*, *rex(v.1.2.2)*, *viridisLite(v.0.4.3)*,
-*rlang(v.1.1.7)*, *urltools(v.1.7.3.1)*, *Rcpp(v.1.1.1)*,
+*rlang(v.1.2.0)*, *urltools(v.1.7.3.1)*, *Rcpp(v.1.1.1)*,
 *DBI(v.1.3.0)*, *glue(v.1.8.0)*, *BiocManager(v.1.30.27)*,
 *xml2(v.1.5.2)*, *pkgload(v.1.5.1)*, *rstudioapi(v.0.18.0)*,
 *jsonlite(v.2.0.0)*, *R6(v.2.6.1)*, *systemfonts(v.1.3.2)* and
