@@ -34,7 +34,7 @@ reporting_wf <- gsm.core::MakeWorkflowList(strNames = c("Results", "Groups", "Me
 
 lRaw <- map_depth(ie_data, 1, gsm.mapping::Ingest, mappings_spec)
 mapped <- map_depth(lRaw, 1, ~ gsm.core::RunWorkflows(mappings_wf, .x))
-# Cleanup discontinuation reasons instead of modifiying gsm.datasim
+# Cleanup discontinuation reasons instead of modifying gsm.datasim
 mapped <- map(mapped, ~ {
   .x$Mapped_STUDCOMP <- .x$Mapped_STUDCOMP %>%
     {
