@@ -106,6 +106,9 @@ test_that("criteria_groupBar uses grouping and label arguments (#14, #21, #22, #
   criteria_text <- plotly_trace_text(out)
   expect_true(any(grepl("Criteria:", criteria_text, fixed = TRUE)))
   expect_true(any(grepl("Site:", criteria_text, fixed = TRUE)))
+  expect_true(any(grepl("Criteria: I001", criteria_text, fixed = TRUE)))
+  expect_true(any(grepl("Criteria: E010", criteria_text, fixed = TRUE)))
+  expect_false(any(grepl("Criteria: I001, E010", criteria_text, fixed = TRUE)))
   expect_match(built$x$layout$title$text, "Criteria by Site", fixed = TRUE)
 })
 
