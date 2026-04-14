@@ -6,7 +6,6 @@
 #' @export
 eligibility_listing <- function(df, download = FALSE) {
   listing <- df %>%
-    mutate(Source = ifelse(Source == "Eligibility IPD only", "Eligibility PD Only", Source)) %>%
     select(country, invid, subjid, Source, ietestcd_concat, dvdtm, eligibility_criteria) %>%
     tidyr::separate(
       dvdtm,

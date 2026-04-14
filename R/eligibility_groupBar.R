@@ -10,9 +10,6 @@
 #' @export
 eligibility_groupBar <- function(df, varGroupID, strGroupLabel, bPercentage = FALSE) {
   # Parse out groups with 0 ineligible
-  df <- df %>%
-    mutate(Source = ifelse(Source == "Eligibility IPD only", "Eligibility PD Only", Source))
-
   groups_with_ineligible <- df %>%
     filter(Source != "Neither") %>%
     pull(!!enexpr(varGroupID)) %>%
