@@ -20,7 +20,6 @@ criteria_groupBar <- function(df, varGroupID, strGroupLabel, bSwapAxes = FALSE) 
 
   if (bSwapAxes) {
     distinct_n_y <- df_counts %>% dplyr::distinct(!!var_sym) %>% nrow()
-    df_totals <- df_counts %>% dplyr::group_by(!!var_sym) %>% dplyr::summarise(n = sum(n), .groups = "drop")
 
     group_criteria_bar <- df_counts %>%
       ggplot(
@@ -37,7 +36,7 @@ criteria_groupBar <- function(df, varGroupID, strGroupLabel, bSwapAxes = FALSE) 
       ) +
       geom_col() +
       geom_text(
-        data = df_totals,
+        data = df_counts %>% dplyr::group_by(!!var_sym) %>% dplyr::summarise(n = sum(n), .groups = "drop"),
         aes(x = n, y = .data[[var_name]], label = n),
         inherit.aes = FALSE,
         nudge_x = 0.1,
@@ -63,7 +62,7 @@ criteria_groupBar <- function(df, varGroupID, strGroupLabel, bSwapAxes = FALSE) 
             "\nCriteria: ", ietestcd_concat,
             "\nCount: ", n
           )
-       )
+        )
       ) +
       geom_col() +
       geom_text(
@@ -83,34 +82,6 @@ criteria_groupBar <- function(df, varGroupID, strGroupLabel, bSwapAxes = FALSE) 
   }
 
   # Create plotly
-  x <- plotly::ggplotly(group_criteria_bar, tooltip = c("text"), h = calc_fig_size(n_rows = distinct_n_y)) %>%
+  plotly::ggplotly(group_criteria_bar, tooltip = c("text"), h = calc_fig_size(n_rows = distinct_n_y)) %>%
     layout(xaxis = list(autorange = TRUE), yaxis = list(autorange = TRUE))
-
-  if (bSwapAxes) {
-    group_levels <- df_totals %>% dplyr::pull(!!var_sym) %>% as.character()
-
-    extract_group_labels <- function(text_values) {
-      first_line <- sub("(<br\\s*/?>|\\n).*$", "", as.character(text_values))
-      sub("^[^:]+: ", "", first_line)
-    }
-
-    for (i in seq_along(x$x$data)) {
-      trace <- x$x$data[[i]]
-
-      if (identical(trace$type, "bar") && !is.null(trace$text)) {
-        x$x$data[[i]]$y <- extract_group_labels(trace$text)
-        x$x$data[[i]]$orientation <- "h"
-      }
-
-      if (identical(trace$type, "scatter") && !is.null(trace$text)) {
-        x$x$data[[i]]$y <- group_levels
-      }
-    }
-
-    x$x$layout$yaxis$type <- "category"
-    x$x$layout$yaxis$categoryorder <- "array"
-    x$x$layout$yaxis$categoryarray <- group_levels
-  }
-
-  x
 }

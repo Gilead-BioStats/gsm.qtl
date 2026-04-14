@@ -6,8 +6,7 @@
 #' @export
 eligibility_sourceBar <- function(df) {
   source_bar <- df %>%
-    filter(Source != "Neither") %>%
-    mutate(Source = ifelse(Source == "Eligibility IPD only", "Eligibility PD Only", Source)) %>%
+    mutate(Source = ifelse(Source == "Eligibility IPD only", "Eligibility PD Only", Source)) %>% # Needs fix in gsm.mapping
     ggplot(
       aes(
         y = Source,
