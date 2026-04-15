@@ -15,12 +15,10 @@ params:
 ---
 
 ```{r setup, include=FALSE} 
-library(gsm.qtl)
-library(gt)
 knitr::opts_chunk$set(warning = FALSE, message = FALSE)
 
 
-dfResults <- ResultsProcessor(dfResults = params$dfResults, dfMetrics = params$dfMetrics)
+dfResults <- gsm.qtl::ResultsProcessor(dfResults = params$dfResults, dfMetrics = params$dfMetrics)
 dfGroups <- params$dfGroups
 lListings <- params$lListings
 latest_snapshot = max(dfResults$SnapshotDate)
@@ -35,18 +33,22 @@ date: "Snapshot Date: `r latest_snapshot`"
 ```{r QTL0001 Eligibility, echo = FALSE, results = 'asis'}
 # Feed and knit just QTL0001 using child rmd support
 if("Analysis_qtl0001" %in% dfResults$MetricID) {
-  qtl0001 <- knitr::knit_child(
-    system.file("report", "QTL0001.Rmd", package = "gsm.qtl"),
-    envir = list(
-      qtl0001_params = list(
-        dfResults = dfResults %>% filter(.data$MetricID == "Analysis_qtl0001"),
-        dfNum = lListings$qtl0001_num,
-        dfDenom = lListings$qtl0001,
-        latest_snapshot = latest_snapshot
+  qtl0001 <- suppressWarnings(
+    suppressMessages(
+      knitr::knit_child(
+        system.file("report", "QTL0001.Rmd", package = "gsm.qtl"),
+        envir = list(
+          qtl0001_params = list(
+            dfResults = dplyr::filter(dfResults, MetricID == "Analysis_qtl0001"),
+            dfNum = lListings$qtl0001_num,
+            dfDenom = lListings$qtl0001,
+            latest_snapshot = latest_snapshot
+          )
+        ),
+        quiet = TRUE
       )
-    ),
-    quiet = TRUE
-  ) %>% suppressMessages %>% suppressWarnings
+    )
+  )
   
   cat(qtl0001, sep = "\n")
 }
@@ -55,18 +57,22 @@ if("Analysis_qtl0001" %in% dfResults$MetricID) {
 ```{r QTL0002 Premature Study Discontinuation, echo = FALSE, results = 'asis'}
 # Feed and knit just QTL0002 using child rmd support
 if("Analysis_qtl0002" %in% dfResults$MetricID) {
-  qtl0002 <- knitr::knit_child(
-    system.file("report", "QTL0002.Rmd", package = "gsm.qtl"),
-    envir = list(
-      qtl0002_params = list(
-        dfResults = dfResults %>% filter(.data$MetricID == "Analysis_qtl0002"),
-        dfNum = lListings$qtl0002_num,
-        dfDenom = lListings$qtl0002,
-        latest_snapshot = latest_snapshot
+  qtl0002 <- suppressWarnings(
+    suppressMessages(
+      knitr::knit_child(
+        system.file("report", "QTL0002.Rmd", package = "gsm.qtl"),
+        envir = list(
+          qtl0002_params = list(
+            dfResults = dplyr::filter(dfResults, MetricID == "Analysis_qtl0002"),
+            dfNum = lListings$qtl0002_num,
+            dfDenom = lListings$qtl0002,
+            latest_snapshot = latest_snapshot
+          )
+        ),
+        quiet = TRUE
       )
-    ),
-    quiet = TRUE
-  ) %>% suppressMessages %>% suppressWarnings
+    )
+  )
   cat(qtl0002, sep = "\n")
 }
 ```
