@@ -90,7 +90,7 @@ Each specification includes the following components:
 **other attached packages:** *gsm.qtl(v.1.1.1)*, *testthat(v.3.3.2)*,
 *riskmetric(v.0.2.7)*, *stringr(v.1.6.0)*, *gh(v.1.5.0)*,
 *pander(v.0.6.6)*, *purrr(v.1.2.2)*, *dplyr(v.1.2.1)*, *knitr(v.1.51)*,
-*gt(v.1.3.0)* and *gsm.core(v.1.1.8)*
+*gt(v.1.3.0)* and *gsm.core(v.1.2.0)*
 
 **loaded via a namespace (and not attached):** *gtable(v.0.3.6)*,
 *xfun(v.0.57)*, *bslib(v.0.10.0)*, *ggplot2(v.4.0.2)*,
@@ -148,6 +148,16 @@ Merging fix-90v2 into fix-90
 | Requester |   Date Requested    |                   Reviewers                    | Review Status |
 |:---------:|:-------------------:|:----------------------------------------------:|:-------------:|
 |  zdz2101  | 2026-04-14 20:27:58 | samussiah copilot-pull-request-reviewer\[bot\] |   APPROVED    |
+
+#### Pull Request 100: Namespace non-base function calls in report templates
+
+Merging fix-90-namespace-report-functions into fix-90
+
+<https://github.com/Gilead-BioStats/gsm.qtl/pull/100>
+
+| Requester |   Date Requested    |                  Reviewers                   | Review Status |
+|:---------:|:-------------------:|:--------------------------------------------:|:-------------:|
+| samussiah | 2026-04-14 15:22:19 | copilot-pull-request-reviewer\[bot\] zdz2101 |   COMMENTED   |
 
 #### Pull Request 92: Point at <gsm.core@dev> for new lSource data and dependencies
 
@@ -228,13 +238,3 @@ Merging main into dev
 | Requester |   Date Requested    |  Reviewers   | Review Status |
 |:---------:|:-------------------:|:------------:|:-------------:|
 |  zdz2101  | 2026-02-02 19:20:48 | lauramaxwell |   APPROVED    |
-
-#### Pull Request 74: gsm.qtl v1.1.1
-
-Merging rc-v1.1.1 into main
-
-<https://github.com/Gilead-BioStats/gsm.qtl/pull/74>
-
-| Requester |   Date Requested    |  Reviewers   | Review Status |
-|:---------:|:-------------------:|:------------:|:-------------:|
-|  zdz2101  | 2026-01-30 16:24:40 | lauramaxwell |   APPROVED    |
