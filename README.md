@@ -1,6 +1,7 @@
 # gsm.qtl
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/Gilead-BioStats/gsm.qtl/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/Gilead-BioStats/gsm.qtl/actions/workflows/R-CMD-check.yaml)
+[![Codecov test coverage](https://codecov.io/gh/Gilead-BioStats/gsm.qtl/graph/badge.svg?branch=dev)](https://codecov.io/gh/Gilead-BioStats/gsm.qtl?branch=dev)
 <!-- badges: end -->
 
 # Good Statistical Monitoring QTL `{gsm.qtl}` R package
