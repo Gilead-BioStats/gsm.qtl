@@ -7,7 +7,6 @@
 #' @export
 discontinuation_reasonBar <- function(df, varCompreas) {
   reasonbar <- df  %>%
-    dplyr::filter(!!enexpr(varCompreas) != "Completed/Ongoing") %>%
     ggplot(., aes(y = {{varCompreas}},
                   fill = {{varCompreas}})) +
     geom_bar() +

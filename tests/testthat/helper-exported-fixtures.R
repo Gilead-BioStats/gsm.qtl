@@ -91,13 +91,18 @@ qtl_test_report_params <- function(include_metric_ids = c("Analysis_qtl0001", "A
   l_listings <- list()
   if ("Analysis_qtl0001" %in% include_metric_ids) {
     l_listings$qtl0001 <- listing
+    l_listings$qtl0001_num <- listing %>% dplyr::filter(Source != "Neither")
   }
   if ("Analysis_qtl0002" %in% include_metric_ids) {
-    l_listings$qtl0002 <- listing
+    qtl0002_listing <- listing %>%
+      dplyr::mutate(compreas = ifelse(compreas == "", "Completed/Ongoing", compreas))
+    l_listings$qtl0002 <- qtl0002_listing
+    l_listings$qtl0002_num <- qtl0002_listing %>% dplyr::filter(compreas != "Completed/Ongoing")
   }
 
   if (length(l_listings) == 0) {
     l_listings$qtl0001 <- listing
+    l_listings$qtl0001_num <- listing %>% dplyr::filter(Source != "Neither")
   }
 
   list(

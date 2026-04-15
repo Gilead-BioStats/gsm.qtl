@@ -62,7 +62,7 @@ criteria_groupBar <- function(df, varGroupID, strGroupLabel, bSwapAxes = FALSE) 
             "\nCriteria: ", ietestcd_concat,
             "\nCount: ", n
           )
-       )
+        )
       ) +
       geom_col() +
       geom_text(

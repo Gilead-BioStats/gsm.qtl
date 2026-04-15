@@ -1,6 +1,7 @@
 #' Stacked Eligibility Bar Chart
 #'
-#' @param df A `data.frame` containing the participant level dataset with eligibility
+#' @param dfNum A `data.frame` containing the participant level dataset with only ineligibility values
+#' @param dfDenom A `data.frame` containing the participant level dataset with all inc/exc values.
 #' @param varGroupID A variable to make the stacked bar chart with, i.e. invid
 #' @param strGroupLabel A `string` to label the `varGroupID` in reference to axes, legend, footnotes.
 #' @param bPercentage A `boolean` to denote whether or not the group bar chart should be visualized as percentages instead of absolute counts.
@@ -8,18 +9,14 @@
 #' @returns A `plotly` object
 #'
 #' @export
-eligibility_groupBar <- function(df, varGroupID, strGroupLabel, bPercentage = FALSE) {
+eligibility_groupBar <- function(dfNum, dfDenom, varGroupID, strGroupLabel, bPercentage = FALSE) {
   # Parse out groups with 0 ineligible
-  df <- df %>%
-    mutate(Source = ifelse(Source == "Eligibility IPD only", "Eligibility PD Only", Source))
-
-  groups_with_ineligible <- df %>%
-    filter(Source != "Neither") %>%
+  groups_with_ineligible <- dfNum %>%
     pull(!!enexpr(varGroupID)) %>%
     unique()
 
   # Create the gg object
-  interim_bar <- df %>%
+  interim_bar <- dfDenom %>%
     mutate(fillcol = ifelse(Source == "Neither", "No Eligibility Risk", "Ineligible")) %>%
     filter(!!enexpr(varGroupID) %in% groups_with_ineligible) %>%
     mutate(!!enexpr(varGroupID) := forcats::fct_rev(forcats::fct_infreq(!!enexpr(varGroupID))),
@@ -69,13 +66,13 @@ eligibility_groupBar <- function(df, varGroupID, strGroupLabel, bPercentage = FA
       theme_classic()
   }
 
-  n_groups_without_ineligible <- df %>%
+  n_groups_without_ineligible <- dfDenom %>%
     filter(!(!!enexpr(varGroupID) %in% groups_with_ineligible)) %>%
     pull(!!enexpr(varGroupID)) %>%
     unique() %>%
     length()
 
-  n_participants_without_ineligible <- df %>%
+  n_participants_without_ineligible <- dfDenom %>%
     filter(!(!!enexpr(varGroupID) %in% groups_with_ineligible)) %>%
     nrow()
 

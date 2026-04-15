@@ -5,7 +5,8 @@
 \title{Stacked Discontinuation Bar Chart}
 \usage{
 discontinuation_groupBar(
-  df,
+  dfNum,
+  dfDenom,
   varGroupID,
   strGroupLabel,
   varStatus = compyn,
@@ -13,7 +14,9 @@ discontinuation_groupBar(
 )
 }
 \arguments{
-\item{df}{A \code{data.frame} containing the participant level dataset with discontinuation}
+\item{dfNum}{A \code{data.frame} containing the participant level dataset with just premature discontinuation}
+
+\item{dfDenom}{A \code{data.frame} containing the participant level dataset with all study dispositions}
 
 \item{varGroupID}{A variable to make the stacked bar chart with, i.e. invid}
 

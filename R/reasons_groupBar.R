@@ -16,7 +16,6 @@ reasons_groupBar <- function(df, varGroupID, varCompreas, strGroupLabel, bSwapAx
   compreas_name <- rlang::as_string(compreas_sym)
 
   df_counts <- df %>%
-    dplyr::filter(.data[[compreas_name]] != "Completed/Ongoing") %>%
     dplyr::count(.data[[compreas_name]], .data[[var_name]], name = "n")
 
   if (bSwapAxes) {
