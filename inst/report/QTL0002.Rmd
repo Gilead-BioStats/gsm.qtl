@@ -23,7 +23,6 @@ gsm.qtl::QTL_lineplot_v2(dfResults = qtl0002_params$dfResults, strQTL = "Prematu
 ### Site
 ```{r, echo = FALSE, results = 'asis', fig.height=4}
 gsm.qtl::discontinuation_groupBar(dfNum = qtl0002_params$dfNum, dfDenom = qtl0002_params$dfDenom, varGroupID = invid, strGroupLabel = "Site")
->>>>>>> fix-90
 ```
 
 ### Country
