@@ -6,8 +6,7 @@
 #' @export
 eligibility_listing <- function(df, download = FALSE) {
   listing <- df %>%
-    filter(Source != "Neither") %>%
-    select(invid, country, subjid, Source, ietestcd_concat, dvdtm, eligibility_criteria) %>%
+    select(country, invid, subjid, Source, ietestcd_concat, dvdtm, eligibility_criteria) %>%
     tidyr::separate(
       dvdtm,
       into = paste0("PD Date", seq_len(max(sapply(strsplit(df$dvdtm, ";;;"), length)))),
@@ -22,11 +21,12 @@ eligibility_listing <- function(df, download = FALSE) {
       fill = "right"
     ) %>%
     rename(
-      Site = invid,
       Country = country,
-      `Subject ID` = subjid,
+      Site = invid,
+      `Participant ID` = subjid,
       `Which I/E` = ietestcd_concat
-    )
+    ) %>%
+    arrange(Site, `Participant ID`)
 
   if(download == TRUE) {
     return(listing)

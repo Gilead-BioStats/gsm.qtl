@@ -44,11 +44,13 @@ Suggests:
   knitr,
   lubridate,
   pander,
+  qcthat,
   rmarkdown,
   riskmetric,
   testthat (>= 3.0.0)
 Remotes:
-    gsm.core=Gilead-BioStats/gsm.core@dev
+    gsm.core=Gilead-BioStats/gsm.core@main,
+    qcthat=Gilead-BioStats/qcthat@main
 VignetteBuilder: knitr
 Config/testthat/edition: 3
 Config/testthat/parallel: false

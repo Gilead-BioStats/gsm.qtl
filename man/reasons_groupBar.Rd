@@ -4,7 +4,7 @@
 \alias{reasons_groupBar}
 \title{Bar Chart by Group and Reasons}
 \usage{
-reasons_groupBar(df, varGroupID, varCompreas, strGroupLabel)
+reasons_groupBar(df, varGroupID, varCompreas, strGroupLabel, bSwapAxes = FALSE)
 }
 \arguments{
 \item{df}{A \code{data.frame} containing the participant level dataset with eligibility}
@@ -14,6 +14,8 @@ reasons_groupBar(df, varGroupID, varCompreas, strGroupLabel)
 \item{varCompreas}{A variable to identify study completion/discontinuation reasons}
 
 \item{strGroupLabel}{A \code{string} to label the \code{varGroupID} in reference to axes, legend, footnotes.}
+
+\item{bSwapAxes}{A \code{boolean} to denote whether or not the y-axis and fill groups should be swapped.}
 }
 \value{
 A \code{plotly} object

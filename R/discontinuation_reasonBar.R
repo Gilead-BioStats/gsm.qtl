@@ -6,7 +6,7 @@
 #' @returns A `plotly` object
 #' @export
 discontinuation_reasonBar <- function(df, varCompreas) {
-  reasonbar <- df %>%
+  reasonbar <- df  %>%
     ggplot(., aes(y = {{varCompreas}},
                   fill = {{varCompreas}})) +
     geom_bar() +
@@ -17,11 +17,12 @@ discontinuation_reasonBar <- function(df, varCompreas) {
       color = "black",
       size  = 4
     ) +
-    labs(y = "Discontinuation Reasons", x = "Participant Count", title = "Participant Count by Reasons") +
+    labs(y = "Discontinuation Reasons", x = "Participant Count", title = "Participant Count by Reasons", fill = "Discontinuation Reasons") +
     theme_classic() +
     theme(
       axis.text.y = element_text(angle = 45, vjust = 1), # tilt to avoid overlap
       panel.grid.major.y = element_blank()
     )
-  plotly::ggplotly(reasonbar, tooltip = c("label"), h = calc_fig_size(n_rows = dplyr::n_distinct(dplyr::pull(df, {{ varCompreas }}))))
+  plotly::ggplotly(reasonbar, tooltip = c("label"), h = calc_fig_size(n_rows = dplyr::n_distinct(dplyr::pull(df, {{ varCompreas }})))) %>%
+    layout(xaxis = list(autorange = TRUE), yaxis = list(autorange = TRUE))
 }

@@ -21,7 +21,7 @@ mapped_exclusion <- subject_base %>%
   mutate(
     Source = case_when(
       row_number() %% 5 == 0 ~ "Neither",
-      row_number() %% 2 == 0 ~ "Eligibility IPD only",
+      row_number() %% 2 == 0 ~ "Eligibility PD Only",
       TRUE ~ "EDC"
     ),
     eligibility_criteria = ifelse(Source == "Neither", "", "Criterion A"),

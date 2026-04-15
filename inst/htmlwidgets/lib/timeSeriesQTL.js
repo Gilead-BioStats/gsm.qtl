@@ -294,16 +294,18 @@ function timeSeriesQTL(
       const groupID = normalizeGroupId(raw.GroupID);
       const value = metricValue(raw, tooltipItem.parsed);
       const date = displayDate(raw, tooltipItem);
+      const pct = value === null ? "NA" : (value * 100).toFixed(1) + "%";
 
       if (groupID && ALWAYS.includes(groupID)) {
-        return [`Date: ${date}`, `Value: ${value === null ? "NA" : value}`];
+        return [`Date: ${date}`, `Value: ${pct}`];
       }
 
       const numerator = raw.Numerator !== undefined && raw.Numerator !== null ? raw.Numerator : "NA";
       const denominator = raw.Denominator !== undefined && raw.Denominator !== null ? raw.Denominator : "NA";
 
       return [
-        `Metric: ${value === null ? "NA" : value}`,
+        `Date: ${date}`,
+        `Rate: ${pct}`,
         `Numerator: ${numerator}`,
         `Denominator: ${denominator}`
       ];
@@ -312,7 +314,11 @@ function timeSeriesQTL(
     chart.options.plugins.tooltip.callbacks.title = function(items) {
       const first = Array.isArray(items) && items.length > 0 ? items[0] : null;
       const raw = first && first.raw ? first.raw : {};
-      return `Date: ${displayDate(raw, first)}`;
+      const groupID = normalizeGroupId(raw.GroupID);
+      if (groupID && ALWAYS.includes(groupID)) {
+        return THRESHOLD_LABELS[groupID] || "Threshold";
+      }
+      return metricLabel;
     };
   }
 

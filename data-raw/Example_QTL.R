@@ -1,6 +1,7 @@
 library(gsm.qtl)
 library(gsm.datasim)
 library(gsm.kri)
+library(dplyr)
 library(purrr)
 devtools::load_all(".")
 
@@ -33,9 +34,36 @@ reporting_wf <- gsm.core::MakeWorkflowList(strNames = c("Results", "Groups", "Me
 
 lRaw <- map_depth(ie_data, 1, gsm.mapping::Ingest, mappings_spec)
 mapped <- map_depth(lRaw, 1, ~ gsm.core::RunWorkflows(mappings_wf, .x))
+# Cleanup discontinuation reasons instead of modifying gsm.datasim
+mapped <- map(mapped, ~ {
+  .x$Mapped_STUDCOMP <- .x$Mapped_STUDCOMP %>%
+    {
+      discontinued_idx <- which(.$compyn == "N")
+      sampled_reasons <- rep(NA_character_, nrow(.))
+
+      if (length(discontinued_idx) > 0) {
+        sampled_reasons[discontinued_idx] <- sample(
+          c("Withdrew Consent", "Death", "Lost to Follow-Up"),
+          size = length(discontinued_idx),
+          replace = TRUE
+        )
+      }
+
+      dplyr::mutate(
+        .,
+        compreas = dplyr::case_when(
+          compyn == "Y" ~ "",
+          compyn == "N" ~ sampled_reasons,
+          TRUE ~ ""
+        )
+      )
+    } %>%
+    filter(subjid %in% .x$Mapped_SUBJ$subjid)
+
+  .x
+})
 analyzed <- map_depth(mapped, 1, ~gsm.core::RunWorkflows(metrics_wf, .x))
 reporting <- map2(mapped, analyzed, ~ gsm.core::RunWorkflows(reporting_wf, c(.x, list(lAnalyzed = .y, lWorkflows = metrics_wf))))
-
 
 # Fix `SnapshotDate` column in reporting results, can be addressed in https://github.com/Gilead-BioStats/gsm.reporting/issues/24
 dates <- names(ie_data) %>% as.Date
@@ -50,10 +78,21 @@ all_reportingMetrics <- reporting[[length(reporting)]]$Reporting_Metrics
 # Only need 1 reporting group object
 all_reportingGroups <- reporting[[length(reporting)]]$Reporting_Groups
 
-report_listings <- list(qtl0001 = mapped[[length(mapped)]]$Mapped_EXCLUSION,
-                        qtl0002 = left_join(mapped[[length(mapped)]]$Mapped_STUDCOMP,
-                                            select(mapped[[length(mapped)]]$Mapped_SUBJ, subjid, country),
-                                            by = "subjid"))
+
+qtl0001 = mapped[[length(mapped)]]$Mapped_EXCLUSION
+qtl0002 = left_join(
+  select(mapped[[length(mapped)]]$Mapped_SUBJ, subjid, country),
+  mapped[[length(mapped)]]$Mapped_STUDCOMP,
+  by = "subjid"
+) %>%
+  mutate(compreas = ifelse(is.na(compreas) | compreas == "", "Completed/Ongoing", compreas))
+
+report_listings <- list(
+  qtl0001 = qtl0001,
+  qtl0001_num = qtl0001 %>% dplyr::filter(Source != "Neither"),
+  qtl0002 = qtl0002,
+  qtl0002_num = qtl0002 %>% dplyr::filter(compreas != "Completed/Ongoing")
+)
 
 example_lparams <- list(
   dfResults = all_reportingResults,

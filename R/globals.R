@@ -13,6 +13,7 @@ globalVariables(
     "MetricID",
     "SnapshotDate",
     "Source",
+    "Participant ID",
     "Which I/E",
     "compreas",
     "compyn",

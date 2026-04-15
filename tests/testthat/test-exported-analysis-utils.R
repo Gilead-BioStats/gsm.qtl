@@ -36,6 +36,21 @@ test_that("calc_fig_size covers n_rows, base, and per arguments (#80)", {
   expect_error(calc_fig_size(n_rows = -1), "single non-negative")
 })
 
+test_that("calc_plotly_footnote_layout expands bottom margin for wrapped footnotes (#90)", {
+  layout <- gsm.qtl:::calc_plotly_footnote_layout(
+    paste(rep("footnote", 30), collapse = " "),
+    margins = list(l = 40, r = 40, b = 50, t = 40),
+    wrap_width = 20
+  )
+
+  expect_gt(layout$margin$b, 50)
+  expect_equal(layout$annotations[[1]]$x, 0)
+  expect_equal(layout$annotations[[1]]$y, 0)
+  expect_equal(layout$annotations[[1]]$yanchor, "top")
+  expect_lt(layout$annotations[[1]]$yshift, 0)
+  expect_match(layout$annotations[[1]]$text, "<br>")
+})
+
 test_that("ResultsProcessor uses dfResults and dfMetrics arguments (#80)", {
   inputs <- qtl_test_processor_inputs()
 

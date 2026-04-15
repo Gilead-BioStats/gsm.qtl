@@ -28,7 +28,7 @@ qtl_test_participant_df <- function() {
   tibble::tribble(
     ~invid, ~country, ~subjid, ~Source, ~ietestcd_concat, ~dvdtm, ~eligibility_criteria, ~compyn, ~compreas,
     "S01", "US", "SUBJ-001", "EDC", "I001;;;E010", "2024-01-01;;;2024-01-03", "Criterion A;;;Criterion B", "N", "Adverse event",
-    "S01", "US", "SUBJ-002", "Eligibility IPD only", "", "2024-01-02", "Criterion C", "", "Lost to follow-up",
+    "S01", "US", "SUBJ-002", "Eligibility PD Only", "", "2024-01-02", "Criterion C", "", "Lost to Follow-Up",
     "S01", "US", "SUBJ-003", "Neither", "", "2024-01-04", "", "Y", "",
     "S02", "CA", "SUBJ-004", "EDC", "I002", "2024-02-01", "Criterion D", "N", "Protocol deviation",
     "S02", "CA", "SUBJ-005", "Neither", "", "2024-02-03", "", "Y", "",
@@ -91,13 +91,18 @@ qtl_test_report_params <- function(include_metric_ids = c("Analysis_qtl0001", "A
   l_listings <- list()
   if ("Analysis_qtl0001" %in% include_metric_ids) {
     l_listings$qtl0001 <- listing
+    l_listings$qtl0001_num <- listing %>% dplyr::filter(Source != "Neither")
   }
   if ("Analysis_qtl0002" %in% include_metric_ids) {
-    l_listings$qtl0002 <- listing
+    qtl0002_listing <- listing %>%
+      dplyr::mutate(compreas = ifelse(compreas == "", "Completed/Ongoing", compreas))
+    l_listings$qtl0002 <- qtl0002_listing
+    l_listings$qtl0002_num <- qtl0002_listing %>% dplyr::filter(compreas != "Completed/Ongoing")
   }
 
   if (length(l_listings) == 0) {
     l_listings$qtl0001 <- listing
+    l_listings$qtl0001_num <- listing %>% dplyr::filter(Source != "Neither")
   }
 
   list(
