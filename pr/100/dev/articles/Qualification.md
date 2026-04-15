@@ -90,7 +90,7 @@ Each specification includes the following components:
 **other attached packages:** *gsm.qtl(v.1.1.1)*, *testthat(v.3.3.2)*,
 *riskmetric(v.0.2.7)*, *stringr(v.1.6.0)*, *gh(v.1.5.0)*,
 *pander(v.0.6.6)*, *purrr(v.1.2.2)*, *dplyr(v.1.2.1)*, *knitr(v.1.51)*,
-*gt(v.1.3.0)* and *gsm.core(v.1.1.8)*
+*gt(v.1.3.0)* and *gsm.core(v.1.2.0)*
 
 **loaded via a namespace (and not attached):** *gtable(v.0.3.6)*,
 *xfun(v.0.57)*, *bslib(v.0.10.0)*, *ggplot2(v.4.0.2)*,
