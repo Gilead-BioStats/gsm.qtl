@@ -139,6 +139,16 @@ Guidelines](https://gilead-biostats.github.io/gsm.core/articles/ContributorGuide
 Below, the most recent 10 PRs into gsm.qtl are displayed. [See all Pull
 Requests here.](https://github.com/gilead-biostats/gsm.qtl/pulls)
 
+#### Pull Request 101: Make swap ins for dual-dataframe, numerator/denominator usage
+
+Merging fix-90v2 into fix-90
+
+<https://github.com/Gilead-BioStats/gsm.qtl/pull/101>
+
+| Requester |   Date Requested    |                   Reviewers                    | Review Status |
+|:---------:|:-------------------:|:----------------------------------------------:|:-------------:|
+|  zdz2101  | 2026-04-14 20:27:58 | samussiah copilot-pull-request-reviewer\[bot\] |   APPROVED    |
+
 #### Pull Request 92: Point at <gsm.core@dev> for new lSource data and dependencies
 
 Merging for-gsm.kri-193 into dev
@@ -228,13 +238,3 @@ Merging rc-v1.1.1 into main
 | Requester |   Date Requested    |  Reviewers   | Review Status |
 |:---------:|:-------------------:|:------------:|:-------------:|
 |  zdz2101  | 2026-01-30 16:24:40 | lauramaxwell |   APPROVED    |
-
-#### Pull Request 73: Migrate qualification tests to `/testthat` and ensure no duplicate workflows
-
-Merging fix-72 into dev
-
-<https://github.com/Gilead-BioStats/gsm.qtl/pull/73>
-
-|  Requester  |   Date Requested    |      Reviewers      | Review Status |
-|:-----------:|:-------------------:|:-------------------:|:-------------:|
-| nandriychuk | 2026-01-29 15:06:35 | zdz2101 nandriychuk |   COMMENTED   |
