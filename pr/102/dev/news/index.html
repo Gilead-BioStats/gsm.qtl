@@ -42,6 +42,22 @@
     </div>
 
     <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.2.0" id="gsmqtl-v120">gsm.qtl v1.2.0<a class="anchor" aria-label="anchor" href="#gsmqtl-v120"></a></h2>
+<div class="section level4">
+<h4 id="bug-fixes-1-2-0">Bug Fixes:<a class="anchor" aria-label="anchor" href="#bug-fixes-1-2-0"></a></h4>
+<ul><li>Fixed issue <a href="https://github.com/Gilead-BioStats/gsm.qtl/issues/90" class="external-link">#90</a>: Updated <code><a href="../reference/eligibility_groupBar.html">eligibility_groupBar()</a></code>, <code><a href="../reference/discontinuation_groupBar.html">discontinuation_groupBar()</a></code>, and <code><a href="../reference/reasons_groupBar.html">reasons_groupBar()</a></code> to accept separate <code>dfNum</code>/<code>dfDenom</code> inputs, correcting count alignment for discontinued and ineligible participants.</li>
+<li>Fixed footnote rendering logic so footnotes always display in report charts.</li>
+</ul></div>
+<div class="section level4">
+<h4 id="key-enhancements-1-2-0">Key Enhancements:<a class="anchor" aria-label="anchor" href="#key-enhancements-1-2-0"></a></h4>
+<ul><li>Added <code>bSwapAxes</code> parameter to <code><a href="../reference/criteria_groupBar.html">criteria_groupBar()</a></code> to support swapped axis views (Site/Criteria and Country/Criteria tabs).</li>
+<li>Added <code>calc_plotly_footnote_layout()</code> utility for consistent plotly footnote positioning across charts.</li>
+<li>Removed completed/ongoing categories from reasons bar charts to focus on actionable discontinuation reasons.</li>
+<li>Fully namespaced all function calls in QTL report templates (<code>QTL0001.Rmd</code>, <code>QTL0002.Rmd</code>, <code>Report_QTL.Rmd</code>) with <code>gsm.qtl::</code> prefix.</li>
+<li>Expanded test coverage for eligibility, analysis utilities, and QTL reporting.</li>
+</ul></div>
+</div>
+    <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.1.1" id="gsmqtl-v111">gsm.qtl v1.1.1<a class="anchor" aria-label="anchor" href="#gsmqtl-v111"></a></h2>
 <ul><li>Updated <code>critera_groupBar()</code> and <code><a href="../reference/reasons_groupBar.html">reasons_groupBar()</a></code> address small bugs that were affecting barchart’s tooltip text.</li>
 <li>Added <code><a href="../reference/QTL_lineplot_v2.html">QTL_lineplot_v2()</a></code> as the new report-facing time-series API using the htmlwidget stack.</li>

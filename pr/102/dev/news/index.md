@@ -1,5 +1,36 @@
 # Changelog
 
+## gsm.qtl v1.2.0
+
+#### Bug Fixes:
+
+- Fixed issue
+  [\#90](https://github.com/Gilead-BioStats/gsm.qtl/issues/90): Updated
+  [`eligibility_groupBar()`](https://gilead-biostats.github.io/gsm.qtl/dev/reference/eligibility_groupBar.md),
+  [`discontinuation_groupBar()`](https://gilead-biostats.github.io/gsm.qtl/dev/reference/discontinuation_groupBar.md),
+  and
+  [`reasons_groupBar()`](https://gilead-biostats.github.io/gsm.qtl/dev/reference/reasons_groupBar.md)
+  to accept separate `dfNum`/`dfDenom` inputs, correcting count
+  alignment for discontinued and ineligible participants.
+- Fixed footnote rendering logic so footnotes always display in report
+  charts.
+
+#### Key Enhancements:
+
+- Added `bSwapAxes` parameter to
+  [`criteria_groupBar()`](https://gilead-biostats.github.io/gsm.qtl/dev/reference/criteria_groupBar.md)
+  to support swapped axis views (Site/Criteria and Country/Criteria
+  tabs).
+- Added `calc_plotly_footnote_layout()` utility for consistent plotly
+  footnote positioning across charts.
+- Removed completed/ongoing categories from reasons bar charts to focus
+  on actionable discontinuation reasons.
+- Fully namespaced all function calls in QTL report templates
+  (`QTL0001.Rmd`, `QTL0002.Rmd`, `Report_QTL.Rmd`) with `gsm.qtl::`
+  prefix.
+- Expanded test coverage for eligibility, analysis utilities, and QTL
+  reporting.
+
 ## gsm.qtl v1.1.1
 
 - Updated `critera_groupBar()` and
