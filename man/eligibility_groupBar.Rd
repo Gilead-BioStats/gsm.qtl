@@ -4,10 +4,18 @@
 \alias{eligibility_groupBar}
 \title{Stacked Eligibility Bar Chart}
 \usage{
-eligibility_groupBar(df, varGroupID, strGroupLabel, bPercentage = FALSE)
+eligibility_groupBar(
+  dfNum,
+  dfDenom,
+  varGroupID,
+  strGroupLabel,
+  bPercentage = FALSE
+)
 }
 \arguments{
-\item{df}{A \code{data.frame} containing the participant level dataset with eligibility}
+\item{dfNum}{A \code{data.frame} containing the participant level dataset with only ineligibility values}
+
+\item{dfDenom}{A \code{data.frame} containing the participant level dataset with all inc/exc values.}
 
 \item{varGroupID}{A variable to make the stacked bar chart with, i.e. invid}
 

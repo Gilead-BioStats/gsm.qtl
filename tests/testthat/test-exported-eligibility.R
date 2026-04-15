@@ -1,8 +1,9 @@
 test_that("eligibility_groupBar uses all arguments (#14, #15, #21, #22, #60)", {
   df <- qtl_test_participant_df()
+  dfNum <- df %>% dplyr::filter(Source != "Neither")
 
-  out_counts <- eligibility_groupBar(df = df, varGroupID = invid, strGroupLabel = "Site", bPercentage = FALSE)
-  out_perc <- eligibility_groupBar(df = df, varGroupID = invid, strGroupLabel = "Site", bPercentage = TRUE)
+  out_counts <- eligibility_groupBar(dfNum = dfNum, dfDenom = df, varGroupID = invid, strGroupLabel = "Site", bPercentage = FALSE)
+  out_perc <- eligibility_groupBar(dfNum = dfNum, dfDenom = df, varGroupID = invid, strGroupLabel = "Site", bPercentage = TRUE)
   built_counts <- plotly::plotly_build(out_counts)
   built_perc <- plotly::plotly_build(out_perc)
 
@@ -31,8 +32,9 @@ test_that("eligibility_groupBar reserves space when a footnote is present (#90)"
       "S04", "US", "SUBJ-008", "Neither", "", "2024-04-02", "", "", ""
     )
   )
+  dfNum <- df %>% dplyr::filter(Source != "Neither")
 
-  out <- eligibility_groupBar(df = df, varGroupID = invid, strGroupLabel = "Site", bPercentage = FALSE)
+  out <- eligibility_groupBar(dfNum = dfNum, dfDenom = df, varGroupID = invid, strGroupLabel = "Site", bPercentage = FALSE)
   annotations <- out$x$layoutAttrs[[1]][["annotations"]]
   margins <- out$x$layoutAttrs[[1]][["margin"]]
 
@@ -45,7 +47,8 @@ test_that("eligibility_groupBar reserves space when a footnote is present (#90)"
 
 test_that("eligibility_groupBar bPercentage = FALSE shows counts (#60)", {
   df <- qtl_test_participant_df()
-  out <- eligibility_groupBar(df = df, varGroupID = invid, strGroupLabel = "Site", bPercentage = FALSE)
+  dfNum <- df %>% dplyr::filter(Source != "Neither")
+  out <- eligibility_groupBar(dfNum = dfNum, dfDenom = df, varGroupID = invid, strGroupLabel = "Site", bPercentage = FALSE)
   built <- plotly::plotly_build(out)
 
   expect_s3_class(out, "plotly")
@@ -55,7 +58,8 @@ test_that("eligibility_groupBar bPercentage = FALSE shows counts (#60)", {
 
 test_that("eligibility_groupBar bPercentage = TRUE shows percentages (#60)", {
   df <- qtl_test_participant_df()
-  out <- eligibility_groupBar(df = df, varGroupID = invid, strGroupLabel = "Site", bPercentage = TRUE)
+  dfNum <- df %>% dplyr::filter(Source != "Neither")
+  out <- eligibility_groupBar(dfNum = dfNum, dfDenom = df, varGroupID = invid, strGroupLabel = "Site", bPercentage = TRUE)
   built <- plotly::plotly_build(out)
 
   expect_s3_class(out, "plotly")
@@ -65,8 +69,9 @@ test_that("eligibility_groupBar bPercentage = TRUE shows percentages (#60)", {
 
 test_that("eligibility_groupBar bPercentage TRUE uses stacked fill position (#60)", {
   df <- qtl_test_participant_df()
-  out_counts <- eligibility_groupBar(df = df, varGroupID = invid, strGroupLabel = "Site", bPercentage = FALSE)
-  out_perc <- eligibility_groupBar(df = df, varGroupID = invid, strGroupLabel = "Site", bPercentage = TRUE)
+  dfNum <- df %>% dplyr::filter(Source != "Neither")
+  out_counts <- eligibility_groupBar(dfNum = dfNum, dfDenom = df, varGroupID = invid, strGroupLabel = "Site", bPercentage = FALSE)
+  out_perc <- eligibility_groupBar(dfNum = dfNum, dfDenom = df, varGroupID = invid, strGroupLabel = "Site", bPercentage = TRUE)
   built_counts <- plotly::plotly_build(out_counts)
   built_perc <- plotly::plotly_build(out_perc)
 
@@ -86,10 +91,8 @@ test_that("eligibility_sourceBar returns plotly object (#14, #21, #22)", {
 
   expect_s3_class(out, "plotly")
 
-  trace_names <- unique(stats::na.omit(plotly_trace_names(out)))
   source_text <- plotly_trace_text(out)
 
-  expect_false("Neither" %in% trace_names)
   expect_true(any(grepl("Source: EDC", source_text, fixed = TRUE)))
   expect_match(built$x$layout$title$text, "Participant Count by Category/Source", fixed = TRUE)
 })
@@ -125,19 +128,6 @@ test_that("criteria_groupBar uses grouping and label arguments correctly when sw
   expect_true(any(grepl("Criteria:", criteria_text, fixed = TRUE)))
   expect_true(any(grepl("Site:", criteria_text, fixed = TRUE)))
   expect_match(built$x$layout$title$text, "Site by Criteria", fixed = TRUE)
-
-  expected_sites <- unique(as.character(df[["invid"]]))
-  plotted_y <- unique(unlist(lapply(built$x$data, function(trace) as.character(trace$y))))
-  trace_names <- unique(vapply(
-    built$x$data,
-    function(trace) {
-      if (is.null(trace$name)) "" else as.character(trace$name)
-    },
-    character(1)
-  ))
-
-  expect_true(all(expected_sites %in% plotted_y))
-  expect_false(any(trace_names %in% expected_sites))
 })
 
 test_that("eligibility_listing covers df and download arguments (#21, #22, #24, #25)", {

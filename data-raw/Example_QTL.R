@@ -78,13 +78,21 @@ all_reportingMetrics <- reporting[[length(reporting)]]$Reporting_Metrics
 # Only need 1 reporting group object
 all_reportingGroups <- reporting[[length(reporting)]]$Reporting_Groups
 
-report_listings <- list(qtl0001 = mapped[[length(mapped)]]$Mapped_EXCLUSION,
-                        qtl0002 = left_join(
-                          select(mapped[[length(mapped)]]$Mapped_SUBJ, subjid, country),
-                          mapped[[length(mapped)]]$Mapped_STUDCOMP,
-                          by = "subjid"
-                        ) %>%
-                          mutate(compreas = ifelse(is.na(compreas) | compreas == "", "Completed/Ongoing", compreas)))
+
+qtl0001 = mapped[[length(mapped)]]$Mapped_EXCLUSION
+qtl0002 = left_join(
+  select(mapped[[length(mapped)]]$Mapped_SUBJ, subjid, country),
+  mapped[[length(mapped)]]$Mapped_STUDCOMP,
+  by = "subjid"
+) %>%
+  mutate(compreas = ifelse(is.na(compreas) | compreas == "", "Completed/Ongoing", compreas))
+
+report_listings <- list(
+  qtl0001 = qtl0001,
+  qtl0001_num = qtl0001 %>% dplyr::filter(Source != "Neither"),
+  qtl0002 = qtl0002,
+  qtl0002_num = qtl0002 %>% dplyr::filter(compreas != "Completed/Ongoing")
+)
 
 example_lparams <- list(
   dfResults = all_reportingResults,

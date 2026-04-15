@@ -1,8 +1,10 @@
 test_that("discontinuation_groupBar uses all arguments (#14, #21, #22, #76, #90)", {
   df <- qtl_test_participant_df()
-  out <- discontinuation_groupBar(df = df, varGroupID = invid, strGroupLabel = "Site")
+  dfNum <- df %>% dplyr::filter(compyn == "N")
+  out <- discontinuation_groupBar(dfNum = dfNum, dfDenom = df, varGroupID = invid, strGroupLabel = "Site")
   out_custom <- discontinuation_groupBar(
-    df = df,
+    dfNum = dfNum,
+    dfDenom = df,
     varGroupID = invid,
     strGroupLabel = "Site",
     varStatus = compyn,

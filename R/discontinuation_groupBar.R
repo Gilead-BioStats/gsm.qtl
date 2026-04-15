@@ -1,6 +1,7 @@
 #' Stacked Discontinuation Bar Chart
 #'
-#' @param df A `data.frame` containing the participant level dataset with discontinuation
+#' @param dfNum A `data.frame` containing the participant level dataset with just premature discontinuation
+#' @param dfDenom A `data.frame` containing the participant level dataset with all study dispositions
 #' @param varGroupID A variable to make the stacked bar chart with, i.e. invid
 #' @param strGroupLabel A `string` to label the `varGroupID` in reference to axes, legend, footnotes.
 #' @param varStatus A variable indicating participant study status, defaults to `compyn`.
@@ -9,18 +10,18 @@
 #' @returns A `plotly` object
 #'
 #' @export
-discontinuation_groupBar <- function(df,
+discontinuation_groupBar <- function(dfNum,
+                                     dfDenom,
                                      varGroupID,
                                      strGroupLabel,
                                      varStatus = compyn,
                                      valuesDiscontinued = c('N')) {
-  groups_with_discontinuation <- df %>%
-    filter(!!enexpr(varStatus) %in% valuesDiscontinued) %>%
+  groups_with_discontinuation <- dfNum %>%
     pull(!!enexpr(varGroupID)) %>%
     unique()
 
   # Create the gg object
-  group_bar <- df %>%
+  group_bar <- dfDenom %>%
     mutate(fillcol = ifelse(!!enexpr(varStatus) %in% valuesDiscontinued, "Premature Discontinuation", "Completed/Ongoing")) %>%
     filter(!!enexpr(varGroupID) %in% groups_with_discontinuation) %>%
     mutate(!!enexpr(varGroupID) := forcats::fct_rev(forcats::fct_infreq(!!enexpr(varGroupID)))) %>%
@@ -43,13 +44,13 @@ discontinuation_groupBar <- function(df,
     )) +
     theme_classic()
 
-  n_groups_without_discontinuation <- df %>%
+  n_groups_without_discontinuation <- dfDenom %>%
     filter(!(!!enexpr(varGroupID) %in% groups_with_discontinuation)) %>%
     pull(!!enexpr(varGroupID)) %>%
     unique() %>%
     length()
 
-  n_participants_without_discontinuation <- df %>%
+  n_participants_without_discontinuation <- dfDenom %>%
     filter(!(!!enexpr(varGroupID) %in% groups_with_discontinuation)) %>%
     nrow()
 
