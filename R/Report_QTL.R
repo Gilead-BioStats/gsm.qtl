@@ -49,9 +49,11 @@ Report_QTL <- function(
     message = paste0("dfMetrics is missing required column(s): ", paste(missing_metrics_cols, collapse = ", "))
   )
 
+  listings_have_studyid <- length(lListings) > 0 &&
+    all(vapply(lListings, function(x) is.data.frame(x) && "studyid" %in% names(x), logical(1)))
   gsm.core::stop_if(
-    cnd = !(length(lListings) > 0 && is.data.frame(lListings[[1]]) && "studyid" %in% names(lListings[[1]])),
-    message = "lListings[[1]] must be a data.frame containing studyid"
+    cnd = !listings_have_studyid,
+    message = "lListings must be a non-empty list of data.frames containing studyid"
   )
 
   gsm.core::stop_if(
