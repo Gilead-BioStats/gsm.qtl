@@ -18,3 +18,7 @@ A \code{plotly} object
 \description{
 QTL Time Series Lineplot
 }
+\details{
+This function is retained as a legacy Plotly-based compatibility path.
+For report rendering, prefer \code{\link[=QTL_lineplot_v2]{QTL_lineplot_v2()}}.
+}

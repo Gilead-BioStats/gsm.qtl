@@ -19,3 +19,37 @@ calc_fig_size <- function(n_rows, base = 500, per = 25) {
   }
   as.integer(max(base, per * n_rows))
 }
+
+calc_plotly_footnote_layout <- function(
+  footnote_text = NULL,
+  margins = list(l = 50, r = 50, b = 50, t = 50),
+  wrap_width = 85,
+  line_height = 16,
+  padding = 18
+) {
+  if (is.null(footnote_text) || !nzchar(trimws(footnote_text))) {
+    return(list(margin = margins, annotations = list()))
+  }
+
+  wrapped_text <- strwrap(footnote_text, width = wrap_width)
+  n_lines <- max(1L, length(wrapped_text))
+  bottom_margin <- margins$b + (n_lines * line_height) + padding
+
+  list(
+    margin = utils::modifyList(margins, list(b = bottom_margin)),
+    annotations = list(list(
+      x = 0,
+      y = 0,
+      text = paste(wrapped_text, collapse = "<br>"),
+      xref = "paper",
+      yref = "paper",
+      showarrow = FALSE,
+      xanchor = "left",
+      yanchor = "top",
+      xshift = 0,
+      yshift = -padding,
+      align = "left",
+      font = list(size = 10)
+    ))
+  )
+}

@@ -4,14 +4,27 @@
 \alias{discontinuation_groupBar}
 \title{Stacked Discontinuation Bar Chart}
 \usage{
-discontinuation_groupBar(df, varGroupID, strGroupLabel)
+discontinuation_groupBar(
+  dfNum,
+  dfDenom,
+  varGroupID,
+  strGroupLabel,
+  varStatus = compyn,
+  valuesDiscontinued = c("N")
+)
 }
 \arguments{
-\item{df}{A \code{data.frame} containing the participant level dataset with discontinuation}
+\item{dfNum}{A \code{data.frame} containing the participant level dataset with just premature discontinuation}
+
+\item{dfDenom}{A \code{data.frame} containing the participant level dataset with all study dispositions}
 
 \item{varGroupID}{A variable to make the stacked bar chart with, i.e. invid}
 
 \item{strGroupLabel}{A \code{string} to label the \code{varGroupID} in reference to axes, legend, footnotes.}
+
+\item{varStatus}{A variable indicating participant study status, defaults to \code{compyn}.}
+
+\item{valuesDiscontinued}{A vector of values in \code{varStatus} considered premature discontinuations, defaults to 'N'.}
 }
 \value{
 A \code{plotly} object

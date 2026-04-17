@@ -1,0 +1,58 @@
+---
+title: "QTL Report"
+author: "[gsm.qtl](https://gilead-biostats.github.io/gsm.qtl) Example"
+description: "Example of a QTL Report generated using standard QTLs in gsm.kri"
+index: 1
+date: "`r format(Sys.time(), '%B %d, %Y %H:%M:%S %Z')`"
+output:
+  html_document:
+    mathjax: null
+    toc: true
+    toc_float:
+      collapsed: false
+      smooth_scroll: true
+    css: ../report/styles.css
+---
+
+# Set Up
+
+This page provides a sample Site KRI Report generated using the standard QTLs included in the `gsm.qtl` package. Expand the "Setup" section below to see the code used to generate the report. Or scroll down for the standard KRI report output.
+
+<details>
+<summary>Setup</summary>
+
+```{r}
+# Load libraries
+library(gsm.core)
+library(dplyr)
+library(gt)
+library(here)
+
+## Site Report
+lParams = gsm.qtl:::example_lparams
+```
+
+</details>
+
+# Report
+
+```{r, echo=FALSE, results='asis', warning = FALSE, message = FALSE}
+## Render example report inline using knit_child
+child_env <- list2env(
+  list(
+    params = list(
+      dfResults = lParams$dfResults,
+      dfGroups = lParams$dfGroups,
+      dfMetrics = lParams$dfMetrics,
+      lListings = lParams$lListings
+    )
+  ),
+  parent = environment()
+)
+report_qtl <- knitr::knit_child(
+  system.file("report", "Report_QTL.Rmd", package = "gsm.qtl"),
+  envir = child_env,
+  quiet = TRUE
+)
+cat(report_qtl, sep = "\n")
+```

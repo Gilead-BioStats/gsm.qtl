@@ -5,6 +5,9 @@
 #' @param strQTL A `string` to label the QTL being measured
 #'
 #' @returns A `plotly` object
+#' @details
+#' This function is retained as a legacy Plotly-based compatibility path.
+#' For report rendering, prefer [QTL_lineplot_v2()].
 #' @export
 QTL_lineplot <- function(dfResults, strQTL) {
   df_plot <- dfResults %>%

@@ -1,22 +1,28 @@
 #' Stacked Discontinuation Bar Chart
 #'
-#' @param df A `data.frame` containing the participant level dataset with discontinuation
+#' @param dfNum A `data.frame` containing the participant level dataset with just premature discontinuation
+#' @param dfDenom A `data.frame` containing the participant level dataset with all study dispositions
 #' @param varGroupID A variable to make the stacked bar chart with, i.e. invid
 #' @param strGroupLabel A `string` to label the `varGroupID` in reference to axes, legend, footnotes.
+#' @param varStatus A variable indicating participant study status, defaults to `compyn`.
+#' @param valuesDiscontinued A vector of values in `varStatus` considered premature discontinuations, defaults to 'N'.
 #'
 #' @returns A `plotly` object
 #'
 #' @export
-discontinuation_groupBar <- function(df, varGroupID, strGroupLabel) {
-  # Parse out groups with 0 ineligible
-  groups_with_discontinuation <- df %>%
-    # filter(compyn %in% c("N", "")) %>%
+discontinuation_groupBar <- function(dfNum,
+                                     dfDenom,
+                                     varGroupID,
+                                     strGroupLabel,
+                                     varStatus = compyn,
+                                     valuesDiscontinued = c('N')) {
+  groups_with_discontinuation <- dfNum %>%
     pull(!!enexpr(varGroupID)) %>%
     unique()
 
   # Create the gg object
-  group_bar <- df %>%
-    mutate(fillcol = ifelse(compyn %in% c("N", ""), "Premature Discontinuation", "Completed/Ongoing")) %>%
+  group_bar <- dfDenom %>%
+    mutate(fillcol = ifelse(!!enexpr(varStatus) %in% valuesDiscontinued, "Premature Discontinuation", "Completed/Ongoing")) %>%
     filter(!!enexpr(varGroupID) %in% groups_with_discontinuation) %>%
     mutate(!!enexpr(varGroupID) := forcats::fct_rev(forcats::fct_infreq(!!enexpr(varGroupID)))) %>%
     dplyr::group_by(!!enexpr(varGroupID), fillcol) %>%
@@ -38,16 +44,39 @@ discontinuation_groupBar <- function(df, varGroupID, strGroupLabel) {
     )) +
     theme_classic()
 
+  n_groups_without_discontinuation <- dfDenom %>%
+    filter(!(!!enexpr(varGroupID) %in% groups_with_discontinuation)) %>%
+    pull(!!enexpr(varGroupID)) %>%
+    unique() %>%
+    length()
+
+  n_participants_without_discontinuation <- dfDenom %>%
+    filter(!(!!enexpr(varGroupID) %in% groups_with_discontinuation)) %>%
+    nrow()
+
+  footnote_text <- if (n_groups_without_discontinuation > 0) {
+    paste0(
+      "Note: Excludes ",
+      n_groups_without_discontinuation,
+      " ",
+      tolower(strGroupLabel),
+      "(s) with no prematurely discontinued participants (",
+      n_participants_without_discontinuation,
+      " participants)."
+    )
+  } else {
+    NULL
+  }
+
+  footnote_layout <- calc_plotly_footnote_layout(footnote_text)
+
   # Create the plotly object
   x <- plotly::ggplotly(group_bar, tooltip = c("text"), h = calc_fig_size(n_rows = length(groups_with_discontinuation))) %>%
     layout(
-      margin = list(l = 50, r = 50, b = 150, t = 50),
-      annotations = list(
-        x = 1, y = -0.5, text = paste0("Note: Excludes ", tolower(strGroupLabel), "(s)", " with no ineligible participants."),
-        xref = "paper", yref = "paper", showarrow = F,
-        xanchor = "right", yanchor = "auto", xshift = 0, yshift = 0,
-        font = list(size = 10)
-      )
+      margin = footnote_layout$margin,
+      annotations = footnote_layout$annotations,
+      xaxis = list(autorange = TRUE),
+      yaxis = list(autorange = TRUE)
     )
   return(x)
 }

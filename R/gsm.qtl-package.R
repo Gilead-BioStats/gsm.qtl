@@ -10,11 +10,12 @@
 #' @import tibble
 #' @importFrom forcats fct_rev fct_infreq
 #' @importFrom htmltools div htmlEscape
-#' @importFrom jsonlite toJSON
+#' @importFrom jsonlite toJSON fromJSON
 #' @importFrom plotly ggplotly layout
 #' @importFrom purrr map
 #' @importFrom rlang check_installed enexpr
 #' @importFrom scales percent_format
+#' @importFrom stats na.omit
 #' @importFrom stringr str_detect
 #' @importFrom tidyr pivot_longer pivot_wider separate unite separate_longer_delim
 #' @importFrom utils globalVariables

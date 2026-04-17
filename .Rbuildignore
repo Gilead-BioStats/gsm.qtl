@@ -7,3 +7,6 @@
 ^LICENSE\.md$
 ^doc$
 ^Meta$
+^\.positai$
+^\.claude$
+^AGENTS\.md$

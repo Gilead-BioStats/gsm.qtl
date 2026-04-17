@@ -1,12 +1,12 @@
 ---
-title: "QTL0001 - Ineligibilty"
+title: "QTL0001 - Ineligibility"
 ---
 
 # QTL0001 - Ineligibility
 
 ## Study Overview
 ```{r, echo=FALSE}
-QTL_Overview(dfResults = qtl0001_params$dfResults,
+gsm.qtl::QTL_Overview(dfResults = qtl0001_params$dfResults,
              dSnapshot = qtl0001_params$latest_snapshot,
              strNum = "Ineligible Participants",
              strDenom = "Total Enrolled", 
@@ -15,59 +15,59 @@ QTL_Overview(dfResults = qtl0001_params$dfResults,
 
 ## Time Series Chart
 ```{r, echo=FALSE, results='asis', fig.height=4}
-# gsm.qtl::Widget_TimeSeriesQTL(
-#   dfResults = dfResults %>% filter(GroupLevel == "Study"),
-#   dfGroups = dfGroups,
-#   strOutcome = "Metric"
-# )
-# Create reference table for funnel bounds per date
-QTL_lineplot(dfResults = qtl0001_params$dfResults, strQTL = "Ineligibility Rate")
+gsm.qtl::QTL_lineplot_v2(dfResults = qtl0001_params$dfResults, strQTL = "Ineligibility Rate")
 ```
 
 ## Bar Charts {.tabset .tabset-pills}
 
-```{r, eval = FALSE , echo = FALSE, results = 'asis', fig.height=4}
-### JS - Site
-# gsm.qtl::Widget_BarChartQTL(
-#   dfResults = dfResults %>% filter(GroupLevel == "Site", SnapshotDate == latest_snapshot, GroupID != "Upper_funnel"),
-#   dfGroups = dfGroups,
-#   strOutcome = "Metric"
-# )
-```
-
 ### Site
 ```{r, echo = FALSE, results = 'asis', fig.height=4}
-eligibility_groupBar(df = qtl0001_params$dfListing, varGroupID = invid, strGroupLabel = "Site")
+gsm.qtl::eligibility_groupBar(dfNum = qtl0001_params$dfNum, dfDenom = qtl0001_params$dfDenom, varGroupID = invid, strGroupLabel = "Site")
+```
+
+### Site (by %)
+```{r, echo = FALSE, results = 'asis', fig.height=4}
+gsm.qtl::eligibility_groupBar(dfNum =  qtl0001_params$dfNum, dfDenom = qtl0001_params$dfDenom, varGroupID = invid, strGroupLabel = "Site", bPercentage = TRUE)
 ```
 
 ### Country
 ```{r, echo = FALSE, results = 'asis', fig.height=4}
-eligibility_groupBar(df = qtl0001_params$dfListing, varGroupID = country, strGroupLabel = "Country")
+gsm.qtl::eligibility_groupBar(dfNum = qtl0001_params$dfNum, dfDenom = qtl0001_params$dfDenom, varGroupID = country, strGroupLabel = "Country")
 ```
 
 ### Source
 ```{r, echo = FALSE, results = 'asis', fig.height=4}
-eligibility_sourceBar(df = qtl0001_params$dfListing)
+gsm.qtl::eligibility_sourceBar(df = qtl0001_params$dfNum)
 ```
 
-### Criteria/Site
+### Criteria/Site (EDC I/E data only)
 ```{r, echo = FALSE, results = 'asis', fig.height=4}
-criteria_groupBar(df = qtl0001_params$dfListing, varGroupID = invid, strGroupLabel = "Site")
+gsm.qtl::criteria_groupBar(df = qtl0001_params$dfNum, varGroupID = invid, strGroupLabel = "Site")
 ```
 
-### Criteria/Country
+### Criteria/Country (EDC I/E data only)
 ```{r, echo = FALSE, results = 'asis', fig.height=4}
-criteria_groupBar(df = qtl0001_params$dfListing, varGroupID = country, strGroupLabel = "Country")
+gsm.qtl::criteria_groupBar(df = qtl0001_params$dfNum, varGroupID = country, strGroupLabel = "Country")
+```
+
+### Site/Criteria (EDC I/E data only)
+```{r, echo = FALSE, results = 'asis', fig.height=4}
+gsm.qtl::criteria_groupBar(df = qtl0001_params$dfNum, varGroupID = invid, strGroupLabel = "Site", bSwapAxes = TRUE)
+```
+
+### Country/Criteria (EDC I/E data only)
+```{r, echo = FALSE, results = 'asis', fig.height=4}
+gsm.qtl::criteria_groupBar(df = qtl0001_params$dfNum, varGroupID = country, strGroupLabel = "Country", bSwapAxes = TRUE)
 ```
 
 ## Inclusion/Exclusion Listing
 ```{r, echo = FALSE}
 # output the listing on the html
-eligibility_listing(df = qtl0001_params$dfListing)
+gsm.qtl::eligibility_listing(df = qtl0001_params$dfNum)
 
 # grab the dataset to download
-x <- eligibility_listing(df = qtl0001_params$dfListing, download = TRUE)
-csv_txt <- paste(capture.output(write.csv(x, row.names = FALSE)), collapse = "\n")# turn into a data-URI (single-file HTML friendly)
+x <- gsm.qtl::eligibility_listing(df = qtl0001_params$dfNum, download = TRUE)
+csv_txt <- paste(utils::capture.output(utils::write.csv(x, row.names = FALSE)), collapse = "\n")# turn into a data-URI (single-file HTML friendly)
 href <- base64enc::dataURI(charToRaw(csv_txt), mime = "text/csv;charset=utf-8")
 
 knitr::asis_output(

@@ -1,13 +1,7 @@
 on:
   release:
     types: [published]
-  pull_request:
-    branches: [dev, main]
   workflow_dispatch:
-    inputs:
-      environment:
-        description: 'Environment to deploy'
-        required: true
 name: qualification-report
 
 jobs:

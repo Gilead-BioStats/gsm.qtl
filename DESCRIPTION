@@ -1,6 +1,6 @@
 Package: gsm.qtl
 Title: Good Statistical Monitoring QTLs
-Version: 1.1.1
+Version: 1.2.0
 Authors@R: c(
     person("Zhongkai", "Wang", , "Zhongkai.Wang6@gilead.com", role = c("aut", "cre"),
             comment = c(ORCID = "0000-0002-1883-2265")),
@@ -30,26 +30,30 @@ Imports:
   purrr,
   rlang,
   scales,
+  stats,
   stringr,
   tidyr,
   tibble,
   utils,
   yaml
 Suggests: 
+  cli,
   glue,
   gh,
   here,
   knitr,
   lubridate,
   pander,
+  qcthat,
   rmarkdown,
   riskmetric,
   testthat (>= 3.0.0)
 Remotes:
-    gsm.core=Gilead-BioStats/gsm.core@main
+    gsm.core=Gilead-BioStats/gsm.core@main,
+    qcthat=Gilead-BioStats/qcthat@main
 VignetteBuilder: knitr
 Config/testthat/edition: 3
-Config/testthat/parallel: true
+Config/testthat/parallel: false
 Config/Needs/website: DT, here, pkgdown, devtools
 Encoding: UTF-8
 Language: en-US
