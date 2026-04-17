@@ -13,9 +13,8 @@ QTL_lineplot(dfResults, strQTL)
 - dfResults:
 
   A results `data.frame` from the output of
-  [`gsm.reporting::BindResults()`](https://gilead-biostats.github.io/gsm.reporting/reference/BindResults.html)
-  used to create a variety of visualizations like the line plot, bar
-  plot.
+  `gsm.reporting::BindResults()` used to create a variety of
+  visualizations like the line plot, bar plot.
 
 - strQTL:
 
@@ -24,3 +23,9 @@ QTL_lineplot(dfResults, strQTL)
 ## Value
 
 A `plotly` object
+
+## Details
+
+This function is retained as a legacy Plotly-based compatibility path.
+For report rendering, prefer
+[`QTL_lineplot_v2()`](https://gilead-biostats.github.io/gsm.qtl/reference/QTL_lineplot_v2.md).

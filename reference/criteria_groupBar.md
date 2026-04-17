@@ -5,7 +5,7 @@ Bar Chart by Group and Criteria
 ## Usage
 
 ``` r
-criteria_groupBar(df, varGroupID, strGroupLabel)
+criteria_groupBar(df, varGroupID, strGroupLabel, bSwapAxes = FALSE)
 ```
 
 ## Arguments
@@ -23,6 +23,11 @@ criteria_groupBar(df, varGroupID, strGroupLabel)
 
   A `string` to label the `varGroupID` in reference to axes, legend,
   footnotes.
+
+- bSwapAxes:
+
+  A `boolean` to denote whether or not the y-axis and fill groups should
+  be swapped.
 
 ## Value
 

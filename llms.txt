@@ -51,8 +51,7 @@ pak::pak("Gilead-BioStats/gsm.qtl@dev")
 ## Sample Code
 
 This is a basic example showing how to create interactive widget
-visualizations based on reporting outputs from the
-[gsm.reporting](https://gilead-biostats.github.io/gsm.reporting/)
+visualizations based on reporting outputs from the `{gsm.reporting}`
 package:
 
 ``` r
@@ -137,6 +136,8 @@ gsm.kri::RenderRmd(
   : QTL Overview Table
 - [`QTL_lineplot()`](https://gilead-biostats.github.io/gsm.qtl/reference/QTL_lineplot.md)
   : QTL Time Series Lineplot
+- [`QTL_lineplot_v2()`](https://gilead-biostats.github.io/gsm.qtl/reference/QTL_lineplot_v2.md)
+  : QTL Time Series Widget (v2)
 - [`Report_QTL()`](https://gilead-biostats.github.io/gsm.qtl/reference/Report_QTL.md)
   **\[stable\]** : Report_QTL function
 - [`ResultsProcessor()`](https://gilead-biostats.github.io/gsm.qtl/reference/ResultsProcessor.md)

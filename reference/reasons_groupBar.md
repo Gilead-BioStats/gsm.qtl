@@ -5,7 +5,7 @@ Bar Chart by Group and Reasons
 ## Usage
 
 ``` r
-reasons_groupBar(df, varGroupID, varCompreas, strGroupLabel)
+reasons_groupBar(df, varGroupID, varCompreas, strGroupLabel, bSwapAxes = FALSE)
 ```
 
 ## Arguments
@@ -27,6 +27,11 @@ reasons_groupBar(df, varGroupID, varCompreas, strGroupLabel)
 
   A `string` to label the `varGroupID` in reference to axes, legend,
   footnotes.
+
+- bSwapAxes:
+
+  A `boolean` to denote whether or not the y-axis and fill groups should
+  be swapped.
 
 ## Value
 

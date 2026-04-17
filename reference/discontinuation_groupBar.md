@@ -5,15 +5,27 @@ Stacked Discontinuation Bar Chart
 ## Usage
 
 ``` r
-discontinuation_groupBar(df, varGroupID, strGroupLabel)
+discontinuation_groupBar(
+  dfNum,
+  dfDenom,
+  varGroupID,
+  strGroupLabel,
+  varStatus = compyn,
+  valuesDiscontinued = c("N")
+)
 ```
 
 ## Arguments
 
-- df:
+- dfNum:
 
-  A `data.frame` containing the participant level dataset with
-  discontinuation
+  A `data.frame` containing the participant level dataset with just
+  premature discontinuation
+
+- dfDenom:
+
+  A `data.frame` containing the participant level dataset with all study
+  dispositions
 
 - varGroupID:
 
@@ -23,6 +35,15 @@ discontinuation_groupBar(df, varGroupID, strGroupLabel)
 
   A `string` to label the `varGroupID` in reference to axes, legend,
   footnotes.
+
+- varStatus:
+
+  A variable indicating participant study status, defaults to `compyn`.
+
+- valuesDiscontinued:
+
+  A vector of values in `varStatus` considered premature
+  discontinuations, defaults to 'N'.
 
 ## Value
 

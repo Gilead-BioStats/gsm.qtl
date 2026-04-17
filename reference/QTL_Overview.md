@@ -13,9 +13,8 @@ QTL_Overview(dfResults, dSnapshot, strNum, strDenom, strQTL)
 - dfResults:
 
   A results `data.frame` from the output of
-  [`gsm.reporting::BindResults()`](https://gilead-biostats.github.io/gsm.reporting/reference/BindResults.html)
-  used to create a variety of visualizations like the line plot, bar
-  plot.
+  `gsm.reporting::BindResults()` used to create a variety of
+  visualizations like the line plot, bar plot.
 
 - dSnapshot:
 

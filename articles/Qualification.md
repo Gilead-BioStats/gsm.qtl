@@ -65,17 +65,17 @@ Each specification includes the following components:
 
 ### One Row Per Test
 
-| Function                         | Spec ID | Test ID | Test Description                                                                            | Test Result |
-|----------------------------------|---------|---------|---------------------------------------------------------------------------------------------|-------------|
-| One Side Prop unit test          | S1_1    | T1_1    | Analyze One Side Prop works for Study, when nProRate is clearly violated                    | Pass        |
-| Ineligibility Assessment         | S2_1    | T2_1    | Given appropriate inclusion/exclusion related data, calculates appropriate QTL threshold.   | Pass        |
-| Early Discontinuation Assessment | S3_1    | T3_1    | Given appropriate study discontinuation related data, calculates appropriate QTL threshold. | Pass        |
+| Function                         | Spec ID | Test ID | Test Description                                                                                                                        | Test Result |
+|----------------------------------|---------|---------|-----------------------------------------------------------------------------------------------------------------------------------------|-------------|
+| One Side Prop unit test          | S1_1    | T1_1    | Analyze One Side Prop works for Study, when nProRate is clearly violated (#5, \#11, \#39, \#42, \#50, \#73)                             | Pass        |
+| Ineligibility Assessment         | S2_1    | T2_1    | Given appropriate inclusion/exclusion related data, calculates appropriate QTL threshold. (#2, \#5, \#11, \#17, \#39, \#42, \#50, \#73) | Pass        |
+| Early Discontinuation Assessment | S3_1    | T3_1    | Given appropriate study discontinuation related data, calculates appropriate QTL threshold. (#3, \#21, \#39, \#42, \#50, \#73)          | Pass        |
 
 ## Qualification Testing Environment
 
 ### Session Information
 
-**R version 4.5.2 (2025-10-31)**
+**R version 4.5.3 (2026-03-11)**
 
 **Platform:** x86_64-pc-linux-gnu
 
@@ -87,36 +87,37 @@ Each specification includes the following components:
 **attached base packages:** *stats*, *graphics*, *grDevices*, *utils*,
 *datasets*, *methods* and *base*
 
-**other attached packages:** *gsm.qtl(v.1.1.1)*, *testthat(v.3.3.2)*,
-*riskmetric(v.0.2.6)*, *stringr(v.1.6.0)*, *gh(v.1.5.0)*,
-*pander(v.0.6.6)*, *purrr(v.1.2.1)*, *dplyr(v.1.1.4)*, *knitr(v.1.51)*,
-*gt(v.1.3.0)* and *gsm.core(v.1.1.7)*
+**other attached packages:** *gsm.qtl(v.1.2.0)*, *testthat(v.3.3.2)*,
+*riskmetric(v.0.2.7)*, *stringr(v.1.6.0)*, *gh(v.1.5.0)*,
+*pander(v.0.6.6)*, *purrr(v.1.2.2)*, *dplyr(v.1.2.1)*, *knitr(v.1.51)*,
+*gt(v.1.3.0)* and *gsm.core(v.1.2.0)*
 
 **loaded via a namespace (and not attached):** *gtable(v.0.3.6)*,
-*xfun(v.0.56)*, *bslib(v.0.10.0)*, *ggplot2(v.4.0.1)*,
-*htmlwidgets(v.1.6.4)*, *devtools(v.2.4.6)*, *remotes(v.2.5.0)*,
-*vctrs(v.0.7.1)*, *tools(v.4.5.2)*, *generics(v.0.1.4)*,
-*curl(v.7.0.0)*, *tibble(v.3.3.1)*, *pkgconfig(v.2.0.3)*,
-*data.table(v.1.18.2.1)*, *RColorBrewer(v.1.1-3)*, *S7(v.0.2.1)*,
-*desc(v.1.4.3)*, *lifecycle(v.1.0.5)*, *farver(v.2.1.2)*,
-*compiler(v.4.5.2)*, *brio(v.1.1.5)*, *textshaping(v.1.0.4)*,
-*htmltools(v.0.5.9)*, *usethis(v.3.2.1)*, *sass(v.0.4.10)*,
-*yaml(v.2.3.12)*, *lazyeval(v.0.2.2)*, *plotly(v.4.12.0)*,
-*pillar(v.1.11.1)*, *pkgdown(v.2.2.0)*, *jquerylib(v.0.1.4)*,
-*tidyr(v.1.3.2)*, *ellipsis(v.0.3.2)*, *cranlogs(v.2.1.1)*,
-*cachem(v.1.1.0)*, *sessioninfo(v.1.2.3)*, *tidyselect(v.1.2.1)*,
-*digest(v.0.6.39)*, *stringi(v.1.8.7)*, *forcats(v.1.0.1)*,
-*rprojroot(v.2.1.1)*, *fastmap(v.1.2.0)*, *grid(v.4.5.2)*,
-*here(v.1.0.2)*, *cli(v.3.6.5)*, *magrittr(v.2.0.4)*,
+*xfun(v.0.57)*, *bslib(v.0.10.0)*, *ggplot2(v.4.0.2)*,
+*htmlwidgets(v.1.6.4)*, *devtools(v.2.5.1)*, *vctrs(v.0.7.3)*,
+*tools(v.4.5.3)*, *generics(v.0.1.4)*, *curl(v.7.0.0)*,
+*tibble(v.3.3.1)*, *pkgconfig(v.2.0.3)*, *data.table(v.1.18.2.1)*,
+*RColorBrewer(v.1.1-3)*, *S7(v.0.2.1-1)*, *desc(v.1.4.3)*,
+*lifecycle(v.1.0.5)*, *farver(v.2.1.2)*, *compiler(v.4.5.3)*,
+*brio(v.1.1.5)*, *textshaping(v.1.0.5)*, *htmltools(v.0.5.9)*,
+*usethis(v.3.2.1)*, *sass(v.0.4.10)*, *lazyeval(v.0.2.3)*,
+*yaml(v.2.3.12)*, *plotly(v.4.12.0)*, *pillar(v.1.11.1)*,
+*pkgdown(v.2.2.0)*, *jquerylib(v.0.1.4)*, *tidyr(v.1.3.2)*,
+*ellipsis(v.0.3.3)*, *cranlogs(v.2.1.1)*, *cachem(v.1.1.0)*,
+*sessioninfo(v.1.2.3)*, *tidyselect(v.1.2.1)*, *digest(v.0.6.39)*,
+*stringi(v.1.8.7)*, *duckdb(v.1.5.2)*, *forcats(v.1.0.1)*,
+*rprojroot(v.2.1.1)*, *fastmap(v.1.2.0)*, *grid(v.4.5.3)*,
+*here(v.1.0.2)*, *cli(v.3.6.6)*, *magrittr(v.2.0.5)*,
 *triebeard(v.0.4.1)*, *pkgbuild(v.1.4.8)*, *withr(v.3.0.2)*,
-*waldo(v.0.6.2)*, *scales(v.1.4.0)*, *backports(v.1.5.0)*,
-*rmarkdown(v.2.30)*, *httr(v.1.4.7)*, *otel(v.0.2.0)*, *ragg(v.1.5.0)*,
+*waldo(v.0.6.2)*, *scales(v.1.4.0)*, *backports(v.1.5.1)*,
+*rmarkdown(v.2.31)*, *httr(v.1.4.8)*, *otel(v.0.2.0)*, *ragg(v.1.5.2)*,
 *memoise(v.2.0.1)*, *evaluate(v.1.0.5)*, *log4r(v.0.4.4)*,
-*covr(v.3.6.5)*, *rex(v.1.2.1)*, *viridisLite(v.0.4.2)*,
-*rlang(v.1.1.7)*, *urltools(v.1.7.3.1)*, *Rcpp(v.1.1.1)*,
-*glue(v.1.8.0)*, *BiocManager(v.1.30.27)*, *xml2(v.1.5.2)*,
-*pkgload(v.1.4.1)*, *rstudioapi(v.0.18.0)*, *jsonlite(v.2.0.0)*,
-*R6(v.2.6.1)*, *systemfonts(v.1.3.1)* and *fs(v.1.6.6)*
+*covr(v.3.6.5)*, *rex(v.1.2.2)*, *viridisLite(v.0.4.3)*,
+*rlang(v.1.2.0)*, *urltools(v.1.7.3.1)*, *Rcpp(v.1.1.1-1)*,
+*DBI(v.1.3.0)*, *glue(v.1.8.0)*, *BiocManager(v.1.30.27)*,
+*xml2(v.1.5.2)*, *pkgload(v.1.5.1)*, *rstudioapi(v.0.18.0)*,
+*jsonlite(v.2.0.0)*, *R6(v.2.6.1)*, *systemfonts(v.1.3.2)* and
+*fs(v.2.0.1)*
 
 ## Pull Request History
 
@@ -138,102 +139,102 @@ Guidelines](https://gilead-biostats.github.io/gsm.core/articles/ContributorGuide
 Below, the most recent 10 PRs into gsm.qtl are displayed. [See all Pull
 Requests here.](https://github.com/gilead-biostats/gsm.qtl/pulls)
 
-#### Pull Request 74: gsm.qtl v1.1.1
+#### Pull Request 102: Gsm.qtl rc v1.2.0
 
-Merging rc-v1.1.1 into main
+Merging gsm.qtl-rc-v1.2.0 into main
 
-<https://github.com/Gilead-BioStats/gsm.qtl/pull/74>
+<https://github.com/Gilead-BioStats/gsm.qtl/pull/102>
 
-| Requester |   Date Requested    |  Reviewers   | Review Status |
-|:---------:|:-------------------:|:------------:|:-------------:|
-|  zdz2101  | 2026-01-30 16:24:40 | lauramaxwell |   APPROVED    |
+| Requester |   Date Requested    |                              Reviewers                              | Review Status |
+|:---------:|:-------------------:|:-------------------------------------------------------------------:|:-------------:|
+|  zdz2101  | 2026-04-15 17:59:56 | copilot-pull-request-reviewer\[bot\] lauramaxwell zdz2101 samussiah |   COMMENTED   |
 
-#### Pull Request 71: Closes \#70 addresses bugs found in eligibility report
+#### Pull Request 101: Make swap ins for dual-dataframe, numerator/denominator usage
 
-Merging fix-70 into dev
+Merging fix-90v2 into fix-90
 
-<https://github.com/Gilead-BioStats/gsm.qtl/pull/71>
+<https://github.com/Gilead-BioStats/gsm.qtl/pull/101>
 
-| Requester |   Date Requested    |                       Reviewers                        | Review Status |
-|:---------:|:-------------------:|:------------------------------------------------------:|:-------------:|
-|  zdz2101  | 2026-01-27 18:44:24 | copilot-pull-request-reviewer\[bot\] samussiah zdz2101 |   COMMENTED   |
+| Requester |   Date Requested    |                   Reviewers                    | Review Status |
+|:---------:|:-------------------:|:----------------------------------------------:|:-------------:|
+|  zdz2101  | 2026-04-14 20:27:58 | samussiah copilot-pull-request-reviewer\[bot\] |   APPROVED    |
 
-#### Pull Request 67: Catch up dev from main
+#### Pull Request 100: Namespace non-base function calls in report templates
 
-Merging main into dev
+Merging fix-90-namespace-report-functions into fix-90
 
-<https://github.com/Gilead-BioStats/gsm.qtl/pull/67>
+<https://github.com/Gilead-BioStats/gsm.qtl/pull/100>
 
-| Requester |   Date Requested    |  Reviewers   | Review Status |
-|:---------:|:-------------------:|:------------:|:-------------:|
-|  zdz2101  | 2026-01-16 19:24:52 | lauramaxwell |   APPROVED    |
+| Requester |   Date Requested    |                  Reviewers                   | Review Status |
+|:---------:|:-------------------:|:--------------------------------------------:|:-------------:|
+| samussiah | 2026-04-14 15:22:19 | copilot-pull-request-reviewer\[bot\] zdz2101 |   COMMENTED   |
 
-#### Pull Request 66: Update package dependencies.
+#### Pull Request 92: Point at <gsm.core@dev> for new lSource data and dependencies
 
-Merging fix-65 into dev
+Merging for-gsm.kri-193 into dev
 
-<https://github.com/Gilead-BioStats/gsm.qtl/pull/66>
+<https://github.com/Gilead-BioStats/gsm.qtl/pull/92>
 
-| Requester |   Date Requested    |                       Reviewers                        | Review Status |
-|:---------:|:-------------------:|:------------------------------------------------------:|:-------------:|
-| samussiah | 2026-01-16 19:23:10 | copilot-pull-request-reviewer\[bot\] zdz2101 samussiah |   COMMENTED   |
+|  Requester   |   Date Requested    |  Reviewers  | Review Status |
+|:------------:|:-------------------:|:-----------:|:-------------:|
+| lauramaxwell | 2026-03-26 18:24:03 | nandriychuk |   APPROVED    |
 
-#### Pull Request 63: Release v1.1.0
+#### Pull Request 91: Closes \#90 Adopt feedback for eligibility by {group} charts
 
-Merging rc-v1.1.0 into main
+Merging fix-90 into dev
 
-<https://github.com/Gilead-BioStats/gsm.qtl/pull/63>
+<https://github.com/Gilead-BioStats/gsm.qtl/pull/91>
 
-| Requester |   Date Requested    |  Reviewers   | Review Status |
-|:---------:|:-------------------:|:------------:|:-------------:|
-|  zdz2101  | 2026-01-08 18:15:53 | lauramaxwell |   APPROVED    |
+| Requester |   Date Requested    |                             Reviewers                             | Review Status |
+|:---------:|:-------------------:|:-----------------------------------------------------------------:|:-------------:|
+|  zdz2101  | 2026-03-05 21:12:44 | copilot-pull-request-reviewer\[bot\] zdz2101 samussiah jonthegeek |   COMMENTED   |
 
-#### Pull Request 62: Circular Dependency Workaround
+#### Pull Request 89: Initialize qcthat
 
-Merging fix-circ-deps into dev
+Merging qcthat into dev
 
-<https://github.com/Gilead-BioStats/gsm.qtl/pull/62>
+<https://github.com/Gilead-BioStats/gsm.qtl/pull/89>
 
-| Requester |   Date Requested    |      Reviewers       | Review Status |
-|:---------:|:-------------------:|:--------------------:|:-------------:|
-|  zdz2101  | 2026-01-07 20:37:07 | zdz2101 lauramaxwell |   COMMENTED   |
+| Requester  |   Date Requested    | Reviewers | Review Status |
+|:----------:|:-------------------:|:---------:|:-------------:|
+| jonthegeek | 2026-03-04 20:18:20 |  zdz2101  |   APPROVED    |
 
-#### Pull Request 61: Closes \#60 adds functionality for a percentage based plot for barcharts
+#### Pull Request 88: Add back enrolled/ongoing patients to the visualizations of QTL0002 study discontinuation
 
-Merging fix-60 into dev
+Merging fix-87 into dev
 
-<https://github.com/Gilead-BioStats/gsm.qtl/pull/61>
-
-| Requester |   Date Requested    |                       Reviewers                        | Review Status |
-|:---------:|:-------------------:|:------------------------------------------------------:|:-------------:|
-|  zdz2101  | 2025-12-04 18:54:22 | jwildfire copilot-pull-request-reviewer\[bot\] zdz2101 |   APPROVED    |
-
-#### Pull Request 59: Closes \#58 removes `gsm.kri` dependency
-
-Merging fix-58 into dev
-
-<https://github.com/Gilead-BioStats/gsm.qtl/pull/59>
+<https://github.com/Gilead-BioStats/gsm.qtl/pull/88>
 
 | Requester |   Date Requested    |                       Reviewers                        | Review Status |
 |:---------:|:-------------------:|:------------------------------------------------------:|:-------------:|
-|  zdz2101  | 2025-10-28 18:07:16 | samussiah copilot-pull-request-reviewer\[bot\] zdz2101 |   COMMENTED   |
+|  zdz2101  | 2026-02-27 17:50:38 | zdz2101 samussiah copilot-pull-request-reviewer\[bot\] |   COMMENTED   |
 
-#### Pull Request 57: Catch main branch up to dev
+#### Pull Request 86: Closes \#76 addresses hard coded discontinuation filters and parameterizes it
 
-Merging main into dev
+Merging fix-78v2 into dev
 
-<https://github.com/Gilead-BioStats/gsm.qtl/pull/57>
+<https://github.com/Gilead-BioStats/gsm.qtl/pull/86>
 
-|  Requester  |   Date Requested    | Reviewers | Review Status |
-|:-----------:|:-------------------:|:---------:|:-------------:|
-| nandriychuk | 2025-10-01 20:20:41 |  zdz2101  |   APPROVED    |
+| Requester |   Date Requested    |                        Reviewers                         | Review Status |
+|:---------:|:-------------------:|:--------------------------------------------------------:|:-------------:|
+|  zdz2101  | 2026-02-25 18:25:33 | copilot-pull-request-reviewer\[bot\] nandriychuk zdz2101 |   COMMENTED   |
 
-#### Pull Request 56: Release v1.0.1
+#### Pull Request 85: Closes \#84 begins to address to feedback from in person QTL Tabletop session
 
-Merging release-1.0.1 into main
+Merging fix-84 into dev
 
-<https://github.com/Gilead-BioStats/gsm.qtl/pull/56>
+<https://github.com/Gilead-BioStats/gsm.qtl/pull/85>
 
-|  Requester  |   Date Requested    | Reviewers | Review Status |
-|:-----------:|:-------------------:|:---------:|:-------------:|
-| nandriychuk | 2025-10-01 20:08:39 |  zdz2101  |   APPROVED    |
+| Requester |   Date Requested    |                        Reviewers                         | Review Status |
+|:---------:|:-------------------:|:--------------------------------------------------------:|:-------------:|
+|  zdz2101  | 2026-02-25 17:59:23 | copilot-pull-request-reviewer\[bot\] nandriychuk zdz2101 |   COMMENTED   |
+
+#### Pull Request 83: Update qualification_report GHA
+
+Merging fix-82 into dev
+
+<https://github.com/Gilead-BioStats/gsm.qtl/pull/83>
+
+|  Requester  |   Date Requested    |                  Reviewers                   | Review Status |
+|:-----------:|:-------------------:|:--------------------------------------------:|:-------------:|
+| nandriychuk | 2026-02-23 18:02:00 | copilot-pull-request-reviewer\[bot\] zdz2101 |   COMMENTED   |
