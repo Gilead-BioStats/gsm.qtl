@@ -94,10 +94,10 @@ Each specification includes the following components:
 
 **loaded via a namespace (and not attached):** *gtable(v.0.3.6)*,
 *xfun(v.0.57)*, *bslib(v.0.10.0)*, *ggplot2(v.4.0.2)*,
-*htmlwidgets(v.1.6.4)*, *devtools(v.2.5.0)*, *vctrs(v.0.7.3)*,
+*htmlwidgets(v.1.6.4)*, *devtools(v.2.5.1)*, *vctrs(v.0.7.3)*,
 *tools(v.4.5.3)*, *generics(v.0.1.4)*, *curl(v.7.0.0)*,
 *tibble(v.3.3.1)*, *pkgconfig(v.2.0.3)*, *data.table(v.1.18.2.1)*,
-*RColorBrewer(v.1.1-3)*, *S7(v.0.2.1)*, *desc(v.1.4.3)*,
+*RColorBrewer(v.1.1-3)*, *S7(v.0.2.1-1)*, *desc(v.1.4.3)*,
 *lifecycle(v.1.0.5)*, *farver(v.2.1.2)*, *compiler(v.4.5.3)*,
 *brio(v.1.1.5)*, *textshaping(v.1.0.5)*, *htmltools(v.0.5.9)*,
 *usethis(v.3.2.1)*, *sass(v.0.4.10)*, *lazyeval(v.0.2.3)*,
@@ -113,7 +113,7 @@ Each specification includes the following components:
 *rmarkdown(v.2.31)*, *httr(v.1.4.8)*, *otel(v.0.2.0)*, *ragg(v.1.5.2)*,
 *memoise(v.2.0.1)*, *evaluate(v.1.0.5)*, *log4r(v.0.4.4)*,
 *covr(v.3.6.5)*, *rex(v.1.2.2)*, *viridisLite(v.0.4.3)*,
-*rlang(v.1.2.0)*, *urltools(v.1.7.3.1)*, *Rcpp(v.1.1.1)*,
+*rlang(v.1.2.0)*, *urltools(v.1.7.3.1)*, *Rcpp(v.1.1.1-1)*,
 *DBI(v.1.3.0)*, *glue(v.1.8.0)*, *BiocManager(v.1.30.27)*,
 *xml2(v.1.5.2)*, *pkgload(v.1.5.1)*, *rstudioapi(v.0.18.0)*,
 *jsonlite(v.2.0.0)*, *R6(v.2.6.1)*, *systemfonts(v.1.3.2)* and
