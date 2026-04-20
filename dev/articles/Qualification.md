@@ -87,17 +87,17 @@ Each specification includes the following components:
 **attached base packages:** *stats*, *graphics*, *grDevices*, *utils*,
 *datasets*, *methods* and *base*
 
-**other attached packages:** *gsm.qtl(v.1.1.1)*, *testthat(v.3.3.2)*,
+**other attached packages:** *gsm.qtl(v.1.2.0)*, *testthat(v.3.3.2)*,
 *riskmetric(v.0.2.7)*, *stringr(v.1.6.0)*, *gh(v.1.5.0)*,
 *pander(v.0.6.6)*, *purrr(v.1.2.2)*, *dplyr(v.1.2.1)*, *knitr(v.1.51)*,
 *gt(v.1.3.0)* and *gsm.core(v.1.2.0)*
 
 **loaded via a namespace (and not attached):** *gtable(v.0.3.6)*,
 *xfun(v.0.57)*, *bslib(v.0.10.0)*, *ggplot2(v.4.0.2)*,
-*htmlwidgets(v.1.6.4)*, *devtools(v.2.5.0)*, *vctrs(v.0.7.3)*,
+*htmlwidgets(v.1.6.4)*, *devtools(v.2.5.1)*, *vctrs(v.0.7.3)*,
 *tools(v.4.5.3)*, *generics(v.0.1.4)*, *curl(v.7.0.0)*,
 *tibble(v.3.3.1)*, *pkgconfig(v.2.0.3)*, *data.table(v.1.18.2.1)*,
-*RColorBrewer(v.1.1-3)*, *S7(v.0.2.1)*, *desc(v.1.4.3)*,
+*RColorBrewer(v.1.1-3)*, *S7(v.0.2.1-1)*, *desc(v.1.4.3)*,
 *lifecycle(v.1.0.5)*, *farver(v.2.1.2)*, *compiler(v.4.5.3)*,
 *brio(v.1.1.5)*, *textshaping(v.1.0.5)*, *htmltools(v.0.5.9)*,
 *usethis(v.3.2.1)*, *sass(v.0.4.10)*, *lazyeval(v.0.2.3)*,
@@ -113,11 +113,11 @@ Each specification includes the following components:
 *rmarkdown(v.2.31)*, *httr(v.1.4.8)*, *otel(v.0.2.0)*, *ragg(v.1.5.2)*,
 *memoise(v.2.0.1)*, *evaluate(v.1.0.5)*, *log4r(v.0.4.4)*,
 *covr(v.3.6.5)*, *rex(v.1.2.2)*, *viridisLite(v.0.4.3)*,
-*rlang(v.1.2.0)*, *urltools(v.1.7.3.1)*, *Rcpp(v.1.1.1)*,
-*DBI(v.1.3.0)*, *glue(v.1.8.0)*, *BiocManager(v.1.30.27)*,
+*rlang(v.1.2.0)*, *urltools(v.1.7.3.1)*, *Rcpp(v.1.1.1-1)*,
+*DBI(v.1.3.0)*, *glue(v.1.8.1)*, *BiocManager(v.1.30.27)*,
 *xml2(v.1.5.2)*, *pkgload(v.1.5.1)*, *rstudioapi(v.0.18.0)*,
 *jsonlite(v.2.0.0)*, *R6(v.2.6.1)*, *systemfonts(v.1.3.2)* and
-*fs(v.2.0.1)*
+*fs(v.2.1.0)*
 
 ## Pull Request History
 
@@ -138,6 +138,26 @@ Guidelines](https://gilead-biostats.github.io/gsm.core/articles/ContributorGuide
 
 Below, the most recent 10 PRs into gsm.qtl are displayed. [See all Pull
 Requests here.](https://github.com/gilead-biostats/gsm.qtl/pulls)
+
+#### Pull Request 104: Main -\> dev
+
+Merging main into dev
+
+<https://github.com/Gilead-BioStats/gsm.qtl/pull/104>
+
+|  Requester   |   Date Requested    | Reviewers | Review Status |
+|:------------:|:-------------------:|:---------:|:-------------:|
+| lauramaxwell | 2026-04-20 15:51:28 |  zdz2101  |   APPROVED    |
+
+#### Pull Request 102: Gsm.qtl rc v1.2.0
+
+Merging gsm.qtl-rc-v1.2.0 into main
+
+<https://github.com/Gilead-BioStats/gsm.qtl/pull/102>
+
+| Requester |   Date Requested    |                              Reviewers                              | Review Status |
+|:---------:|:-------------------:|:-------------------------------------------------------------------:|:-------------:|
+|  zdz2101  | 2026-04-15 17:59:56 | copilot-pull-request-reviewer\[bot\] lauramaxwell zdz2101 samussiah |   COMMENTED   |
 
 #### Pull Request 101: Make swap ins for dual-dataframe, numerator/denominator usage
 
@@ -218,23 +238,3 @@ Merging fix-84 into dev
 | Requester |   Date Requested    |                        Reviewers                         | Review Status |
 |:---------:|:-------------------:|:--------------------------------------------------------:|:-------------:|
 |  zdz2101  | 2026-02-25 17:59:23 | copilot-pull-request-reviewer\[bot\] nandriychuk zdz2101 |   COMMENTED   |
-
-#### Pull Request 83: Update qualification_report GHA
-
-Merging fix-82 into dev
-
-<https://github.com/Gilead-BioStats/gsm.qtl/pull/83>
-
-|  Requester  |   Date Requested    |                  Reviewers                   | Review Status |
-|:-----------:|:-------------------:|:--------------------------------------------:|:-------------:|
-| nandriychuk | 2026-02-23 18:02:00 | copilot-pull-request-reviewer\[bot\] zdz2101 |   COMMENTED   |
-
-#### Pull Request 81: Closes \#80 add testthat suite
-
-Merging fix-80 into dev
-
-<https://github.com/Gilead-BioStats/gsm.qtl/pull/81>
-
-| Requester |   Date Requested    |                        Reviewers                         | Review Status |
-|:---------:|:-------------------:|:--------------------------------------------------------:|:-------------:|
-|  zdz2101  | 2026-02-19 00:16:10 | copilot-pull-request-reviewer\[bot\] nandriychuk zdz2101 |   COMMENTED   |
