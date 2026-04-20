@@ -44,6 +44,7 @@ criteria_groupBar <- function(df, varGroupID, strGroupLabel, bSwapAxes = FALSE) 
         color = "black"
       ) +
       labs(y = strGroupLabel, x = "Criteria Count", fill = "Criteria", title = paste0(strGroupLabel, " by Criteria")) +
+      scale_x_continuous(expand = expansion(mult = c(0, 0.05))) +
       theme_classic(base_size = 11) +
       theme(
         panel.grid.major.y = element_blank()
@@ -74,6 +75,7 @@ criteria_groupBar <- function(df, varGroupID, strGroupLabel, bSwapAxes = FALSE) 
         color = "black"
       ) +
       labs(y = "Criteria", x = "Criteria Count", fill = strGroupLabel, title = paste0("Criteria by ", strGroupLabel)) +
+      scale_x_continuous(expand = expansion(mult = c(0, 0.05))) +
       theme_classic(base_size = 11) +
       theme(
         axis.text.y = element_text(angle = 45, vjust = 1), # tilt to avoid overlap
@@ -82,6 +84,5 @@ criteria_groupBar <- function(df, varGroupID, strGroupLabel, bSwapAxes = FALSE) 
   }
 
   # Create plotly
-  plotly::ggplotly(group_criteria_bar, tooltip = c("text"), h = calc_fig_size(n_rows = distinct_n_y)) %>%
-    layout(xaxis = list(autorange = TRUE), yaxis = list(autorange = TRUE))
+  plotly::ggplotly(group_criteria_bar, tooltip = c("text"), h = calc_fig_size(n_rows = distinct_n_y))
 }

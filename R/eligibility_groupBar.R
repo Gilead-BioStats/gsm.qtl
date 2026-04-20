@@ -90,8 +90,7 @@ eligibility_groupBar <- function(dfNum, dfDenom, varGroupID, strGroupLabel, bPer
     layout(
       margin = footnote_layout$margin,
       annotations = footnote_layout$annotations,
-      xaxis = list(autorange = TRUE),
-      yaxis = list(autorange = TRUE)
+      xaxis = list(autorange = TRUE)
     )
   return(x)
 }

@@ -50,9 +50,21 @@ Report_QTL <- function(
   )
 
   gsm.core::stop_if(
-    cnd = !(length(lListings) > 0 && is.data.frame(lListings[[1]]) && "studyid" %in% names(lListings[[1]])),
-    message = "lListings[[1]] must be a data.frame containing studyid"
+    cnd = length(lListings) == 0,
+    message = "lListings must be a non-empty list"
   )
+  invalid_listings <- !vapply(
+    lListings,
+    function(x) is.data.frame(x) && "studyid" %in% names(x),
+    logical(1)
+  )
+  if (any(invalid_listings)) {
+    first_bad <- which(invalid_listings)[1]
+    gsm.core::stop_if(
+      cnd = TRUE,
+      message = paste0("lListings[[", first_bad, "]] must be a data.frame containing studyid")
+    )
+  }
 
   gsm.core::stop_if(
     cnd = !(is.character(strOutputDir) && length(strOutputDir) == 1 && nzchar(strOutputDir)),
