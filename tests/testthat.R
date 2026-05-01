@@ -9,6 +9,7 @@
 library(testthat)
 library(gsm.core)
 library(gsm.qtl)
+library(workr)
 library(dplyr)
 library(purrr)
 

@@ -35,6 +35,7 @@ Imports:
   tidyr,
   tibble,
   utils,
+  workr,
   yaml
 Suggests: 
   cli,
@@ -50,6 +51,7 @@ Suggests:
   testthat (>= 3.0.0)
 Remotes:
     gsm.core=Gilead-BioStats/gsm.core@main,
+    workr=Gilead-BioStats/workr@main,
     qcthat=Gilead-BioStats/qcthat@main
 VignetteBuilder: knitr
 Config/testthat/edition: 3

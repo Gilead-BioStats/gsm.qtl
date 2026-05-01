@@ -1,6 +1,7 @@
 library(gsm.qtl)
 library(gsm.datasim)
 library(gsm.kri)
+library(workr)
 library(dplyr)
 library(purrr)
 devtools::load_all(".")
@@ -22,18 +23,18 @@ ie_data <- gsm.datasim::generate_rawdata_for_single_study(
   desired_specs = NULL
 )
 
-mappings_wf <- gsm.core::MakeWorkflowList(
+mappings_wf <- workr::MakeWorkflowList(
   strNames =c("SUBJ", "ENROLL", "IE", "PD", "STUDY", "SITE", "COUNTRY", "EXCLUSION", "STUDCOMP"),
   strPath = "workflow/1_mappings",
   strPackage = "gsm.mapping"
 )
 mappings_spec <- gsm.mapping::CombineSpecs(mappings_wf)
-metrics_wf <- gsm.core::MakeWorkflowList(strNames = c("qtl0001", "qtl0002"), strPath = "inst/workflow/2_metrics")
-reporting_wf <- gsm.core::MakeWorkflowList(strNames = c("Results", "Groups", "Metrics"), strPath = "workflow/3_reporting", strPackage = "gsm.reporting")
+metrics_wf <- workr::MakeWorkflowList(strNames = c("qtl0001", "qtl0002"), strPath = "inst/workflow/2_metrics")
+reporting_wf <- workr::MakeWorkflowList(strNames = c("Results", "Groups", "Metrics"), strPath = "workflow/3_reporting", strPackage = "gsm.reporting")
 
 
 lRaw <- map_depth(ie_data, 1, gsm.mapping::Ingest, mappings_spec)
-mapped <- map_depth(lRaw, 1, ~ gsm.core::RunWorkflows(mappings_wf, .x))
+mapped <- map_depth(lRaw, 1, ~ workr::RunWorkflows(mappings_wf, .x))
 # Cleanup discontinuation reasons instead of modifying gsm.datasim
 mapped <- map(mapped, ~ {
   .x$Mapped_STUDCOMP <- .x$Mapped_STUDCOMP %>%
@@ -62,8 +63,8 @@ mapped <- map(mapped, ~ {
 
   .x
 })
-analyzed <- map_depth(mapped, 1, ~gsm.core::RunWorkflows(metrics_wf, .x))
-reporting <- map2(mapped, analyzed, ~ gsm.core::RunWorkflows(reporting_wf, c(.x, list(lAnalyzed = .y, lWorkflows = metrics_wf))))
+analyzed <- map_depth(mapped, 1, ~workr::RunWorkflows(metrics_wf, .x))
+reporting <- map2(mapped, analyzed, ~ workr::RunWorkflows(reporting_wf, c(.x, list(lAnalyzed = .y, lWorkflows = metrics_wf))))
 
 # Fix `SnapshotDate` column in reporting results, can be addressed in https://github.com/Gilead-BioStats/gsm.reporting/issues/24
 dates <- names(ie_data) %>% as.Date

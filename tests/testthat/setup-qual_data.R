@@ -82,7 +82,7 @@ run_workflow_outputs <- function(
   }
 
   for (step in workflow$steps) {
-    result <- gsm.core::RunStep(
+    result <- workr::RunStep(
       lStep = step,
       lData = workflow$lData,
       lMeta = workflow$meta
@@ -105,14 +105,14 @@ run_workflow_outputs <- function(
 # -------------------------------------------------------------------------
 
 ineligibility_workflow <- purrr::flatten(
-  gsm.core::MakeWorkflowList(
+  workr::MakeWorkflowList(
     strNames = c("qtl0001"),
     strPath = GetYamlPathDefaultMetrics()
   )
 )
 
 discontinuation_workflow <- purrr::flatten(
-  gsm.core::MakeWorkflowList(
+  workr::MakeWorkflowList(
     strNames = c("qtl0002"),
     strPath = GetYamlPathDefaultMetrics()
   )
