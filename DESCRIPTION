@@ -51,7 +51,7 @@ Suggests:
   testthat (>= 3.0.0)
 Remotes:
     gsm.core=Gilead-BioStats/gsm.core@workr-implementation,
-    workr=Gilead-BioStats/workr@main,
+    workr=Gilead-BioStats/workr,
     qcthat=Gilead-BioStats/qcthat@main
 VignetteBuilder: knitr
 Config/testthat/edition: 3
