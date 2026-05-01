@@ -50,7 +50,7 @@ Suggests:
   riskmetric,
   testthat (>= 3.0.0)
 Remotes:
-    gsm.core=Gilead-BioStats/gsm.core@main,
+    gsm.core=Gilead-BioStats/gsm.core@workr-implementation,
     workr=Gilead-BioStats/workr@main,
     qcthat=Gilead-BioStats/qcthat@main
 VignetteBuilder: knitr
