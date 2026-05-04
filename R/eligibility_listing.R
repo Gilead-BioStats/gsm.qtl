@@ -10,8 +10,11 @@ eligibility_listing <- function(df, download = FALSE) {
     return(gt::gt(df))
   }
 
-  n_dvdtm <- max(sapply(strsplit(na.omit(df$dvdtm), ";;;"), length), 1L)
-  n_elig <- max(sapply(strsplit(na.omit(df$eligibility_criteria), ";;;"), length), 1L)
+  dvdtm_splits <- strsplit(na.omit(df$dvdtm), ";;;")
+  n_dvdtm <- if (length(dvdtm_splits) == 0) 1L else max(lengths(dvdtm_splits))
+
+  elig_splits <- strsplit(na.omit(df$eligibility_criteria), ";;;")
+  n_elig <- if (length(elig_splits) == 0) 1L else max(lengths(elig_splits))
 
   listing <- df %>%
     select(country, invid, subjid, Source, ietestcd_concat, dvdtm, eligibility_criteria) %>%
