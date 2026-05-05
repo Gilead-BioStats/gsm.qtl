@@ -160,7 +160,7 @@ will be configurable in the workflows from study to study, denoted as
 <p>To account for natural variability, a <strong>tolerance
 margin</strong> is added to the threshold based on a normal
 approximation to the binomial distribution:</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="normal">Tolerance Margin</mtext><mo>=</mo><mtext mathvariant="normal">z</mtext><mo>×</mo><msqrt><mfrac><mrow><msub><mi>p</mi><mn>0</mn></msub><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo>−</mo><msub><mi>p</mi><mn>0</mn></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow><mtext mathvariant="normal">denom</mtext></mfrac></msqrt><mi>.</mi></mrow><annotation encoding="application/x-tex">
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="normal">Tolerance Margin</mtext><mo>=</mo><mtext mathvariant="normal">z</mtext><mo>×</mo><msqrt><mfrac><mrow><msub><mi>p</mi><mn>0</mn></msub><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo>−</mo><msub><mi>p</mi><mn>0</mn></msub><mo stretchy="false" form="postfix">)</mo></mrow><mtext mathvariant="normal">denom</mtext></mfrac></msqrt><mi>.</mi></mrow><annotation encoding="application/x-tex">
 \text{Tolerance Margin} = \text{z} \times \sqrt{\frac{p_0(1 - p_0)}{\text{denom}}}.
 </annotation></semantics></math></p>
 <p>Here,
@@ -169,7 +169,7 @@ which will also be configurable denoted as <code>nNumDeviations</code>
 in the <code>yaml</code>’s <code>meta</code> field, controls the
 leniency of the threshold.</p>
 <p>An excursion from the <strong>QTL</strong> limit is flagged when</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover><mi>p</mi><mo accent="true">̂</mo></mover><mo>&gt;</mo><msub><mi>p</mi><mn>0</mn></msub><mo>+</mo><mtext mathvariant="normal">z</mtext><mo>×</mo><msqrt><mfrac><mrow><msub><mi>p</mi><mn>0</mn></msub><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo>−</mo><msub><mi>p</mi><mn>0</mn></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow><mtext mathvariant="normal">denom</mtext></mfrac></msqrt><mi>.</mi></mrow><annotation encoding="application/x-tex">
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover><mi>p</mi><mo accent="true">̂</mo></mover><mo>&gt;</mo><msub><mi>p</mi><mn>0</mn></msub><mo>+</mo><mtext mathvariant="normal">z</mtext><mo>×</mo><msqrt><mfrac><mrow><msub><mi>p</mi><mn>0</mn></msub><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo>−</mo><msub><mi>p</mi><mn>0</mn></msub><mo stretchy="false" form="postfix">)</mo></mrow><mtext mathvariant="normal">denom</mtext></mfrac></msqrt><mi>.</mi></mrow><annotation encoding="application/x-tex">
 \hat{p} &gt; p_0 + \text{z} \times \sqrt{\frac{p_0(1 - p_0)}{\text{denom}}}.
 </annotation></semantics></math></p>
 <p>This approach is conceptually similar to a one-sided control limit

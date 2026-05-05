@@ -44,6 +44,7 @@ widgets and tables that ultimately go into an html QTL report.
 You can install the development version of `gsm.qtl` like so:
 
 ``` r
+
 # install.packages("pak")
 pak::pak("Gilead-BioStats/gsm.qtl@dev")
 ```
@@ -55,6 +56,7 @@ visualizations based on reporting outputs from the `{gsm.reporting}`
 package:
 
 ``` r
+
 library(gsm.datasim)
 library(gsm.mapping)
 library(gsm.reporting)
