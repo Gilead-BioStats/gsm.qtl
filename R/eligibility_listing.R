@@ -5,18 +5,29 @@
 #' @returns A `gt` object or `data.frame`
 #' @export
 eligibility_listing <- function(df, download = FALSE) {
+  if (nrow(df) == 0) {
+    if (download) return(df)
+    return(gt::gt(df))
+  }
+
+  dvdtm_splits <- strsplit(na.omit(df$dvdtm), ";;;")
+  n_dvdtm <- if (length(dvdtm_splits) == 0) 1L else max(lengths(dvdtm_splits))
+
+  elig_splits <- strsplit(na.omit(df$eligibility_criteria), ";;;")
+  n_elig <- if (length(elig_splits) == 0) 1L else max(lengths(elig_splits))
+
   listing <- df %>%
     select(country, invid, subjid, Source, ietestcd_concat, dvdtm, eligibility_criteria) %>%
     tidyr::separate(
       dvdtm,
-      into = paste0("PD Date", seq_len(max(sapply(strsplit(df$dvdtm, ";;;"), length)))),
+      into = paste0("PD Date", seq_len(n_dvdtm)),
       sep = ";;;",
       fill = "right"
     ) %>%
     mutate_at(vars(starts_with("PD Date")), ~ substr(.x, 1, 10)) %>%
     tidyr::separate(
       eligibility_criteria,
-      into = paste0("PD Term", seq_len(max(sapply(strsplit(df$eligibility_criteria, ";;;"), length)))),
+      into = paste0("PD Term", seq_len(n_elig)),
       sep = ";;;",
       fill = "right"
     ) %>%

@@ -142,6 +142,31 @@ test_that("eligibility_listing covers df and download arguments (#21, #22, #24, 
   expect_true(nrow(out_download) > 0)
 })
 
+test_that("eligibility_listing handles zero-row data frame (#108)", {
+  df <- qtl_test_participant_df()[0, ]
+
+  out_download <- eligibility_listing(df = df, download = TRUE)
+  out_gt <- eligibility_listing(df = df, download = FALSE)
+
+  expect_s3_class(out_download, "data.frame")
+  expect_equal(nrow(out_download), 0)
+  expect_s3_class(out_gt, "gt_tbl")
+})
+
+test_that("eligibility_listing handles all-NA dvdtm and eligibility_criteria (#108)", {
+  df <- tibble::tribble(
+    ~invid, ~country, ~subjid, ~Source, ~ietestcd_concat, ~dvdtm, ~eligibility_criteria, ~compyn, ~compreas,
+    "S01", "US", "SUBJ-001", "EDC", "I001", NA_character_, NA_character_, "N", "AE"
+  )
+
+  out <- eligibility_listing(df = df, download = TRUE)
+
+  expect_s3_class(out, "data.frame")
+  expect_equal(nrow(out), 1)
+  expect_true("PD Date1" %in% names(out))
+  expect_true("PD Term1" %in% names(out))
+})
+
 test_that("scrollable_gt uses height and width arguments (#21, #22)", {
   gt_tbl <- gt::gt(head(qtl_test_participant_df(), 2))
   out <- scrollable_gt(gt_tbl = gt_tbl, height = "200px", min_table_width = "800px")
