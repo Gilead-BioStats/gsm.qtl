@@ -1,5 +1,12 @@
 # Changelog
 
+## gsm.qtl v1.2.1
+
+#### Bug Fixes:
+
+- Adds early return for zero-row df to prevent crash in
+  [`eligibility_listing()`](https://gilead-biostats.github.io/gsm.qtl/reference/eligibility_listing.md)
+
 ## gsm.qtl v1.2.0
 
 #### Bug Fixes:
