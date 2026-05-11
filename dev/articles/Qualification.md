@@ -87,7 +87,7 @@ Each specification includes the following components:
 **attached base packages:** *stats*, *graphics*, *grDevices*, *utils*,
 *datasets*, *methods* and *base*
 
-**other attached packages:** *gsm.qtl(v.1.2.0)*, *testthat(v.3.3.2)*,
+**other attached packages:** *gsm.qtl(v.1.2.1)*, *testthat(v.3.3.2)*,
 *riskmetric(v.0.2.7)*, *stringr(v.1.6.0)*, *gh(v.1.5.0)*,
 *pander(v.0.6.6)*, *purrr(v.1.2.2)*, *dplyr(v.1.2.1)*, *knitr(v.1.51)*,
 *gt(v.1.3.0)* and *gsm.core(v.1.2.0)*
@@ -96,7 +96,7 @@ Each specification includes the following components:
 *xfun(v.0.57)*, *bslib(v.0.10.0)*, *ggplot2(v.4.0.3)*,
 *htmlwidgets(v.1.6.4)*, *devtools(v.2.5.2)*, *vctrs(v.0.7.3)*,
 *tools(v.4.6.0)*, *generics(v.0.1.4)*, *curl(v.7.1.0)*,
-*tibble(v.3.3.1)*, *pkgconfig(v.2.0.3)*, *data.table(v.1.18.2.1)*,
+*tibble(v.3.3.1)*, *pkgconfig(v.2.0.3)*, *data.table(v.1.18.4)*,
 *RColorBrewer(v.1.1-3)*, *S7(v.0.2.2)*, *desc(v.1.4.3)*,
 *lifecycle(v.1.0.5)*, *farver(v.2.1.2)*, *compiler(v.4.6.0)*,
 *brio(v.1.1.5)*, *textshaping(v.1.0.5)*, *htmltools(v.0.5.9)*,
@@ -138,6 +138,26 @@ Guidelines](https://gilead-biostats.github.io/gsm.core/articles/ContributorGuide
 
 Below, the most recent 10 PRs into gsm.qtl are displayed. [See all Pull
 Requests here.](https://github.com/gilead-biostats/gsm.qtl/pulls)
+
+#### Pull Request 112: gsm.qtl v1.2.1
+
+Merging rc-v1.2.1 into main
+
+<https://github.com/Gilead-BioStats/gsm.qtl/pull/112>
+
+| Requester |   Date Requested    | Reviewers | Review Status |
+|:---------:|:-------------------:|:---------:|:-------------:|
+|  zdz2101  | 2026-05-06 20:48:27 | samussiah |   APPROVED    |
+
+#### Pull Request 111: catch dev up to main
+
+Merging main into dev
+
+<https://github.com/Gilead-BioStats/gsm.qtl/pull/111>
+
+| Requester |   Date Requested    |  Reviewers   | Review Status |
+|:---------:|:-------------------:|:------------:|:-------------:|
+|  zdz2101  | 2026-05-06 20:41:03 | lauramaxwell |   APPROVED    |
 
 #### Pull Request 109: Fix eligibility_listing crash on zero-row or all-NA input
 
@@ -218,23 +238,3 @@ Merging qcthat into dev
 | Requester  |   Date Requested    | Reviewers | Review Status |
 |:----------:|:-------------------:|:---------:|:-------------:|
 | jonthegeek | 2026-03-04 20:18:20 |  zdz2101  |   APPROVED    |
-
-#### Pull Request 88: Add back enrolled/ongoing patients to the visualizations of QTL0002 study discontinuation
-
-Merging fix-87 into dev
-
-<https://github.com/Gilead-BioStats/gsm.qtl/pull/88>
-
-| Requester | Date Requested | Reviewers | Review Status |
-|:--:|:--:|:--:|:--:|
-| zdz2101 | 2026-02-27 17:50:38 | zdz2101 samussiah copilot-pull-request-reviewer\[bot\] | COMMENTED |
-
-#### Pull Request 86: Closes \#76 addresses hard coded discontinuation filters and parameterizes it
-
-Merging fix-78v2 into dev
-
-<https://github.com/Gilead-BioStats/gsm.qtl/pull/86>
-
-| Requester | Date Requested | Reviewers | Review Status |
-|:--:|:--:|:--:|:--:|
-| zdz2101 | 2026-02-25 18:25:33 | copilot-pull-request-reviewer\[bot\] nandriychuk zdz2101 | COMMENTED |
