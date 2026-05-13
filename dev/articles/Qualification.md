@@ -169,6 +169,16 @@ Merging bugfix/108-eligibility-listing-zero-row into dev
 |:--:|:--:|:--:|:--:|
 | samussiah | 2026-05-04 19:09:57 | zdz2101 copilot-pull-request-reviewer\[bot\] | APPROVED |
 
+#### Pull Request 106: Update workflows
+
+Merging gha-202604 into dev
+
+<https://github.com/Gilead-BioStats/gsm.qtl/pull/106>
+
+| Requester  |   Date Requested    |  Reviewers   | Review Status |
+|:----------:|:-------------------:|:------------:|:-------------:|
+| jonthegeek | 2026-04-30 19:41:20 | lauramaxwell |   APPROVED    |
+
 #### Pull Request 104: Main -\> dev
 
 Merging main into dev
@@ -228,13 +238,3 @@ Merging fix-90 into dev
 | Requester | Date Requested | Reviewers | Review Status |
 |:--:|:--:|:--:|:--:|
 | zdz2101 | 2026-03-05 21:12:44 | copilot-pull-request-reviewer\[bot\] zdz2101 samussiah jonthegeek | COMMENTED |
-
-#### Pull Request 89: Initialize qcthat
-
-Merging qcthat into dev
-
-<https://github.com/Gilead-BioStats/gsm.qtl/pull/89>
-
-| Requester  |   Date Requested    | Reviewers | Review Status |
-|:----------:|:-------------------:|:---------:|:-------------:|
-| jonthegeek | 2026-03-04 20:18:20 |  zdz2101  |   APPROVED    |
