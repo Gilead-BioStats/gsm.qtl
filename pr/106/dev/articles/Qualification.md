@@ -87,10 +87,10 @@ Each specification includes the following components:
 **attached base packages:** *stats*, *graphics*, *grDevices*, *utils*,
 *datasets*, *methods* and *base*
 
-**other attached packages:** *gsm.qtl(v.1.2.0.9000)*,
-*testthat(v.3.3.2)*, *riskmetric(v.0.2.7)*, *stringr(v.1.6.0)*,
-*gh(v.1.5.0)*, *pander(v.0.6.6)*, *purrr(v.1.2.2)*, *dplyr(v.1.2.1)*,
-*knitr(v.1.51)*, *gt(v.1.3.0)* and *gsm.core(v.1.2.0)*
+**other attached packages:** *gsm.qtl(v.1.2.1)*, *testthat(v.3.3.2)*,
+*riskmetric(v.0.2.7)*, *stringr(v.1.6.0)*, *gh(v.1.5.0)*,
+*pander(v.0.6.6)*, *purrr(v.1.2.2)*, *dplyr(v.1.2.1)*, *knitr(v.1.51)*,
+*gt(v.1.3.0)* and *gsm.core(v.1.2.0)*
 
 **loaded via a namespace (and not attached):** *gtable(v.0.3.6)*,
 *xfun(v.0.57)*, *bslib(v.0.10.0)*, *ggplot2(v.4.0.3)*,
@@ -148,6 +148,16 @@ Merging rc-v1.2.1 into main
 | Requester |   Date Requested    | Reviewers | Review Status |
 |:---------:|:-------------------:|:---------:|:-------------:|
 |  zdz2101  | 2026-05-06 20:48:27 | samussiah |   APPROVED    |
+
+#### Pull Request 111: catch dev up to main
+
+Merging main into dev
+
+<https://github.com/Gilead-BioStats/gsm.qtl/pull/111>
+
+| Requester |   Date Requested    |  Reviewers   | Review Status |
+|:---------:|:-------------------:|:------------:|:-------------:|
+|  zdz2101  | 2026-05-06 20:41:03 | lauramaxwell |   APPROVED    |
 
 #### Pull Request 109: Fix eligibility_listing crash on zero-row or all-NA input
 
@@ -228,13 +238,3 @@ Merging qcthat into dev
 | Requester  |   Date Requested    | Reviewers | Review Status |
 |:----------:|:-------------------:|:---------:|:-------------:|
 | jonthegeek | 2026-03-04 20:18:20 |  zdz2101  |   APPROVED    |
-
-#### Pull Request 88: Add back enrolled/ongoing patients to the visualizations of QTL0002 study discontinuation
-
-Merging fix-87 into dev
-
-<https://github.com/Gilead-BioStats/gsm.qtl/pull/88>
-
-| Requester | Date Requested | Reviewers | Review Status |
-|:--:|:--:|:--:|:--:|
-| zdz2101 | 2026-02-27 17:50:38 | zdz2101 samussiah copilot-pull-request-reviewer\[bot\] | COMMENTED |
