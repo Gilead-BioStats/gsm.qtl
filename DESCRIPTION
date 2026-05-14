@@ -1,6 +1,6 @@
 Package: gsm.qtl
 Title: Good Statistical Monitoring QTLs
-Version: 1.2.1
+Version: 1.2.2
 Authors@R: c(
     person("Zhongkai", "Wang", , "Zhongkai.Wang6@gilead.com", role = c("aut", "cre"),
             comment = c(ORCID = "0000-0002-1883-2265")),
@@ -60,4 +60,4 @@ Language: en-US
 LazyData: true
 LazyDataCompression: xz
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.3
+Config/roxygen2/version: 8.0.0
