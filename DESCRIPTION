@@ -3,61 +3,62 @@ Title: Good Statistical Monitoring QTLs
 Version: 1.2.2
 Authors@R: c(
     person("Zhongkai", "Wang", , "Zhongkai.Wang6@gilead.com", role = c("aut", "cre"),
-            comment = c(ORCID = "0000-0002-1883-2265")),
-    person("Laura", "Maxwell", , "laura.maxwell@atorusresearch.com", role = c("aut")),
-    person("Zelos", "Zhu", , "zelos.zhu@atorusresearch.com", role = c("aut"))
-    )
+           comment = c(ORCID = "0000-0002-1883-2265")),
+    person("Laura", "Maxwell", , "laura.maxwell@atorusresearch.com", role = "aut"),
+    person("Zelos", "Zhu", , "zelos.zhu@atorusresearch.com", role = "aut")
+  )
 Description: The Good Statistical Monitoring or 'gsm' suite of R packages
-    provides a framework for statistical data monitoring. 'gsm.qtl'
-    is an extension that contains the additional functions, workflows,
-    and document template to generate reports for QTL.
+    provides a framework for statistical data monitoring. 'gsm.qtl' is an
+    extension that contains the additional functions, workflows, and
+    document template to generate reports for QTL.
 License: Apache License (>= 2)
 URL: https://gilead-biostats.github.io/gsm.qtl,
     https://github.com/Gilead-BioStats/gsm.qtl,
 BugReports: https://github.com/Gilead-BioStats/gsm.qtl/issues
 Depends:
-  R (>= 4.0)
+    R (>= 4.0)
 Imports: 
-  dplyr,
-  forcats,
-  ggplot2,
-  gsm.core (>= 1.1.2),
-  gt,
-  htmltools,
-  htmlwidgets,
-  jsonlite,
-  plotly,
-  purrr,
-  rlang,
-  scales,
-  stats,
-  stringr,
-  tidyr,
-  tibble,
-  utils,
-  yaml
+    dplyr,
+    forcats,
+    ggplot2,
+    gsm.core (>= 1.1.2),
+    gt,
+    htmltools,
+    htmlwidgets,
+    jsonlite,
+    plotly,
+    purrr,
+    rlang,
+    scales,
+    stats,
+    stringr,
+    tibble,
+    tidyr,
+    utils,
+    yaml
 Suggests: 
-  cli,
-  glue,
-  gh,
-  here,
-  knitr,
-  lubridate,
-  pander,
-  qcthat,
-  rmarkdown,
-  riskmetric,
-  testthat (>= 3.0.0)
+    cli,
+    gh,
+    glue,
+    here,
+    knitr,
+    lubridate,
+    pander,
+    qcthat,
+    riskmetric,
+    rmarkdown,
+    testthat (>= 3.0.0)
+VignetteBuilder: 
+    knitr
 Remotes:
     gsm.core=Gilead-BioStats/gsm.core@main,
     qcthat=Gilead-BioStats/qcthat@main
-VignetteBuilder: knitr
+Config/Needs/website: DT, here, pkgdown, devtools
+Config/roxygen2/version: 8.0.0
 Config/testthat/edition: 3
 Config/testthat/parallel: false
-Config/Needs/website: DT, here, pkgdown, devtools
 Encoding: UTF-8
 Language: en-US
 LazyData: true
 LazyDataCompression: xz
 Roxygen: list(markdown = TRUE)
-Config/roxygen2/version: 8.0.0

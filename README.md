@@ -1,6 +1,23 @@
 # gsm.qtl
+
 <!-- badges: start -->
-[![R-CMD-check](https://github.com/Gilead-BioStats/gsm.qtl/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/Gilead-BioStats/gsm.qtl/actions/workflows/R-CMD-check.yaml)
+
+<div class="pkgdown-release">
+
+[![R-CMD-check](https://github.com/Gilead-BioStats/gsm.qtl/actions/workflows/R-CMD-check.yaml/badge.svg?branch=main)](https://github.com/Gilead-BioStats/gsm.qtl/actions/workflows/R-CMD-check.yaml)
+[![test-coverage](https://github.com/Gilead-BioStats/gsm.qtl/actions/workflows/test-coverage.yaml/badge.svg?branch=main)](https://github.com/Gilead-BioStats/gsm.qtl/actions/workflows/test-coverage.yaml)
+[![pkgdown-all](https://github.com/Gilead-BioStats/gsm.qtl/actions/workflows/pkgdown-all.yaml/badge.svg?branch=main)](https://github.com/Gilead-BioStats/gsm.qtl/actions/workflows/pkgdown-all.yaml)
+
+</div>
+
+<div class="pkgdown-devel">
+
+[![R-CMD-check](https://github.com/Gilead-BioStats/gsm.qtl/actions/workflows/R-CMD-check.yaml/badge.svg?branch=dev)](https://github.com/Gilead-BioStats/gsm.qtl/actions/workflows/R-CMD-check.yaml)
+[![test-coverage](https://github.com/Gilead-BioStats/gsm.qtl/actions/workflows/test-coverage.yaml/badge.svg?branch=dev)](https://github.com/Gilead-BioStats/gsm.qtl/actions/workflows/test-coverage.yaml)
+[![pkgdown-all](https://github.com/Gilead-BioStats/gsm.qtl/actions/workflows/pkgdown-all.yaml/badge.svg?branch=dev)](https://github.com/Gilead-BioStats/gsm.qtl/actions/workflows/pkgdown-all.yaml)
+
+</div>
+
 <!-- badges: end -->
 
 # Good Statistical Monitoring QTL `{gsm.qtl}` R package
@@ -32,12 +49,24 @@ Additional mappings that have been added to support `gsm.qtl` include the `IE` a
 
 ## Installation
 
-You can install the development version of `gsm.qtl` like so:
+You can install the latest release of gsm.qtl from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("pak")
-pak::pak("Gilead-BioStats/gsm.qtl@dev")
+pak::pak("Gilead-BioStats/gsm.qtl@*release")
 ```
+
+<div class="pkgdown-devel">
+
+You can install the development version of gsm.qtl from
+[GitHub](https://github.com/) with:
+
+``` r
+# install.packages("pak")
+pak::pak("Gilead-BioStats/gsm.qtl")
+```
+
+</div>
 
 ## Sample Code
 
