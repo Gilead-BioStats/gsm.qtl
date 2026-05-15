@@ -1,3 +1,7 @@
+# gsm.qtl v1.2.2
+
+This patch release updates the GitHub action workflows to align with the new federated action framework in `gsm.utils`
+
 # gsm.qtl v1.2.1
 
 ### Bug Fixes:
