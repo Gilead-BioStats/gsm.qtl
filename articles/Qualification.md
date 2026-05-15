@@ -87,7 +87,7 @@ Each specification includes the following components:
 **attached base packages:** *stats*, *graphics*, *grDevices*, *utils*,
 *datasets*, *methods* and *base*
 
-**other attached packages:** *gsm.qtl(v.1.2.1)*, *testthat(v.3.3.2)*,
+**other attached packages:** *gsm.qtl(v.1.2.2)*, *testthat(v.3.3.2)*,
 *riskmetric(v.0.2.7)*, *stringr(v.1.6.0)*, *gh(v.1.5.0)*,
 *pander(v.0.6.6)*, *purrr(v.1.2.2)*, *dplyr(v.1.2.1)*, *knitr(v.1.51)*,
 *gt(v.1.3.0)* and *gsm.core(v.1.2.0)*
@@ -139,6 +139,16 @@ Guidelines](https://gilead-biostats.github.io/gsm.core/articles/ContributorGuide
 Below, the most recent 10 PRs into gsm.qtl are displayed. [See all Pull
 Requests here.](https://github.com/gilead-biostats/gsm.qtl/pulls)
 
+#### Pull Request 113: gsm.qtl v1.2.2 release candidate
+
+Merging gsm.qtl-v1.2.2-rc into main
+
+<https://github.com/Gilead-BioStats/gsm.qtl/pull/113>
+
+|  Requester   |   Date Requested    |   Reviewers    | Review Status |
+|:------------:|:-------------------:|:--------------:|:-------------:|
+| lauramaxwell | 2026-05-14 19:42:37 | jharmon-gilead |   APPROVED    |
+
 #### Pull Request 112: gsm.qtl v1.2.1
 
 Merging rc-v1.2.1 into main
@@ -149,6 +159,16 @@ Merging rc-v1.2.1 into main
 |:---------:|:-------------------:|:---------:|:-------------:|
 |  zdz2101  | 2026-05-06 20:48:27 | samussiah |   APPROVED    |
 
+#### Pull Request 111: catch dev up to main
+
+Merging main into dev
+
+<https://github.com/Gilead-BioStats/gsm.qtl/pull/111>
+
+| Requester |   Date Requested    |  Reviewers   | Review Status |
+|:---------:|:-------------------:|:------------:|:-------------:|
+|  zdz2101  | 2026-05-06 20:41:03 | lauramaxwell |   APPROVED    |
+
 #### Pull Request 109: Fix eligibility_listing crash on zero-row or all-NA input
 
 Merging bugfix/108-eligibility-listing-zero-row into dev
@@ -158,6 +178,16 @@ Merging bugfix/108-eligibility-listing-zero-row into dev
 | Requester | Date Requested | Reviewers | Review Status |
 |:--:|:--:|:--:|:--:|
 | samussiah | 2026-05-04 19:09:57 | zdz2101 copilot-pull-request-reviewer\[bot\] | APPROVED |
+
+#### Pull Request 106: Update workflows
+
+Merging gha-202604 into dev
+
+<https://github.com/Gilead-BioStats/gsm.qtl/pull/106>
+
+| Requester  |   Date Requested    |  Reviewers   | Review Status |
+|:----------:|:-------------------:|:------------:|:-------------:|
+| jonthegeek | 2026-04-30 19:41:20 | lauramaxwell |   APPROVED    |
 
 #### Pull Request 104: Main -\> dev
 
@@ -208,33 +238,3 @@ Merging for-gsm.kri-193 into dev
 |  Requester   |   Date Requested    |  Reviewers  | Review Status |
 |:------------:|:-------------------:|:-----------:|:-------------:|
 | lauramaxwell | 2026-03-26 18:24:03 | nandriychuk |   APPROVED    |
-
-#### Pull Request 91: Closes \#90 Adopt feedback for eligibility by {group} charts
-
-Merging fix-90 into dev
-
-<https://github.com/Gilead-BioStats/gsm.qtl/pull/91>
-
-| Requester | Date Requested | Reviewers | Review Status |
-|:--:|:--:|:--:|:--:|
-| zdz2101 | 2026-03-05 21:12:44 | copilot-pull-request-reviewer\[bot\] zdz2101 samussiah jonthegeek | COMMENTED |
-
-#### Pull Request 89: Initialize qcthat
-
-Merging qcthat into dev
-
-<https://github.com/Gilead-BioStats/gsm.qtl/pull/89>
-
-| Requester  |   Date Requested    | Reviewers | Review Status |
-|:----------:|:-------------------:|:---------:|:-------------:|
-| jonthegeek | 2026-03-04 20:18:20 |  zdz2101  |   APPROVED    |
-
-#### Pull Request 88: Add back enrolled/ongoing patients to the visualizations of QTL0002 study discontinuation
-
-Merging fix-87 into dev
-
-<https://github.com/Gilead-BioStats/gsm.qtl/pull/88>
-
-| Requester | Date Requested | Reviewers | Review Status |
-|:--:|:--:|:--:|:--:|
-| zdz2101 | 2026-02-27 17:50:38 | zdz2101 samussiah copilot-pull-request-reviewer\[bot\] | COMMENTED |

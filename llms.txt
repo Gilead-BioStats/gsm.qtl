@@ -41,12 +41,22 @@ widgets and tables that ultimately go into an html QTL report.
 
 ## Installation
 
-You can install the development version of `gsm.qtl` like so:
+You can install the latest release of gsm.qtl from
+[GitHub](https://github.com/) with:
 
 ``` r
 
 # install.packages("pak")
-pak::pak("Gilead-BioStats/gsm.qtl@dev")
+pak::pak("Gilead-BioStats/gsm.qtl@*release")
+```
+
+You can install the development version of gsm.qtl from
+[GitHub](https://github.com/) with:
+
+``` r
+
+# install.packages("pak")
+pak::pak("Gilead-BioStats/gsm.qtl")
 ```
 
 ## Sample Code
