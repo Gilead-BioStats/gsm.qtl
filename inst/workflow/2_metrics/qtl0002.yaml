@@ -12,7 +12,7 @@ meta:
   nPropRate: 0.07 # insert historical data
   nNumDeviations: 3
   MetricActive: true
-  RiskSignalActive: true
+  WorkItemActive: true
 spec:
   Mapped_SUBJ:
     subjid:
