@@ -139,6 +139,16 @@ Guidelines](https://gilead-biostats.github.io/gsm.core/articles/ContributorGuide
 Below, the most recent 10 PRs into gsm.qtl are displayed. [See all Pull
 Requests here.](https://github.com/gilead-biostats/gsm.qtl/pulls)
 
+#### Pull Request 117: Fix 116: Add active fields to workflows
+
+Merging fix-116-add_active_fields into dev
+
+<https://github.com/Gilead-BioStats/gsm.qtl/pull/117>
+
+| Requester | Date Requested | Reviewers | Review Status |
+|:--:|:--:|:--:|:--:|
+| jharmon-gilead | 2026-05-27 14:44:32 | copilot-pull-request-reviewer\[bot\] zdz2101 | COMMENTED |
+
 #### Pull Request 114: Main -\> dev
 
 Merging main into dev
@@ -228,13 +238,3 @@ Merging fix-90v2 into fix-90
 | Requester | Date Requested | Reviewers | Review Status |
 |:--:|:--:|:--:|:--:|
 | zdz2101 | 2026-04-14 20:27:58 | samussiah copilot-pull-request-reviewer\[bot\] | APPROVED |
-
-#### Pull Request 100: Namespace non-base function calls in report templates
-
-Merging fix-90-namespace-report-functions into fix-90
-
-<https://github.com/Gilead-BioStats/gsm.qtl/pull/100>
-
-| Requester | Date Requested | Reviewers | Review Status |
-|:--:|:--:|:--:|:--:|
-| samussiah | 2026-04-14 15:22:19 | copilot-pull-request-reviewer\[bot\] zdz2101 | COMMENTED |
