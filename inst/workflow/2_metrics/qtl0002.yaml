@@ -11,6 +11,8 @@ meta:
   AnalysisType: binary
   nPropRate: 0.07 # insert historical data
   nNumDeviations: 3
+  MetricActive: true
+  RiskSignalActive: true
 spec:
   Mapped_SUBJ:
     subjid:
