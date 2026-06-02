@@ -93,7 +93,7 @@ Each specification includes the following components:
 *gt(v.1.3.0)* and *gsm.core(v.1.2.1)*
 
 **loaded via a namespace (and not attached):** *gtable(v.0.3.6)*,
-*xfun(v.0.57)*, *bslib(v.0.11.0)*, *ggplot2(v.4.0.3)*,
+*xfun(v.0.58)*, *bslib(v.0.11.0)*, *ggplot2(v.4.0.3)*,
 *htmlwidgets(v.1.6.4)*, *devtools(v.2.5.2)*, *vctrs(v.0.7.3)*,
 *tools(v.4.6.0)*, *generics(v.0.1.4)*, *curl(v.7.1.0)*,
 *tibble(v.3.3.1)*, *pkgconfig(v.2.0.3)*, *data.table(v.1.18.4)*,
