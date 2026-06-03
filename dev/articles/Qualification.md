@@ -88,12 +88,12 @@ Each specification includes the following components:
 *datasets*, *methods* and *base*
 
 **other attached packages:** *gsm.qtl(v.1.2.2)*, *testthat(v.3.3.2)*,
-*riskmetric(v.0.2.7)*, *stringr(v.1.6.0)*, *gh(v.1.5.0)*,
+*riskmetric(v.0.2.7)*, *stringr(v.1.6.0)*, *gh(v.1.6.0)*,
 *pander(v.0.6.6)*, *purrr(v.1.2.2)*, *dplyr(v.1.2.1)*, *knitr(v.1.51)*,
 *gt(v.1.3.0)* and *gsm.core(v.1.2.1)*
 
 **loaded via a namespace (and not attached):** *gtable(v.0.3.6)*,
-*xfun(v.0.57)*, *bslib(v.0.11.0)*, *ggplot2(v.4.0.3)*,
+*xfun(v.0.58)*, *bslib(v.0.11.0)*, *ggplot2(v.4.0.3)*,
 *htmlwidgets(v.1.6.4)*, *devtools(v.2.5.2)*, *vctrs(v.0.7.3)*,
 *tools(v.4.6.0)*, *generics(v.0.1.4)*, *curl(v.7.1.0)*,
 *tibble(v.3.3.1)*, *pkgconfig(v.2.0.3)*, *data.table(v.1.18.4)*,
@@ -138,6 +138,16 @@ Guidelines](https://gilead-biostats.github.io/gsm.core/articles/ContributorGuide
 
 Below, the most recent 10 PRs into gsm.qtl are displayed. [See all Pull
 Requests here.](https://github.com/gilead-biostats/gsm.qtl/pulls)
+
+#### Pull Request 119: Fix 118: Standardize activity fields
+
+Merging fix-118-rename_activity_fields into dev
+
+<https://github.com/Gilead-BioStats/gsm.qtl/pull/119>
+
+|   Requester    |   Date Requested    |      Reviewers       | Review Status |
+|:--------------:|:-------------------:|:--------------------:|:-------------:|
+| jharmon-gilead | 2026-06-01 15:32:18 | zdz2101 lauramaxwell |   APPROVED    |
 
 #### Pull Request 117: Fix 116: Add active fields to workflows
 
@@ -228,13 +238,3 @@ Merging gsm.qtl-rc-v1.2.0 into main
 | Requester | Date Requested | Reviewers | Review Status |
 |:--:|:--:|:--:|:--:|
 | zdz2101 | 2026-04-15 17:59:56 | copilot-pull-request-reviewer\[bot\] lauramaxwell zdz2101 samussiah | COMMENTED |
-
-#### Pull Request 101: Make swap ins for dual-dataframe, numerator/denominator usage
-
-Merging fix-90v2 into fix-90
-
-<https://github.com/Gilead-BioStats/gsm.qtl/pull/101>
-
-| Requester | Date Requested | Reviewers | Review Status |
-|:--:|:--:|:--:|:--:|
-| zdz2101 | 2026-04-14 20:27:58 | samussiah copilot-pull-request-reviewer\[bot\] | APPROVED |
