@@ -11,8 +11,8 @@ meta:
   AnalysisType: binary
   nPropRate: 0.03 # insert historical data
   nNumDeviations: 3
-  MetricActive: true
-  WorkItemActive: true
+  Active: true
+  GenerateRiskSignal: true
 spec:
   Mapped_EXCLUSION:
     subjid:
