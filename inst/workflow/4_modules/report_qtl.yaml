@@ -4,6 +4,7 @@ meta:
   Output: html
   Name: QTL Report
   Description: A report summarizing QTL
+  Active: true
 spec:
   Mapped_STUDCOMP:
     _all:

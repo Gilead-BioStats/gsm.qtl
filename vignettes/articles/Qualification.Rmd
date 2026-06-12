@@ -201,14 +201,14 @@ The GitHub Pull Request (PR) process begins with the creation of one or more iss
 Below, the most recent 10 PRs into `r params$repo` are displayed. [See all Pull Requests here.](`r paste0("https://github.com/gilead-biostats/",params$repo,"/pulls")`)
 
 ```{r prs}
-release <- gh(paste0("/repos/Gilead-BioStats/",params$repo,"/releases"), .token = remotes:::github_pat())[[1]]
+release <- gh(paste0("/repos/Gilead-BioStats/",params$repo,"/releases"))[[1]]
 release_date <- ifelse(is.null(release$published_at), release$created_at, release$published_at)
 
 pr_at_date <- FALSE
 page_num <- 1
 prs <- list()
 while(pr_at_date != TRUE){
-  resp <- gh(paste0("/repos/Gilead-BioStats/",params$repo,"/pulls"), per_page = 100, .token = remotes:::github_pat(),
+  resp <- gh(paste0("/repos/Gilead-BioStats/",params$repo,"/pulls"), per_page = 100,
              .params = list(page = page_num, state = "closed"))
 
   map(resp, function(x){
