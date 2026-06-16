@@ -71,7 +71,6 @@ library(gsm.datasim)
 library(gsm.mapping)
 library(gsm.reporting)
 library(gsm.core)
-library(workr)
 library(gsm.kri)
 library(purrr)
 library(dplyr)
@@ -97,7 +96,7 @@ mappings_wf <- workr::MakeWorkflowList(
   strPackage = "gsm.mapping"
 )
 mappings_spec <- gsm.mapping::CombineSpecs(mappings_wf)
-metrics_wf <- workr::MakeWorkflowList(strNames = c("qtl0001", "qtl0002"), strPath = "inst/workflow/2_metrics", strPackage = "gsm.qtl")
+metrics_wf <- workr::MakeWorkflowList(strNames = c("qtl0001", "qtl0002"), strPath = "workflow/2_metrics", strPackage = "gsm.qtl")
 reporting_wf <- workr::MakeWorkflowList(strNames = c("Results", "Groups"), strPath = "workflow/3_reporting", strPackage = "gsm.reporting")
 
 lRaw <- map_depth(ie_data, 1, gsm.mapping::Ingest, mappings_spec)
