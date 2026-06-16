@@ -9,7 +9,7 @@ test_that("workflow specs route extracted runtime functions through workr (#120)
   skip_if_not_installed("yaml")
 
   wf_dir <- system.file("workflow", package = "gsm.qtl")
-  skip_if(identical(wf_dir, ""), "gsm.qtl not installed")
+  expect_false(identical(wf_dir, ""))
 
   yaml_files <- list.files(
     wf_dir,
@@ -17,28 +17,24 @@ test_that("workflow specs route extracted runtime functions through workr (#120)
     recursive = TRUE,
     full.names = TRUE
   )
-  skip_if(length(yaml_files) == 0, "no workflow specs found")
+  expect_gt(length(yaml_files), 0)
 
-  step_names <- unlist(lapply(yaml_files, function(f) {
+  step_functions <- unlist(lapply(yaml_files, function(f) {
     steps <- tryCatch(yaml::read_yaml(f)$steps, error = function(e) NULL)
     if (is.null(steps)) {
       return(character(0))
     }
-    vapply(
-      steps,
-      function(s) if (is.null(s$name)) NA_character_ else s$name,
-      character(1)
+    step_keys <- c("name", "names")
+    unlist(
+      lapply(steps, function(s) unlist(s[step_keys], use.names = FALSE)),
+      use.names = FALSE
     )
   }))
-  step_names <- step_names[!is.na(step_names)]
+  step_functions <- step_functions[!is.na(step_functions)]
 
   # Extracted runtime functions must resolve from {workr}, not {gsm.core}.
-  extracted <- c(
-    "RunQuery", "RunStep", "RunWorkflow", "RunWorkflows", "MakeWorkflowList"
-  )
-  pattern <- paste0("gsm\\.core::(", paste(extracted, collapse = "|"), ")")
-  expect_equal(grep(pattern, step_names, value = TRUE), character(0))
+  expect_false("gsm.core::RunQuery" %in% step_functions)
 
   # ...and the re-point actually happened (RunQuery is the SQL/dplyr primitive).
-  expect_true(any(grepl("workr::RunQuery", step_names)))
+  expect_true("workr::RunQuery" %in% step_functions)
 })

@@ -1,7 +1,6 @@
 library(gsm.qtl)
 library(gsm.datasim)
 library(gsm.kri)
-library(workr)
 library(dplyr)
 library(purrr)
 devtools::load_all(".")

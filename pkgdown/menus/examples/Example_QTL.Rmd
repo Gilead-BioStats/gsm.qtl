@@ -24,7 +24,6 @@ This page provides a sample Site KRI Report generated using the standard QTLs in
 ```{r}
 # Load libraries
 library(gsm.core)
-library(workr)
 library(dplyr)
 library(gt)
 library(here)
