@@ -75,7 +75,7 @@ Each specification includes the following components:
 
 ### Session Information
 
-**R version 4.6.0 (2026-04-24)**
+**R version 4.6.1 (2026-06-24)**
 
 **Platform:** x86_64-pc-linux-gnu
 
@@ -88,36 +88,36 @@ Each specification includes the following components:
 *datasets*, *methods* and *base*
 
 **other attached packages:** *gsm.qtl(v.1.2.2)*, *testthat(v.3.3.2)*,
-*riskmetric(v.0.2.7)*, *stringr(v.1.6.0)*, *gh(v.1.6.0)*,
+*riskmetric(v.0.2.7)*, *stringr(v.1.6.0)*, *gh(v.1.6.0.9000)*,
 *pander(v.0.6.6)*, *purrr(v.1.2.2)*, *dplyr(v.1.2.1)*, *knitr(v.1.51)*,
 *gt(v.1.3.0)* and *gsm.core(v.1.2.1)*
 
 **loaded via a namespace (and not attached):** *gtable(v.0.3.6)*,
-*xfun(v.0.58)*, *bslib(v.0.11.0)*, *ggplot2(v.4.0.3)*,
+*xfun(v.0.59)*, *bslib(v.0.11.0)*, *ggplot2(v.4.0.3)*,
 *htmlwidgets(v.1.6.4)*, *devtools(v.2.5.2)*, *vctrs(v.0.7.3)*,
-*tools(v.4.6.0)*, *generics(v.0.1.4)*, *curl(v.7.1.0)*,
+*tools(v.4.6.1)*, *generics(v.0.1.4)*, *curl(v.7.1.0)*,
 *tibble(v.3.3.1)*, *pkgconfig(v.2.0.3)*, *data.table(v.1.18.4)*,
 *RColorBrewer(v.1.1-3)*, *S7(v.0.2.2)*, *desc(v.1.4.3)*,
-*lifecycle(v.1.0.5)*, *farver(v.2.1.2)*, *compiler(v.4.6.0)*,
+*lifecycle(v.1.0.5)*, *farver(v.2.1.2)*, *compiler(v.4.6.1)*,
 *brio(v.1.1.5)*, *textshaping(v.1.0.5)*, *htmltools(v.0.5.9)*,
 *usethis(v.3.2.1)*, *sass(v.0.4.10)*, *lazyeval(v.0.2.3)*,
 *yaml(v.2.3.12)*, *plotly(v.4.12.0)*, *pillar(v.1.11.1)*,
 *pkgdown(v.2.2.0)*, *jquerylib(v.0.1.4)*, *tidyr(v.1.3.2)*,
 *ellipsis(v.0.3.3)*, *cranlogs(v.2.1.1)*, *cachem(v.1.1.0)*,
-*sessioninfo(v.1.2.3)*, *tidyselect(v.1.2.1)*, *digest(v.0.6.39)*,
-*stringi(v.1.8.7)*, *duckdb(v.1.5.2)*, *forcats(v.1.0.1)*,
-*rprojroot(v.2.1.1)*, *fastmap(v.1.2.0)*, *grid(v.4.6.0)*,
+*sessioninfo(v.1.2.4)*, *tidyselect(v.1.2.1)*, *digest(v.0.6.39)*,
+*stringi(v.1.8.7)*, *duckdb(v.1.5.4.2)*, *forcats(v.1.0.1)*,
+*rprojroot(v.2.1.1)*, *fastmap(v.1.2.0)*, *grid(v.4.6.1)*,
 *here(v.1.0.2)*, *cli(v.3.6.6)*, *magrittr(v.2.0.5)*,
-*triebeard(v.0.4.1)*, *pkgbuild(v.1.4.8)*, *withr(v.3.0.2)*,
+*triebeard(v.0.4.1)*, *pkgbuild(v.1.4.8)*, *withr(v.3.0.3)*,
 *waldo(v.0.6.2)*, *scales(v.1.4.0)*, *backports(v.1.5.1)*,
 *rmarkdown(v.2.31)*, *httr(v.1.4.8)*, *otel(v.0.2.0)*, *ragg(v.1.5.2)*,
 *memoise(v.2.0.1)*, *evaluate(v.1.0.5)*, *log4r(v.0.4.4)*,
 *covr(v.3.6.5)*, *rex(v.1.2.2)*, *viridisLite(v.0.4.3)*,
 *rlang(v.1.2.0)*, *urltools(v.1.7.3.1)*, *Rcpp(v.1.1.1-1.1)*,
-*DBI(v.1.3.0)*, *glue(v.1.8.1)*, *BiocManager(v.1.30.27)*,
-*xml2(v.1.5.2)*, *pkgload(v.1.5.2)*, *rstudioapi(v.0.18.0)*,
-*jsonlite(v.2.0.0)*, *R6(v.2.6.1)*, *systemfonts(v.1.3.2)* and
-*fs(v.2.1.0)*
+*DBI(v.1.3.0)*, *glue(v.1.8.1)*, *workr(v.1.0.0)*,
+*BiocManager(v.1.30.27)*, *xml2(v.1.6.0)*, *pkgload(v.1.5.3)*,
+*rstudioapi(v.0.19.0)*, *jsonlite(v.2.0.0)*, *R6(v.2.6.1)*,
+*systemfonts(v.1.3.2)* and *fs(v.2.1.0)*
 
 ## Pull Request History
 
@@ -209,6 +209,16 @@ Merging bugfix/108-eligibility-listing-zero-row into dev
 |:--:|:--:|:--:|:--:|
 | samussiah | 2026-05-04 19:09:57 | zdz2101 copilot-pull-request-reviewer\[bot\] | APPROVED |
 
+#### Pull Request 107: Migrate workflow runtime from gsm.core to workr (#120)
+
+Merging workr-implementation into dev
+
+<https://github.com/Gilead-BioStats/gsm.qtl/pull/107>
+
+| Requester | Date Requested | Reviewers | Review Status |
+|:--:|:--:|:--:|:--:|
+| zdz2101 | 2026-05-01 17:32:47 | copilot-pull-request-reviewer\[bot\] zdz2101 lauramaxwell | COMMENTED |
+
 #### Pull Request 106: Update workflows
 
 Merging gha-202604 into dev
@@ -228,13 +238,3 @@ Merging main into dev
 |  Requester   |   Date Requested    | Reviewers | Review Status |
 |:------------:|:-------------------:|:---------:|:-------------:|
 | lauramaxwell | 2026-04-20 15:51:28 |  zdz2101  |   APPROVED    |
-
-#### Pull Request 102: Gsm.qtl rc v1.2.0
-
-Merging gsm.qtl-rc-v1.2.0 into main
-
-<https://github.com/Gilead-BioStats/gsm.qtl/pull/102>
-
-| Requester | Date Requested | Reviewers | Review Status |
-|:--:|:--:|:--:|:--:|
-| zdz2101 | 2026-04-15 17:59:56 | copilot-pull-request-reviewer\[bot\] lauramaxwell zdz2101 samussiah | COMMENTED |
