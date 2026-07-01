@@ -52,7 +52,7 @@ Suggests:
 VignetteBuilder: 
     knitr
 Remotes:
-    gsm.core=Gilead-BioStats/gsm.core@workr-implementation,
+    gsm.core=Gilead-BioStats/gsm.core@dev,
     workr=Gilead-BioStats/workr,
     qcthat=Gilead-BioStats/qcthat@*release
 Config/Needs/website: DT, here, pkgdown, devtools
