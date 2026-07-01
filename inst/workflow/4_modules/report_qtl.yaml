@@ -31,12 +31,12 @@ spec:
 steps:
   # add listings
   - output: qtl0001
-    name: gsm.core::RunQuery
+    name: workr::RunQuery
     params:
       df: Mapped_EXCLUSION
       strQuery: "SELECT * FROM df"
   - output: qtl0001_num
-    name: gsm.core::RunQuery
+    name: workr::RunQuery
     params:
       df: qtl0001
       strQuery: "SELECT * FROM df WHERE Source != 'Neither'"
@@ -54,7 +54,7 @@ steps:
       .data: qtl0002_preprocess
       'compreas': !expr rlang::expr(ifelse(is.na(.data[["compreas"]]), "Completed/Ongoing", .data[["compreas"]]))
   - output: qtl0002_num
-    name: gsm.core::RunQuery
+    name: workr::RunQuery
     params:
       df: qtl0002
       strQuery: "SELECT * FROM df WHERE compreas != 'Completed/Ongoing'"
@@ -66,7 +66,7 @@ steps:
       'qtl0002': qtl0002
       'qtl0002_num': qtl0002_num
   - output: all_reportingResults
-    name: gsm.core::RunQuery
+    name: workr::RunQuery
     params:
       df: Reporting_Results_Longitudinal
       strQuery: |
@@ -75,7 +75,7 @@ steps:
         WHERE GroupLevel = 'Study'
         ORDER BY MetricID
   - output: all_reportingGroups
-    name: gsm.core::RunQuery
+    name: workr::RunQuery
     params:
       df: Reporting_Groups
       strQuery: |
