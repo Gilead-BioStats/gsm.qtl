@@ -1,3 +1,14 @@
+# gsm.qtl v1.3.0
+
+### Key Enhancements:
+
+- QTL workflows now run on the new `workr` engine. Workflow helpers (`MakeWorkflowList()`, `RunWorkflows()`, and `RunQuery()`) are now provided by `workr` instead of `gsm.core`, and the bundled QTL, metric, and reporting workflows have been updated to match. If you run these workflows in your own pipelines, update your calls to use `workr::` in place of `gsm.core::`.
+- Standardized the metadata on all bundled workflows: every workflow now declares an `Active` flag, and the QTL metric workflows (`qtl0001`, `qtl0002`) declare a `GenerateRiskSignal` flag, bringing QTL workflows in line with the broader `gsm` workflow framework.
+
+### Other Updates:
+
+- Added `workr` as a package dependency and updated related dependency references.
+
 # gsm.qtl v1.2.2
 
 This patch release updates the GitHub action workflows to align with the new federated action framework in `gsm.utils`
