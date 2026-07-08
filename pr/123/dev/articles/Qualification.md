@@ -90,7 +90,7 @@ Each specification includes the following components:
 **other attached packages:** *gsm.qtl(v.1.3.0)*, *testthat(v.3.3.2)*,
 *riskmetric(v.0.2.7)*, *stringr(v.1.6.0)*, *gh(v.1.6.0.9000)*,
 *pander(v.0.6.6)*, *purrr(v.1.2.2)*, *dplyr(v.1.2.1)*, *knitr(v.1.51)*,
-*gt(v.1.3.0)* and *gsm.core(v.1.2.1)*
+*gt(v.1.3.0)* and *gsm.core(v.1.3.0)*
 
 **loaded via a namespace (and not attached):** *gtable(v.0.3.6)*,
 *xfun(v.0.59)*, *bslib(v.0.11.0)*, *ggplot2(v.4.0.3)*,
@@ -114,7 +114,7 @@ Each specification includes the following components:
 *memoise(v.2.0.1)*, *evaluate(v.1.0.5)*, *log4r(v.0.4.4)*,
 *covr(v.3.6.5)*, *rex(v.1.2.2)*, *viridisLite(v.0.4.3)*,
 *rlang(v.1.3.0)*, *urltools(v.1.7.3.1)*, *Rcpp(v.1.1.2)*,
-*DBI(v.1.3.0)*, *glue(v.1.8.1)*, *workr(v.1.0.0)*,
+*DBI(v.1.3.0)*, *glue(v.1.8.1)*, *workr(v.1.1.0)*,
 *BiocManager(v.1.30.27)*, *xml2(v.1.6.0)*, *pkgload(v.1.5.3)*,
 *rstudioapi(v.0.19.0)*, *jsonlite(v.2.0.0)*, *R6(v.2.6.1)*,
 *systemfonts(v.1.3.2)* and *fs(v.2.1.0)*
