@@ -3,6 +3,7 @@ meta:
   ID: disc_reasons
   file: disc_reasons.yaml
   output: string
+  Active: true
 steps:
   - output: disc_reasons
     name: c

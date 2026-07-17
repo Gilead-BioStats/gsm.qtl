@@ -11,6 +11,8 @@ meta:
   AnalysisType: binary
   nPropRate: 0.07 # insert historical data
   nNumDeviations: 3
+  Active: true
+  GenerateRiskSignal: true
 spec:
   Mapped_SUBJ:
     subjid:
@@ -31,7 +33,7 @@ spec:
 steps:
 # study specific, can grab the default in gsm.qtl too
   - output: Mapped_DROPOUT
-    name: gsm.core::RunQuery
+    name: workr::RunQuery
     params:
       df: Mapped_STUDCOMP
       strQuery: "SELECT * FROM df WHERE compyn = 'N'"
