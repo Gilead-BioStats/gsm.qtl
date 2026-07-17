@@ -52,8 +52,8 @@ Suggests:
 VignetteBuilder: 
     knitr
 Remotes:
-    gsm.core=Gilead-BioStats/gsm.core@gsm.core-v1.3.0-rc,
-    workr=Gilead-BioStats/workr@*release,
+    gsm.core=Gilead-BioStats/gsm.core@main,
+    workr=Gilead-BioStats/workr@main,
     qcthat=Gilead-BioStats/qcthat@*release
 Config/Needs/website: DT, here, pkgdown, devtools
 Config/roxygen2/version: 8.0.0
