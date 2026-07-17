@@ -90,19 +90,19 @@ ie_data <- generate_rawdata_for_single_study(
   desired_specs = NULL
 )
 
-mappings_wf <- gsm.core::MakeWorkflowList(
+mappings_wf <- workr::MakeWorkflowList(
   strNames =c("SUBJ", "ENROLL", "IE", "PD", "STUDY", "SITE", "COUNTRY", "EXCLUSION", "STUDCOMP"),
   strPath = "workflow/1_mappings",
   strPackage = "gsm.mapping"
 )
 mappings_spec <- gsm.mapping::CombineSpecs(mappings_wf)
-metrics_wf <- gsm.core::MakeWorkflowList(strNames = c("qtl0001", "qtl0002"), strPath = "inst/workflow/2_metrics", strPackage = "gsm.qtl")
-reporting_wf <- gsm.core::MakeWorkflowList(strNames = c("Results", "Groups"), strPath = "workflow/3_reporting", strPackage = "gsm.reporting")
+metrics_wf <- workr::MakeWorkflowList(strNames = c("qtl0001", "qtl0002"), strPath = "workflow/2_metrics", strPackage = "gsm.qtl")
+reporting_wf <- workr::MakeWorkflowList(strNames = c("Results", "Groups"), strPath = "workflow/3_reporting", strPackage = "gsm.reporting")
 
 lRaw <- map_depth(ie_data, 1, gsm.mapping::Ingest, mappings_spec)
-mapped <- map_depth(lRaw, 1, ~ gsm.core::RunWorkflows(mappings_wf, .x))
-analyzed <- map_depth(mapped, 1, ~gsm.core::RunWorkflows(metrics_wf, .x))
-reporting <- map2(mapped, analyzed, ~ gsm.core::RunWorkflows(reporting_wf, c(.x, list(lAnalyzed = .y, lWorkflows = metrics_wf))))
+mapped <- map_depth(lRaw, 1, ~ workr::RunWorkflows(mappings_wf, .x))
+analyzed <- map_depth(mapped, 1, ~workr::RunWorkflows(metrics_wf, .x))
+reporting <- map2(mapped, analyzed, ~ workr::RunWorkflows(reporting_wf, c(.x, list(lAnalyzed = .y, lWorkflows = metrics_wf))))
 
 dates <- names(ie_data) %>% as.Date
 reporting <- map2(reporting, dates, ~{
