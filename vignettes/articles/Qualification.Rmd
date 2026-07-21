@@ -24,6 +24,7 @@ suppressPackageStartupMessages({
   library(pander)
   library(gh)
   library(stringr)
+  library(riskmetric)
   suppressMessages(devtools::load_all())
 })
 
