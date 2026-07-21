@@ -30,11 +30,9 @@ Imports:
     purrr,
     rlang,
     scales,
-    stats,
     stringr,
     tibble,
     tidyr,
-    utils,
     workr,
     yaml
 Suggests: 
@@ -46,7 +44,6 @@ Suggests:
     lubridate,
     pander,
     qcthat,
-    riskmetric,
     rmarkdown,
     testthat (>= 3.0.0)
 VignetteBuilder: 
