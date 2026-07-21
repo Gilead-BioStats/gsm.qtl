@@ -90,7 +90,7 @@ Each specification includes the following components:
 **other attached packages:** *gsm.qtl(v.1.3.0.9000)*,
 *testthat(v.3.3.2)*, *stringr(v.1.6.0)*, *gh(v.1.6.1.9000)*,
 *pander(v.0.6.6)*, *purrr(v.1.2.2)*, *dplyr(v.1.2.1)*, *knitr(v.1.51)*,
-*gt(v.1.3.0)* and *gsm.core(v.1.3.0)*
+*gt(v.1.3.0)* and *gsm.core(v.1.3.0.9000)*
 
 **loaded via a namespace (and not attached):** *gtable(v.0.3.6)*,
 *xfun(v.0.60)*, *bslib(v.0.11.0)*, *ggplot2(v.4.0.3)*,
@@ -110,11 +110,11 @@ Each specification includes the following components:
 *pkgbuild(v.1.4.8)*, *withr(v.3.0.3)*, *waldo(v.0.6.2)*,
 *scales(v.1.4.0)*, *rmarkdown(v.2.31)*, *httr(v.1.4.8)*,
 *otel(v.0.2.0)*, *ragg(v.1.5.2)*, *memoise(v.2.0.1)*,
-*evaluate(v.1.0.5)*, *log4r(v.0.4.4.9000)*, *viridisLite(v.0.4.3)*,
-*rlang(v.1.3.0)*, *Rcpp(v.1.1.2)*, *DBI(v.1.3.0)*, *glue(v.1.8.1)*,
-*workr(v.1.1.0)*, *xml2(v.1.6.0)*, *pkgload(v.1.5.3)*,
-*rstudioapi(v.0.19.0)*, *jsonlite(v.2.0.0)*, *R6(v.2.6.1)*,
-*systemfonts(v.1.3.2)* and *fs(v.2.1.0)*
+*evaluate(v.1.0.5)*, *viridisLite(v.0.4.3)*, *rlang(v.1.3.0)*,
+*Rcpp(v.1.1.2)*, *DBI(v.1.3.0)*, *glue(v.1.8.1)*, *workr(v.1.1.0)*,
+*xml2(v.1.6.0)*, *pkgload(v.1.5.3)*, *rstudioapi(v.0.19.0)*,
+*jsonlite(v.2.0.0)*, *R6(v.2.6.1)*, *systemfonts(v.1.3.2)* and
+*fs(v.2.1.0)*
 
 ## Pull Request History
 
