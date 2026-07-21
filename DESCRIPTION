@@ -49,6 +49,7 @@ Suggests:
 VignetteBuilder: 
     knitr
 Remotes:
+    gh=r-lib/gh,
     gsm.core=Gilead-BioStats/gsm.core@main,
     workr=Gilead-BioStats/workr@main,
     qcthat=Gilead-BioStats/qcthat@main
